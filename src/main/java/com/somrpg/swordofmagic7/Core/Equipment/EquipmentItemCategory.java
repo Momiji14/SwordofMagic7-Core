@@ -1,6 +1,5 @@
 package com.somrpg.swordofmagic7.Core.Equipment;
 
-import com.somrpg.swordofmagic7.Core.Equipment.SomEquipmentSlot;
 import org.bukkit.Material;
 
 public enum EquipmentItemCategory {

@@ -24,3 +24,7 @@ commands:
     aliases: m
     description: description
     usage: /<command>
+  setting:
+    aliases: setting
+    description: description
+    usage: /<command>

@@ -5,9 +5,6 @@ import com.somrpg.swordofmagic7.Core.SomCore;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerToggleSprintEvent;
 import org.bukkit.scheduler.BukkitTask;
 
 public class PlayerCharacon implements PlayerDataInterface {

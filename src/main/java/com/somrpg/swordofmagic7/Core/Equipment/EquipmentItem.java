@@ -1,13 +1,11 @@
 package com.somrpg.swordofmagic7.Core.Equipment;
 
-import com.somrpg.swordofmagic7.Core.Equipment.SomEquipmentSlot;
-import com.somrpg.swordofmagic7.Core.Generic.Parameter.StatusParameterInterface;
 import com.somrpg.swordofmagic7.Core.Generic.Parameter.StatusParameter;
 import com.somrpg.swordofmagic7.Core.Item.BaseItem;
-import com.somrpg.swordofmagic7.Core.Item.RuneItem;
-import org.bukkit.Material;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class EquipmentItem extends BaseItem {
     private final StatusParameter statusParameter;

@@ -1,7 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Pet;
 
 import com.somrpg.swordofmagic7.Core.Generic.Entity.BaseEntity;
-import com.somrpg.swordofmagic7.Core.Generic.Parameter.StatusParameterInterface;
 
 public class PetEntity extends BaseEntity implements PetEntityInterface {
 

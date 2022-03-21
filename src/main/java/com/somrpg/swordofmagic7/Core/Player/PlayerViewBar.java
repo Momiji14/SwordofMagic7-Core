@@ -1,10 +1,11 @@
 package com.somrpg.swordofmagic7.Core.Player;
 
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerViewBarInterface;
-import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class PlayerViewBar implements PlayerViewBarInterface {
 

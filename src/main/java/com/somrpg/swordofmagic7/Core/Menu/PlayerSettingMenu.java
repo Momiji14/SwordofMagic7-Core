@@ -5,16 +5,16 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
-public class PlayerUserMenu implements UserMenuInterface {
+public class PlayerSettingMenu implements SettingMenuInterface {
 
     private final PlayerData playerData;
-    public PlayerUserMenu(PlayerData playerData) {
+    public PlayerSettingMenu(PlayerData playerData) {
         this.playerData = playerData;
     }
 
     @Override
     public String getTitle() {
-        return "§lユーザーメニュ";
+        return "§l設定メニュー";
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
 import com.somrpg.swordofmagic7.Core.Menu.PlayerUserMenu;
-import com.somrpg.swordofmagic7.Core.Player.*;
+import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.entity.Player;
 

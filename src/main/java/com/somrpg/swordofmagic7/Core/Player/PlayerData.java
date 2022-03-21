@@ -3,6 +3,7 @@ package com.somrpg.swordofmagic7.Core.Player;
 import com.somrpg.swordofmagic7.Core.Inventory.ItemInventory;
 import com.somrpg.swordofmagic7.Core.Inventory.PetInventory;
 import com.somrpg.swordofmagic7.Core.Inventory.RuneInventory;
+import com.somrpg.swordofmagic7.Core.Menu.PlayerSettingMenu;
 import com.somrpg.swordofmagic7.Core.Menu.PlayerUserMenu;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerDataInterface;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerViewUpdate;
@@ -45,6 +46,7 @@ public class PlayerData implements PlayerDataInterface, PlayerViewUpdate {
     private final PetInventory petInventory;
 
     private final PlayerUserMenu playerUserMenu;
+    private final PlayerSettingMenu playerSettingMenu;
 
     PlayerData(Player player) {
         this.player = player;
@@ -61,6 +63,8 @@ public class PlayerData implements PlayerDataInterface, PlayerViewUpdate {
 
         playerUserMenu = new PlayerUserMenu(this);
         SomCore.getJavaPlugin().getCommand("menu").setExecutor(playerUserMenu);
+        playerSettingMenu = new PlayerSettingMenu(this);
+        SomCore.getJavaPlugin().getCommand("setting").setExecutor(playerSettingMenu);
 
         playerFile = new File(DataBasePath, "PlayerData/" + player.getUniqueId() + ".yml");
         data = YamlConfiguration.loadConfiguration(playerFile);

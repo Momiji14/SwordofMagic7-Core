@@ -8,8 +8,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.SlimeSplitEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
@@ -76,5 +77,24 @@ public class Events implements Listener {
                 event.setCancelled(true);
             }
         } else event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onInventoryClick(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+        PlayerData playerData = PlayerData.getData(player);
+        if (playerData.getPlayerSetting().isPlayMode()) {
+            playerData.getPlayerInput().onClickGUI(event);
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onInventoryClose(InventoryCloseEvent event) {
+        Player player = (Player) event.getPlayer();
+        PlayerData playerData = PlayerData.getData(player);
+        if (playerData.getPlayerSetting().isPlayMode()) {
+            playerData.getPlayerInput().onCloseGUI(event);
+        }
     }
 }

@@ -1,7 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Item;
 
-import com.somrpg.swordofmagic7.Core.Generic.Parameter.StatusParameter;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
+import com.somrpg.swordofmagic7.Core.Generic.Parameter.StatusParameter;
 
 public class RuneItem extends SomItemStack {
 

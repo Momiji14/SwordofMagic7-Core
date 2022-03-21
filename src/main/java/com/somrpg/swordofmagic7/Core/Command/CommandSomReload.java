@@ -1,6 +1,5 @@
 package com.somrpg.swordofmagic7.Core.Command;
 
-import com.somrpg.swordofmagic7.Core.SomCore;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 

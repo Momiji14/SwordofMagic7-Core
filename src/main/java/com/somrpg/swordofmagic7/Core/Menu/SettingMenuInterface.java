@@ -3,9 +3,10 @@ package com.somrpg.swordofmagic7.Core.Menu;
 import com.somrpg.swordofmagic7.Core.Generic.BaseGraphicalUserInterface;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
 import org.bukkit.Material;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.inventory.ItemStack;
 
-public interface SettingMenuInterface extends BaseGraphicalUserInterface {
+public interface SettingMenuInterface extends BaseGraphicalUserInterface, CommandExecutor {
     String display = "§l設定メニュー";
     int size = 1;
 
@@ -22,5 +23,11 @@ public interface SettingMenuInterface extends BaseGraphicalUserInterface {
         content[2] = DropLogIcon;
         content[3] = PvPModeIcon;
         return content;
+    }
+
+    default void onClick(ItemStack currentItem) {
+        if (currentItem.equals(DamageLogIcon)) {
+            getPlayerData().getPlayerSetting();
+        }
     }
 }
