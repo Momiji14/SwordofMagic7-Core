@@ -1,5 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Player;
 
+import com.somrpg.swordofmagic7.Core.Inventory.SomInventoryType;
 import com.somrpg.swordofmagic7.Core.Player.Enum.*;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerDataInterface;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerSettingInterface;
@@ -20,6 +21,8 @@ public class PlayerSetting implements PlayerDataInterface, PlayerSettingInterfac
     private DamageLog damageLog = DamageLog.Disable;
     private ExpLog expLog = ExpLog.Disable;
     private DropLog dropLog = DropLog.Disable;
+
+    private SomInventoryType viewInventory;
 
     @Override
     public PlayerData getPlayerData() {
@@ -100,5 +103,21 @@ public class PlayerSetting implements PlayerDataInterface, PlayerSettingInterfac
     @Override
     public DropLog getDropLog() {
         return dropLog;
+    }
+
+    @Override
+    public void setViewInventory(SomInventoryType type) {
+        setViewInventory(type, true);
+    }
+
+    public void setViewInventory(SomInventoryType type, boolean log) {
+        viewInventory = type;
+        getPlayerData().viewUpdate();
+        if (log) sendMessage("§bインベントリ表示§aを§e[" + viewInventory.getDisplay() + "]§aに変更しました", SomSound.Tick);
+    }
+
+    @Override
+    public SomInventoryType getViewInventory() {
+        return viewInventory;
     }
 }

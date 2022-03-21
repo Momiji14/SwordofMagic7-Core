@@ -1,5 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
+import com.somrpg.swordofmagic7.Core.Inventory.SomInventoryType;
 import com.somrpg.swordofmagic7.Core.Player.Enum.*;
 
 public interface PlayerSettingInterface extends PlayerDataInterface {
@@ -23,4 +24,7 @@ public interface PlayerSettingInterface extends PlayerDataInterface {
 
     void setDropLog(DropLog dropLog);
     DropLog getDropLog();
+
+    void setViewInventory(SomInventoryType type);
+    SomInventoryType getViewInventory();
 }

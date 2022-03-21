@@ -3,7 +3,7 @@ package com.somrpg.swordofmagic7.Core.Inventory;
 public enum SomInventoryType {
     ItemInventory("アイテムインベントリ"),
     RuneInventory("ルーンインベントリ"),
-    PetCage("ペットケージ"),
+    PetInventory("ペットケージ"),
     SkillSlot("スキルスロット"),
     ;
 
@@ -26,7 +26,7 @@ public enum SomInventoryType {
     }
 
     public boolean isPetCage() {
-        return this == PetCage;
+        return this == PetInventory;
     }
 
     public boolean isSkillSlot() {

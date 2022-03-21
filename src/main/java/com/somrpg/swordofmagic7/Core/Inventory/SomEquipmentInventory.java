@@ -16,4 +16,6 @@ public interface SomEquipmentInventory extends SomInventoryInterface {
     default boolean hasEquipment(SomEquipmentSlot slot) {
         return getEquipmentSlot().containsKey(slot);
     }
+
+    void setEquipment(EquipmentItem equipmentItem);
 }

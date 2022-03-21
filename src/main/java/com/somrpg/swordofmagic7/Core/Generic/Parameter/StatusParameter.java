@@ -19,16 +19,67 @@ public class StatusParameter extends SomLevel implements StatusParameterInterfac
     public StatusParameter(FileConfiguration data) {
         load(data);
     }
+    public void setStatusParameter(double maxHealth, double healthRegen, double maxMana, double manaRegen, double atk, double def, double acc, double eva, double criticalRate, double criticalResist) {
+        MaxHealth = maxHealth;
+        HealthRegen = healthRegen;
+        MaxMana = maxMana;
+        ManaRegen = manaRegen;
+        ATK = atk;
+        DEF = def;
+        ACC = acc;
+        EVA = eva;
+        CriticalRate = criticalRate;
+        CriticalResist = criticalResist;
+    }
 
     public void load(FileConfiguration data) {
-        MaxHealth = data.getDouble("MaxHealth", 0d);
-        MaxMana = data.getDouble("MaxMana", 0d);
-        ATK = data.getDouble("ATK", 0d);
-        DEF = data.getDouble("DEF", 0d);
-        ACC = data.getDouble("ACC", 0d);
-        EVA = data.getDouble("EVA", 0d);
-        CriticalRate = data.getDouble("CriticalRate", 0d);
-        CriticalResist = data.getDouble("CriticalResist", 0d);
+        MaxHealth = data.getDouble("MaxHealth", 0);
+        MaxMana = data.getDouble("MaxMana", 0);
+        ATK = data.getDouble("ATK", 0);
+        DEF = data.getDouble("DEF", 0);
+        ACC = data.getDouble("ACC", 0);
+        EVA = data.getDouble("EVA", 0);
+        CriticalRate = data.getDouble("CriticalRate", 0);
+        CriticalResist = data.getDouble("CriticalResist", 0);
+    }
+
+    public void addStatusParameter(StatusParameter param) {
+        MaxHealth += param.getMaxHealth();
+        HealthRegen += param.getHealthRegen();
+        MaxMana += param.getMaxMana();
+        ManaRegen += param.getManaRegen();
+        ATK += param.getATK();
+        DEF += param.getDEF();
+        ACC += param.getACC();
+        EVA += param.getEVA();
+        CriticalRate += param.getCriticalRate();
+        CriticalResist += param.getCriticalResist();
+    }
+
+    public void multiplyStatusParameter(StatusParameter param) {
+        MaxHealth *= param.getMaxHealth();
+        HealthRegen *= param.getHealthRegen();
+        MaxMana *= param.getMaxMana();
+        ManaRegen *= param.getManaRegen();
+        ATK *= param.getATK();
+        DEF *= param.getDEF();
+        ACC *= param.getACC();
+        EVA *= param.getEVA();
+        CriticalRate *= param.getCriticalRate();
+        CriticalResist *= param.getCriticalResist();
+    }
+
+    public void setStatusParameter(StatusParameter param) {
+        MaxHealth = param.getMaxHealth();
+        HealthRegen = param.getHealthRegen();
+        MaxMana = param.getMaxMana();
+        ManaRegen = param.getManaRegen();
+        ATK = param.getATK();
+        DEF = param.getDEF();
+        ACC = param.getACC();
+        EVA = param.getEVA();
+        CriticalRate = param.getCriticalRate();
+        CriticalResist = param.getCriticalResist();
     }
 
     public void setMaxHealth(double maxHealth) {

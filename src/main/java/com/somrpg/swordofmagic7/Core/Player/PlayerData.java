@@ -1,7 +1,11 @@
 package com.somrpg.swordofmagic7.Core.Player;
 
+import com.somrpg.swordofmagic7.Core.Inventory.ItemInventory;
+import com.somrpg.swordofmagic7.Core.Inventory.PetInventory;
+import com.somrpg.swordofmagic7.Core.Inventory.RuneInventory;
 import com.somrpg.swordofmagic7.Core.Menu.PlayerUserMenu;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerDataInterface;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerViewUpdate;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -9,13 +13,12 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.UUID;
 
 import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.DataBasePath;
 
-public class PlayerData implements PlayerDataInterface {
+public class PlayerData implements PlayerDataInterface, PlayerViewUpdate {
 
     private static final HashMap<UUID, PlayerData> playerDataList = new HashMap<>();
     public static PlayerData getData(Player player) {
@@ -29,7 +32,7 @@ public class PlayerData implements PlayerDataInterface {
     private final Player player;
 
     private final File playerFile;
-    private final FileConfiguration playerData;
+    private final FileConfiguration data;
     private final PlayerEntity playerEntity;
     private final PlayerCharacon playerCharacon;
     private final PlayerViewBar playerViewBar;
@@ -37,7 +40,11 @@ public class PlayerData implements PlayerDataInterface {
     private final PlayerSetting playerSetting;
     private final PlayerInput playerInput;
 
-    private final PlayerUserMenu userMenu;
+    private final ItemInventory itemInventory;
+    private final RuneInventory runeInventory;
+    private final PetInventory petInventory;
+
+    private final PlayerUserMenu playerUserMenu;
 
     PlayerData(Player player) {
         this.player = player;
@@ -48,18 +55,15 @@ public class PlayerData implements PlayerDataInterface {
         playerInput = new PlayerInput(this);
         playerSetting = new PlayerSetting(this);
 
-        userMenu = new PlayerUserMenu(this);
-        SomCore.getJavaPlugin().getCommand("menu").setExecutor(userMenu);
+        itemInventory = new ItemInventory(this);
+        runeInventory = new RuneInventory(this);
+        petInventory = new PetInventory(this);
+
+        playerUserMenu = new PlayerUserMenu(this);
+        SomCore.getJavaPlugin().getCommand("menu").setExecutor(playerUserMenu);
 
         playerFile = new File(DataBasePath, "PlayerData/" + player.getUniqueId() + ".yml");
-        if (!playerFile.exists()) {
-            try {
-                playerFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        playerData = YamlConfiguration.loadConfiguration(playerFile);
+        data = YamlConfiguration.loadConfiguration(playerFile);
     }
 
     @Override
@@ -96,18 +100,37 @@ public class PlayerData implements PlayerDataInterface {
     }
 
     public PlayerUserMenu getUserMenu() {
-        return userMenu;
+        return playerUserMenu;
+    }
+
+    public ItemInventory getItemInventory() {
+        return itemInventory;
+    }
+
+    public RuneInventory getRuneInventory() {
+        return runeInventory;
+    }
+
+    public PetInventory getPetInventory() {
+        return petInventory;
     }
 
     public void save() {
         try {
-            playerData.set("Mel", playerBank.getMel());
-            playerData.set("Level", playerEntity.getLevel());
-            playerData.set("Exp", playerEntity.getExp());
-            playerData.set("Health", playerEntity.getHealth());
-            playerData.set("Mana", playerEntity.getMana());
 
-            playerData.save(playerFile);
+            if (!playerFile.exists()) playerFile.createNewFile();
+
+            data.set("Mel", playerBank.getMel());
+            data.set("Level", playerEntity.getLevel());
+            data.set("Exp", playerEntity.getExp());
+            data.set("Health", playerEntity.getHealth());
+            data.set("Mana", playerEntity.getMana());
+
+            data.set("ItemInventory", itemInventory.getContentsToString());
+            data.set("RuneInventory", runeInventory.getContentsToString());
+            data.set("PetInventory", petInventory.getContentsToString());
+
+            data.save(playerFile);
         } catch (Exception e) {
             e.printStackTrace();
             sendMessage("§eセーブデータ§aの§b保存§aに§c失敗§aしました", SomSound.Nope);}
@@ -115,11 +138,15 @@ public class PlayerData implements PlayerDataInterface {
 
     public void load() {
         try {
-            playerBank.setMel(playerData.getInt("Mel", 10000));
-            playerEntity.setLevel(playerData.getInt("Level", 1));
-            playerEntity.setExp(playerData.getInt("Exp", 0));
-            playerEntity.setHealth(playerData.getDouble("Health", Double.MAX_VALUE));
-            playerEntity.setMana(playerData.getDouble("Mana", Double.MAX_VALUE));
+            playerBank.setMel(data.getInt("Mel", 10000));
+            playerEntity.setLevel(data.getInt("Level", 1));
+            playerEntity.setExp(data.getInt("Exp", 0));
+            playerEntity.setHealth(data.getDouble("Health", Double.MAX_VALUE));
+            playerEntity.setMana(data.getDouble("Mana", Double.MAX_VALUE));
+
+            itemInventory.fromContentsFromString(data.getStringList("ItemInventory"));
+            runeInventory.fromContentsFromString(data.getStringList("RuneInventory"));
+            petInventory.fromContentsFromString(data.getStringList("PetInventory"));
         } catch (Exception e) {
             e.printStackTrace();
             sendMessage("§eセーブデータ§aの§b読み込み§aに§c失敗§aしました", SomSound.Nope);

@@ -18,8 +18,8 @@ public class ItemInventory extends BaseInventory implements SomEquipmentInventor
 
     private final HashMap<SomEquipmentSlot, EquipmentItem> equipmentSlot = new HashMap<>();
 
-    public ItemInventory(PlayerData playerData, SomInventoryType inventoryType) {
-        super(playerData, inventoryType);
+    public ItemInventory(PlayerData playerData) {
+        super(playerData, SomInventoryType.ItemInventory);
     }
 
     @Override
@@ -45,5 +45,17 @@ public class ItemInventory extends BaseInventory implements SomEquipmentInventor
     @Override
     public Map<SomEquipmentSlot, EquipmentItem> getEquipmentSlot() {
         return equipmentSlot;
+    }
+
+    @Override
+    public void setEquipment(EquipmentItem equipmentItem) {
+        setEquipment(equipmentItem, true);
+    }
+
+    public void setEquipment(EquipmentItem equipmentItem, boolean log) {
+        SomEquipmentSlot slot = equipmentItem.getEquipmentSlot();
+        if (hasEquipment(slot)) addContent(getEquipment(slot));
+        equipmentSlot.put(slot, equipmentItem);
+        if (log) sendMessage("§e[" + equipmentItem.getDisplay() + "]§aを§b装備§aしました", SomSound.Equip);
     }
 }

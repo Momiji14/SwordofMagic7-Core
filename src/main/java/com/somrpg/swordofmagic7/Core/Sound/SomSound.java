@@ -12,6 +12,7 @@ public enum SomSound {
 
     LevelUp(Sound.ENTITY_PLAYER_LEVELUP, 1, 1),
     Nope(Sound.BLOCK_NOTE_BLOCK_HARP, 1, 0),
+    Equip(Sound.ITEM_ARMOR_EQUIP_CHAIN, 1, 1),
     ;
 
     private final Sound sound;

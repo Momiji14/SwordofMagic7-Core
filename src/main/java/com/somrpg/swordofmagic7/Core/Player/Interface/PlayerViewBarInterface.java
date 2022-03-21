@@ -7,12 +7,15 @@ import com.somrpg.swordofmagic7.Core.Player.PlayerEntity;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+
+import static com.somrpg.swordofmagic7.Core.Generic.DecoFormat.ScaleDigit;
 
 public interface PlayerViewBarInterface extends PlayerDataInterface {
 
@@ -22,6 +25,7 @@ public interface PlayerViewBarInterface extends PlayerDataInterface {
     List<String> getScoreKey();
     default void startTickUpdate() {
         Player player = getPlayer();
+        player.setHealthScale(40);
         Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
         Objective sidebarObject = board.registerNewObjective("Sidebar", "dummy", DecoContent.decoDisplay("§bSword of Magic Ⅶ"));
         sidebarObject.setDisplaySlot(DisplaySlot.SIDEBAR);
@@ -30,19 +34,20 @@ public interface PlayerViewBarInterface extends PlayerDataInterface {
         team.addEntry(player.getName());
         team.setCanSeeFriendlyInvisibles(true);
 
-        SomCore.getSomTask().AsyncTaskTimer(() -> {
-            PlayerEntity playerEntity = getPlayerData().getPlayerEntity();
-            double MaxHealth = playerEntity.getMaxHealth();
-            double HealthRegen = playerEntity.getHealthRegen();
-            double Health = playerEntity.getHealth();
-            double MaxMana = playerEntity.getMaxMana();
-            double ManaRegen = playerEntity.getManaRegen();
-            double Mana = playerEntity.getMana();
-            String actionBar = "§c§l《Health: " + Health + "/" + MaxHealth + "》"
-                    + "§b§l《Mana: " + Mana + "/" + MaxMana + "》";
+        PlayerEntity playerEntity = getPlayerData().getPlayerEntity();
 
-            playerEntity.addHealth(HealthRegen/100d);
-            playerEntity.addHealth(ManaRegen/100d);
+        SomCore.getSomTask().AsyncTaskTimer(() -> {
+            double maxHealth = playerEntity.getMaxHealth();
+            double healthRegen = playerEntity.getHealthRegen();
+            double health = playerEntity.getHealth();
+            double maxMana = playerEntity.getMaxMana();
+            double manaRegen = playerEntity.getManaRegen();
+            double mana = playerEntity.getMana();
+            String actionBar = "§c§l《Health: " + ScaleDigit(health) + "/" + ScaleDigit(maxHealth) + "》"
+                    + "§b§l《Mana: " + ScaleDigit(mana) + "/" + ScaleDigit(maxMana) + "》";
+
+            playerEntity.addHealth(healthRegen/10d);
+            playerEntity.addMana(manaRegen/10d);
 
             player.sendActionBar(Component.text(actionBar));
 
@@ -58,6 +63,16 @@ public interface PlayerViewBarInterface extends PlayerDataInterface {
             }
             player.setScoreboard(board);
         }, 2);
+
+        SomCore.getSomTask().SyncTaskTimer(() -> {
+            double maxHealth = playerEntity.getMaxHealth();
+            double health = playerEntity.getHealth();
+            double maxMana = playerEntity.getMaxMana();
+            double mana = playerEntity.getMana();
+            player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHealth);
+            player.setHealth(Math.max(0.5, Math.min(maxHealth, health)));
+            player.setFoodLevel((int) Math.max(0, Math.min(20, Math.floor(mana/maxMana))));
+        }, 20);
     }
 
     static void setSideBar(Collection<Player> players, String key, List<String> data) {

@@ -2,8 +2,11 @@ package com.somrpg.swordofmagic7.Core.Inventory;
 
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.PlayerInventory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface SomInventoryInterface {
@@ -38,6 +41,21 @@ public interface SomInventoryInterface {
             }
         }
         return null;
+    }
+
+    default List<String> getContentsToString() {
+        List<String> list = new ArrayList<>();
+        for (SomItemStack itemStack : getList()) {
+            list.add(itemStack.toDataString());
+        }
+        return list;
+    }
+
+    default void fromContentsFromString(List<String> dataList) {
+        getList().clear();
+        for (String data : dataList) {
+            getList().add(SomItemStack.fromDataString(data));
+        }
     }
 
     default void viewInventory() {

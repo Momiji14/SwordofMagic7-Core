@@ -17,6 +17,16 @@ public class SomTask {
         return scheduler.runTaskTimerAsynchronously(SomCore.getPlugin(), runnable, 0, tick);
     }
 
+    public BukkitTask SyncTask(SomRunnable runnable) {
+        return scheduler.runTask(SomCore.getPlugin(), runnable);
+    }
+    public BukkitTask SyncTaskLater(SomRunnable runnable, int tick) {
+        return scheduler.runTaskLater(SomCore.getPlugin(), runnable, tick);
+    }
+    public BukkitTask SyncTaskTimer(SomRunnable runnable, int tick) {
+        return scheduler.runTaskTimer(SomCore.getPlugin(), runnable, 0, tick);
+    }
+
     public synchronized void sleepTick(int tick) {
         try {
             wait(tick * 50L);
@@ -24,4 +34,5 @@ public class SomTask {
             e.printStackTrace();
         }
     }
+
 }

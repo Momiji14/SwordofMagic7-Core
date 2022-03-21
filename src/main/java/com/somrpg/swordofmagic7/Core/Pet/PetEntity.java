@@ -1,4 +1,18 @@
 package com.somrpg.swordofmagic7.Core.Pet;
 
-public class PetEntity {
+import com.somrpg.swordofmagic7.Core.Generic.Entity.BaseEntity;
+import com.somrpg.swordofmagic7.Core.Generic.Parameter.StatusParameterInterface;
+
+public class PetEntity extends BaseEntity implements PetEntityInterface {
+
+    private final PetItem petItem;
+
+    PetEntity(PetItem petItem) {
+        this.petItem = petItem;
+    }
+
+    @Override
+    public PetItem getPetItem() {
+        return petItem;
+    }
 }

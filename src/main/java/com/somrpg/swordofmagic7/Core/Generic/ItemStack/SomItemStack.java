@@ -2,6 +2,8 @@ package com.somrpg.swordofmagic7.Core.Generic.ItemStack;
 
 import com.somrpg.swordofmagic7.Core.DataBase.SomItemDataLoader;
 import com.somrpg.swordofmagic7.Core.DataBase.SomLoader;
+import com.somrpg.swordofmagic7.Core.Equipment.EquipmentItem;
+import com.somrpg.swordofmagic7.Core.Generic.DecoFormat;
 import com.somrpg.swordofmagic7.Core.Item.RuneItem;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import org.bukkit.Material;
@@ -59,18 +61,24 @@ public class SomItemStack extends ViewableItemStack {
     }
 
     public String toDataString() {
-        String data = "Id:" + getId()
+        StringBuilder data = new StringBuilder("Id:" + getId()
                 + ",Owner:" + itemOwner.getOwner()
-                + ",UUID:" + uuid.toString();
+                + ",UUID:" + uuid.toString());
         if (this instanceof RuneItem item) {
-            data += ",Level:" + item.getLevel()
-                    + ",Quality:" + String.format("%.5f", item.getQuality());
+            data.append(",Level:").append(item.getLevel()).append(",Quality:").append(DecoFormat.ScaleDigit(item.getQuality(), 5));
+        } else if (this instanceof EquipmentItem item) {
+            data.append(",Plus:").append(item.getPlus());
+            int i = 0;
+            for (UUID uuid : item.getRune()) {
+                data.append(",Rune").append(i).append(":").append(uuid);
+                i++;
+            }
         }
 
-        return data;
+        return data.toString();
     }
 
-    public SomItemStack fromDataString(String data) {
+    public static SomItemStack fromDataString(String data) {
         try {
             String[] split = data.split(",");
             Map<String, String> mapData = new HashMap<>();
@@ -89,6 +97,15 @@ public class SomItemStack extends ViewableItemStack {
                 double quality = Double.parseDouble(mapData.get("Quality"));
                 runeItem.setLevel(level);
                 runeItem.setQuality(quality);
+            } else if (item instanceof EquipmentItem equipmentItem) {
+                int plus = Integer.parseInt(mapData.get("Plus"));
+                equipmentItem.setPlus(plus);
+                int i = 0;
+                while (mapData.containsKey("Rune" + i)) {
+                    UUID runeUUID = UUID.fromString(mapData.get("Rune" + i));
+                    equipmentItem.getRune().add(runeUUID);
+                    i++;
+                }
             }
             return item;
         } catch (Exception e) {

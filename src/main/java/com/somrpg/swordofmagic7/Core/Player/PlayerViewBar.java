@@ -1,6 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Player;
 
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerViewBarInterface;
+import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import org.bukkit.entity.Player;
 
 import java.util.*;

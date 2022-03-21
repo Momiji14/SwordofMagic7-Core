@@ -28,7 +28,7 @@ public final class SomCore extends JavaPlugin {
         DataLoader.startLoad();
 
         for (Player player : PlayerList.getPlayerList()) {
-            PlayerData.getData(player);
+            PlayerData.getData(player).load();
         }
     }
 

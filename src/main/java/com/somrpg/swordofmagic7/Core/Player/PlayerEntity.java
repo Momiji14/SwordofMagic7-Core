@@ -14,9 +14,4 @@ public class PlayerEntity extends BaseEntity implements PlayerEntityInterface {
     public PlayerData getPlayerData() {
         return playerData;
     }
-
-    @Override
-    public void statusUpdate() {
-
-    }
 }
