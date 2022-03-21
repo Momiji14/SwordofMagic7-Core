@@ -1,6 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Menu;
 
 import com.somrpg.swordofmagic7.Core.Generic.BaseGraphicalUserInterface;
+import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
 import com.somrpg.swordofmagic7.Core.Inventory.SomInventoryType;
 import org.bukkit.Material;
@@ -9,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 
 public interface UserMenuInterface extends BaseGraphicalUserInterface, CommandExecutor {
     String display = "§lユーザーメニュー";
-    int size = 2;
+    int size = 3;
 
     ItemStack ItemInventoryIcon = ViewableItemStack.create(SomInventoryType.ItemInventory.getDisplay(),Material.CHEST, "インベントリ表示を" + SomInventoryType.ItemInventory.getDisplay() + "に切り替えます").viewItemStack();
     ItemStack RuneInventoryIcon = ViewableItemStack.create(SomInventoryType.RuneInventory.getDisplay(),Material.ENDER_CHEST, "インベントリ表示を" + SomInventoryType.RuneInventory.getDisplay() + "に切り替えます").viewItemStack();
@@ -23,6 +24,10 @@ public interface UserMenuInterface extends BaseGraphicalUserInterface, CommandEx
         content[1] = RuneInventoryIcon;
         content[2] = PetInventoryIcon;
         content[3] = SkillSlotIcon;
+
+        for (int i = 9; i < 17; i++) {
+            content[i] = GenericConfig.GUIPartition;
+        }
         return content;
     }
 

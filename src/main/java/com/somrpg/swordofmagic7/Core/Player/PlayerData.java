@@ -3,6 +3,8 @@ package com.somrpg.swordofmagic7.Core.Player;
 import com.somrpg.swordofmagic7.Core.Inventory.ItemInventory;
 import com.somrpg.swordofmagic7.Core.Inventory.PetInventory;
 import com.somrpg.swordofmagic7.Core.Inventory.RuneInventory;
+import com.somrpg.swordofmagic7.Core.Map.MapData;
+import com.somrpg.swordofmagic7.Core.Map.MapDataInterface;
 import com.somrpg.swordofmagic7.Core.Menu.PlayerSettingMenu;
 import com.somrpg.swordofmagic7.Core.Menu.PlayerUserMenu;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerDataInterface;
@@ -48,6 +50,8 @@ public class PlayerData implements PlayerDataInterface, PlayerViewUpdate {
     private final PlayerUserMenu playerUserMenu;
     private final PlayerSettingMenu playerSettingMenu;
 
+    private MapDataInterface mapData;
+
     PlayerData(Player player) {
         this.player = player;
         playerEntity = new PlayerEntity(this);
@@ -62,7 +66,7 @@ public class PlayerData implements PlayerDataInterface, PlayerViewUpdate {
         petInventory = new PetInventory(this);
 
         playerUserMenu = new PlayerUserMenu(this);
-        SomCore.getJavaPlugin().getCommand("menu").setExecutor(playerUserMenu);
+        SomCore.getJavaPlugin().getCommand("m").setExecutor(playerUserMenu);
         playerSettingMenu = new PlayerSettingMenu(this);
         SomCore.getJavaPlugin().getCommand("setting").setExecutor(playerSettingMenu);
 
@@ -117,6 +121,14 @@ public class PlayerData implements PlayerDataInterface, PlayerViewUpdate {
 
     public PetInventory getPetInventory() {
         return petInventory;
+    }
+
+    public void setMapData(MapData mapData) {
+        this.mapData = mapData;
+    }
+
+    public MapDataInterface getMapData() {
+        return mapData;
     }
 
     public void save() {

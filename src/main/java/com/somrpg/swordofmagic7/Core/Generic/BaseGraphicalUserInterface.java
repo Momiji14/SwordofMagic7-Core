@@ -15,9 +15,10 @@ public interface BaseGraphicalUserInterface extends PlayerDataInterface {
     ItemStack[] getContent();
 
     default Inventory openGUI() {
-        Inventory inv = Bukkit.createInventory(null, getSize(), Component.text(getTitle()));
+        Inventory inv = Bukkit.createInventory(null, getSize()*9, Component.text(getTitle()));
         inv.setMaxStackSize(GenericConfig.MaxItemStackAmount);
         inv.setContents(getContent());
+        getPlayer().openInventory(inv);
         return inv;
     }
 }

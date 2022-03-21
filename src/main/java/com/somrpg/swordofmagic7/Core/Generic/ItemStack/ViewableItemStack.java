@@ -16,8 +16,6 @@ public class ViewableItemStack {
     private final String display;
     private final Material material;
     private final List<String> lore;
-    private final String decoDisplay;
-    private final List<String> decoLore;
     private int amount = 1;
     private int customModelData = 0;
 
@@ -25,8 +23,6 @@ public class ViewableItemStack {
         this.display = display;
         this.material = material;
         this.lore = lore;
-        decoDisplay = DecoContent.decoDisplay(display);
-        decoLore = DecoContent.colorLore(lore);
     }
 
     public static ViewableItemStack create(String display, Material material, String lore, int customModelData) {
@@ -62,11 +58,11 @@ public class ViewableItemStack {
     }
 
     public String getDecoDisplay() {
-        return decoDisplay;
+        return DecoContent.decoDisplay(display);
     }
 
     public List<String> getDecoLore() {
-        return decoLore;
+        return DecoContent.colorLore(lore);
     }
 
     public void setAmount(int amount) {

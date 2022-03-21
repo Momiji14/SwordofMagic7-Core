@@ -18,7 +18,6 @@ public interface PlayerDataInterface {
         return getPlayerData().getUserMenu();
     }
 
-
     default void sendMessage(String message, SomSound sound) {
         sendMessage(List.of(message.split("\n")), sound);
     }

@@ -20,8 +20,8 @@ commands:
     description: description
     usage: /<command>
 
-  menu:
-    aliases: m
+  m:
+    aliases: menu
     description: description
     usage: /<command>
   setting:
