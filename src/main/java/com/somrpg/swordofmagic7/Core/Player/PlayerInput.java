@@ -43,6 +43,7 @@ public class PlayerInput implements PlayerInputInterface {
 
     @Override
     public void onCloseGUI(InventoryCloseEvent event) {
-
+        getPlayerData().getPlayerEntity().statusUpdate();
+        getPlayerData().viewUpdate();
     }
 }

@@ -9,14 +9,25 @@ commands:
     permission: som7.developer
     description: description
     usage: /<command>
-  getItem:
+  save:
     permission: som7.developer
+    description: description
+    usage: /<command>
+  load:
+    permission: som7.developer
+    description: description
+    usage: /<command>
+
+
+  getItem:
+    permission: som7.admin
     description: description
     usage: /<command>
   getRune:
-    permission: som7.developer
+    permission: som7.admin
     description: description
     usage: /<command>
+
 
   gm:
     permission: som7.builder
@@ -27,6 +38,7 @@ commands:
     aliases: pm
     description: description
     usage: /<command>
+
 
   m:
     aliases: menu

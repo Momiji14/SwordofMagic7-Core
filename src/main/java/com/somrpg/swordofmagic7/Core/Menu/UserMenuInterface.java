@@ -1,5 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Menu;
 
+import com.somrpg.swordofmagic7.Core.Command.PlayerDataCommandExecutor;
 import com.somrpg.swordofmagic7.Core.Generic.BaseGraphicalUserInterface;
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
@@ -8,7 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.inventory.ItemStack;
 
-public interface UserMenuInterface extends BaseGraphicalUserInterface, CommandExecutor {
+public interface UserMenuInterface extends BaseGraphicalUserInterface, PlayerDataCommandExecutor {
     String display = "§lユーザーメニュー";
     int size = 3;
 

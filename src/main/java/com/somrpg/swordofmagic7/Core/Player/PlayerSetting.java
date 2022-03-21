@@ -22,7 +22,7 @@ public class PlayerSetting implements PlayerDataInterface, PlayerSettingInterfac
     private ExpLog expLog = ExpLog.Disable;
     private DropLog dropLog = DropLog.Disable;
 
-    private SomInventoryType viewInventory;
+    private SomInventoryType viewInventory = SomInventoryType.ItemInventory;
 
     @Override
     public PlayerData getPlayerData() {

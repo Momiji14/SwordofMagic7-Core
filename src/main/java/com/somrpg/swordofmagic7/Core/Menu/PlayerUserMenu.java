@@ -1,8 +1,11 @@
 package com.somrpg.swordofmagic7.Core.Menu;
 
+import com.somrpg.swordofmagic7.Core.Command.PlayerCommandExecutor;
+import com.somrpg.swordofmagic7.Core.Command.PlayerDataCommandExecutor;
 import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class PlayerUserMenu implements UserMenuInterface {
@@ -28,8 +31,7 @@ public class PlayerUserMenu implements UserMenuInterface {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public void command(String[] args) {
         openGUI();
-        return true;
     }
 }

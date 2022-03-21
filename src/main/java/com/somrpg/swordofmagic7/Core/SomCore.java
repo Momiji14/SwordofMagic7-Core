@@ -1,16 +1,17 @@
 package com.somrpg.swordofmagic7.Core;
 
-import com.somrpg.swordofmagic7.Core.Command.CommandManager;
+import com.somrpg.swordofmagic7.Core.Command.BuilderCommand.CommandGameMode;
+import com.somrpg.swordofmagic7.Core.Command.BuilderCommand.CommandPlayMode;
+import com.somrpg.swordofmagic7.Core.Command.AdminCommand.CommandGetItem;
+import com.somrpg.swordofmagic7.Core.Command.AdminCommand.CommandGetRune;
+import com.somrpg.swordofmagic7.Core.Command.DeveloperCommand.CommandSomReload;
 import com.somrpg.swordofmagic7.Core.DataBase.DataLoader;
 import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import com.somrpg.swordofmagic7.Core.Player.PlayerList;
 import com.somrpg.swordofmagic7.Core.SomThread.SomTask;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.jetbrains.annotations.NotNull;
 
 public final class SomCore extends JavaPlugin {
     private static Plugin plugin;
@@ -23,6 +24,17 @@ public final class SomCore extends JavaPlugin {
         javaPlugin = this;
 
         getServer().getPluginManager().registerEvents(new Events(), plugin);
+
+        //Developer
+        getJavaPlugin().getCommand("somReload").setExecutor(new CommandSomReload());
+        getJavaPlugin().getCommand("load").setExecutor(new CommandGetItem());
+        getJavaPlugin().getCommand("save").setExecutor(new CommandGetRune());
+        //Admin
+        getJavaPlugin().getCommand("getItem").setExecutor(new CommandGetItem());
+        getJavaPlugin().getCommand("getRune").setExecutor(new CommandGetRune());
+        //Builder
+        getJavaPlugin().getCommand("gm").setExecutor(new CommandGameMode());
+        getJavaPlugin().getCommand("playMode").setExecutor(new CommandPlayMode());
 
         PlayerList.load();
         DataLoader.startLoad();
@@ -37,18 +49,6 @@ public final class SomCore extends JavaPlugin {
         for (Player player : PlayerList.getPlayerList()) {
             PlayerData.getData(player).save();
         }
-    }
-
-    @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
-        try {
-            CommandManager.command(sender, cmd, args);
-            return true;
-        } catch (Exception e) {
-            sender.sendMessage(e.getMessage());
-            e.printStackTrace();
-        }
-        return false;
     }
 
     public static Plugin getPlugin() {
