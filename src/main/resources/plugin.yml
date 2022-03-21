@@ -1,0 +1,26 @@
+name: SwordofMagic7-Core
+version: '${project.version}'
+main: com.somrpg.swordofmagic7.Core.SomCore
+api-version: 1.18
+authors: [ MomiNeko ]
+
+commands:
+  somreload:
+    permission: som7.developer
+    description: description
+    usage: /<command>
+
+  gm:
+    permission: som7.builder
+    description: description
+    usage: /<command>
+  playmode:
+    permission: som7.builder
+    aliases: pm
+    description: description
+    usage: /<command>
+
+  menu:
+    aliases: m
+    description: description
+    usage: /<command>
