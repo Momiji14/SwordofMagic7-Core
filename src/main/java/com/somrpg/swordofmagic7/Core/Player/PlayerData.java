@@ -40,6 +40,7 @@ public class PlayerData implements PlayerDataInterface, PlayerViewUpdate {
     private final PlayerBank playerBank;
     private final PlayerSetting playerSetting;
     private final PlayerInput playerInput;
+    private final PlayerStatistics playerStatistics;
 
     private final ItemInventory itemInventory;
     private final RuneInventory runeInventory;
@@ -58,6 +59,7 @@ public class PlayerData implements PlayerDataInterface, PlayerViewUpdate {
         playerBank = new PlayerBank(this);
         playerInput = new PlayerInput(this);
         playerSetting = new PlayerSetting(this);
+        playerStatistics = new PlayerStatistics(this);
 
         itemInventory = new ItemInventory(this);
         runeInventory = new RuneInventory(this);
@@ -103,6 +105,10 @@ public class PlayerData implements PlayerDataInterface, PlayerViewUpdate {
 
     public PlayerInput getPlayerInput() {
         return playerInput;
+    }
+
+    public PlayerStatistics getPlayerStatistics() {
+        return playerStatistics;
     }
 
     public PlayerUserMenu getUserMenu() {
@@ -160,9 +166,10 @@ public class PlayerData implements PlayerDataInterface, PlayerViewUpdate {
             data.set("PetInventory", petInventory.getContentsToString());
 
             data.save(playerFile);
+            sendMessage("§eプレイヤーデータ§aの§b保存§aが§b完了§aしました", SomSound.Tick);
         } catch (Exception e) {
             e.printStackTrace();
-            sendMessage("§eセーブデータ§aの§b保存§aに§c失敗§aしました", SomSound.Nope);}
+            sendMessage("§eプレイヤーデータ§aの§b保存§aに§c失敗§aしました", SomSound.Nope);}
     }
 
     public void load() {
@@ -176,9 +183,12 @@ public class PlayerData implements PlayerDataInterface, PlayerViewUpdate {
             itemInventory.fromContentsFromString(data.getStringList("ItemInventory"));
             runeInventory.fromContentsFromString(data.getStringList("RuneInventory"));
             petInventory.fromContentsFromString(data.getStringList("PetInventory"));
+
+            getPlayerEntity().statusUpdate();
+            sendMessage("§eプレイヤーデータ§aの§b読み込み§aが§b完了§aしました", SomSound.Tick);
         } catch (Exception e) {
             e.printStackTrace();
-            sendMessage("§eセーブデータ§aの§b読み込み§aに§c失敗§aしました", SomSound.Nope);
+            sendMessage("§eプレイヤーデータ§aの§b読み込み§aに§c失敗§aしました", SomSound.Nope);
         }
     }
 }

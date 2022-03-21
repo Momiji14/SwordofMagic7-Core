@@ -4,8 +4,11 @@ import com.somrpg.swordofmagic7.Core.Command.BuilderCommand.CommandGameMode;
 import com.somrpg.swordofmagic7.Core.Command.BuilderCommand.CommandPlayMode;
 import com.somrpg.swordofmagic7.Core.Command.AdminCommand.CommandGetItem;
 import com.somrpg.swordofmagic7.Core.Command.AdminCommand.CommandGetRune;
+import com.somrpg.swordofmagic7.Core.Command.DeveloperCommand.CommandLoad;
+import com.somrpg.swordofmagic7.Core.Command.DeveloperCommand.CommandSave;
 import com.somrpg.swordofmagic7.Core.Command.DeveloperCommand.CommandSomReload;
 import com.somrpg.swordofmagic7.Core.DataBase.DataLoader;
+import com.somrpg.swordofmagic7.Core.Listener.*;
 import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import com.somrpg.swordofmagic7.Core.Player.PlayerList;
 import com.somrpg.swordofmagic7.Core.SomThread.SomTask;
@@ -23,12 +26,16 @@ public final class SomCore extends JavaPlugin {
         plugin = this;
         javaPlugin = this;
 
-        getServer().getPluginManager().registerEvents(new Events(), plugin);
+        getServer().getPluginManager().registerEvents(new ConnectionListener(), plugin);
+        getServer().getPluginManager().registerEvents(new DamageListener(), plugin);
+        getServer().getPluginManager().registerEvents(new InventoryListener(), plugin);
+        getServer().getPluginManager().registerEvents(new OthersListener(), plugin);
+        getServer().getPluginManager().registerEvents(new PlayerControlListener(), plugin);
 
         //Developer
         getJavaPlugin().getCommand("somReload").setExecutor(new CommandSomReload());
-        getJavaPlugin().getCommand("load").setExecutor(new CommandGetItem());
-        getJavaPlugin().getCommand("save").setExecutor(new CommandGetRune());
+        getJavaPlugin().getCommand("load").setExecutor(new CommandLoad());
+        getJavaPlugin().getCommand("save").setExecutor(new CommandSave());
         //Admin
         getJavaPlugin().getCommand("getItem").setExecutor(new CommandGetItem());
         getJavaPlugin().getCommand("getRune").setExecutor(new CommandGetRune());

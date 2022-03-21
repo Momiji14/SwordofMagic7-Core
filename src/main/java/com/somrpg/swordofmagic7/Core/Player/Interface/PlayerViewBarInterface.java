@@ -24,7 +24,7 @@ public interface PlayerViewBarInterface extends PlayerDataInterface {
     List<String> getScoreKey();
     default void startTickUpdate() {
         Player player = getPlayer();
-        player.setHealthScale(40);
+        player.setHealthScale(20);
         Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
         Objective sidebarObject = board.registerNewObjective("Sidebar", "dummy", DecoContent.decoDisplay("§bSword of Magic Ⅶ"));
         sidebarObject.setDisplaySlot(DisplaySlot.SIDEBAR);
@@ -45,8 +45,8 @@ public interface PlayerViewBarInterface extends PlayerDataInterface {
             String actionBar = "§c§l《Health: " + ScaleDigit(health) + "/" + ScaleDigit(maxHealth) + "》"
                     + "§b§l《Mana: " + ScaleDigit(mana) + "/" + ScaleDigit(maxMana) + "》";
 
-            playerEntity.addHealth(healthRegen/10d);
-            playerEntity.addMana(manaRegen/10d);
+            playerEntity.addHealth(healthRegen/20d);
+            playerEntity.addMana(manaRegen/20d);
 
             player.sendActionBar(Component.text(actionBar));
 
@@ -70,7 +70,8 @@ public interface PlayerViewBarInterface extends PlayerDataInterface {
             double mana = playerEntity.getMana();
             player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHealth);
             player.setHealth(Math.max(0.5, Math.min(maxHealth, health)));
-            player.setFoodLevel((int) Math.max(0, Math.min(20, Math.floor(mana/maxMana))));
+            player.setFoodLevel((int) Math.max(0, Math.min(20, Math.floor(mana/maxMana*20))));
+            getPlayerData().getPlayerStatistics().addPlayTime();
         }, 20);
     }
 
