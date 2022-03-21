@@ -5,14 +5,13 @@ import com.somrpg.swordofmagic7.Core.Item.BaseItem;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class EquipmentItem extends BaseItem {
     private final StatusParameter statusParameter;
     private final SomEquipmentSlot equipmentSlot;
     private int plus = 0;
     private int runeSlot = 1;
-    private final List<UUID> rune = new ArrayList<>();
+    private final List<String> rune = new ArrayList<>();
 
     public EquipmentItem(BaseItem data, SomEquipmentSlot equipmentSlot) {
         super(data, data.getItemCategory(), data.getSell());
@@ -44,7 +43,7 @@ public class EquipmentItem extends BaseItem {
         return runeSlot;
     }
 
-    public List<UUID> getRune() {
+    public List<String> getRune() {
         return rune;
     }
 }

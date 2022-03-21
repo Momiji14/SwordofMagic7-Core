@@ -1,17 +1,10 @@
 package com.somrpg.swordofmagic7.Core.DataBase;
 
-import com.somrpg.swordofmagic7.Core.Equipment.EquipmentItem;
-import com.somrpg.swordofmagic7.Core.Equipment.SomEquipmentSlot;
-import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
-import com.somrpg.swordofmagic7.Core.Item.BaseItem;
-import com.somrpg.swordofmagic7.Core.Item.ItemCategory;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
-import java.util.List;
 
 import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.DataBasePath;
 

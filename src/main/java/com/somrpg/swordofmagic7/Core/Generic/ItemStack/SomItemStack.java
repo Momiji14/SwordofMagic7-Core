@@ -14,7 +14,7 @@ import java.util.*;
 public class SomItemStack extends ViewableItemStack {
 
     private final String Id;
-    private UUID uuid = UUID.randomUUID();
+    private String uuid = String.valueOf(UUID.randomUUID());
     private ItemOwner itemOwner = new ItemOwner();
     private File file;
 
@@ -36,11 +36,11 @@ public class SomItemStack extends ViewableItemStack {
         return Id;
     }
 
-    public void setUUID(UUID uuid) {
+    public void setUUID(String uuid) {
         this.uuid = uuid;
     }
 
-    public UUID getUUID() {
+    public String getUUID() {
         return uuid;
     }
 
@@ -63,13 +63,13 @@ public class SomItemStack extends ViewableItemStack {
     public String toDataString() {
         StringBuilder data = new StringBuilder("Id:" + getId()
                 + ",Owner:" + itemOwner.getOwner()
-                + ",UUID:" + uuid.toString());
+                + ",UUID:" + uuid);
         if (this instanceof RuneItem item) {
             data.append(",Level:").append(item.getLevel()).append(",Quality:").append(DecoFormat.ScaleDigit(item.getQuality(), 5));
         } else if (this instanceof EquipmentItem item) {
             data.append(",Plus:").append(item.getPlus());
             int i = 0;
-            for (UUID uuid : item.getRune()) {
+            for (String uuid : item.getRune()) {
                 data.append(",Rune").append(i).append(":").append(uuid);
                 i++;
             }
@@ -88,7 +88,7 @@ public class SomItemStack extends ViewableItemStack {
             }
             String id = mapData.get("Id");
             String owner = mapData.get("Owner");
-            UUID uuid = UUID.fromString(mapData.get("UUID"));
+            String uuid = mapData.get("UUID");
             SomItemStack item = SomItemDataLoader.getItem(id);
             item.setItemOwner(new ItemOwner(owner));
             item.setUUID(uuid);
@@ -102,7 +102,7 @@ public class SomItemStack extends ViewableItemStack {
                 equipmentItem.setPlus(plus);
                 int i = 0;
                 while (mapData.containsKey("Rune" + i)) {
-                    UUID runeUUID = UUID.fromString(mapData.get("Rune" + i));
+                    String runeUUID = mapData.get("Rune" + i);
                     equipmentItem.getRune().add(runeUUID);
                     i++;
                 }

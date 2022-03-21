@@ -14,26 +14,28 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.UUID;
 
 import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.DataBasePath;
 
 public class PlayerData implements PlayerDataInterface, PlayerViewUpdate {
 
-    private static final HashMap<UUID, PlayerData> playerDataList = new HashMap<>();
+    private static final HashMap<String, PlayerData> playerDataList = new HashMap<>();
     public static PlayerData getData(Player player) {
-        UUID uuid = player.getUniqueId();
+        String uuid = String.valueOf(player.getUniqueId());
         if (!playerDataList.containsKey(uuid)) {
             playerDataList.put(uuid, new PlayerData(player));
         }
         return playerDataList.get(uuid);
     }
+    public static Collection<PlayerData> getDataList() {
+        return playerDataList.values();
+    }
 
     private final Player player;
 
-    private final File playerFile;
-    private final FileConfiguration data;
+    private File playerFile;
     private final PlayerEntity playerEntity;
     private final PlayerCharacon playerCharacon;
     private final PlayerViewBar playerViewBar;
@@ -69,9 +71,6 @@ public class PlayerData implements PlayerDataInterface, PlayerViewUpdate {
         SomCore.getJavaPlugin().getCommand("m").setExecutor(playerUserMenu);
         playerSettingMenu = new PlayerSettingMenu(this);
         SomCore.getJavaPlugin().getCommand("setting").setExecutor(playerSettingMenu);
-
-        playerFile = new File(DataBasePath, "PlayerData/" + player.getUniqueId() + ".yml");
-        data = YamlConfiguration.loadConfiguration(playerFile);
     }
 
     @Override
@@ -152,8 +151,9 @@ public class PlayerData implements PlayerDataInterface, PlayerViewUpdate {
 
     public void save() {
         try {
-
+            playerFile = new File(DataBasePath, "PlayerData/" + player.getUniqueId() + ".yml");
             if (!playerFile.exists()) playerFile.createNewFile();
+            FileConfiguration data = YamlConfiguration.loadConfiguration(playerFile);
 
             data.set("Mel", playerBank.getMel());
             data.set("Level", playerEntity.getLevel());
@@ -174,11 +174,20 @@ public class PlayerData implements PlayerDataInterface, PlayerViewUpdate {
 
     public void load() {
         try {
+            playerFile = new File(DataBasePath, "PlayerData/" + player.getUniqueId() + ".yml");
+            if (!playerFile.exists()) {
+                getPlayerEntity().statusUpdate();
+                getPlayerEntity().setHealth(getPlayerEntity().getMaxHealth());
+                getPlayerEntity().setMana(getPlayerEntity().getMana());
+                return;
+            }
+            FileConfiguration data = YamlConfiguration.loadConfiguration(playerFile);
+
             playerBank.setMel(data.getInt("Mel", 10000));
             playerEntity.setLevel(data.getInt("Level", 1));
             playerEntity.setExp(data.getInt("Exp", 0));
-            playerEntity.setHealth(data.getDouble("Health", Double.MAX_VALUE));
-            playerEntity.setMana(data.getDouble("Mana", Double.MAX_VALUE));
+            playerEntity.setHealthUnsafe(data.getDouble("Health", Double.MAX_VALUE));
+            playerEntity.setManaUnsafe(data.getDouble("Mana", Double.MAX_VALUE));
 
             itemInventory.fromContentsFromString(data.getStringList("ItemInventory"));
             runeInventory.fromContentsFromString(data.getStringList("RuneInventory"));

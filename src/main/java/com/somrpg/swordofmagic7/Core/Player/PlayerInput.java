@@ -28,6 +28,7 @@ public class PlayerInput implements PlayerInputInterface {
         ClickType clickType = event.getClick();
         int slot = event.getSlot();
         ItemStack currentItem = event.getCurrentItem();
+        view.setCursor(null);
         if (currentItem != null) {
             if (view.getTopInventory() == clickedInv) {
                 getPlayerData().getUserMenu().onClick(currentItem);

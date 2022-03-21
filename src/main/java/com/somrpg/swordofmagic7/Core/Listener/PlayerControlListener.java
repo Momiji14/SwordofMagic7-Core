@@ -23,9 +23,7 @@ public class PlayerControlListener implements Listener {
     public void onSprintToggle(PlayerToggleSprintEvent event) {
         Player player = event.getPlayer();
         PlayerData playerData = PlayerData.getData(player);
-        if (!player.isSprinting() && playerData.getPlayerSetting().getPlayerStrafeMode().isAirDash()) {
-            playerData.getPlayerCharacon().strafe();
-        }
+        playerData.getPlayerCharacon().wallKick();
     }
 
     @EventHandler

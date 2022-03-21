@@ -1,12 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Menu;
 
-import com.somrpg.swordofmagic7.Core.Command.PlayerCommandExecutor;
-import com.somrpg.swordofmagic7.Core.Command.PlayerDataCommandExecutor;
 import com.somrpg.swordofmagic7.Core.Player.PlayerData;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
 public class PlayerUserMenu implements UserMenuInterface {
 

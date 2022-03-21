@@ -25,6 +25,10 @@ public class BaseEntity extends StatusParameter implements BaseEntityInterface {
         Health = Math.max(0, Math.min(health, getMaxHealth()));
     }
 
+    public void setHealthUnsafe(double health) {
+        Health = health;
+    }
+
     @Override
     public void addHealth(double health) {
         setHealth(Health + health);
@@ -38,6 +42,10 @@ public class BaseEntity extends StatusParameter implements BaseEntityInterface {
     @Override
     public void setMana(double mana) {
         Mana = Math.max(0, Math.min(mana, getMaxMana()));
+    }
+
+    public void setManaUnsafe(double mana) {
+        Mana = mana;
     }
 
     @Override

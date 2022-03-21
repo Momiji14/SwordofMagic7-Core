@@ -3,11 +3,7 @@ package com.somrpg.swordofmagic7.Core.Command.BuilderCommand;
 import com.somrpg.swordofmagic7.Core.Command.PlayerCommandExecutor;
 import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import org.bukkit.GameMode;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
 public class CommandGameMode implements PlayerCommandExecutor {
     @Override

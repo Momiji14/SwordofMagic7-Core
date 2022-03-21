@@ -1,9 +1,9 @@
 package com.somrpg.swordofmagic7.Core;
 
-import com.somrpg.swordofmagic7.Core.Command.BuilderCommand.CommandGameMode;
-import com.somrpg.swordofmagic7.Core.Command.BuilderCommand.CommandPlayMode;
 import com.somrpg.swordofmagic7.Core.Command.AdminCommand.CommandGetItem;
 import com.somrpg.swordofmagic7.Core.Command.AdminCommand.CommandGetRune;
+import com.somrpg.swordofmagic7.Core.Command.BuilderCommand.CommandGameMode;
+import com.somrpg.swordofmagic7.Core.Command.BuilderCommand.CommandPlayMode;
 import com.somrpg.swordofmagic7.Core.Command.DeveloperCommand.CommandLoad;
 import com.somrpg.swordofmagic7.Core.Command.DeveloperCommand.CommandSave;
 import com.somrpg.swordofmagic7.Core.Command.DeveloperCommand.CommandSomReload;
@@ -53,9 +53,7 @@ public final class SomCore extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        for (Player player : PlayerList.getPlayerList()) {
-            PlayerData.getData(player).save();
-        }
+
     }
 
     public static Plugin getPlugin() {

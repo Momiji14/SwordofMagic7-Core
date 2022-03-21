@@ -4,7 +4,6 @@ import com.somrpg.swordofmagic7.Core.Command.PlayerDataCommandExecutor;
 import com.somrpg.swordofmagic7.Core.Generic.BaseGraphicalUserInterface;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
 import org.bukkit.Material;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.inventory.ItemStack;
 
 public interface SettingMenuInterface extends BaseGraphicalUserInterface, PlayerDataCommandExecutor {

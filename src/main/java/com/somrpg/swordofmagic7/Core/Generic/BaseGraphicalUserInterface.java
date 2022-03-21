@@ -1,6 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Generic;
 
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerDataInterface;
+import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
@@ -19,6 +20,7 @@ public interface BaseGraphicalUserInterface extends PlayerDataInterface {
         inv.setMaxStackSize(GenericConfig.MaxItemStackAmount);
         inv.setContents(getContent());
         getPlayer().openInventory(inv);
+        SomSound.Open.play(getPlayer());
         return inv;
     }
 }
