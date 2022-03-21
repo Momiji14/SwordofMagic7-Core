@@ -85,12 +85,13 @@ public class ViewableItemStack {
         ItemStack item = new ItemStack(getMaterial());
         ItemMeta meta = item.getItemMeta();
         meta.displayName(Component.text(getDecoDisplay()));
-        meta.lore(DecoContent.loreToComponent(getLore()));
+        meta.lore(DecoContent.loreToComponent(getDecoLore()));
         meta.setUnbreakable(true);
         meta.setCustomModelData(customModelData);
         for (ItemFlag flag : ItemFlag.values()) {
             meta.addItemFlags(flag);
         }
+        item.setItemMeta(meta);
         amount = Math.max(1, Math.min(GenericConfig.MaxItemStackAmount, amount));
         item.setAmount(amount);
         return item;

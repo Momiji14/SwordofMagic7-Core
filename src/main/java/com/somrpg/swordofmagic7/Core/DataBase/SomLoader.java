@@ -11,4 +11,11 @@ public interface SomLoader {
     SomItemStack ErrorItemStack = new SomItemStack("Error SomItemStack", Material.BARRIER);
     Map<String, SomItemStack> SomItemDataList = new HashMap<>();
     Map<String, MapData> MapDataList = new HashMap<>();
+
+    static SomItemStack getSomItemStack(String id) {
+        if (SomItemDataList.containsKey(id)) {
+            return SomItemDataList.get(id);
+        }
+        return null;
+    }
 }

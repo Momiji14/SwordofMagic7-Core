@@ -12,10 +12,10 @@ public interface UserMenuInterface extends BaseGraphicalUserInterface, CommandEx
     String display = "§lユーザーメニュー";
     int size = 3;
 
-    ItemStack ItemInventoryIcon = ViewableItemStack.create(SomInventoryType.ItemInventory.getDisplay(),Material.CHEST, "インベントリ表示を" + SomInventoryType.ItemInventory.getDisplay() + "に切り替えます").viewItemStack();
-    ItemStack RuneInventoryIcon = ViewableItemStack.create(SomInventoryType.RuneInventory.getDisplay(),Material.ENDER_CHEST, "インベントリ表示を" + SomInventoryType.RuneInventory.getDisplay() + "に切り替えます").viewItemStack();
-    ItemStack PetInventoryIcon = ViewableItemStack.create(SomInventoryType.PetInventory.getDisplay(),Material.NOTE_BLOCK, "インベントリ表示を" + SomInventoryType.PetInventory.getDisplay() + "に切り替えます").viewItemStack();
-    ItemStack SkillSlotIcon = ViewableItemStack.create(SomInventoryType.SkillSlot.getDisplay(),Material.END_CRYSTAL, "インベントリ表示を" + SomInventoryType.SkillSlot.getDisplay() + "に切り替えます").viewItemStack();
+    ItemStack ItemInventoryIcon = ViewableItemStack.create(SomInventoryType.ItemInventory.getDisplay(),Material.CHEST, "インベントリ表示をアイテムに切り替えます").viewItemStack();
+    ItemStack RuneInventoryIcon = ViewableItemStack.create(SomInventoryType.RuneInventory.getDisplay(),Material.ENDER_CHEST, "インベントリ表示をルーンに切り替えます").viewItemStack();
+    ItemStack PetInventoryIcon = ViewableItemStack.create(SomInventoryType.PetInventory.getDisplay(),Material.NOTE_BLOCK, "インベントリ表示をペットケージに切り替えます").viewItemStack();
+    ItemStack SkillSlotIcon = ViewableItemStack.create(SomInventoryType.SkillSlot.getDisplay(),Material.END_CRYSTAL, "インベントリ表示をスキルスロットに切り替えます").viewItemStack();
 
     @Override
     default ItemStack[] getContent() {
@@ -25,7 +25,7 @@ public interface UserMenuInterface extends BaseGraphicalUserInterface, CommandEx
         content[2] = PetInventoryIcon;
         content[3] = SkillSlotIcon;
 
-        for (int i = 9; i < 17; i++) {
+        for (int i = 9; i < 18; i++) {
             content[i] = GenericConfig.GUIPartition;
         }
         return content;

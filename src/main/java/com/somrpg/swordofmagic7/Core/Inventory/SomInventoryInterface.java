@@ -2,12 +2,20 @@ package com.somrpg.swordofmagic7.Core.Inventory;
 
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
+import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public interface SomInventoryInterface {
+
+    ItemStack UpScrollIcon = ViewableItemStack.create("上へスクロール", Material.ITEM_FRAME).viewItemStack();
+    ItemStack DownScrollIcon = ViewableItemStack.create("下へスクロール", Material.ITEM_FRAME).viewItemStack();
+    ItemStack UserMenuIcon = ViewableItemStack.create("ユーザーメニュ", Material.BOOK, "ユーザーメニュを開きます").viewItemStack();
+
     List<SomItemStack> getList();
     void setScroll(int scroll);
     void addScroll(int scroll);
@@ -60,9 +68,9 @@ public interface SomInventoryInterface {
         int index = 0;
         for (int slot = 9; slot < 36; slot++) {
             switch (slot) {
-                case 17 -> getInventory().setItem(slot, GenericConfig.UpScrollIcon);
-                case 26 -> getInventory().setItem(slot, GenericConfig.UserMenuIcon);
-                case 35 -> getInventory().setItem(slot, GenericConfig.DownScrollIcon);
+                case 17 -> getInventory().setItem(slot, UpScrollIcon);
+                case 26 -> getInventory().setItem(slot, UserMenuIcon);
+                case 35 -> getInventory().setItem(slot, DownScrollIcon);
                 default -> {
                     if (getList().size() > index) {
                         index++;

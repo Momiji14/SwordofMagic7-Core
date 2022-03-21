@@ -39,7 +39,7 @@ public class BaseInventory implements PlayerDataInterface, SomInventoryInterface
 
     @Override
     public void addScroll(int scroll) {
-        this.scroll += scroll;
+        setScroll((int) Math.max(0,Math.min(Math.ceil(getList().size()/9f)-2, getScroll() + scroll)));
     }
 
     @Override

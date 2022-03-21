@@ -1,8 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Player;
 
-import com.somrpg.swordofmagic7.Core.Inventory.ItemInventory;
-import com.somrpg.swordofmagic7.Core.Inventory.PetInventory;
-import com.somrpg.swordofmagic7.Core.Inventory.RuneInventory;
+import com.somrpg.swordofmagic7.Core.Inventory.*;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
 import com.somrpg.swordofmagic7.Core.Map.MapDataInterface;
 import com.somrpg.swordofmagic7.Core.Menu.PlayerSettingMenu;
@@ -121,6 +119,21 @@ public class PlayerData implements PlayerDataInterface, PlayerViewUpdate {
 
     public PetInventory getPetInventory() {
         return petInventory;
+    }
+
+    public BaseInventory getBaseInventory(SomInventoryType type) {
+        switch (type) {
+            case ItemInventory -> {
+                return getItemInventory();
+            }
+            case RuneInventory -> {
+                return getRuneInventory();
+            }
+            case PetInventory -> {
+                return getPetInventory();
+            }
+        }
+        return null;
     }
 
     public void setMapData(MapData mapData) {

@@ -26,10 +26,17 @@ public class PlayerInput implements PlayerInputInterface {
         InventoryView view = event.getView();
         Inventory clickedInv = event.getClickedInventory();
         ClickType clickType = event.getClick();
+        int slot = event.getSlot();
         ItemStack currentItem = event.getCurrentItem();
         if (currentItem != null) {
             if (view.getTopInventory() == clickedInv) {
-                playerData.getUserMenu().onClick(currentItem);
+                getPlayerData().getUserMenu().onClick(currentItem);
+            } else if (view.getBottomInventory() == clickedInv) {
+                switch (slot) {
+                    case 26 -> getPlayerData().getUserMenu().openGUI();
+                    case 17 -> getPlayerData().getBaseInventory(getPlayerData().getPlayerSetting().getViewInventory()).addScroll(1);
+                    case 35 -> getPlayerData().getBaseInventory(getPlayerData().getPlayerSetting().getViewInventory()).addScroll(-1);
+                }
             }
         }
     }

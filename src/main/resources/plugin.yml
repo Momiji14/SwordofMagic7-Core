@@ -9,6 +9,14 @@ commands:
     permission: som7.developer
     description: description
     usage: /<command>
+  getItem:
+    permission: som7.developer
+    description: description
+    usage: /<command>
+  getRune:
+    permission: som7.developer
+    description: description
+    usage: /<command>
 
   gm:
     permission: som7.builder

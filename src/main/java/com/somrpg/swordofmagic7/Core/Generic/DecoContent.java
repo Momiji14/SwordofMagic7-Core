@@ -35,7 +35,7 @@ public interface DecoContent {
     static List<String> colorLore(List<String> lore) {
         List<String> coloredLore = new ArrayList<>();
         for (String str : lore) {
-            coloredLore.add(colorDef(str, "§e§l"));
+            coloredLore.add(colorDef(str, "§a§l"));
         }
         return coloredLore;
     }
