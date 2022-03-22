@@ -1,5 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Player;
 
+import com.somrpg.swordofmagic7.Core.SomCore;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -27,7 +28,7 @@ public class PlayerList {
     }
 
     public static void offlineCheck() {
-        playerList.removeIf(player -> !player.isOnline());
+        SomCore.getSomTask().AsyncTaskLater(() -> playerList.removeIf(player -> !player.isOnline()), 5);
     }
 
     public static Collection<Player> getPlayerList() {
