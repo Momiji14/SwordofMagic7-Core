@@ -2,6 +2,7 @@ package com.somrpg.swordofmagic7.Core.Generic.Parameter;
 
 import com.somrpg.swordofmagic7.Core.Player.Level.SomLevel;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class StatusParameter extends SomLevel implements StatusParameterInterface {
     private double MaxHealth = 0;
@@ -16,7 +17,7 @@ public class StatusParameter extends SomLevel implements StatusParameterInterfac
     private double CriticalResist = 0;
 
     public StatusParameter() {}
-    public StatusParameter(FileConfiguration data) {
+    public StatusParameter(@NonNull FileConfiguration data) {
         load(data);
     }
     public void setStatusParameter(double maxHealth, double healthRegen, double maxMana, double manaRegen, double atk, double def, double acc, double eva, double criticalRate, double criticalResist) {

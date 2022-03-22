@@ -40,12 +40,12 @@ commands:
     usage: /<command>
 
 
-  m:
-    aliases: menu
+  menu:
+    aliases: m
     description: description
     usage: /<command>
-  setting:
-    aliases: setting
+  settingMenu:
+    aliases: setting, sm
     description: description
     usage: /<command>
   damageLog:

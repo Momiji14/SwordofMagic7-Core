@@ -8,6 +8,7 @@ import com.somrpg.swordofmagic7.Core.Item.BaseItem;
 import com.somrpg.swordofmagic7.Core.Item.ItemCategory;
 import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,12 +17,12 @@ public class ItemInventory extends BaseInventory implements SomEquipmentInventor
 
     private final HashMap<SomEquipmentSlot, EquipmentItem> equipmentSlot = new HashMap<>();
 
-    public ItemInventory(PlayerData playerData) {
+    public ItemInventory(@NonNull PlayerData playerData) {
         super(playerData, SomInventoryType.ItemInventory);
     }
 
     @Override
-    public void addContent(SomItemStack itemData) {
+    public void addContent(@NonNull SomItemStack itemData) {
         if (itemData instanceof BaseItem item) {
             if (getList().size() < GenericConfig.ItemInventoryMaxSlot) {
                 if (hasContent(item.getId())) {
@@ -46,11 +47,11 @@ public class ItemInventory extends BaseInventory implements SomEquipmentInventor
     }
 
     @Override
-    public void setEquipment(EquipmentItem equipmentItem) {
+    public void setEquipment(@NonNull EquipmentItem equipmentItem) {
         setEquipment(equipmentItem, true);
     }
 
-    public void setEquipment(EquipmentItem equipmentItem, boolean log) {
+    public void setEquipment(@NonNull EquipmentItem equipmentItem, boolean log) {
         SomEquipmentSlot slot = equipmentItem.getEquipmentSlot();
         if (hasEquipment(slot)) addContent(getEquipment(slot));
         equipmentSlot.put(slot, equipmentItem);

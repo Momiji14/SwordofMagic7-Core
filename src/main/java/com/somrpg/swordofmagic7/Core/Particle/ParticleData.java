@@ -6,6 +6,8 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 public class ParticleData implements ParticleInterface {
     private Particle particle;
@@ -14,12 +16,12 @@ public class ParticleData implements ParticleInterface {
     private Vector vector = new Vector();
     private Vector offset = new Vector(0, 0.15, 0);
 
-    public ParticleData(Particle particle) {
+    public ParticleData(@NonNull Particle particle) {
         this.particle = particle;
     }
 
     @Override
-    public void spawn(Location location) {
+    public void spawn(@NonNull Location location) {
         if (particle != Particle.REDSTONE) {
             for (Player player : PlayerList.getNear(location, 48)) {
                 player.spawnParticle(particle, location.clone().add(offset), 0, vector.getX(), vector.getY(), vector.getZ(), speed);
@@ -32,7 +34,7 @@ public class ParticleData implements ParticleInterface {
     }
 
     @Override
-    public ParticleData setParticle(Particle particle) {
+    public ParticleData setParticle(@NotNull Particle particle) {
         this.particle = particle;
         return this;
     }
@@ -50,13 +52,13 @@ public class ParticleData implements ParticleInterface {
     }
 
     @Override
-    public ParticleData setVector(Vector vector) {
+    public ParticleData setVector(@NotNull Vector vector) {
         this.vector = vector;
         return this;
     }
 
     @Override
-    public ParticleData setOffset(Vector offset) {
+    public ParticleData setOffset(@NotNull Vector offset) {
         this.offset = offset;
         return this;
     }

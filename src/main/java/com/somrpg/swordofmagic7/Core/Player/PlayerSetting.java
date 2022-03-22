@@ -2,11 +2,10 @@ package com.somrpg.swordofmagic7.Core.Player;
 
 import com.somrpg.swordofmagic7.Core.Inventory.SomInventoryType;
 import com.somrpg.swordofmagic7.Core.Player.Enum.*;
-import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerDataInterface;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerSettingInterface;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 
-public class PlayerSetting implements PlayerDataInterface, PlayerSettingInterface {
+public class PlayerSetting implements PlayerData, PlayerSettingInterface {
     private final PlayerData playerData;
 
     PlayerSetting(PlayerData playerData) {

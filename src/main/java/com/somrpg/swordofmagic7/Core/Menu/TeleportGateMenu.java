@@ -2,7 +2,7 @@ package com.somrpg.swordofmagic7.Core.Menu;
 
 import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
 import com.somrpg.swordofmagic7.Core.DataBase.TeleportGateLoader;
-import com.somrpg.swordofmagic7.Core.Generic.BaseGraphicalUserInterface;
+import com.somrpg.swordofmagic7.Core.Generic.BaseGraphicalUser;
 import com.somrpg.swordofmagic7.Core.Map.TeleportGate.TeleportGate;
 import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import com.somrpg.swordofmagic7.Core.SomCore;
@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Map;
 
-public class TeleportGateMenu implements BaseGraphicalUserInterface {
+public class TeleportGateMenu implements BaseGraphicalUser {
 
     private final PlayerData playerData;
 
@@ -45,7 +45,8 @@ public class TeleportGateMenu implements BaseGraphicalUserInterface {
     }
 
     public void onClick(int slot) {
-        TeleportGate teleport = DataBase.TeleportGateList.get(DataBase.TeleportGateList.get(slot));
+        TeleportGate teleport = DataBase.getTeleportGate(TeleportGateLoader.TeleportGateMenu.get(slot));
+        assert teleport != null;
         if (teleport.isDefaultActive() || getPlayerData().getActiveTeleportGate().contains(teleport.getId()) || getPlayer().hasPermission("som7.builder")) {
             getPlayerData().setMapData(teleport.getMapData());
             getPlayer().teleportAsync(teleport.getLocation());

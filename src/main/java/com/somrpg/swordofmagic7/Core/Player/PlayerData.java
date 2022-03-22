@@ -1,142 +1,109 @@
 package com.somrpg.swordofmagic7.Core.Player;
 
+import com.somrpg.swordofmagic7.Core.Generic.Parameter.StatusParameterInterface;
 import com.somrpg.swordofmagic7.Core.Inventory.*;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
 import com.somrpg.swordofmagic7.Core.Map.MapDataInterface;
-import com.somrpg.swordofmagic7.Core.Menu.PlayerSettingMenu;
 import com.somrpg.swordofmagic7.Core.Menu.PlayerUserMenu;
 import com.somrpg.swordofmagic7.Core.Menu.TeleportGateMenu;
-import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerDataInterface;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerBankInterface;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerEntityInterface;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerInput;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerSettingInterface;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerViewUpdate;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 
-import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.DataBasePath;
+public interface PlayerData extends StatusParameterInterface, PlayerEntityInterface, PlayerSettingInterface, PlayerBankInterface, PlayerViewUpdate {
 
-public class PlayerData implements PlayerDataInterface {
+    static PlayerData getData(Player player) {
+        return PlayerDataContainer.getData(player);
+    }
 
-    private static final HashMap<String, PlayerData> playerDataList = new HashMap<>();
-    public static PlayerData getData(Player player) {
-        String uuid = String.valueOf(player.getUniqueId());
-        if (!playerDataList.containsKey(uuid)) {
-            playerDataList.put(uuid, new PlayerData(player));
+    PlayerData getPlayerData();
+
+    default PlayerDataContainer getPlayerDataContainer() {
+        return getPlayerData().getPlayerDataContainer();
+    }
+
+    default Player getPlayer() {
+        return getPlayerData().getPlayer();
+    }
+
+    default void sendMessage(String message, SomSound sound) {
+        sendMessage(List.of(message.split("\n")), sound);
+    }
+
+    default void sendMessage(List<String> message, SomSound sound) {
+        Player player = getPlayer();
+        for (String msg : message) {
+            player.sendMessage(msg);
         }
-        return playerDataList.get(uuid);
-    }
-    public static Collection<PlayerData> getDataList() {
-        return playerDataList.values();
+        sound.play(player);
     }
 
-    private final Player player;
-
-    private File playerFile;
-    private final PlayerEntity playerEntity;
-    private final PlayerCharacon playerCharacon;
-    private final PlayerViewBar playerViewBar;
-    private final PlayerBank playerBank;
-    private final PlayerSetting playerSetting;
-    private final PlayerInput playerInput;
-    private final PlayerStatistics playerStatistics;
-
-    private final ItemInventory itemInventory;
-    private final RuneInventory runeInventory;
-    private final PetInventory petInventory;
-
-    private final PlayerUserMenu playerUserMenu;
-    private final PlayerSettingMenu playerSettingMenu;
-    private final TeleportGateMenu teleportGateMenu;
-
-    private MapDataInterface mapData;
-    private List<String> activeTeleportGate = new ArrayList<>();
-
-    PlayerData(Player player) {
-        this.player = player;
-        playerEntity = new PlayerEntity(this);
-        playerCharacon = new PlayerCharacon(this);
-        playerViewBar = new PlayerViewBar(this);
-        playerBank = new PlayerBank(this);
-        playerInput = new PlayerInput(this);
-        playerSetting = new PlayerSetting(this);
-        playerStatistics = new PlayerStatistics(this);
-
-        itemInventory = new ItemInventory(this);
-        runeInventory = new RuneInventory(this);
-        petInventory = new PetInventory(this);
-
-        playerUserMenu = new PlayerUserMenu(this);
-        playerSettingMenu = new PlayerSettingMenu(this);
-        teleportGateMenu = new TeleportGateMenu(this);
+    default BaseInventory getBaseViewInventory() {
+        return getPlayerData().getBaseInventory(getViewInventory());
     }
 
-    @Override
-    public PlayerData getPlayerData() {
-        return this;
+    default SomInventoryType getViewInventory() {
+        return getPlayerSetting().getViewInventory();
     }
 
-    public Player getPlayer() {
-        return player;
+    default PlayerEntity getPlayerEntity() {
+        return getPlayerData().getPlayerEntity();
     }
 
-    public PlayerEntity getPlayerEntity() {
-        return playerEntity;
+    default PlayerCharacon getPlayerCharacon() {
+        return getPlayerData().getPlayerCharacon();
     }
 
-    public PlayerCharacon getPlayerCharacon() {
-        return playerCharacon;
+    default com.somrpg.swordofmagic7.Core.Player.Interface.PlayerViewBar getPlayerViewBar() {
+        return getPlayerData().getPlayerViewBar();
     }
 
-    public PlayerViewBar getPlayerViewBar() {
-        return playerViewBar;
+    default PlayerInput getPlayerInput() {
+        return getPlayerData().getPlayerInput();
     }
 
-    public PlayerBank getPlayerBank() {
-        return playerBank;
+    default PlayerStatistics getPlayerStatistics() {
+        return getPlayerData().getPlayerStatistics();
     }
 
-    @Override
-    public PlayerSetting getPlayerSetting() {
-        return playerSetting;
+    default PlayerBank getPlayerBank() {
+        return getPlayerData().getPlayerBank();
     }
 
-    public PlayerInput getPlayerInput() {
-        return playerInput;
+    default PlayerSetting getPlayerSetting() {
+        return getPlayerData().getPlayerSetting();
     }
 
-    public PlayerStatistics getPlayerStatistics() {
-        return playerStatistics;
+    default ItemInventory getItemInventory() {
+        return getPlayerData().getItemInventory();
     }
 
-    public PlayerUserMenu getUserMenu() {
-        return playerUserMenu;
+    default RuneInventory getRuneInventory() {
+        return getPlayerData().getRuneInventory();
     }
 
-    public List<String> getActiveTeleportGate() {
-        return activeTeleportGate;
+    default PetInventory getPetInventory() {
+        return getPlayerData().getPetInventory();
     }
 
-    @Override
-    public ItemInventory getItemInventory() {
-        return itemInventory;
+
+    default PlayerUserMenu getUserMenu() {
+        return getPlayerData().getUserMenu();
+    }
+    default PlayerUserMenu getSettingMenu() {
+        return getPlayerData().getSettingMenu();
+    }
+    default TeleportGateMenu getTeleportGateMenu() {
+        return getPlayerData().getTeleportGateMenu();
     }
 
-    @Override
-    public RuneInventory getRuneInventory() {
-        return runeInventory;
-    }
-
-    @Override
-    public PetInventory getPetInventory() {
-        return petInventory;
-    }
-
-    public BaseInventory getBaseInventory(SomInventoryType type) {
+    default BaseInventory getBaseInventory(SomInventoryType type) {
         switch (type) {
             case ItemInventory -> {
                 return getItemInventory();
@@ -151,73 +118,159 @@ public class PlayerData implements PlayerDataInterface {
         return null;
     }
 
+    default void setMapData(MapData mapData) {
+        getPlayerData().setMapData(mapData);
+    }
+
+    default MapDataInterface getMapData() {
+        return getPlayerData().getMapData();
+    }
+
+    default List<String> getActiveTeleportGate() {
+        return getPlayerData().getActiveTeleportGate();
+    }
+
+    default void save() {
+        getPlayerDataContainer().save();
+    }
+
+    default void load() {
+        getPlayerDataContainer().load();
+    }
+
     @Override
-    public TeleportGateMenu getTeleportGateMenu() {
-        return teleportGateMenu;
+    default void setMel(int mel) {
+        getPlayerBank().setMel(mel);
     }
 
-    public void setMapData(MapData mapData) {
-        this.mapData = mapData;
+    @Override
+    default void addMel(int mel) {
+        getPlayerBank().addMel(mel);
     }
 
-    public MapDataInterface getMapData() {
-        return mapData;
+    @Override
+    default void removeMel(int mel) {
+        getPlayerBank().removeMel(mel);
     }
 
-    public void save() {
-        try {
-            playerFile = new File(DataBasePath, "PlayerData/" + player.getUniqueId() + ".yml");
-            if (!playerFile.exists()) playerFile.createNewFile();
-            FileConfiguration data = YamlConfiguration.loadConfiguration(playerFile);
-
-            data.set("Mel", getMel());
-            data.set("Level", getLevel());
-            data.set("Exp", getExp());
-            data.set("Health", getHealth());
-            data.set("Mana", getMana());
-
-            data.set("ItemInventory", itemInventory.getContentsToString());
-            data.set("RuneInventory", runeInventory.getContentsToString());
-            data.set("PetInventory", petInventory.getContentsToString());
-
-            data.set("ActiveTeleportGate", getActiveTeleportGate());
-
-            data.save(playerFile);
-            sendMessage("§eプレイヤーデータ§aの§b保存§aが§b完了§aしました", SomSound.Tick);
-        } catch (Exception e) {
-            e.printStackTrace();
-            sendMessage("§eプレイヤーデータ§aの§b保存§aに§c失敗§aしました", SomSound.Nope);}
+    @Override
+    default int getMel() {
+        return getPlayerBank().getMel();
     }
 
-    public void load() {
-        try {
-            playerFile = new File(DataBasePath, "PlayerData/" + player.getUniqueId() + ".yml");
-            if (!playerFile.exists()) {
-                getPlayerEntity().statusUpdate();
-                getPlayerEntity().setHealth(getPlayerEntity().getMaxHealth());
-                getPlayerEntity().setMana(getPlayerEntity().getMana());
-                return;
-            }
-            FileConfiguration data = YamlConfiguration.loadConfiguration(playerFile);
+    @Override
+    default void setMaxHealth(double maxHealth) {
+        getPlayerEntity().setMaxHealth(maxHealth);
+    }
 
-            playerBank.setMel(data.getInt("Mel", 10000));
-            playerEntity.setLevel(data.getInt("Level", 1));
-            playerEntity.setExp(data.getInt("Exp", 0));
-            playerEntity.setHealthUnsafe(data.getDouble("Health", Double.MAX_VALUE));
-            playerEntity.setManaUnsafe(data.getDouble("Mana", Double.MAX_VALUE));
+    @Override
+    default double getMaxHealth() {
+        return getPlayerEntity().getMaxHealth();
+    }
 
-            itemInventory.fromContentsFromString(data.getStringList("ItemInventory"));
-            runeInventory.fromContentsFromString(data.getStringList("RuneInventory"));
-            petInventory.fromContentsFromString(data.getStringList("PetInventory"));
+    default void setHealth(double health) {
+        getPlayerEntity().setHealth(health);
+    }
 
-            activeTeleportGate = data.getStringList("ActiveTeleportGate");
+    default double getHealth() {
+        return getPlayerEntity().getHealth();
+    }
 
-            getPlayerEntity().statusUpdate();
-            viewUpdate();
-            sendMessage("§eプレイヤーデータ§aの§b読み込み§aが§b完了§aしました", SomSound.Tick);
-        } catch (Exception e) {
-            e.printStackTrace();
-            sendMessage("§eプレイヤーデータ§aの§b読み込み§aに§c失敗§aしました", SomSound.Nope);
-        }
+    @Override
+    default void setHealthRegen(double healthRegen) {
+        getPlayerEntity().setHealthRegen(healthRegen);
+    }
+
+    @Override
+    default double getHealthRegen() {
+        return getPlayerEntity().getHealthRegen();
+    }
+
+    @Override
+    default void setMaxMana(double maxMana) {
+        getPlayerEntity().setMaxMana(maxMana);
+    }
+
+    @Override
+    default double getMaxMana() {
+        return getPlayerEntity().getMaxMana();
+    }
+
+    default void setMana(double mana) {
+        getPlayerEntity().setMana(mana);
+    }
+
+    default double getMana() {
+        return getPlayerEntity().getMana();
+    }
+
+    @Override
+    default void setManaRegen(double manaRegen) {
+        getPlayerEntity().setManaRegen(manaRegen);
+    }
+
+    @Override
+    default double getManaRegen() {
+        return getPlayerEntity().getManaRegen();
+    }
+
+    @Override
+    default void setATK(double ATK) {
+        getPlayerEntity().setATK(ATK);
+    }
+
+    @Override
+    default double getATK() {
+        return getPlayerEntity().getATK();
+    }
+
+    @Override
+    default void setDEF(double DEF) {
+        getPlayerEntity().setDEF(DEF);
+    }
+
+    @Override
+    default double getDEF() {
+        return getPlayerEntity().getDEF();
+    }
+
+    @Override
+    default void setACC(double ACC) {
+        getPlayerEntity().setACC(ACC);
+    }
+
+    @Override
+    default double getACC() {
+        return getPlayerEntity().getACC();
+    }
+
+    @Override
+    default void setEVA(double EVA) {
+        getPlayerEntity().setEVA(EVA);
+    }
+
+    @Override
+    default double getEVA() {
+        return getPlayerEntity().getEVA();
+    }
+
+    @Override
+    default void setCriticalRate(double criticalRate) {
+        getPlayerEntity().setCriticalRate(criticalRate);
+    }
+
+    @Override
+    default double getCriticalRate() {
+        return getPlayerEntity().getCriticalRate();
+    }
+
+    @Override
+    default void setCriticalResist(double criticalResist) {
+        getPlayerEntity().setCriticalResist(criticalResist);
+    }
+
+    @Override
+    default double getCriticalResist() {
+        return getPlayerEntity().getCriticalResist();
     }
 }

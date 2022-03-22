@@ -1,5 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Item;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 public enum ItemCategory {
     Equipment("装備"),
     Tool("ツール"),
@@ -11,7 +13,7 @@ public enum ItemCategory {
 
     private final String Display;
 
-    ItemCategory(String Display) {
+    ItemCategory(@NonNull String Display) {
         this.Display = Display;
     }
 

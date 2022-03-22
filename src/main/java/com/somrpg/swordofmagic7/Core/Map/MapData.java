@@ -2,6 +2,7 @@ package com.somrpg.swordofmagic7.Core.Map;
 
 import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +25,7 @@ public class MapData implements MapDataInterface{
     }
 
     @Override
-    public void enter(Player player) {
+    public void enter(@NotNull Player player) {
         PlayerData.getData(player).setMapData(this);
     }
 

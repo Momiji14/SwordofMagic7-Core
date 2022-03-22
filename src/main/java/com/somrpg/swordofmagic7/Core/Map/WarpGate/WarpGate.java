@@ -12,6 +12,7 @@ import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public interface WarpGate {
     void disable();
     void activeAtTime(int time);
 
-    void usePlayer(Player player);
+    void usePlayer(@NonNull Player player);
 
     String getId();
     Location getLocation();
@@ -30,7 +31,7 @@ public interface WarpGate {
     String getTrigger();
     MapData getNextMap();
 
-    static void Selector(Player player) {
+    static void Selector(@NonNull Player player) {
         Location pLoc = player.getLocation();
         for (Map.Entry<String, WarpGateData> entry : DataBase.WarpGateList.entrySet()) {
             if (entry.getValue().getLocation().distance(pLoc) < 1.5) {

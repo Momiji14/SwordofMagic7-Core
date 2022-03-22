@@ -2,14 +2,11 @@ package com.somrpg.swordofmagic7.Core.Player.Interface;
 
 import com.somrpg.swordofmagic7.Core.Effect.EffectData;
 import com.somrpg.swordofmagic7.Core.Generic.Entity.BaseEntityInterface;
-import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import com.somrpg.swordofmagic7.Core.Player.PlayerEntity;
 
 import java.util.Collection;
 
 public interface PlayerEntityInterface extends BaseEntityInterface, PlayerStatusCalculation {
-
-    PlayerData getPlayerData();
 
     default PlayerEntity getPlayerEntity() {
         return getPlayerData().getPlayerEntity();

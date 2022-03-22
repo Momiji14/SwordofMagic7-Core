@@ -7,10 +7,12 @@ import com.somrpg.swordofmagic7.Core.Item.BaseItem;
 import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.entity.Player;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 public class CommandGetItem implements PlayerCommandExecutor {
     @Override
-    public void command(Player player, PlayerData playerData, String[] args) {
+    public void command(@NotNull Player player, @NotNull @NonNull PlayerData playerData, String[] args) {
         if (args.length >= 1) {
             int amount = 1;
             if (args.length >= 2) amount = Integer.parseInt(args[1]);

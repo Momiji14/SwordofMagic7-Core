@@ -1,5 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Inventory;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 public enum SomInventoryType {
     ItemInventory("アイテムインベントリ"),
     RuneInventory("ルーンインベントリ"),
@@ -9,7 +11,7 @@ public enum SomInventoryType {
 
     private final String display;
 
-    SomInventoryType(String display) {
+    SomInventoryType(@NonNull String display) {
         this.display = display;
     }
 

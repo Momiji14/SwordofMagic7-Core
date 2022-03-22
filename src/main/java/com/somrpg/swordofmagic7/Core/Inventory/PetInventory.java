@@ -5,6 +5,7 @@ import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Pet.PetItem;
 import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class PetInventory extends BaseInventory {
 
@@ -13,7 +14,7 @@ public class PetInventory extends BaseInventory {
     }
 
     @Override
-    public void addContent(SomItemStack itemData) {
+    public void addContent(@NonNull SomItemStack itemData) {
         if (itemData instanceof PetItem item) {
             if (getList().size() < GenericConfig.PetInventoryMaxSlot) {
                 getList().add(item);

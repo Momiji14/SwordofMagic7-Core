@@ -8,6 +8,7 @@ import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class WarpGateData implements WarpGate {
     private final String id;
@@ -57,7 +58,7 @@ public class WarpGateData implements WarpGate {
     }
 
     @Override
-    public void usePlayer(Player player) {
+    public void usePlayer(@NotNull Player player) {
         /*
         if (getTrigger() != null) {
             if (getTrigger().equals("AusMineB1") && AusMineB1.Start()) return;

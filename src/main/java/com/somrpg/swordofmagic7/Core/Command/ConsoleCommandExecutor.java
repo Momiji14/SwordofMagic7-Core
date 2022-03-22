@@ -3,6 +3,7 @@ package com.somrpg.swordofmagic7.Core.Command;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.NotNull;
 
 public interface ConsoleCommandExecutor extends CommandExecutor {
@@ -13,5 +14,5 @@ public interface ConsoleCommandExecutor extends CommandExecutor {
         return true;
     }
 
-    void command(CommandSender sender, String[] args);
+    void command(@NonNull CommandSender sender, @NonNull String[] args);
 }

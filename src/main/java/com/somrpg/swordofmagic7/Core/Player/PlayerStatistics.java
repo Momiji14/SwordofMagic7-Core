@@ -1,8 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Player;
 
-import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerDataInterface;
-
-public class PlayerStatistics implements PlayerDataInterface {
+public class PlayerStatistics implements PlayerData {
 
     private final PlayerData playerData;
 

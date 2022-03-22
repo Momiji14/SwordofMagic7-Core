@@ -1,17 +1,16 @@
 package com.somrpg.swordofmagic7.Core.Menu;
 
 import com.somrpg.swordofmagic7.Core.Command.PlayerDataCommandExecutor;
-import com.somrpg.swordofmagic7.Core.Generic.BaseGraphicalUserInterface;
+import com.somrpg.swordofmagic7.Core.Generic.BaseGraphicalUser;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
 import com.somrpg.swordofmagic7.Core.Player.Enum.DamageLog;
 import com.somrpg.swordofmagic7.Core.Player.Enum.DropLog;
 import com.somrpg.swordofmagic7.Core.Player.Enum.ExpLog;
-import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerDataInterface;
 import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class PlayerSettingMenu implements BaseGraphicalUserInterface, PlayerDataCommandExecutor, PlayerDataInterface {
+public class PlayerSettingMenu implements BaseGraphicalUser, PlayerDataCommandExecutor, PlayerData {
     ItemStack DamageLogIcon = ViewableItemStack.create("ダメージログ", Material.RED_DYE, "ダメージログ表示を切り替えます").viewItemStack();
     ItemStack ExpLogIcon = ViewableItemStack.create("経験値ログ", Material.EXPERIENCE_BOTTLE, "経験値ログ表示を切り替えます").viewItemStack();
     ItemStack DropLogIcon = ViewableItemStack.create("ドロップログ", Material.CHEST, "ドロップログ表示を切り替えます").viewItemStack();

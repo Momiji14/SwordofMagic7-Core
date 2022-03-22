@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public enum SomSound {
     Tick(Sound.BLOCK_LEVER_CLICK, 1, 1),
@@ -29,15 +30,11 @@ public enum SomSound {
         this.volume = volume;
     }
 
-    public void play(Player player) {
-        SomCore.getSomTask().AsyncTaskLater(() -> {
-            player.playSound(player.getLocation(), sound, category, volume, pitch);
-        }, 1);
+    public void play(@NonNull Player player) {
+        SomCore.getSomTask().AsyncTaskLater(() -> player.playSound(player.getLocation(), sound, category, volume, pitch), 1);
     }
 
-    public void play(Location location) {
-        SomCore.getSomTask().AsyncTaskLater(() -> {
-            location.getWorld().playSound(location, sound, category, volume, pitch);
-        }, 1);
+    public void play(@NonNull Location location) {
+        SomCore.getSomTask().AsyncTaskLater(() -> location.getWorld().playSound(location, sound, category, volume, pitch), 1);
     }
 }

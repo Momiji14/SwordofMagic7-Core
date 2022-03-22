@@ -2,6 +2,7 @@ package com.somrpg.swordofmagic7.Core.Item;
 
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Generic.Parameter.StatusParameter;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class RuneItem extends SomItemStack {
 
@@ -9,7 +10,7 @@ public class RuneItem extends SomItemStack {
     private double quality = 0.5;
     private int level = 0;
 
-    public RuneItem(SomItemStack data, StatusParameter statusParameter) {
+    public RuneItem(@NonNull SomItemStack data, @NonNull StatusParameter statusParameter) {
         super(data.getId(), data.getDisplay(), data.getMaterial(), data.getLore());
         this.statusParameter = statusParameter;
     }

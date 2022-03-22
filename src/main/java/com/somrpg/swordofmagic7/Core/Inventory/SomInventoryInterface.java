@@ -5,6 +5,7 @@ import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,15 +23,15 @@ public interface SomInventoryInterface {
     SomInventoryType getInventoryType();
     PlayerInventory getInventory();
 
-    default void addContent(SomItemStack content) {
+    default void addContent(@NonNull SomItemStack content) {
         getList().add(content);
     }
 
-    default void removeContent(SomItemStack content) {
+    default void removeContent(@NonNull SomItemStack content) {
         getList().remove(content);
     }
 
-    default boolean hasContent(String Id) {
+    default boolean hasContent(@NonNull String Id) {
         for (SomItemStack itemStack : getList()) {
             if (itemStack.getId().equals(Id)) {
                 return true;
@@ -39,7 +40,7 @@ public interface SomInventoryInterface {
         return false;
     }
 
-    default SomItemStack getContent(String Id) {
+    default SomItemStack getContent(@NonNull String Id) {
         for (SomItemStack itemStack : getList()) {
             if (itemStack.getId().equals(Id)) {
                 return itemStack;
@@ -56,7 +57,7 @@ public interface SomInventoryInterface {
         return list;
     }
 
-    default void fromContentsFromString(List<String> dataList) {
+    default void fromContentsFromString(@NonNull List<String> dataList) {
         getList().clear();
         for (String data : dataList) {
             getList().add(SomItemStack.fromDataString(data));

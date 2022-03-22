@@ -1,16 +1,18 @@
 package com.somrpg.swordofmagic7.Core.Generic.ItemStack;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 public class ItemOwner {
 
     private String owner = "GameSystem";
 
     public ItemOwner() {}
 
-    public ItemOwner(String owner) {
+    public ItemOwner(@NonNull String owner) {
         this.owner = owner;
     }
 
-    public void setOwner(String owner) {
+    public void setOwner(@NonNull String owner) {
         this.owner = owner;
     }
 

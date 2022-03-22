@@ -9,6 +9,7 @@ import com.somrpg.swordofmagic7.Core.Map.WarpGate.WarpGateData;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import org.bukkit.Material;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -57,6 +58,7 @@ public interface DataBase {
         TeleportGateLoader.load();
     }
 
+    @Nullable
     static SomItemStack getSomItemStack(String key) {
         if (SomItemDataList.containsKey(key)) {
             return SomItemDataList.get(key);
@@ -64,6 +66,7 @@ public interface DataBase {
         return null;
     }
 
+    @Nullable
     static MapData getMapData(String key) {
         if (MapDataList.containsKey(key)) {
             return MapDataList.get(key);
@@ -71,6 +74,7 @@ public interface DataBase {
         return null;
     }
 
+    @Nullable
     static WarpGate getWarpGate(String key) {
         if (WarpGateList.containsKey(key)) {
             return WarpGateList.get(key);
@@ -78,6 +82,7 @@ public interface DataBase {
         return null;
     }
 
+    @Nullable
     static TeleportGate getTeleportGate(String key) {
         if (TeleportGateList.containsKey(key)) {
             return TeleportGateList.get(key);

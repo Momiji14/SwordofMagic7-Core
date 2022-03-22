@@ -6,6 +6,7 @@ import com.somrpg.swordofmagic7.Core.Item.BaseItem;
 import com.somrpg.swordofmagic7.Core.Item.RuneItem;
 import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class RuneInventory extends BaseInventory {
     }
 
     @Override
-    public void addContent(SomItemStack itemData) {
+    public void addContent(@NonNull SomItemStack itemData) {
         if (itemData instanceof BaseItem item) {
             if (getList().size() < GenericConfig.RuneInventoryMaxSlot) {
                 getList().add(item);

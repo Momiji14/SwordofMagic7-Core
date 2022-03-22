@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,27 +20,27 @@ public class ViewableItemStack {
     private int amount = 1;
     private int customModelData = 0;
 
-    public ViewableItemStack(String display, Material material, List<String> lore) {
+    public ViewableItemStack(@NonNull String display, @NonNull Material material, @NonNull List<String> lore) {
         this.display = display;
         this.material = material;
         this.lore = lore;
     }
 
-    public static ViewableItemStack create(String display, Material material, String lore, int customModelData) {
+    public static ViewableItemStack create(@NonNull String display, @NonNull Material material, @NonNull String lore, int customModelData) {
         ViewableItemStack itemStack = new ViewableItemStack(display, material, List.of(lore));
         itemStack.customModelData = customModelData;
         return itemStack;
     }
 
-    public static ViewableItemStack create(String display, Material material, String lore) {
+    public static ViewableItemStack create(@NonNull String display, @NonNull Material material, @NonNull String lore) {
         return new ViewableItemStack(display, material, List.of(lore));
     }
 
-    public static ViewableItemStack create(String display, Material material) {
+    public static ViewableItemStack create(@NonNull String display, @NonNull Material material) {
         return new ViewableItemStack(display, material, new ArrayList<>());
     }
 
-    public static ViewableItemStack create(String display, Material material, int customModelData) {
+    public static ViewableItemStack create(@NonNull String display, @NonNull Material material, int customModelData) {
         ViewableItemStack itemStack = new ViewableItemStack(display, material, new ArrayList<>());
         itemStack.customModelData = customModelData;
         return itemStack;
@@ -49,7 +50,7 @@ public class ViewableItemStack {
         return display;
     }
 
-    public void setMaterial(Material material) {
+    public void setMaterial(@NonNull Material material) {
         this.material = material;
     }
 

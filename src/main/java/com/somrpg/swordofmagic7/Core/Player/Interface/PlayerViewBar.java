@@ -7,6 +7,7 @@ import com.somrpg.swordofmagic7.Core.SomCore;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
 
@@ -16,7 +17,7 @@ import java.util.List;
 
 import static com.somrpg.swordofmagic7.Core.Generic.DecoFormat.ScaleDigit;
 
-public interface PlayerViewBarInterface extends PlayerDataInterface {
+public interface PlayerViewBar extends PlayerData {
 
     void setSideBar(String key, List<String> data);
     void resetSideBar(String key);
@@ -26,7 +27,7 @@ public interface PlayerViewBarInterface extends PlayerDataInterface {
         Player player = getPlayer();
         player.setHealthScale(20);
         Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
-        Objective sidebarObject = board.registerNewObjective("Sidebar", "dummy", DecoContent.decoDisplay("§bSword of Magic Ⅶ"));
+        Objective sidebarObject = board.registerNewObjective("Sidebar", "dummy", Component.text(DecoContent.decoDisplay("§bSword of Magic Ⅶ")));
         sidebarObject.setDisplaySlot(DisplaySlot.SIDEBAR);
         Team team = board.registerNewTeam(player.getName());
         team.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.FOR_OWN_TEAM);
@@ -58,7 +59,8 @@ public interface PlayerViewBarInterface extends PlayerDataInterface {
         }, 2);
 
         SomCore.getSomTask().SyncTaskTimer(() -> {
-            player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(getMaxHealth());
+            AttributeInstance maxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+            if (maxHealth != null) maxHealth.setBaseValue(getMaxHealth());
             player.setHealth(Math.max(0.5, Math.min(getMaxHealth(), getHealth())));
             player.setFoodLevel((int) Math.max(0, Math.min(20, Math.floor(getMana()/getMaxMana()*20))));
             getPlayerData().getPlayerStatistics().addPlayTime();

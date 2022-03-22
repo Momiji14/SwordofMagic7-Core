@@ -1,13 +1,12 @@
 package com.somrpg.swordofmagic7.Core.Player;
 
-import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerDataInterface;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
-public class PlayerCharacon implements PlayerDataInterface {
+public class PlayerCharacon implements PlayerData {
 
     private final PlayerData playerData;
     private final Player player;

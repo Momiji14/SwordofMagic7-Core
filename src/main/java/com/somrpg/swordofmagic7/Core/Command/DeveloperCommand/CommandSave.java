@@ -5,10 +5,11 @@ import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class CommandSave implements ConsoleCommandExecutor {
     @Override
-    public void command(CommandSender sender, String[] args) {
+    public void command(@NotNull CommandSender sender, String[] args) {
         if (args.length == 1) {
             Player player = Bukkit.getPlayer(args[0]);
             if (player != null && player.isOnline()) {

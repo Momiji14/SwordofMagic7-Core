@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.NotNull;
 
 public interface PlayerCommandExecutor extends CommandExecutor {
@@ -18,5 +19,5 @@ public interface PlayerCommandExecutor extends CommandExecutor {
         return false;
     }
 
-    void command(Player player, PlayerData playerData, String[] args);
+    void command(@NonNull Player player, @NonNull PlayerData playerData, @NonNull String[] args);
 }

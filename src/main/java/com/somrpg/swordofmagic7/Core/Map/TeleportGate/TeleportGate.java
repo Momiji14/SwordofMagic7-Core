@@ -15,6 +15,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.Map;
 
@@ -33,7 +34,7 @@ public interface TeleportGate {
         return ViewableItemStack.create(getDisplay(), getMaterial()).viewItemStack();
     }
 
-    static void Selector(Player player) {
+    static void Selector(@NonNull Player player) {
         PlayerData playerData = PlayerData.getData(player);
         Location pLoc = player.getLocation();
         for (Map.Entry<String, TeleportGateData> entry : DataBase.TeleportGateList.entrySet()) {

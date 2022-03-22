@@ -6,6 +6,7 @@ import com.somrpg.swordofmagic7.Core.Equipment.EquipmentItem;
 import com.somrpg.swordofmagic7.Core.Item.RuneItem;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import org.bukkit.Material;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.io.File;
 import java.util.*;
@@ -17,16 +18,16 @@ public class SomItemStack extends ViewableItemStack {
     private ItemOwner itemOwner = new ItemOwner();
     private File file;
 
-    public SomItemStack(String Id, String display, Material material, List<String> lore) {
+    public SomItemStack(@NonNull String Id, @NonNull String display, @NonNull Material material, @NonNull List<String> lore) {
         super(display, material, lore);
         this.Id = Id;
     }
 
-    public SomItemStack(String display, Material material, String lore) {
+    public SomItemStack(@NonNull String display, @NonNull Material material, @NonNull String lore) {
         super(display, material, List.of(lore.split("\n")));
         this.Id = "ID未設定";
     }
-    public SomItemStack(String display, Material material) {
+    public SomItemStack(@NonNull String display, @NonNull Material material) {
         super(display, material, new ArrayList<>());
         this.Id = "ID未設定";
     }
@@ -35,7 +36,7 @@ public class SomItemStack extends ViewableItemStack {
         return Id;
     }
 
-    public void setUUID(String uuid) {
+    public void setUUID(@NonNull String uuid) {
         this.uuid = uuid;
     }
 
@@ -43,7 +44,7 @@ public class SomItemStack extends ViewableItemStack {
         return uuid;
     }
 
-    public void setItemOwner(ItemOwner itemOwner) {
+    public void setItemOwner(@NonNull ItemOwner itemOwner) {
         this.itemOwner = itemOwner;
     }
 
@@ -51,7 +52,7 @@ public class SomItemStack extends ViewableItemStack {
         return itemOwner;
     }
 
-    public void setFile(File file) {
+    public void setFile(@NonNull File file) {
         this.file = file;
     }
 
@@ -75,7 +76,7 @@ public class SomItemStack extends ViewableItemStack {
         return data.toString();
     }
 
-    public static SomItemStack fromDataString(String data) {
+    public static SomItemStack fromDataString(@NonNull String data) {
         try {
             String[] split = data.split(",");
             Map<String, String> mapData = new HashMap<>();

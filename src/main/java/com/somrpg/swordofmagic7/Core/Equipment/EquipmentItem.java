@@ -2,6 +2,7 @@ package com.somrpg.swordofmagic7.Core.Equipment;
 
 import com.somrpg.swordofmagic7.Core.Generic.Parameter.StatusParameter;
 import com.somrpg.swordofmagic7.Core.Item.BaseItem;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ public class EquipmentItem extends BaseItem {
     private int runeSlot = 1;
     private final List<String> rune = new ArrayList<>();
 
-    public EquipmentItem(BaseItem data, EquipmentItemCategory equipmentItemCategory, SomEquipmentSlot equipmentSlot) {
+    public EquipmentItem(@NonNull BaseItem data, @NonNull EquipmentItemCategory equipmentItemCategory, @NonNull SomEquipmentSlot equipmentSlot) {
         super(data, data.getItemCategory(), data.getSell());
         this.equipmentSlot = equipmentSlot;
         this.equipmentItemCategory = equipmentItemCategory;

@@ -1,15 +1,15 @@
 package com.somrpg.swordofmagic7.Core.Inventory;
 
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
-import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerDataInterface;
 import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.inventory.PlayerInventory;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseInventory implements PlayerDataInterface, SomInventoryInterface {
+public class BaseInventory implements PlayerData, SomInventoryInterface {
 
     private final PlayerData playerData;
     private final PlayerInventory playerInventory;
@@ -17,7 +17,7 @@ public class BaseInventory implements PlayerDataInterface, SomInventoryInterface
     private final List<SomItemStack> inventoryContent = new ArrayList<>();
     private int scroll = 0;
 
-    public BaseInventory(PlayerData playerData, SomInventoryType inventoryType) {
+    public BaseInventory(@NonNull PlayerData playerData, @NonNull SomInventoryType inventoryType) {
         this.playerData = playerData;
         this.inventoryType = inventoryType;
         playerInventory = playerData.getPlayer().getInventory();

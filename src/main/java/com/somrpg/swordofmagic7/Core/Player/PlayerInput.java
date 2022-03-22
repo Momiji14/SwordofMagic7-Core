@@ -1,6 +1,5 @@
 package com.somrpg.swordofmagic7.Core.Player;
 
-import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerInputInterface;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -9,7 +8,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
-public class PlayerInput implements PlayerInputInterface {
+public class PlayerInput implements com.somrpg.swordofmagic7.Core.Player.Interface.PlayerInput {
 
     private final PlayerData playerData;
 
