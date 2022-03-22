@@ -61,9 +61,7 @@ public class SomItemStack extends ViewableItemStack {
     }
 
     public String toDataString() {
-        StringBuilder data = new StringBuilder("Id:" + getId()
-                + ",Owner:" + itemOwner.getOwner()
-                + ",UUID:" + uuid);
+        StringBuilder data = new StringBuilder("Id:" + getId());
         if (this instanceof RuneItem item) {
             data.append(",Level:").append(item.getLevel()).append(",Quality:").append(DecoFormat.ScaleDigit(item.getQuality(), 5));
         } else if (this instanceof EquipmentItem item) {
@@ -74,7 +72,7 @@ public class SomItemStack extends ViewableItemStack {
                 i++;
             }
         }
-
+        data.append(",Owner:").append(getItemOwner()).append(",UUID:").append(getUUID());
         return data.toString();
     }
 

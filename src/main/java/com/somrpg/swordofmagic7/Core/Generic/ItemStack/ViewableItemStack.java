@@ -14,7 +14,7 @@ import java.util.List;
 public class ViewableItemStack {
 
     private final String display;
-    private final Material material;
+    private Material material;
     private final List<String> lore;
     private int amount = 1;
     private int customModelData = 0;
@@ -47,6 +47,10 @@ public class ViewableItemStack {
 
     public String getDisplay() {
         return display;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
     public Material getMaterial() {

@@ -19,7 +19,7 @@ import java.util.HashMap;
 
 import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.DataBasePath;
 
-public class PlayerData implements PlayerDataInterface, PlayerViewUpdate {
+public class PlayerData implements PlayerDataInterface {
 
     private static final HashMap<String, PlayerData> playerDataList = new HashMap<>();
     public static PlayerData getData(Player player) {
@@ -98,6 +98,7 @@ public class PlayerData implements PlayerDataInterface, PlayerViewUpdate {
         return playerBank;
     }
 
+    @Override
     public PlayerSetting getPlayerSetting() {
         return playerSetting;
     }
@@ -114,14 +115,17 @@ public class PlayerData implements PlayerDataInterface, PlayerViewUpdate {
         return playerUserMenu;
     }
 
+    @Override
     public ItemInventory getItemInventory() {
         return itemInventory;
     }
 
+    @Override
     public RuneInventory getRuneInventory() {
         return runeInventory;
     }
 
+    @Override
     public PetInventory getPetInventory() {
         return petInventory;
     }
@@ -155,11 +159,11 @@ public class PlayerData implements PlayerDataInterface, PlayerViewUpdate {
             if (!playerFile.exists()) playerFile.createNewFile();
             FileConfiguration data = YamlConfiguration.loadConfiguration(playerFile);
 
-            data.set("Mel", playerBank.getMel());
-            data.set("Level", playerEntity.getLevel());
-            data.set("Exp", playerEntity.getExp());
-            data.set("Health", playerEntity.getHealth());
-            data.set("Mana", playerEntity.getMana());
+            data.set("Mel", getMel());
+            data.set("Level", getLevel());
+            data.set("Exp", getExp());
+            data.set("Health", getHealth());
+            data.set("Mana", getMana());
 
             data.set("ItemInventory", itemInventory.getContentsToString());
             data.set("RuneInventory", runeInventory.getContentsToString());
@@ -194,6 +198,7 @@ public class PlayerData implements PlayerDataInterface, PlayerViewUpdate {
             petInventory.fromContentsFromString(data.getStringList("PetInventory"));
 
             getPlayerEntity().statusUpdate();
+            viewUpdate();
             sendMessage("§eプレイヤーデータ§aの§b読み込み§aが§b完了§aしました", SomSound.Tick);
         } catch (Exception e) {
             e.printStackTrace();

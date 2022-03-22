@@ -1,6 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Player;
 
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerInputInterface;
+import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -31,12 +32,17 @@ public class PlayerInput implements PlayerInputInterface {
         view.setCursor(null);
         if (currentItem != null) {
             if (view.getTopInventory() == clickedInv) {
-                getPlayerData().getUserMenu().onClick(currentItem);
+                getUserMenu().onClick(currentItem);
             } else if (view.getBottomInventory() == clickedInv) {
                 switch (slot) {
-                    case 26 -> getPlayerData().getUserMenu().openGUI();
-                    case 17 -> getPlayerData().getBaseInventory(getPlayerData().getPlayerSetting().getViewInventory()).addScroll(1);
-                    case 35 -> getPlayerData().getBaseInventory(getPlayerData().getPlayerSetting().getViewInventory()).addScroll(-1);
+                    case 26 -> getUserMenu().openGUI();
+                    case 17 -> getBaseViewInventory().addScroll(1);
+                    case 35 -> getBaseViewInventory().addScroll(-1);
+                    default -> {
+                        if (getViewInventory().isItemInventory()) {
+
+                        }
+                    }
                 }
             }
         }
@@ -44,6 +50,7 @@ public class PlayerInput implements PlayerInputInterface {
 
     @Override
     public void onCloseGUI(InventoryCloseEvent event) {
+        SomSound.Close.play(getPlayer());
         getPlayerData().getPlayerEntity().statusUpdate();
         getPlayerData().viewUpdate();
     }

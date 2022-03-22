@@ -10,8 +10,6 @@ import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.somrpg.swordofmagic7.Core.Generic.DecoContent.decoBrackets;
-
 public class RuneInventory extends BaseInventory {
 
     private final List<RuneItem> activeRune = new ArrayList<>();
@@ -26,7 +24,7 @@ public class RuneInventory extends BaseInventory {
             if (getList().size() < GenericConfig.RuneInventoryMaxSlot) {
                 getList().add(item);
             } else {
-                getPlayerData().sendMessage(decoBrackets(getInventoryType().getDisplay(), "§e"), SomSound.Nope);
+                getPlayerData().sendMessage("§e" + getInventoryType().getDisplay() + "§aが一杯です", SomSound.Nope);
             }
         }
     }

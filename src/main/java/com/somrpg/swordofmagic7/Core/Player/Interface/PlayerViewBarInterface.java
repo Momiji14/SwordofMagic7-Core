@@ -36,17 +36,11 @@ public interface PlayerViewBarInterface extends PlayerDataInterface {
         PlayerEntity playerEntity = getPlayerData().getPlayerEntity();
 
         SomCore.getSomTask().AsyncTaskTimer(() -> {
-            double maxHealth = playerEntity.getMaxHealth();
-            double healthRegen = playerEntity.getHealthRegen();
-            double health = playerEntity.getHealth();
-            double maxMana = playerEntity.getMaxMana();
-            double manaRegen = playerEntity.getManaRegen();
-            double mana = playerEntity.getMana();
-            String actionBar = "§c§l《Health: " + ScaleDigit(health) + "/" + ScaleDigit(maxHealth) + "》"
-                    + "§b§l《Mana: " + ScaleDigit(mana) + "/" + ScaleDigit(maxMana) + "》";
+            String actionBar = "§c§l《Health: " + ScaleDigit(getHealth()) + "/" + ScaleDigit(getMaxHealth()) + "》"
+                    + "§b§l《Mana: " + ScaleDigit(getMana()) + "/" + ScaleDigit(getMaxMana()) + "》";
 
-            playerEntity.addHealth(healthRegen/20d);
-            playerEntity.addMana(manaRegen/20d);
+            playerEntity.addHealth(getHealthRegen()/20d);
+            playerEntity.addMana(getManaRegen()/20d);
 
             player.sendActionBar(Component.text(actionBar));
 
@@ -64,13 +58,9 @@ public interface PlayerViewBarInterface extends PlayerDataInterface {
         }, 2);
 
         SomCore.getSomTask().SyncTaskTimer(() -> {
-            double maxHealth = playerEntity.getMaxHealth();
-            double health = playerEntity.getHealth();
-            double maxMana = playerEntity.getMaxMana();
-            double mana = playerEntity.getMana();
-            player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHealth);
-            player.setHealth(Math.max(0.5, Math.min(maxHealth, health)));
-            player.setFoodLevel((int) Math.max(0, Math.min(20, Math.floor(mana/maxMana*20))));
+            player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(getMaxHealth());
+            player.setHealth(Math.max(0.5, Math.min(getMaxHealth(), getHealth())));
+            player.setFoodLevel((int) Math.max(0, Math.min(20, Math.floor(getMana()/getMaxMana()*20))));
             getPlayerData().getPlayerStatistics().addPlayTime();
         }, 20);
     }

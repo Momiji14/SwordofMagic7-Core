@@ -3,6 +3,7 @@ package com.somrpg.swordofmagic7.Core.Inventory;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerDataInterface;
 import com.somrpg.swordofmagic7.Core.Player.PlayerData;
+import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.inventory.PlayerInventory;
 
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class BaseInventory implements PlayerDataInterface, SomInventoryInterface
     @Override
     public void addScroll(int scroll) {
         setScroll((int) Math.max(0,Math.min(Math.ceil(getList().size()/9f)-2, getScroll() + scroll)));
+        SomSound.Tick.play(getPlayer());
     }
 
     @Override

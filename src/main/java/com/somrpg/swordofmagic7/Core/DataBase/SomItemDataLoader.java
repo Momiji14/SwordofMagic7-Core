@@ -1,6 +1,7 @@
 package com.somrpg.swordofmagic7.Core.DataBase;
 
 import com.somrpg.swordofmagic7.Core.Equipment.EquipmentItem;
+import com.somrpg.swordofmagic7.Core.Equipment.EquipmentItemCategory;
 import com.somrpg.swordofmagic7.Core.Equipment.SomEquipmentSlot;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Generic.Parameter.StatusParameter;
@@ -34,8 +35,9 @@ public class SomItemDataLoader implements SomLoader {
                 BaseItem baseItem = new BaseItem(item, category, sell);
                 switch (category) {
                     case Equipment -> {
+                        EquipmentItemCategory equipmentItemCategory = EquipmentItemCategory.valueOf(data.getString("EquipmentCategory"));
                         SomEquipmentSlot equipmentSlot = SomEquipmentSlot.valueOf(data.getString("EquipmentSlot"));
-                        item = new EquipmentItem(baseItem, equipmentSlot);
+                        item = new EquipmentItem(baseItem, equipmentItemCategory, equipmentSlot);
                     }
                 }
                 SomLoader.SomItemDataList.put(fileName, item);

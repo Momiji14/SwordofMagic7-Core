@@ -1,12 +1,15 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
 import com.somrpg.swordofmagic7.Core.Equipment.EquipmentItem;
+import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import com.somrpg.swordofmagic7.Core.Player.PlayerEntity;
 
-public interface PlayerStatusCalculation extends PlayerDataInterface {
+public interface PlayerStatusCalculation {
     static double levelMultiply(int level) {
         return Math.pow(level, 1.01) + (level-1) * 0.05;
     }
+
+    PlayerData getPlayerData();
 
     default void statusUpdate() {
         PlayerEntity playerEntity = getPlayerData().getPlayerEntity();

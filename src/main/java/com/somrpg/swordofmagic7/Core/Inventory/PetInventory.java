@@ -6,8 +6,6 @@ import com.somrpg.swordofmagic7.Core.Pet.PetItem;
 import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 
-import static com.somrpg.swordofmagic7.Core.Generic.DecoContent.decoBrackets;
-
 public class PetInventory extends BaseInventory {
 
     public PetInventory(PlayerData playerData) {
@@ -18,9 +16,9 @@ public class PetInventory extends BaseInventory {
     public void addContent(SomItemStack itemData) {
         if (itemData instanceof PetItem item) {
             if (getList().size() < GenericConfig.PetInventoryMaxSlot) {
-                addContent(item);
+                getList().add(item);
             } else {
-                getPlayerData().sendMessage(decoBrackets(getInventoryType().getDisplay(), "§e"), SomSound.Nope);
+                getPlayerData().sendMessage("§e" + getInventoryType().getDisplay() + "§aが一杯です", SomSound.Nope);
             }
         }
     }

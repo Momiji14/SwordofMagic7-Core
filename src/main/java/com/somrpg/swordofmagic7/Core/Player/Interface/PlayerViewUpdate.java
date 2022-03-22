@@ -1,6 +1,10 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
-public interface PlayerViewUpdate extends PlayerDataInterface {
+import com.somrpg.swordofmagic7.Core.Player.PlayerData;
+
+public interface PlayerViewUpdate {
+
+    PlayerData getPlayerData();
 
     default void viewUpdate() {
         switch (getPlayerData().getPlayerSetting().getViewInventory()) {

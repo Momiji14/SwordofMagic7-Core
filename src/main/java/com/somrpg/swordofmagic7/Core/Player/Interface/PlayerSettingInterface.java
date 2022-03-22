@@ -2,29 +2,70 @@ package com.somrpg.swordofmagic7.Core.Player.Interface;
 
 import com.somrpg.swordofmagic7.Core.Inventory.SomInventoryType;
 import com.somrpg.swordofmagic7.Core.Player.Enum.*;
+import com.somrpg.swordofmagic7.Core.Player.PlayerData;
+import com.somrpg.swordofmagic7.Core.Player.PlayerSetting;
 
-public interface PlayerSettingInterface extends PlayerDataInterface {
-    void setPlayerStrafMode(PlayerStrafeMode playerStrafMode);
-    PlayerStrafeMode getPlayerStrafeMode();
+public interface PlayerSettingInterface {
 
-    void setPlayerPvPMode(PlayerPvPMode playerPvPMode);
-    PlayerPvPMode getPlayerPvPMode();
+    PlayerData getPlayerData();
 
-    void setPlayMode(boolean playMode);
-    boolean isPlayMode();
+    default PlayerSetting getPlayerSetting() {
+        return getPlayerData().getPlayerSetting();
+    }
 
-    void setCastMode(PlayerCastMode castMode);
-    PlayerCastMode getCastMode();
+    default void setPlayerStrafMode(PlayerStrafeMode playerStrafMode) {
+        getPlayerSetting().setPlayerStrafMode(playerStrafMode);
+    }
+    default PlayerStrafeMode getPlayerStrafeMode() {
+        return getPlayerSetting().getPlayerStrafeMode();
+    }
 
-    void setDamageLog(DamageLog damageLog);
-    DamageLog getDamageLog();
+    default void setPlayerPvPMode(PlayerPvPMode playerPvPMode) {
+        getPlayerSetting().setPlayerPvPMode(playerPvPMode);
+    }
+    default PlayerPvPMode getPlayerPvPMode() {
+        return getPlayerSetting().getPlayerPvPMode();
+    }
 
-    void setExpLog(ExpLog expLog);
-    ExpLog getExpLog();
+    default void setPlayMode(boolean playMode) {
+        getPlayerSetting().setPlayMode(playMode);
+    }
+    default boolean isPlayMode() {
+        return getPlayerSetting().isPlayMode();
+    }
 
-    void setDropLog(DropLog dropLog);
-    DropLog getDropLog();
+    default void setCastMode(PlayerCastMode castMode) {
+        getPlayerSetting().setCastMode(castMode);
+    }
+    default PlayerCastMode getCastMode() {
+        return getPlayerSetting().getCastMode();
+    }
 
-    void setViewInventory(SomInventoryType type);
-    SomInventoryType getViewInventory();
+    default void setDamageLog(DamageLog damageLog) {
+        getPlayerSetting().setDamageLog(damageLog);
+    }
+    default DamageLog getDamageLog() {
+        return getPlayerSetting().getDamageLog();
+    }
+
+    default void setExpLog(ExpLog expLog) {
+        getPlayerSetting().setExpLog(expLog);
+    }
+    default ExpLog getExpLog() {
+        return getPlayerSetting().getExpLog();
+    }
+
+    default void setDropLog(DropLog dropLog) {
+        getPlayerSetting().setDropLog(dropLog);
+    }
+    default DropLog getDropLog() {
+        return getPlayerSetting().getDropLog();
+    }
+
+    default void setViewInventory(SomInventoryType type) {
+        getPlayerSetting().setViewInventory(type);
+    }
+    default SomInventoryType getViewInventory() {
+        return getPlayerSetting().getViewInventory();
+    }
 }

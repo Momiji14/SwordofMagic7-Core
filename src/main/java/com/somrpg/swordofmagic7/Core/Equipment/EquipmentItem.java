@@ -8,19 +8,26 @@ import java.util.List;
 
 public class EquipmentItem extends BaseItem {
     private final StatusParameter statusParameter;
+    private final EquipmentItemCategory equipmentItemCategory;
     private final SomEquipmentSlot equipmentSlot;
     private int plus = 0;
     private int runeSlot = 1;
     private final List<String> rune = new ArrayList<>();
 
-    public EquipmentItem(BaseItem data, SomEquipmentSlot equipmentSlot) {
+    public EquipmentItem(BaseItem data, EquipmentItemCategory equipmentItemCategory, SomEquipmentSlot equipmentSlot) {
         super(data, data.getItemCategory(), data.getSell());
         this.equipmentSlot = equipmentSlot;
+        this.equipmentItemCategory = equipmentItemCategory;
         this.statusParameter = new StatusParameter();
+        setMaterial(equipmentItemCategory.getMaterial());
     }
 
     public StatusParameter getStatusParameter() {
         return statusParameter;
+    }
+
+    public EquipmentItemCategory getEquipmentItemCategory() {
+        return equipmentItemCategory;
     }
 
     public SomEquipmentSlot getEquipmentSlot() {

@@ -72,8 +72,8 @@ public interface SomInventoryInterface {
                 case 35 -> getInventory().setItem(slot, DownScrollIcon);
                 default -> {
                     if (getList().size() > index) {
-                        index++;
                         getInventory().setItem(slot, getList().get(index).viewItemStack());
+                        index++;
                     } else {
                         getInventory().setItem(slot, null);
                     }

@@ -47,8 +47,4 @@ public interface DecoContent {
         }
         return components;
     }
-
-    static String decoBrackets(String string, String color) {
-        return color + "[" + string + color + "]";
-    }
 }

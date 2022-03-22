@@ -12,8 +12,6 @@ import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.somrpg.swordofmagic7.Core.Generic.DecoContent.decoBrackets;
-
 public class ItemInventory extends BaseInventory implements SomEquipmentInventory {
 
     private final HashMap<SomEquipmentSlot, EquipmentItem> equipmentSlot = new HashMap<>();
@@ -29,15 +27,15 @@ public class ItemInventory extends BaseInventory implements SomEquipmentInventor
                 if (hasContent(item.getId())) {
                     ItemCategory category = item.getItemCategory();
                     if (category.isEquipment() || category.isTool()) {
-                        addContent(item);
+                        getList().add(item);
                     } else {
                         getContent(item.getId()).addAmount(item.getAmount());
                     }
                 } else {
-                    addContent(item);
+                    getList().add(item);
                 }
             } else {
-                getPlayerData().sendMessage(decoBrackets(getInventoryType().getDisplay(), "§e"), SomSound.Nope);
+                getPlayerData().sendMessage("§e" + getInventoryType().getDisplay() + "§aが一杯です", SomSound.Nope);
             }
         }
     }
