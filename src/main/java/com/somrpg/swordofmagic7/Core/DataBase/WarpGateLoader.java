@@ -10,12 +10,11 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 
-import static com.somrpg.swordofmagic7.Core.DataBase.DataLoader.*;
 import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.DataBasePath;
 
-public interface WarpGateLoader extends SomLoader {
+public interface WarpGateLoader extends DataBase {
     static void load() {
-        for (File file : dump(new File(DataBasePath, "WarpGateData/"))) {
+        for (File file : DataBase.dump(new File(DataBasePath, "WarpGateData/"))) {
             try {
                 FileConfiguration data = YamlConfiguration.loadConfiguration(file);
                 String fileName = file.getName().replace(".yml", "");
@@ -50,7 +49,7 @@ public interface WarpGateLoader extends SomLoader {
                 warp.start();
                 WarpGateList.put(fileName, warp);
             } catch (Exception e) {
-                loadError(file);
+                DataBase.loadError(file);
             }
         }
     }

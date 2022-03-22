@@ -3,12 +3,10 @@ package com.somrpg.swordofmagic7.Core.Player;
 import com.somrpg.swordofmagic7.Core.Inventory.*;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
 import com.somrpg.swordofmagic7.Core.Map.MapDataInterface;
-import com.somrpg.swordofmagic7.Core.Map.TeleportGate.TeleportGate;
 import com.somrpg.swordofmagic7.Core.Menu.PlayerSettingMenu;
 import com.somrpg.swordofmagic7.Core.Menu.PlayerUserMenu;
 import com.somrpg.swordofmagic7.Core.Menu.TeleportGateMenu;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerDataInterface;
-import com.somrpg.swordofmagic7.Core.SomCore;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -53,6 +51,7 @@ public class PlayerData implements PlayerDataInterface {
 
     private final PlayerUserMenu playerUserMenu;
     private final PlayerSettingMenu playerSettingMenu;
+    private final TeleportGateMenu teleportGateMenu;
 
     private MapDataInterface mapData;
     private List<String> activeTeleportGate = new ArrayList<>();
@@ -73,6 +72,7 @@ public class PlayerData implements PlayerDataInterface {
 
         playerUserMenu = new PlayerUserMenu(this);
         playerSettingMenu = new PlayerSettingMenu(this);
+        teleportGateMenu = new TeleportGateMenu(this);
     }
 
     @Override
@@ -149,6 +149,11 @@ public class PlayerData implements PlayerDataInterface {
             }
         }
         return null;
+    }
+
+    @Override
+    public TeleportGateMenu getTeleportGateMenu() {
+        return teleportGateMenu;
     }
 
     public void setMapData(MapData mapData) {

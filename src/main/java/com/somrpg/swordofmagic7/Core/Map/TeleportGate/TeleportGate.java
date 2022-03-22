@@ -1,6 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Map.TeleportGate;
 
-import com.somrpg.swordofmagic7.Core.DataBase.SomLoader;
+import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
@@ -29,21 +29,22 @@ public interface TeleportGate {
     MapData getMapData();
     boolean isDefaultActive();
 
-    default ItemStack view() {
+    default ItemStack viewItemStack() {
         return ViewableItemStack.create(getDisplay(), getMaterial()).viewItemStack();
     }
 
-    default void Selector(Player player) {
+    static void Selector(Player player) {
         PlayerData playerData = PlayerData.getData(player);
         Location pLoc = player.getLocation();
-        for (Map.Entry<String, TeleportGateData> entry : SomLoader.TeleportGateList.entrySet()) {
+        for (Map.Entry<String, TeleportGateData> entry : DataBase.TeleportGateList.entrySet()) {
             TeleportGateData teleport = entry.getValue();
-            if (teleport.getLocation().distance(pLoc) < 2) {
+            if (teleport.getLocation().distance(pLoc) < 1.5) {
                 if (!teleport.isDefaultActive() && !playerData.getActiveTeleportGate().contains(teleport.getId())) {
                     playerData.getActiveTeleportGate().add(teleport.getId());
                     player.sendMessage("§e[" + teleport.getDisplay() + "]§aを§b[有効化]§aしました");
                     SomSound.LevelUp.play(player);
                 }
+                playerData.getTeleportGateMenu().openGUI();
             }
         }
     }
@@ -54,7 +55,7 @@ public interface TeleportGate {
         new BukkitRunnable() {
             int i = 0;
             final double increment = (2 * Math.PI) / 90;
-            final double radius = 2;
+            final double radius = 1.5;
             @Override
             public void run() {
                 double angle = i * increment;

@@ -13,16 +13,14 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.somrpg.swordofmagic7.Core.DataBase.DataLoader.dump;
-import static com.somrpg.swordofmagic7.Core.DataBase.DataLoader.loadError;
 import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.DataBasePath;
 
-public interface TeleportGateLoader extends SomLoader {
+public interface TeleportGateLoader extends DataBase {
 
     Map<Integer, String> TeleportGateMenu = new HashMap<>();
 
     static void load() {
-        for (File file : dump(new File(DataBasePath, "TeleportGateData/"))) {
+        for (File file : DataBase.dump(new File(DataBasePath, "TeleportGateData/"))) {
             try {
                 FileConfiguration data = YamlConfiguration.loadConfiguration(file);
                 String fileName = file.getName().replace(".yml", "");
@@ -51,7 +49,7 @@ public interface TeleportGateLoader extends SomLoader {
                     }
                 }
             } catch (Exception e) {
-                loadError(file);
+                DataBase.loadError(file);
             }
         }
     }

@@ -3,11 +3,9 @@ package com.somrpg.swordofmagic7.Core.Particle.LocationContainer;
 import com.somrpg.swordofmagic7.Core.Particle.ParticleData;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class BaseLocationContainer {

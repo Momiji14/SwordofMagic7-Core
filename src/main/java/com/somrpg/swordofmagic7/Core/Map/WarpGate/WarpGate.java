@@ -1,7 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Map.WarpGate;
 
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
-import com.somrpg.swordofmagic7.Core.DataBase.SomLoader;
+import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
 import com.somrpg.swordofmagic7.Core.Particle.ParticleData;
@@ -32,9 +32,9 @@ public interface WarpGate {
 
     static void Selector(Player player) {
         Location pLoc = player.getLocation();
-        for (Map.Entry<String, WarpGateData> entry : SomLoader.WarpGateList.entrySet()) {
-            if (entry.getValue().getLocation().distance(pLoc) < 2) {
-                if (SomLoader.WarpGateList.containsKey(entry.getValue().getTarget()) || entry.getValue().getTargetLocation() != null) {
+        for (Map.Entry<String, WarpGateData> entry : DataBase.WarpGateList.entrySet()) {
+            if (entry.getValue().getLocation().distance(pLoc) < 1.5) {
+                if (DataBase.WarpGateList.containsKey(entry.getValue().getTarget()) || entry.getValue().getTargetLocation() != null) {
                     entry.getValue().usePlayer(player);
                 } else {
                     SomCore.log("§cError NotFundWarpGate: " + entry.getValue().getTarget() + " at " + entry.getKey());
@@ -53,7 +53,7 @@ public interface WarpGate {
         new BukkitRunnable() {
             int i = 0;
             final double increment = (2 * Math.PI) / 90;
-            final double radius = 2;
+            final double radius = 1.5;
             @Override
             public void run() {
                 double angle = i * increment;

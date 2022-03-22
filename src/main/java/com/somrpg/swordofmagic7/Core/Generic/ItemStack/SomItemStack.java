@@ -1,9 +1,8 @@
 package com.somrpg.swordofmagic7.Core.Generic.ItemStack;
 
+import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
 import com.somrpg.swordofmagic7.Core.DataBase.SomItemDataLoader;
-import com.somrpg.swordofmagic7.Core.DataBase.SomLoader;
 import com.somrpg.swordofmagic7.Core.Equipment.EquipmentItem;
-import com.somrpg.swordofmagic7.Core.Generic.DecoFormat;
 import com.somrpg.swordofmagic7.Core.Item.RuneItem;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import org.bukkit.Material;
@@ -109,7 +108,7 @@ public class SomItemStack extends ViewableItemStack {
         } catch (Exception e) {
             e.printStackTrace();
             SomCore.log("SomItemStack fromDataStringError -> " + data);
-            return SomLoader.ErrorItemStack;
+            return DataBase.ErrorItemStack;
         }
     }
 }

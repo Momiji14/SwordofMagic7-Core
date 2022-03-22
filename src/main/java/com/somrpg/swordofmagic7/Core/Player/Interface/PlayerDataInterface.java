@@ -3,6 +3,7 @@ package com.somrpg.swordofmagic7.Core.Player.Interface;
 import com.somrpg.swordofmagic7.Core.Generic.Parameter.StatusParameterInterface;
 import com.somrpg.swordofmagic7.Core.Inventory.*;
 import com.somrpg.swordofmagic7.Core.Menu.PlayerUserMenu;
+import com.somrpg.swordofmagic7.Core.Menu.TeleportGateMenu;
 import com.somrpg.swordofmagic7.Core.Player.PlayerBank;
 import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import com.somrpg.swordofmagic7.Core.Player.PlayerEntity;
@@ -29,10 +30,6 @@ public interface PlayerDataInterface extends StatusParameterInterface, PlayerEnt
             player.sendMessage(msg);
         }
         sound.play(player);
-    }
-
-    default PlayerUserMenu getUserMenu() {
-        return getPlayerData().getUserMenu();
     }
 
     default BaseInventory getBaseViewInventory() {
@@ -65,6 +62,17 @@ public interface PlayerDataInterface extends StatusParameterInterface, PlayerEnt
 
     default PetInventory getPetInventory() {
         return getPlayerData().getPetInventory();
+    }
+
+
+    default PlayerUserMenu getUserMenu() {
+        return getPlayerData().getUserMenu();
+    }
+    default PlayerUserMenu getSettingMenu() {
+        return getPlayerData().getSettingMenu();
+    }
+    default TeleportGateMenu getTeleportGateMenu() {
+        return getPlayerData().getTeleportGateMenu();
     }
 
     @Override

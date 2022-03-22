@@ -1,6 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Listener;
 
 import com.destroystokyo.paper.event.player.PlayerJumpEvent;
+import com.somrpg.swordofmagic7.Core.Map.TeleportGate.TeleportGate;
 import com.somrpg.swordofmagic7.Core.Map.WarpGate.WarpGate;
 import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import org.bukkit.GameMode;
@@ -34,10 +35,10 @@ public class PlayerControlListener implements Listener {
     public void onSneakToggle(PlayerToggleSneakEvent event) {
         Player player = event.getPlayer();
         PlayerData playerData = PlayerData.getData(player);
-        if (!player.isSneaking()) {
-            WarpGate.Selector(player);
-        } else {
+        if (player.isSneaking()) {
             playerData.getPlayerCharacon().wallKick();
+            WarpGate.Selector(player);
+            TeleportGate.Selector(player);
         }
     }
 

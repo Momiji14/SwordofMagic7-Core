@@ -1,16 +1,10 @@
 package com.somrpg.swordofmagic7.Core.Map.TeleportGate;
 
-import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
-import com.somrpg.swordofmagic7.Core.Particle.ParticleData;
-import com.somrpg.swordofmagic7.Core.SomCore;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Particle;
-import org.bukkit.World;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class TeleportGateData implements TeleportGate {
     private final String id;
@@ -20,7 +14,7 @@ public class TeleportGateData implements TeleportGate {
     private final String subTitle;
     private final Location location;
     private final MapData mapData;
-    private boolean defaultActive;
+    private final boolean defaultActive;
 
     public TeleportGateData(String id, String display, Material material, String title, String subTitle, Location location, MapData mapData, boolean defaultActive) {
         this.id = id;

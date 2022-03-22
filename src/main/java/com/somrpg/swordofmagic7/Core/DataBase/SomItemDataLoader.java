@@ -17,9 +17,9 @@ import java.util.List;
 
 import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.DataBasePath;
 
-public interface SomItemDataLoader extends SomLoader {
+public interface SomItemDataLoader extends DataBase {
     static void load() {
-        for (File file : DataLoader.dump(new File(DataBasePath, "ItemData"))) {
+        for (File file : DataBase.dump(new File(DataBasePath, "ItemData"))) {
             try {
                 String fileName = file.getName().replace(".yml", "");
                 FileConfiguration data = YamlConfiguration.loadConfiguration(file);
@@ -40,14 +40,14 @@ public interface SomItemDataLoader extends SomLoader {
                         item = new EquipmentItem(baseItem, equipmentItemCategory, equipmentSlot);
                     }
                 }
-                SomLoader.SomItemDataList.put(fileName, item);
+                DataBase.SomItemDataList.put(fileName, item);
             } catch (Exception e) {
                 e.printStackTrace();
-                DataLoader.loadError(file);
+                DataBase.loadError(file);
             }
         }
 
-        for (File file : DataLoader.dump(new File(DataBasePath, "RuneData"))) {
+        for (File file : DataBase.dump(new File(DataBasePath, "RuneData"))) {
             try {
                 String fileName = file.getName().replace(".yml", "");
                 FileConfiguration data = YamlConfiguration.loadConfiguration(file);
@@ -56,10 +56,10 @@ public interface SomItemDataLoader extends SomLoader {
                 List<String> lore = data.getStringList("Lore");
                 SomItemStack item = new SomItemStack(fileName, display, material, lore);
                 RuneItem runeItem = new RuneItem(item, new StatusParameter(data));
-                SomLoader.SomItemDataList.put(fileName, runeItem);
+                DataBase.SomItemDataList.put(fileName, runeItem);
             } catch (Exception e) {
                 e.printStackTrace();
-                DataLoader.loadError(file);
+                DataBase.loadError(file);
             }
         }
     }

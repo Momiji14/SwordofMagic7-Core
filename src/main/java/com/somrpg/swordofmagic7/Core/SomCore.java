@@ -7,7 +7,7 @@ import com.somrpg.swordofmagic7.Core.Command.BuilderCommand.CommandPlayMode;
 import com.somrpg.swordofmagic7.Core.Command.DeveloperCommand.CommandLoad;
 import com.somrpg.swordofmagic7.Core.Command.DeveloperCommand.CommandSave;
 import com.somrpg.swordofmagic7.Core.Command.DeveloperCommand.CommandSomReload;
-import com.somrpg.swordofmagic7.Core.DataBase.DataLoader;
+import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
 import com.somrpg.swordofmagic7.Core.Listener.*;
 import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import com.somrpg.swordofmagic7.Core.Player.PlayerList;
@@ -20,7 +20,6 @@ public final class SomCore extends JavaPlugin {
     private static Plugin plugin;
     private static JavaPlugin javaPlugin;
     private static final SomTask somTask = new SomTask();
-    private static final DataLoader dataLoader = new DataLoader();
 
     @Override
     public void onEnable() {
@@ -50,8 +49,8 @@ public final class SomCore extends JavaPlugin {
 
 
         PlayerList.load();
-        dataLoader.dataLoadable();
-        dataLoader.singleLoad();
+        DataBase.dataLoadable();
+        DataBase.singleLoad();
 
         for (Player player : PlayerList.getPlayerList()) {
             PlayerData.getData(player).load();
@@ -66,6 +65,7 @@ public final class SomCore extends JavaPlugin {
     public static Plugin getPlugin() {
         return plugin;
     }
+
     public static JavaPlugin getJavaPlugin() {
         return javaPlugin;
     }
