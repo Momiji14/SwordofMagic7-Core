@@ -17,6 +17,7 @@ public class PlayerSetting implements PlayerDataInterface, PlayerSettingInterfac
     private PlayerPvPMode pvpMode = PlayerPvPMode.Friendly;
     private boolean playMode = true;
     private PlayerCastMode castMode = PlayerCastMode.Hold;
+    private int viewDigit = 0;
 
     private DamageLog damageLog = DamageLog.Disable;
     private ExpLog expLog = ExpLog.Disable;
@@ -119,5 +120,15 @@ public class PlayerSetting implements PlayerDataInterface, PlayerSettingInterfac
     @Override
     public SomInventoryType getViewInventory() {
         return viewInventory;
+    }
+
+    @Override
+    public void setViewDigit(int digit) {
+        viewDigit = digit;
+    }
+
+    @Override
+    public int getViewDigit() {
+        return viewDigit;
     }
 }

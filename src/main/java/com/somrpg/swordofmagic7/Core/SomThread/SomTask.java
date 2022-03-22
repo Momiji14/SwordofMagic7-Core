@@ -35,4 +35,12 @@ public class SomTask {
         }
     }
 
+    public synchronized void sleepMillis(int millis) {
+        try {
+            wait(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -63,7 +63,7 @@ public class SomItemStack extends ViewableItemStack {
     public String toDataString() {
         StringBuilder data = new StringBuilder("Id:" + getId());
         if (this instanceof RuneItem item) {
-            data.append(",Level:").append(item.getLevel()).append(",Quality:").append(DecoFormat.ScaleDigit(item.getQuality(), 5));
+            data.append(",Level:").append(item.getLevel()).append(",Quality:").append(item.getQuality());
         } else if (this instanceof EquipmentItem item) {
             data.append(",Plus:").append(item.getPlus());
             int i = 0;

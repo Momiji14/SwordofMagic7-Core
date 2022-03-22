@@ -27,7 +27,13 @@ public class DataLoader {
         SomCore.log("§cLoading Error -> " + file.getName());
     }
 
-    public static void startLoad() {
+    public void dataLoadable() {
         SomItemDataLoader.load();
+        MapDataLoader.load();
+    }
+
+    public void singleLoad() {
+        WarpGateLoader.load();
+        TeleportGateLoader.load();
     }
 }

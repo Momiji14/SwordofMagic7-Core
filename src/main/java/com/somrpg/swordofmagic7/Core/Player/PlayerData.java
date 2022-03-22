@@ -3,10 +3,11 @@ package com.somrpg.swordofmagic7.Core.Player;
 import com.somrpg.swordofmagic7.Core.Inventory.*;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
 import com.somrpg.swordofmagic7.Core.Map.MapDataInterface;
+import com.somrpg.swordofmagic7.Core.Map.TeleportGate.TeleportGate;
 import com.somrpg.swordofmagic7.Core.Menu.PlayerSettingMenu;
 import com.somrpg.swordofmagic7.Core.Menu.PlayerUserMenu;
+import com.somrpg.swordofmagic7.Core.Menu.TeleportGateMenu;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerDataInterface;
-import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerViewUpdate;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -14,8 +15,10 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.DataBasePath;
 
@@ -52,6 +55,7 @@ public class PlayerData implements PlayerDataInterface {
     private final PlayerSettingMenu playerSettingMenu;
 
     private MapDataInterface mapData;
+    private List<String> activeTeleportGate = new ArrayList<>();
 
     PlayerData(Player player) {
         this.player = player;
@@ -68,9 +72,7 @@ public class PlayerData implements PlayerDataInterface {
         petInventory = new PetInventory(this);
 
         playerUserMenu = new PlayerUserMenu(this);
-        SomCore.getJavaPlugin().getCommand("m").setExecutor(playerUserMenu);
         playerSettingMenu = new PlayerSettingMenu(this);
-        SomCore.getJavaPlugin().getCommand("setting").setExecutor(playerSettingMenu);
     }
 
     @Override
@@ -113,6 +115,10 @@ public class PlayerData implements PlayerDataInterface {
 
     public PlayerUserMenu getUserMenu() {
         return playerUserMenu;
+    }
+
+    public List<String> getActiveTeleportGate() {
+        return activeTeleportGate;
     }
 
     @Override
@@ -169,6 +175,8 @@ public class PlayerData implements PlayerDataInterface {
             data.set("RuneInventory", runeInventory.getContentsToString());
             data.set("PetInventory", petInventory.getContentsToString());
 
+            data.set("ActiveTeleportGate", getActiveTeleportGate());
+
             data.save(playerFile);
             sendMessage("§eプレイヤーデータ§aの§b保存§aが§b完了§aしました", SomSound.Tick);
         } catch (Exception e) {
@@ -196,6 +204,8 @@ public class PlayerData implements PlayerDataInterface {
             itemInventory.fromContentsFromString(data.getStringList("ItemInventory"));
             runeInventory.fromContentsFromString(data.getStringList("RuneInventory"));
             petInventory.fromContentsFromString(data.getStringList("PetInventory"));
+
+            activeTeleportGate = data.getStringList("ActiveTeleportGate");
 
             getPlayerEntity().statusUpdate();
             viewUpdate();

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ProtocolLib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../Minecraft/Server/SwordofMagic7/Server1/plugins/ProtocolLib.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

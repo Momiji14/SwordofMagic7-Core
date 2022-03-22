@@ -17,8 +17,8 @@ import java.util.List;
 
 import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.DataBasePath;
 
-public class SomItemDataLoader implements SomLoader {
-    public static void load() {
+public interface SomItemDataLoader extends SomLoader {
+    static void load() {
         for (File file : DataLoader.dump(new File(DataBasePath, "ItemData"))) {
             try {
                 String fileName = file.getName().replace(".yml", "");
@@ -64,7 +64,7 @@ public class SomItemDataLoader implements SomLoader {
         }
     }
 
-    public static SomItemStack getItem(String id) {
+    static SomItemStack getItem(String id) {
         if (SomItemDataList.containsKey(id)) {
             return SomItemDataList.get(id);
         }

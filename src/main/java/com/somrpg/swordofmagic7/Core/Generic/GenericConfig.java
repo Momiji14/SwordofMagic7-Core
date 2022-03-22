@@ -3,6 +3,7 @@ package com.somrpg.swordofmagic7.Core.Generic;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 public interface GenericConfig {
     String DataBasePath = "M:\\Minecraft\\Server\\SwordofMagic7\\DataBase\\";
@@ -14,6 +15,8 @@ public interface GenericConfig {
     int PlayerMaxLevel = 50;
     int ClassMaxLevel = 15;
     int LifeMaxLevel = 30;
+
+    Vector VectorUp = new Vector(0, 1, 0);
 
     ItemStack AirItem = new ItemStack(Material.AIR);
 

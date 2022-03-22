@@ -20,6 +20,7 @@ public final class SomCore extends JavaPlugin {
     private static Plugin plugin;
     private static JavaPlugin javaPlugin;
     private static final SomTask somTask = new SomTask();
+    private static final DataLoader dataLoader = new DataLoader();
 
     @Override
     public void onEnable() {
@@ -31,6 +32,8 @@ public final class SomCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new InventoryListener(), plugin);
         getServer().getPluginManager().registerEvents(new OthersListener(), plugin);
         getServer().getPluginManager().registerEvents(new PlayerControlListener(), plugin);
+        getServer().getPluginManager().registerEvents(new PhysicsListener(), plugin);
+        getServer().getPluginManager().registerEvents(new BlockListener(), plugin);
 
         //Developer
         getJavaPlugin().getCommand("somReload").setExecutor(new CommandSomReload());
@@ -42,9 +45,13 @@ public final class SomCore extends JavaPlugin {
         //Builder
         getJavaPlugin().getCommand("gm").setExecutor(new CommandGameMode());
         getJavaPlugin().getCommand("playMode").setExecutor(new CommandPlayMode());
+        //Player
+
+
 
         PlayerList.load();
-        DataLoader.startLoad();
+        dataLoader.dataLoadable();
+        dataLoader.singleLoad();
 
         for (Player player : PlayerList.getPlayerList()) {
             PlayerData.getData(player).load();

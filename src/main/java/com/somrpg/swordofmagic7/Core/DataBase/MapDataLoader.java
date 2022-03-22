@@ -8,8 +8,8 @@ import java.io.File;
 
 import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.DataBasePath;
 
-public class MapDataLoader implements SomLoader {
-    public static void load() {
+public interface MapDataLoader extends SomLoader {
+    static void load() {
         for (File file : DataLoader.dump(new File(DataBasePath, "MapData"))) {
             try {
                 String fileName = file.getName().replace(".yml", "");

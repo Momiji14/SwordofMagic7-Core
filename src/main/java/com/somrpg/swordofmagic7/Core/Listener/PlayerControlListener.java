@@ -1,12 +1,14 @@
 package com.somrpg.swordofmagic7.Core.Listener;
 
 import com.destroystokyo.paper.event.player.PlayerJumpEvent;
+import com.somrpg.swordofmagic7.Core.Map.WarpGate.WarpGate;
 import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
 
 public class PlayerControlListener implements Listener {
@@ -23,7 +25,20 @@ public class PlayerControlListener implements Listener {
     public void onSprintToggle(PlayerToggleSprintEvent event) {
         Player player = event.getPlayer();
         PlayerData playerData = PlayerData.getData(player);
-        playerData.getPlayerCharacon().wallKick();
+        if (!player.isSprinting() && playerData.getPlayerSetting().getPlayerStrafeMode().isAirDash()) {
+            playerData.getPlayerCharacon().strafe();
+        }
+    }
+
+    @EventHandler
+    public void onSneakToggle(PlayerToggleSneakEvent event) {
+        Player player = event.getPlayer();
+        PlayerData playerData = PlayerData.getData(player);
+        if (!player.isSneaking()) {
+            WarpGate.Selector(player);
+        } else {
+            playerData.getPlayerCharacon().wallKick();
+        }
     }
 
     @EventHandler

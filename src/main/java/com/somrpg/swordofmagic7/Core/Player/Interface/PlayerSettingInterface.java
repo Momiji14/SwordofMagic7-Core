@@ -68,4 +68,12 @@ public interface PlayerSettingInterface {
     default SomInventoryType getViewInventory() {
         return getPlayerSetting().getViewInventory();
     }
+
+    default void setViewDigit(int digit) {
+        getPlayerSetting().setViewDigit(digit);
+    }
+
+    default int getViewDigit() {
+        return getPlayerSetting().getViewDigit();
+    }
 }

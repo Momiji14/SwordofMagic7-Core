@@ -48,3 +48,18 @@ commands:
     aliases: setting
     description: description
     usage: /<command>
+  damageLog:
+    description: description
+    usage: /<command>
+  expLog:
+    description: description
+    usage: /<command>
+  dropLog:
+    description: description
+    usage: /<command>
+  castMode:
+    description: description
+    usage: /<command>
+  stafeMode:
+    description: description
+    usage: /<command>

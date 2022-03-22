@@ -9,14 +9,14 @@ import org.bukkit.inventory.ItemStack;
 
 public interface BaseGraphicalUserInterface extends PlayerDataInterface {
 
-    String getTitle();
+    String getGUIDisplay();
 
     int getSize();
 
     ItemStack[] getContent();
 
     default Inventory openGUI() {
-        Inventory inv = Bukkit.createInventory(null, getSize()*9, Component.text(getTitle()));
+        Inventory inv = Bukkit.createInventory(null, getSize()*9, Component.text(getGUIDisplay()));
         inv.setMaxStackSize(GenericConfig.MaxItemStackAmount);
         inv.setContents(getContent());
         getPlayer().openInventory(inv);
