@@ -1,22 +1,22 @@
-package com.somrpg.swordofmagic7.Core.Player;
+package com.somrpg.swordofmagic7.Core.Player.Interface;
 
 import com.somrpg.swordofmagic7.Core.Generic.Parameter.StatusParameterInterface;
 import com.somrpg.swordofmagic7.Core.Inventory.*;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
 import com.somrpg.swordofmagic7.Core.Map.MapDataInterface;
+import com.somrpg.swordofmagic7.Core.Menu.BaseMenu;
+import com.somrpg.swordofmagic7.Core.Menu.PlayerSettingMenu;
 import com.somrpg.swordofmagic7.Core.Menu.PlayerUserMenu;
 import com.somrpg.swordofmagic7.Core.Menu.TeleportGateMenu;
-import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerBankInterface;
-import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerEntityInterface;
-import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerInput;
-import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerSettingInterface;
-import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerViewUpdate;
+import com.somrpg.swordofmagic7.Core.Player.*;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 
 import java.util.List;
 
-public interface PlayerData extends StatusParameterInterface, PlayerEntityInterface, PlayerSettingInterface, PlayerBankInterface, PlayerViewUpdate {
+public interface PlayerData extends StatusParameterInterface, PlayerInputInterface, PlayerEntityInterface, PlayerSettingInterface, PlayerBankInterface, PlayerViewUpdate {
 
     static PlayerData getData(Player player) {
         return PlayerDataContainer.getData(player);
@@ -29,7 +29,7 @@ public interface PlayerData extends StatusParameterInterface, PlayerEntityInterf
     }
 
     default Player getPlayer() {
-        return getPlayerData().getPlayer();
+        return getPlayerDataContainer().getPlayer();
     }
 
     default void sendMessage(String message, SomSound sound) {
@@ -44,64 +44,41 @@ public interface PlayerData extends StatusParameterInterface, PlayerEntityInterf
         sound.play(player);
     }
 
-    default BaseInventory getBaseViewInventory() {
-        return getPlayerData().getBaseInventory(getViewInventory());
+    default BaseMenu[] getBaseMenu() {
+        return new BaseMenu[]{
+                getUserMenu(),
+                getSettingMenu(),
+                getTeleportGateMenu()
+        };
     }
 
-    default SomInventoryType getViewInventory() {
-        return getPlayerSetting().getViewInventory();
-    }
+    BaseInventory getBaseViewInventory();
 
-    default PlayerEntity getPlayerEntity() {
-        return getPlayerData().getPlayerEntity();
-    }
+    SomInventoryType getViewInventory();
 
-    default PlayerCharacon getPlayerCharacon() {
-        return getPlayerData().getPlayerCharacon();
-    }
+    PlayerEntity getPlayerEntity();
 
-    default com.somrpg.swordofmagic7.Core.Player.Interface.PlayerViewBar getPlayerViewBar() {
-        return getPlayerData().getPlayerViewBar();
-    }
+    PlayerCharacon getPlayerCharacon();
 
-    default PlayerInput getPlayerInput() {
-        return getPlayerData().getPlayerInput();
-    }
+    PlayerDisplay getPlayerViewBar();
 
-    default PlayerStatistics getPlayerStatistics() {
-        return getPlayerData().getPlayerStatistics();
-    }
+    PlayerInputInterface getPlayerInput();
 
-    default PlayerBank getPlayerBank() {
-        return getPlayerData().getPlayerBank();
-    }
+    PlayerStatistics getPlayerStatistics();
 
-    default PlayerSetting getPlayerSetting() {
-        return getPlayerData().getPlayerSetting();
-    }
+    PlayerBank getPlayerBank();
 
-    default ItemInventory getItemInventory() {
-        return getPlayerData().getItemInventory();
-    }
+    PlayerSetting getPlayerSetting();
 
-    default RuneInventory getRuneInventory() {
-        return getPlayerData().getRuneInventory();
-    }
+    ItemInventory getItemInventory();
 
-    default PetInventory getPetInventory() {
-        return getPlayerData().getPetInventory();
-    }
+    RuneInventory getRuneInventory();
 
+    PetInventory getPetInventory();
 
-    default PlayerUserMenu getUserMenu() {
-        return getPlayerData().getUserMenu();
-    }
-    default PlayerUserMenu getSettingMenu() {
-        return getPlayerData().getSettingMenu();
-    }
-    default TeleportGateMenu getTeleportGateMenu() {
-        return getPlayerData().getTeleportGateMenu();
-    }
+    PlayerUserMenu getUserMenu();
+    PlayerSettingMenu getSettingMenu();
+    TeleportGateMenu getTeleportGateMenu();
 
     default BaseInventory getBaseInventory(SomInventoryType type) {
         switch (type) {
@@ -118,25 +95,15 @@ public interface PlayerData extends StatusParameterInterface, PlayerEntityInterf
         return null;
     }
 
-    default void setMapData(MapData mapData) {
-        getPlayerData().setMapData(mapData);
-    }
+    void setMapData(MapData mapData);
 
-    default MapDataInterface getMapData() {
-        return getPlayerData().getMapData();
-    }
+    MapDataInterface getMapData();
 
-    default List<String> getActiveTeleportGate() {
-        return getPlayerData().getActiveTeleportGate();
-    }
+    List<String> getActiveTeleportGate();
 
-    default void save() {
-        getPlayerDataContainer().save();
-    }
+    void save();
 
-    default void load() {
-        getPlayerDataContainer().load();
-    }
+    void load();
 
     @Override
     default void setMel(int mel) {
@@ -272,5 +239,14 @@ public interface PlayerData extends StatusParameterInterface, PlayerEntityInterf
     @Override
     default double getCriticalResist() {
         return getPlayerEntity().getCriticalResist();
+    }
+
+    @Override
+    default void onClickGUI(InventoryClickEvent event) {
+        getPlayerInput().onClickGUI(event);
+    }
+    @Override
+    default void onCloseGUI(InventoryCloseEvent event) {
+        getPlayerInput().onCloseGUI(event);
     }
 }

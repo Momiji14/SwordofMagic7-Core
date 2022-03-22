@@ -1,7 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Command.DeveloperCommand;
 
 import com.somrpg.swordofmagic7.Core.Command.ConsoleCommandExecutor;
-import com.somrpg.swordofmagic7.Core.Player.PlayerData;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

@@ -1,6 +1,8 @@
 package com.somrpg.swordofmagic7.Core.Player;
 
-public class PlayerStatistics implements PlayerData {
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
+
+public class PlayerStatistics {
 
     private final PlayerData playerData;
 
@@ -8,7 +10,6 @@ public class PlayerStatistics implements PlayerData {
         this.playerData = playerData;
     }
 
-    @Override
     public PlayerData getPlayerData() {
         return playerData;
     }

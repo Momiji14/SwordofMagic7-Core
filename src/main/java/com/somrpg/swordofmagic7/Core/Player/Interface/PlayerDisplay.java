@@ -1,7 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
 import com.somrpg.swordofmagic7.Core.Generic.DecoContent;
-import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import com.somrpg.swordofmagic7.Core.Player.PlayerEntity;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import net.kyori.adventure.text.Component;
@@ -9,6 +8,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.*;
 
 import java.util.Collection;
@@ -17,7 +18,13 @@ import java.util.List;
 
 import static com.somrpg.swordofmagic7.Core.Generic.DecoFormat.ScaleDigit;
 
-public interface PlayerViewBar extends PlayerData {
+public interface PlayerDisplay {
+
+    PlayerData getPlayerData();
+
+    default Player getPlayer() {
+        return getPlayerData().getPlayer();
+    }
 
     void setSideBar(String key, List<String> data);
     void resetSideBar(String key);
@@ -37,11 +44,11 @@ public interface PlayerViewBar extends PlayerData {
         PlayerEntity playerEntity = getPlayerData().getPlayerEntity();
 
         SomCore.getSomTask().AsyncTaskTimer(() -> {
-            String actionBar = "§c§l《Health: " + ScaleDigit(getHealth()) + "/" + ScaleDigit(getMaxHealth()) + "》"
-                    + "§b§l《Mana: " + ScaleDigit(getMana()) + "/" + ScaleDigit(getMaxMana()) + "》";
+            String actionBar = "§c§l《Health: " + ScaleDigit(getPlayerData().getHealth()) + "/" + ScaleDigit(getPlayerData().getMaxHealth()) + "》"
+                    + "§b§l《Mana: " + ScaleDigit(getPlayerData().getMana()) + "/" + ScaleDigit(getPlayerData().getMaxMana()) + "》";
 
-            playerEntity.addHealth(getHealthRegen()/20d);
-            playerEntity.addMana(getManaRegen()/20d);
+            playerEntity.addHealth(getPlayerData().getHealthRegen()/20d);
+            playerEntity.addMana(getPlayerData().getManaRegen()/20d);
 
             player.sendActionBar(Component.text(actionBar));
 
@@ -58,11 +65,13 @@ public interface PlayerViewBar extends PlayerData {
             player.setScoreboard(board);
         }, 2);
 
+        PotionEffect jumpPotion = new PotionEffect(PotionEffectType.JUMP, 21, 0, false, false, false);
         SomCore.getSomTask().SyncTaskTimer(() -> {
+            player.addPotionEffect(jumpPotion);
             AttributeInstance maxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);
-            if (maxHealth != null) maxHealth.setBaseValue(getMaxHealth());
-            player.setHealth(Math.max(0.5, Math.min(getMaxHealth(), getHealth())));
-            player.setFoodLevel((int) Math.max(0, Math.min(20, Math.floor(getMana()/getMaxMana()*20))));
+            if (maxHealth != null) maxHealth.setBaseValue(getPlayerData().getMaxHealth());
+            player.setHealth(Math.max(0.5, Math.min(getPlayerData().getMaxHealth(), getPlayerData().getHealth())));
+            player.setFoodLevel((int) Math.max(0, Math.min(20, Math.floor(getPlayerData().getMana()/getPlayerData().getMaxMana()*20))));
             getPlayerData().getPlayerStatistics().addPlayTime();
         }, 20);
     }

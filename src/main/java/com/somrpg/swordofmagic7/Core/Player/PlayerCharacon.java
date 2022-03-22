@@ -1,12 +1,13 @@
 package com.somrpg.swordofmagic7.Core.Player;
 
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
-public class PlayerCharacon implements PlayerData {
+public class PlayerCharacon {
 
     private final PlayerData playerData;
     private final Player player;
@@ -20,7 +21,6 @@ public class PlayerCharacon implements PlayerData {
         player.setAllowFlight(true);
     }
 
-    @Override
     public PlayerData getPlayerData() {
         return playerData;
     }

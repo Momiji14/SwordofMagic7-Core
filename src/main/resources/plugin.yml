@@ -45,7 +45,7 @@ commands:
     description: description
     usage: /<command>
   settingMenu:
-    aliases: setting, sm
+    aliases: [setting, sm]
     description: description
     usage: /<command>
   damageLog:
@@ -60,6 +60,9 @@ commands:
   castMode:
     description: description
     usage: /<command>
-  stafeMode:
+  strafeMode:
+    description: description
+    usage: /<command>
+  pvpMode:
     description: description
     usage: /<command>

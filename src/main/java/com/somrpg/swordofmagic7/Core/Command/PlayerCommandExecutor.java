@@ -1,11 +1,10 @@
 package com.somrpg.swordofmagic7.Core.Command;
 
-import com.somrpg.swordofmagic7.Core.Player.PlayerData;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.NotNull;
 
 public interface PlayerCommandExecutor extends CommandExecutor {
@@ -19,5 +18,5 @@ public interface PlayerCommandExecutor extends CommandExecutor {
         return false;
     }
 
-    void command(@NonNull Player player, @NonNull PlayerData playerData, @NonNull String[] args);
+    void command(Player player, PlayerData playerData, String[] args);
 }

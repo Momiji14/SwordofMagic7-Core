@@ -1,19 +1,21 @@
 package com.somrpg.swordofmagic7.Core.Player;
 
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerDisplay;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class PlayerViewBar implements com.somrpg.swordofmagic7.Core.Player.Interface.PlayerViewBar {
+public class PlayerDisplayContainer implements PlayerDisplay {
 
     private final PlayerData playerData;
     private final Player player;
     private final List<String> ScoreKey = new ArrayList<>();
     private final HashMap<String, List<String>> SideBar = new HashMap<>();
 
-    PlayerViewBar(PlayerData playerData) {
+    PlayerDisplayContainer(PlayerData playerData) {
         this.playerData = playerData;
         player = playerData.getPlayer();
 

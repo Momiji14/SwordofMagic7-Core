@@ -4,9 +4,10 @@ import com.somrpg.swordofmagic7.Core.Command.PlayerCommandExecutor;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import org.bukkit.entity.Player;
 
-public class CommandDamageLog implements PlayerCommandExecutor {
+
+public class CommandExpLog implements PlayerCommandExecutor {
     @Override
     public void command(Player player, PlayerData playerData, String[] args) {
-        playerData.getSettingMenu().pvpMode();
+        playerData.getSettingMenu().expLog();
     }
 }

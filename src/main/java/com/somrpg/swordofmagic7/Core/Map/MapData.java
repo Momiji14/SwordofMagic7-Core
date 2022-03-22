@@ -1,6 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Map;
 
-import com.somrpg.swordofmagic7.Core.Player.PlayerData;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 

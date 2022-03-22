@@ -1,14 +1,15 @@
 package com.somrpg.swordofmagic7.Core.Player;
 
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerInputInterface;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
-import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
-public class PlayerInput implements com.somrpg.swordofmagic7.Core.Player.Interface.PlayerInput {
+public class PlayerInput implements PlayerInputInterface {
 
     private final PlayerData playerData;
 
@@ -25,20 +26,21 @@ public class PlayerInput implements com.somrpg.swordofmagic7.Core.Player.Interfa
     public void onClickGUI(InventoryClickEvent event) {
         InventoryView view = event.getView();
         Inventory clickedInv = event.getClickedInventory();
-        ClickType clickType = event.getClick();
         int slot = event.getSlot();
-        ItemStack currentItem = event.getCurrentItem();
+        ItemStack clickedItem = event.getCurrentItem();
         view.setCursor(null);
-        if (currentItem != null) {
+        if (clickedItem != null) {
             if (view.getTopInventory() == clickedInv) {
-                getUserMenu().onClick(currentItem);
+                getPlayerData().getUserMenu().onClick(event);
+                getPlayerData().getSettingMenu().onClick(event);
+                getPlayerData().getTeleportGateMenu().onClick(event);
             } else if (view.getBottomInventory() == clickedInv) {
                 switch (slot) {
-                    case 26 -> getUserMenu().openGUI();
-                    case 17 -> getBaseViewInventory().addScroll(1);
-                    case 35 -> getBaseViewInventory().addScroll(-1);
+                    case 26 -> getPlayerData().getUserMenu().openGUI();
+                    case 17 -> getPlayerData().getBaseViewInventory().addScroll(1);
+                    case 35 -> getPlayerData().getBaseViewInventory().addScroll(-1);
                     default -> {
-                        if (getViewInventory().isItemInventory()) {
+                        if (getPlayerData().getViewInventory().isItemInventory()) {
 
                         }
                     }
@@ -49,7 +51,7 @@ public class PlayerInput implements com.somrpg.swordofmagic7.Core.Player.Interfa
 
     @Override
     public void onCloseGUI(InventoryCloseEvent event) {
-        SomSound.Close.play(getPlayer());
+        SomSound.Close.play(getPlayerData().getPlayer());
         getPlayerData().getPlayerEntity().statusUpdate();
         getPlayerData().viewUpdate();
     }

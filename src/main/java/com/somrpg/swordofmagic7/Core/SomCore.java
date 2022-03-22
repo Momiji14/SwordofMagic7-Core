@@ -1,15 +1,9 @@
 package com.somrpg.swordofmagic7.Core;
 
-import com.somrpg.swordofmagic7.Core.Command.AdminCommand.CommandGetItem;
-import com.somrpg.swordofmagic7.Core.Command.AdminCommand.CommandGetRune;
-import com.somrpg.swordofmagic7.Core.Command.BuilderCommand.CommandGameMode;
-import com.somrpg.swordofmagic7.Core.Command.BuilderCommand.CommandPlayMode;
-import com.somrpg.swordofmagic7.Core.Command.DeveloperCommand.CommandLoad;
-import com.somrpg.swordofmagic7.Core.Command.DeveloperCommand.CommandSave;
-import com.somrpg.swordofmagic7.Core.Command.DeveloperCommand.CommandSomReload;
+import com.somrpg.swordofmagic7.Core.Command.CommandRegisterExecutor;
 import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
 import com.somrpg.swordofmagic7.Core.Listener.*;
-import com.somrpg.swordofmagic7.Core.Player.PlayerData;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Player.PlayerList;
 import com.somrpg.swordofmagic7.Core.SomThread.SomTask;
 import org.bukkit.entity.Player;
@@ -34,20 +28,7 @@ public final class SomCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PhysicsListener(), plugin);
         getServer().getPluginManager().registerEvents(new BlockListener(), plugin);
 
-        //Developer
-        getJavaPlugin().getCommand("somReload").setExecutor(new CommandSomReload());
-        getJavaPlugin().getCommand("load").setExecutor(new CommandLoad());
-        getJavaPlugin().getCommand("save").setExecutor(new CommandSave());
-        //Admin
-        getJavaPlugin().getCommand("getItem").setExecutor(new CommandGetItem());
-        getJavaPlugin().getCommand("getRune").setExecutor(new CommandGetRune());
-        //Builder
-        getJavaPlugin().getCommand("gm").setExecutor(new CommandGameMode());
-        getJavaPlugin().getCommand("playMode").setExecutor(new CommandPlayMode());
-        //Player
-
-
-
+        CommandRegisterExecutor.registerExecutors();
         PlayerList.load();
         DataBase.dataLoadable();
         DataBase.singleLoad();

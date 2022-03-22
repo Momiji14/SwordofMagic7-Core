@@ -1,6 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Player;
 
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerBankInterface;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 
 public class PlayerBank implements PlayerBankInterface {

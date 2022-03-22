@@ -1,23 +1,20 @@
 package com.somrpg.swordofmagic7.Core.Menu;
 
-import com.somrpg.swordofmagic7.Core.Command.PlayerDataCommandExecutor;
-import com.somrpg.swordofmagic7.Core.Generic.BaseGraphicalUser;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
-import com.somrpg.swordofmagic7.Core.Player.Enum.DamageLog;
-import com.somrpg.swordofmagic7.Core.Player.Enum.DropLog;
-import com.somrpg.swordofmagic7.Core.Player.Enum.ExpLog;
-import com.somrpg.swordofmagic7.Core.Player.PlayerData;
+import com.somrpg.swordofmagic7.Core.Player.Enum.*;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import org.bukkit.Material;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class PlayerSettingMenu implements BaseGraphicalUser, PlayerDataCommandExecutor, PlayerData {
+public class PlayerSettingMenu implements BaseMenu {
     ItemStack DamageLogIcon = ViewableItemStack.create("ダメージログ", Material.RED_DYE, "ダメージログ表示を切り替えます").viewItemStack();
     ItemStack ExpLogIcon = ViewableItemStack.create("経験値ログ", Material.EXPERIENCE_BOTTLE, "経験値ログ表示を切り替えます").viewItemStack();
     ItemStack DropLogIcon = ViewableItemStack.create("ドロップログ", Material.CHEST, "ドロップログ表示を切り替えます").viewItemStack();
     ItemStack PvPModeIcon = ViewableItemStack.create("PvP設定", Material.IRON_SWORD, "PvP設定を切り替えます").viewItemStack();
     ItemStack CastModeIcon = ViewableItemStack.create("キャストモード", Material.END_CRYSTAL, "スキルの発動方法を切り替えます").viewItemStack();
     ItemStack StrafeModeIcon = ViewableItemStack.create("ストレイフモード", Material.FEATHER, "ストレイフの発動条件を切り替えます").viewItemStack();
-    ItemStack ViewDigitIcon = ViewableItemStack.create("表示桁数", Material.FEATHER, "ステータスなどの数値の表示桁数を変更します").viewItemStack();
+    ItemStack ViewDigitIcon = ViewableItemStack.create("表示桁数", Material.COMMAND_BLOCK, "ステータスなどの数値の表示桁数を変更します").viewItemStack();
 
     private final PlayerData playerData;
 
@@ -41,11 +38,6 @@ public class PlayerSettingMenu implements BaseGraphicalUser, PlayerDataCommandEx
     }
 
     @Override
-    public void command(String[] args) {
-        openGUI();
-    }
-
-    @Override
     public ItemStack[] getContent() {
         ItemStack[] content = new ItemStack[getSize()*9];
         content[0] = DamageLogIcon;
@@ -58,51 +50,81 @@ public class PlayerSettingMenu implements BaseGraphicalUser, PlayerDataCommandEx
         return content;
     }
 
-    public void onClick(ItemStack currentItem) {
-        if (currentItem.equals(DamageLogIcon)) {
+    @Override
+    public void onClick(Inventory clickedInv, ItemStack clickedItem, int slot) {
+        if (clickedItem.equals(DamageLogIcon)) {
             damageLog();
-        } else if (currentItem.equals(ExpLogIcon)) {
+        } else if (clickedItem.equals(ExpLogIcon)) {
             expLog();
-        } else if (currentItem.equals(DropLogIcon)) {
+        } else if (clickedItem.equals(DropLogIcon)) {
             dropLog();
-        } else if (currentItem.equals(ViewDigitIcon)) {
+        } else if (clickedItem.equals(PvPModeIcon)) {
+            pvpMode();
+        } else if (clickedItem.equals(CastModeIcon)) {
+            castMode();
+        } else if (clickedItem.equals(StrafeModeIcon)) {
+            strafeMode();
+        } else if (clickedItem.equals(ViewDigitIcon)) {
             viewDigit();
         }
     }
 
     public void damageLog() {
-        switch (getPlayerSetting().getDamageLog()) {
-            case Disable -> getPlayerSetting().setDamageLog(DamageLog.DamageOnly);
-            case DamageOnly -> getPlayerSetting().setDamageLog(DamageLog.Detail);
-            case Detail -> getPlayerSetting().setDamageLog(DamageLog.Debug);
-            case Debug -> getPlayerSetting().setDamageLog(DamageLog.Disable);
+        switch (getPlayerData().getPlayerSetting().getDamageLog()) {
+            case Disable -> getPlayerData().setDamageLog(DamageLog.DamageOnly);
+            case DamageOnly -> getPlayerData().setDamageLog(DamageLog.Detail);
+            case Detail -> getPlayerData().setDamageLog(DamageLog.Debug);
+            case Debug -> getPlayerData().setDamageLog(DamageLog.Disable);
         }
     }
 
     public void expLog() {
-        switch (getPlayerSetting().getExpLog()) {
-            case Disable -> getPlayerSetting().setExpLog(ExpLog.Class);
-            case Class -> getPlayerSetting().setExpLog(ExpLog.Player);
-            case Player -> getPlayerSetting().setExpLog(ExpLog.Both);
-            case Both -> getPlayerSetting().setExpLog(ExpLog.Disable);
+        switch (getPlayerData().getExpLog()) {
+            case Disable -> getPlayerData().setExpLog(ExpLog.Class);
+            case Class -> getPlayerData().setExpLog(ExpLog.Player);
+            case Player -> getPlayerData().setExpLog(ExpLog.Both);
+            case Both -> getPlayerData().setExpLog(ExpLog.Disable);
         }
     }
 
     public void dropLog() {
-        switch (getPlayerSetting().getDropLog()) {
-            case Disable -> getPlayerSetting().setDropLog(DropLog.Item);
-            case Item -> getPlayerSetting().setDropLog(DropLog.Rune);
-            case Rune -> getPlayerSetting().setDropLog(DropLog.Both);
-            case Both -> getPlayerSetting().setDropLog(DropLog.Disable);
+        switch (getPlayerData().getDropLog()) {
+            case Disable -> getPlayerData().setDropLog(DropLog.Item);
+            case Item -> getPlayerData().setDropLog(DropLog.Rune);
+            case Rune -> getPlayerData().setDropLog(DropLog.Both);
+            case Both -> getPlayerData().setDropLog(DropLog.Disable);
+        }
+    }
+
+    public void pvpMode() {
+        switch (getPlayerData().getPlayerPvPMode()) {
+            case Hostile -> getPlayerData().setPlayerPvPMode(PlayerPvPMode.Friendly);
+            case Friendly -> getPlayerData().setPlayerPvPMode(PlayerPvPMode.Hostile);
+        }
+    }
+
+    public void castMode() {
+        switch (getPlayerData().getPlayerCastMode()) {
+            case Hold -> getPlayerData().setPlayerCastMode(PlayerCastMode.Renewed);
+            case Renewed -> getPlayerData().setPlayerCastMode(PlayerCastMode.Legacy);
+            case Legacy -> getPlayerData().setPlayerCastMode(PlayerCastMode.Hold);
+        }
+    }
+
+    public void strafeMode() {
+        switch (getPlayerData().getPlayerStrafeMode()) {
+            case DoubleJump -> getPlayerData().setPlayerStrafMode(PlayerStrafeMode.AirDash);
+            case AirDash -> getPlayerData().setPlayerStrafMode(PlayerStrafeMode.Both);
+            case Both -> getPlayerData().setPlayerStrafMode(PlayerStrafeMode.DoubleJump);
         }
     }
 
     public void viewDigit() {
-        int digit = getPlayerSetting().getViewDigit();
+        int digit = getPlayerData().getViewDigit();
         if (digit < 10) {
-            getPlayerSetting().setViewDigit(digit+1);
+            getPlayerData().setViewDigit(digit+1);
         } else {
-            getPlayerSetting().setViewDigit(0);
+            getPlayerData().setViewDigit(0);
         }
     }
 }

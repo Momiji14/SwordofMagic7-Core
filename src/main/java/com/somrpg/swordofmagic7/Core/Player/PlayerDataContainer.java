@@ -1,14 +1,12 @@
 package com.somrpg.swordofmagic7.Core.Player;
 
-import com.somrpg.swordofmagic7.Core.Inventory.ItemInventory;
-import com.somrpg.swordofmagic7.Core.Inventory.PetInventory;
-import com.somrpg.swordofmagic7.Core.Inventory.RuneInventory;
+import com.somrpg.swordofmagic7.Core.Inventory.*;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
 import com.somrpg.swordofmagic7.Core.Map.MapDataInterface;
 import com.somrpg.swordofmagic7.Core.Menu.PlayerSettingMenu;
 import com.somrpg.swordofmagic7.Core.Menu.PlayerUserMenu;
 import com.somrpg.swordofmagic7.Core.Menu.TeleportGateMenu;
-import com.somrpg.swordofmagic7.Core.SomCore;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -41,7 +39,7 @@ public class PlayerDataContainer implements PlayerData {
     private File playerFile;
     private final PlayerEntity playerEntity;
     private final PlayerCharacon playerCharacon;
-    private final PlayerViewBar playerViewBar;
+    private final PlayerDisplayContainer playerDisplayContainer;
     private final PlayerBank playerBank;
     private final PlayerSetting playerSetting;
     private final PlayerInput playerInput;
@@ -62,7 +60,7 @@ public class PlayerDataContainer implements PlayerData {
         this.player = player;
         playerEntity = new PlayerEntity(this);
         playerCharacon = new PlayerCharacon(this);
-        playerViewBar = new PlayerViewBar(this);
+        playerDisplayContainer = new PlayerDisplayContainer(this);
         playerBank = new PlayerBank(this);
         playerInput = new PlayerInput(this);
         playerSetting = new PlayerSetting(this);
@@ -73,9 +71,7 @@ public class PlayerDataContainer implements PlayerData {
         petInventory = new PetInventory(this);
 
         playerUserMenu = new PlayerUserMenu(this);
-        SomCore.getJavaPlugin().getCommand("menu").setExecutor(playerUserMenu);
         playerSettingMenu = new PlayerSettingMenu(this);
-        SomCore.getJavaPlugin().getCommand("settingMenu").setExecutor(playerSettingMenu);
         teleportGateMenu = new TeleportGateMenu(this);
     }
 
@@ -95,6 +91,16 @@ public class PlayerDataContainer implements PlayerData {
     }
 
     @Override
+    public BaseInventory getBaseViewInventory() {
+        return getBaseInventory(getViewInventory());
+    }
+
+    @Override
+    public SomInventoryType getViewInventory() {
+        return getPlayerSetting().getViewInventory();
+    }
+
+    @Override
     public PlayerEntity getPlayerEntity() {
         return playerEntity;
     }
@@ -105,8 +111,8 @@ public class PlayerDataContainer implements PlayerData {
     }
 
     @Override
-    public PlayerViewBar getPlayerViewBar() {
-        return playerViewBar;
+    public PlayerDisplayContainer getPlayerViewBar() {
+        return playerDisplayContainer;
     }
 
     @Override
@@ -132,6 +138,11 @@ public class PlayerDataContainer implements PlayerData {
     @Override
     public PlayerUserMenu getUserMenu() {
         return playerUserMenu;
+    }
+
+    @Override
+    public PlayerSettingMenu getSettingMenu() {
+        return playerSettingMenu;
     }
 
     @Override
@@ -176,17 +187,22 @@ public class PlayerDataContainer implements PlayerData {
             if (!playerFile.exists()) playerFile.createNewFile();
             FileConfiguration data = YamlConfiguration.loadConfiguration(playerFile);
 
+            //基本データ
             data.set("Mel", getMel());
             data.set("Level", getLevel());
             data.set("Exp", getExp());
             data.set("Health", getHealth());
             data.set("Mana", getMana());
 
-            data.set("ItemInventory", itemInventory.getContentsToString());
-            data.set("RuneInventory", runeInventory.getContentsToString());
-            data.set("PetInventory", petInventory.getContentsToString());
+            //各インベントリ
+            data.set("ItemInventory", getItemInventory().getContentsToString());
+            data.set("RuneInventory", getRuneInventory().getContentsToString());
+            data.set("PetInventory", getPetInventory().getContentsToString());
 
+            //その他
             data.set("ActiveTeleportGate", getActiveTeleportGate());
+
+            getPlayerSetting().save(data);
 
             data.save(playerFile);
             sendMessage("§eプレイヤーデータ§aの§b保存§aが§b完了§aしました", SomSound.Tick);
@@ -207,17 +223,19 @@ public class PlayerDataContainer implements PlayerData {
             }
             FileConfiguration data = YamlConfiguration.loadConfiguration(playerFile);
 
-            playerBank.setMel(data.getInt("Mel", 10000));
-            playerEntity.setLevel(data.getInt("Level", 1));
-            playerEntity.setExp(data.getInt("Exp", 0));
-            playerEntity.setHealthUnsafe(data.getDouble("Health", Double.MAX_VALUE));
-            playerEntity.setManaUnsafe(data.getDouble("Mana", Double.MAX_VALUE));
+            setMel(data.getInt("Mel", 10000));
+            setLevel(data.getInt("Level", 1));
+            setExp(data.getInt("Exp", 0));
+            getPlayerEntity().setHealthUnsafe(data.getDouble("Health", Double.MAX_VALUE));
+            getPlayerEntity().setManaUnsafe(data.getDouble("Mana", Double.MAX_VALUE));
 
-            itemInventory.fromContentsFromString(data.getStringList("ItemInventory"));
-            runeInventory.fromContentsFromString(data.getStringList("RuneInventory"));
-            petInventory.fromContentsFromString(data.getStringList("PetInventory"));
+            getItemInventory().fromContentsFromString(data.getStringList("ItemInventory"));
+            getRuneInventory().fromContentsFromString(data.getStringList("RuneInventory"));
+            getPetInventory().fromContentsFromString(data.getStringList("PetInventory"));
 
             activeTeleportGate = data.getStringList("ActiveTeleportGate");
+
+            getPlayerSetting().load(data);
 
             getPlayerEntity().statusUpdate();
             viewUpdate();

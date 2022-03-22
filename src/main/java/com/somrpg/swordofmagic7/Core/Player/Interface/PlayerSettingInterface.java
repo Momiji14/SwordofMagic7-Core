@@ -2,7 +2,6 @@ package com.somrpg.swordofmagic7.Core.Player.Interface;
 
 import com.somrpg.swordofmagic7.Core.Inventory.SomInventoryType;
 import com.somrpg.swordofmagic7.Core.Player.Enum.*;
-import com.somrpg.swordofmagic7.Core.Player.PlayerData;
 import com.somrpg.swordofmagic7.Core.Player.PlayerSetting;
 
 public interface PlayerSettingInterface {
@@ -34,11 +33,11 @@ public interface PlayerSettingInterface {
         return getPlayerSetting().isPlayMode();
     }
 
-    default void setCastMode(PlayerCastMode castMode) {
-        getPlayerSetting().setCastMode(castMode);
+    default void setPlayerCastMode(PlayerCastMode castMode) {
+        getPlayerSetting().setPlayerCastMode(castMode);
     }
-    default PlayerCastMode getCastMode() {
-        return getPlayerSetting().getCastMode();
+    default PlayerCastMode getPlayerCastMode() {
+        return getPlayerSetting().getPlayerCastMode();
     }
 
     default void setDamageLog(DamageLog damageLog) {

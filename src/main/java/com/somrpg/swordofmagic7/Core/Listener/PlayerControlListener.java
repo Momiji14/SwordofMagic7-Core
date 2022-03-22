@@ -3,7 +3,7 @@ package com.somrpg.swordofmagic7.Core.Listener;
 import com.destroystokyo.paper.event.player.PlayerJumpEvent;
 import com.somrpg.swordofmagic7.Core.Map.TeleportGate.TeleportGate;
 import com.somrpg.swordofmagic7.Core.Map.WarpGate.WarpGate;
-import com.somrpg.swordofmagic7.Core.Player.PlayerData;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

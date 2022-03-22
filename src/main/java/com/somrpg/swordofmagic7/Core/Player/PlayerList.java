@@ -13,6 +13,21 @@ public class PlayerList {
 
     public static void load() {
         playerList.addAll(Bukkit.getOnlinePlayers());
+        offlineCheck();
+    }
+
+    public static void addPlayer(Player player) {
+        playerList.add(player);
+        offlineCheck();
+    }
+
+    public static void removePlayer(Player player) {
+        playerList.remove(player);
+        offlineCheck();
+    }
+
+    public static void offlineCheck() {
+        playerList.removeIf(player -> !player.isOnline());
     }
 
     public static Collection<Player> getPlayerList() {

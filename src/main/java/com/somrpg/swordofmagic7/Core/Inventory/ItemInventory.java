@@ -6,7 +6,7 @@ import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Item.BaseItem;
 import com.somrpg.swordofmagic7.Core.Item.ItemCategory;
-import com.somrpg.swordofmagic7.Core.Player.PlayerData;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -55,6 +55,6 @@ public class ItemInventory extends BaseInventory implements SomEquipmentInventor
         SomEquipmentSlot slot = equipmentItem.getEquipmentSlot();
         if (hasEquipment(slot)) addContent(getEquipment(slot));
         equipmentSlot.put(slot, equipmentItem);
-        if (log) sendMessage("§e[" + equipmentItem.getDisplay() + "]§aを§b装備§aしました", SomSound.Equip);
+        if (log) getPlayerData().sendMessage("§e[" + equipmentItem.getDisplay() + "]§aを§b装備§aしました", SomSound.Equip);
     }
 }

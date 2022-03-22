@@ -4,15 +4,13 @@ import com.somrpg.swordofmagic7.Core.Command.PlayerCommandExecutor;
 import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Item.RuneItem;
-import com.somrpg.swordofmagic7.Core.Player.PlayerData;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.jetbrains.annotations.NotNull;
 
 public class CommandGetRune implements PlayerCommandExecutor {
     @Override
-    public void command(@NotNull Player player, @NotNull @NonNull PlayerData playerData, String[] args) {
+    public void command(Player player, PlayerData playerData, String[] args) {
         if (args.length >= 1) {
             int level = 1;
             double quality = 0.5;
