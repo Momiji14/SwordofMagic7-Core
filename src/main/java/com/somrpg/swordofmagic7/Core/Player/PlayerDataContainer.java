@@ -1,5 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Player;
 
+import com.somrpg.swordofmagic7.Core.Generic.Entity.BaseEntityContainer;
 import com.somrpg.swordofmagic7.Core.Inventory.*;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
 import com.somrpg.swordofmagic7.Core.Map.MapDataInterface;
@@ -7,6 +8,7 @@ import com.somrpg.swordofmagic7.Core.Menu.PlayerSettingMenu;
 import com.somrpg.swordofmagic7.Core.Menu.PlayerUserMenu;
 import com.somrpg.swordofmagic7.Core.Menu.TeleportGateMenu;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerOther;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -37,17 +39,18 @@ public class PlayerDataContainer implements PlayerData {
     private final Player player;
 
     private File playerFile;
-    private final PlayerEntity playerEntity;
+    private final PlayerEntityContainer playerEntity;
     private final PlayerCharacon playerCharacon;
     private final PlayerDisplayContainer playerDisplayContainer;
     private final PlayerBank playerBank;
     private final PlayerSetting playerSetting;
     private final PlayerInput playerInput;
     private final PlayerStatistics playerStatistics;
+    private final PlayerOther playerOther;
 
-    private final ItemInventory itemInventory;
-    private final RuneInventory runeInventory;
-    private final PetInventory petInventory;
+    private final ItemInventoryContainer itemInventoryContainer;
+    private final RuneInventoryContainer runeInventoryContainer;
+    private final PetInventoryContainer petInventoryContainer;
 
     private final PlayerUserMenu playerUserMenu;
     private final PlayerSettingMenu playerSettingMenu;
@@ -58,17 +61,18 @@ public class PlayerDataContainer implements PlayerData {
 
     PlayerDataContainer(Player player) {
         this.player = player;
-        playerEntity = new PlayerEntity(this);
+        playerEntity = new PlayerEntityContainer(this);
         playerCharacon = new PlayerCharacon(this);
         playerDisplayContainer = new PlayerDisplayContainer(this);
         playerBank = new PlayerBank(this);
         playerInput = new PlayerInput(this);
         playerSetting = new PlayerSetting(this);
         playerStatistics = new PlayerStatistics(this);
+        playerOther = new PlayerOtherContainer(this);
 
-        itemInventory = new ItemInventory(this);
-        runeInventory = new RuneInventory(this);
-        petInventory = new PetInventory(this);
+        itemInventoryContainer = new ItemInventoryContainer(this);
+        runeInventoryContainer = new RuneInventoryContainer(this);
+        petInventoryContainer = new PetInventoryContainer(this);
 
         playerUserMenu = new PlayerUserMenu(this);
         playerSettingMenu = new PlayerSettingMenu(this);
@@ -86,12 +90,17 @@ public class PlayerDataContainer implements PlayerData {
     }
 
     @Override
+    public BaseEntityContainer getBaseEntityContainer() {
+        return playerEntity;
+    }
+
+    @Override
     public Player getPlayer() {
         return player;
     }
 
     @Override
-    public BaseInventory getBaseViewInventory() {
+    public SomInventory getBaseViewInventory() {
         return getBaseInventory(getViewInventory());
     }
 
@@ -101,7 +110,7 @@ public class PlayerDataContainer implements PlayerData {
     }
 
     @Override
-    public PlayerEntity getPlayerEntity() {
+    public PlayerEntityContainer getPlayerEntity() {
         return playerEntity;
     }
 
@@ -151,18 +160,23 @@ public class PlayerDataContainer implements PlayerData {
     }
 
     @Override
-    public ItemInventory getItemInventory() {
-        return itemInventory;
+    public ItemInventoryContainer getItemInventory() {
+        return itemInventoryContainer;
     }
 
     @Override
-    public RuneInventory getRuneInventory() {
-        return runeInventory;
+    public RuneInventoryContainer getRuneInventory() {
+        return runeInventoryContainer;
     }
 
     @Override
-    public PetInventory getPetInventory() {
-        return petInventory;
+    public PetInventoryContainer getPetInventory() {
+        return petInventoryContainer;
+    }
+
+    @Override
+    public PlayerOther getPlayerOther() {
+        return null;
     }
 
     @Override
@@ -195,9 +209,9 @@ public class PlayerDataContainer implements PlayerData {
             data.set("Mana", getMana());
 
             //各インベントリ
-            data.set("ItemInventory", getItemInventory().getContentsToString());
-            data.set("RuneInventory", getRuneInventory().getContentsToString());
-            data.set("PetInventory", getPetInventory().getContentsToString());
+            data.set("ItemInventoryContainer", getItemInventory().getContentsToString());
+            data.set("RuneInventoryContainer", getRuneInventory().getContentsToString());
+            data.set("PetInventoryContainer", getPetInventory().getContentsToString());
 
             //その他
             data.set("ActiveTeleportGate", getActiveTeleportGate());
@@ -229,9 +243,9 @@ public class PlayerDataContainer implements PlayerData {
             getPlayerEntity().setHealthUnsafe(data.getDouble("Health", Double.MAX_VALUE));
             getPlayerEntity().setManaUnsafe(data.getDouble("Mana", Double.MAX_VALUE));
 
-            getItemInventory().fromContentsFromString(data.getStringList("ItemInventory"));
-            getRuneInventory().fromContentsFromString(data.getStringList("RuneInventory"));
-            getPetInventory().fromContentsFromString(data.getStringList("PetInventory"));
+            getItemInventory().fromContentsFromString(data.getStringList("ItemInventoryContainer"));
+            getRuneInventory().fromContentsFromString(data.getStringList("RuneInventoryContainer"));
+            getPetInventory().fromContentsFromString(data.getStringList("PetInventoryContainer"));
 
             activeTeleportGate = data.getStringList("ActiveTeleportGate");
 

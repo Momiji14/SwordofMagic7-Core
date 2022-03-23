@@ -2,9 +2,9 @@ package com.somrpg.swordofmagic7.Core.Effect;
 
 public class EffectData {
     private int Time;
-    private final EffectType effectType;
+    private final SomEffectType effectType;
 
-    public EffectData(EffectType effectType, int time) {
+    public EffectData(SomEffectType effectType, int time) {
         this.effectType = effectType;
         Time = time;
     }
@@ -21,7 +21,7 @@ public class EffectData {
         return Time;
     }
 
-    public EffectType getEffectType() {
+    public SomEffectType getEffectType() {
         return effectType;
     }
 }

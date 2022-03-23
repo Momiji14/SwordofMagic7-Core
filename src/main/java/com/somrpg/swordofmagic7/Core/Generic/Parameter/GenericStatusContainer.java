@@ -4,7 +4,7 @@ import com.somrpg.swordofmagic7.Core.Player.Level.SomLevel;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-public class StatusParameter extends SomLevel implements StatusParameterInterface {
+public class GenericStatusContainer extends SomLevel implements GenericStatus {
     private double MaxHealth = 0;
     private double HealthRegen = 0;
     private double MaxMana = 0;
@@ -16,8 +16,8 @@ public class StatusParameter extends SomLevel implements StatusParameterInterfac
     private double CriticalRate = 0;
     private double CriticalResist = 0;
 
-    public StatusParameter() {}
-    public StatusParameter(@NonNull FileConfiguration data) {
+    public GenericStatusContainer() {}
+    public GenericStatusContainer(@NonNull FileConfiguration data) {
         load(data);
     }
     public void setStatusParameter(double maxHealth, double healthRegen, double maxMana, double manaRegen, double atk, double def, double acc, double eva, double criticalRate, double criticalResist) {
@@ -44,7 +44,7 @@ public class StatusParameter extends SomLevel implements StatusParameterInterfac
         CriticalResist = data.getDouble("CriticalResist", 0);
     }
 
-    public void addStatusParameter(StatusParameter param) {
+    public void addStatusParameter(GenericStatus param) {
         MaxHealth += param.getMaxHealth();
         HealthRegen += param.getHealthRegen();
         MaxMana += param.getMaxMana();
@@ -57,7 +57,7 @@ public class StatusParameter extends SomLevel implements StatusParameterInterfac
         CriticalResist += param.getCriticalResist();
     }
 
-    public void multiplyStatusParameter(StatusParameter param) {
+    public void multiplyStatusParameter(GenericStatus param) {
         MaxHealth *= param.getMaxHealth();
         HealthRegen *= param.getHealthRegen();
         MaxMana *= param.getMaxMana();
@@ -70,7 +70,7 @@ public class StatusParameter extends SomLevel implements StatusParameterInterfac
         CriticalResist *= param.getCriticalResist();
     }
 
-    public void setStatusParameter(StatusParameter param) {
+    public void setStatusParameter(GenericStatus param) {
         MaxHealth = param.getMaxHealth();
         HealthRegen = param.getHealthRegen();
         MaxMana = param.getMaxMana();
@@ -83,82 +83,102 @@ public class StatusParameter extends SomLevel implements StatusParameterInterfac
         CriticalResist = param.getCriticalResist();
     }
 
+    @Override
     public void setMaxHealth(double maxHealth) {
         MaxHealth = maxHealth;
     }
 
+    @Override
     public double getMaxHealth() {
         return MaxHealth;
     }
 
+    @Override
     public void setHealthRegen(double healthRegen) {
         HealthRegen = healthRegen;
     }
 
+    @Override
     public double getHealthRegen() {
         return HealthRegen;
     }
 
+    @Override
     public void setMaxMana(double maxMana) {
         MaxMana = maxMana;
     }
 
+    @Override
     public double getMaxMana() {
         return MaxMana;
     }
 
+    @Override
     public void setManaRegen(double manaRegen) {
         ManaRegen = manaRegen;
     }
 
+    @Override
     public double getManaRegen() {
         return ManaRegen;
     }
 
+    @Override
     public void setATK(double ATK) {
         this.ATK = ATK;
     }
 
+    @Override
     public double getATK() {
         return ATK;
     }
 
+    @Override
     public void setDEF(double DEF) {
         this.DEF = DEF;
     }
 
+    @Override
     public double getDEF() {
         return DEF;
     }
 
+    @Override
     public void setACC(double ACC) {
         this.ACC = ACC;
     }
 
+    @Override
     public double getACC() {
         return ACC;
     }
 
+    @Override
     public void setEVA(double EVA) {
         this.EVA = EVA;
     }
 
+    @Override
     public double getEVA() {
         return EVA;
     }
 
+    @Override
     public void setCriticalRate(double criticalRate) {
         CriticalRate = criticalRate;
     }
 
+    @Override
     public double getCriticalRate() {
         return CriticalRate;
     }
 
+    @Override
     public void setCriticalResist(double criticalResist) {
         CriticalResist = criticalResist;
     }
 
+    @Override
     public double getCriticalResist() {
         return CriticalResist;
     }

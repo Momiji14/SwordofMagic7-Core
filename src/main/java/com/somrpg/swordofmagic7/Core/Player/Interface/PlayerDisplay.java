@@ -1,7 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
 import com.somrpg.swordofmagic7.Core.Generic.DecoContent;
-import com.somrpg.swordofmagic7.Core.Player.PlayerEntity;
+import com.somrpg.swordofmagic7.Core.Player.PlayerEntityContainer;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -41,11 +41,14 @@ public interface PlayerDisplay {
         team.addEntry(player.getName());
         team.setCanSeeFriendlyInvisibles(true);
 
-        PlayerEntity playerEntity = getPlayerData().getPlayerEntity();
+        PlayerEntityContainer playerEntity = getPlayerData().getPlayerEntity();
 
         SomCore.getSomTask().AsyncTaskTimer(() -> {
-            String actionBar = "§c§l《Health: " + ScaleDigit(getPlayerData().getHealth()) + "/" + ScaleDigit(getPlayerData().getMaxHealth()) + "》"
-                    + "§b§l《Mana: " + ScaleDigit(getPlayerData().getMana()) + "/" + ScaleDigit(getPlayerData().getMaxMana()) + "》";
+            String actionBar =
+                    "§e§l《" + getPlayerData().getNick() + " Lv" + getPlayerData().getLevel() + "》" +
+                    "§c§l《Health: " + ScaleDigit(getPlayerData().getHealth()) + "/" + ScaleDigit(getPlayerData().getMaxHealth()) + "》" +
+                    "§b§l《Mana: " + ScaleDigit(getPlayerData().getMana()) + "/" + ScaleDigit(getPlayerData().getMaxMana()) + "》" +
+                    "§a§l《Exp: " + getPlayerData().getExpPercentString() + "》";
 
             playerEntity.addHealth(getPlayerData().getHealthRegen()/20d);
             playerEntity.addMana(getPlayerData().getManaRegen()/20d);

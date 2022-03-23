@@ -1,6 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Equipment;
 
-import com.somrpg.swordofmagic7.Core.Generic.Parameter.StatusParameter;
+import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatus;
+import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatusContainer;
 import com.somrpg.swordofmagic7.Core.Item.BaseItem;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EquipmentItem extends BaseItem {
-    private final StatusParameter statusParameter;
+    private final GenericStatus genericStatus;
     private final EquipmentItemCategory equipmentItemCategory;
     private final SomEquipmentSlot equipmentSlot;
     private int plus = 0;
@@ -19,12 +20,12 @@ public class EquipmentItem extends BaseItem {
         super(data, data.getItemCategory(), data.getSell());
         this.equipmentSlot = equipmentSlot;
         this.equipmentItemCategory = equipmentItemCategory;
-        this.statusParameter = new StatusParameter();
+        this.genericStatus = new GenericStatusContainer();
         setMaterial(equipmentItemCategory.getMaterial());
     }
 
-    public StatusParameter getStatusParameter() {
-        return statusParameter;
+    public GenericStatus getStatusParameter() {
+        return genericStatus;
     }
 
     public EquipmentItemCategory getEquipmentItemCategory() {

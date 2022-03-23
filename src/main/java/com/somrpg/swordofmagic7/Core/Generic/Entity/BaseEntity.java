@@ -1,60 +1,51 @@
 package com.somrpg.swordofmagic7.Core.Generic.Entity;
 
 import com.somrpg.swordofmagic7.Core.Effect.EffectData;
-import com.somrpg.swordofmagic7.Core.Generic.Parameter.StatusParameter;
+import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatus;
+import com.somrpg.swordofmagic7.Core.SomCore;
 
 import java.util.Collection;
-import java.util.HashSet;
 
-public class BaseEntity extends StatusParameter implements BaseEntityInterface {
-    private double Health = 0;
-    private double Mana = 0;
-    private final Collection<EffectData> EffectSet = new HashSet<>();
+public interface BaseEntity {
 
-    public BaseEntity() {
-        startEffectTimer();
+    BaseEntityContainer getBaseEntityContainer();
+
+    default void setHealth(double health) {
+        getBaseEntityContainer().setHealth(health);
+    }
+    default void addHealth(double health) {
+        getBaseEntityContainer().addHealth(health);
+    }
+    default double getHealth() {
+        return getBaseEntityContainer().getHealth();
+    }
+    default void setMana(double mana) {
+        getBaseEntityContainer().setMana(mana);
+    }
+    default void addMana(double mana) {
+        getBaseEntityContainer().addMana(mana);
+    }
+    default double getMana() {
+        return getBaseEntityContainer().getMana();
     }
 
-    @Override
-    public Collection<EffectData> getEffectSet() {
-        return EffectSet;
+    default void setHealthUnsafe(double health) {
+        getBaseEntityContainer().setHealth(health);
+    }
+    default void setManaUnsafe(double mana) {
+        getBaseEntityContainer().setMana(mana);
     }
 
-    @Override
-    public void setHealth(double health) {
-        Health = Math.max(0, Math.min(health, getMaxHealth()));
+    default Collection<EffectData> getEffectSet() {
+        return getBaseEntityContainer().getEffectSet();
     }
 
-    public void setHealthUnsafe(double health) {
-        Health = health;
-    }
-
-    @Override
-    public void addHealth(double health) {
-        setHealth(Health + health);
-    }
-
-    @Override
-    public double getHealth() {
-        return Health;
-    }
-
-    @Override
-    public void setMana(double mana) {
-        Mana = Math.max(0, Math.min(mana, getMaxMana()));
-    }
-
-    public void setManaUnsafe(double mana) {
-        Mana = mana;
-    }
-
-    @Override
-    public void addMana(double mana) {
-        setMana(Mana + mana);
-    }
-
-    @Override
-    public double getMana() {
-        return Mana;
+    default void startEffectTimer() {
+        SomCore.getSomTask().AsyncTaskTimer(() -> {
+            for (EffectData effectData : getEffectSet()) {
+                effectData.addTime(-1);
+            }
+            getEffectSet().removeIf(effectData -> effectData.getTime() < 1);
+        }, 1);
     }
 }

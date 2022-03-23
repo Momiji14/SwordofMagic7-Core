@@ -4,7 +4,7 @@ import com.somrpg.swordofmagic7.Core.Equipment.EquipmentItem;
 import com.somrpg.swordofmagic7.Core.Equipment.EquipmentItemCategory;
 import com.somrpg.swordofmagic7.Core.Equipment.SomEquipmentSlot;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
-import com.somrpg.swordofmagic7.Core.Generic.Parameter.StatusParameter;
+import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatusContainer;
 import com.somrpg.swordofmagic7.Core.Item.BaseItem;
 import com.somrpg.swordofmagic7.Core.Item.ItemCategory;
 import com.somrpg.swordofmagic7.Core.Item.RuneItem;
@@ -55,7 +55,7 @@ public interface SomItemDataLoader extends DataBase {
                 String display = data.getString("Display");
                 List<String> lore = data.getStringList("Lore");
                 SomItemStack item = new SomItemStack(fileName, display, material, lore);
-                RuneItem runeItem = new RuneItem(item, new StatusParameter(data));
+                RuneItem runeItem = new RuneItem(item, new GenericStatusContainer(data));
                 DataBase.SomItemDataList.put(fileName, runeItem);
             } catch (Exception e) {
                 e.printStackTrace();

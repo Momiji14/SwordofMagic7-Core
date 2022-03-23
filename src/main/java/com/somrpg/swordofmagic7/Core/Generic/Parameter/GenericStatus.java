@@ -1,6 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Generic.Parameter;
 
-public interface StatusParameterInterface {
+public interface GenericStatus {
 
     void setMaxHealth(double maxHealth);
     double getMaxHealth();

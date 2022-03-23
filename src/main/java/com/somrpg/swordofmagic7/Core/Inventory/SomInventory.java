@@ -10,7 +10,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface SomInventoryInterface {
+public interface SomInventory {
 
     ItemStack UpScrollIcon = ViewableItemStack.create("上へスクロール", Material.ITEM_FRAME).viewItemStack();
     ItemStack DownScrollIcon = ViewableItemStack.create("下へスクロール", Material.ITEM_FRAME).viewItemStack();

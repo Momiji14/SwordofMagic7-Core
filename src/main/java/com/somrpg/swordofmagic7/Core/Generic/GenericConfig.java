@@ -12,6 +12,8 @@ public interface GenericConfig {
     int RuneInventoryMaxSlot = 256;
     int PetInventoryMaxSlot = 64;
 
+    int GenericDigit = 2;
+
     int PlayerMaxLevel = 50;
     int ClassMaxLevel = 15;
     int LifeMaxLevel = 30;

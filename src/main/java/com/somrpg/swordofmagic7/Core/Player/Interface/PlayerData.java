@@ -1,6 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
-import com.somrpg.swordofmagic7.Core.Generic.Parameter.StatusParameterInterface;
+import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatus;
 import com.somrpg.swordofmagic7.Core.Inventory.*;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
 import com.somrpg.swordofmagic7.Core.Map.MapDataInterface;
@@ -16,7 +16,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 
 import java.util.List;
 
-public interface PlayerData extends StatusParameterInterface, PlayerInputInterface, PlayerEntityInterface, PlayerSettingInterface, PlayerBankInterface, PlayerViewUpdate {
+public interface PlayerData extends GenericStatus, PlayerInputInterface, PlayerEntity, PlayerSettingInterface, PlayerBankInterface, PlayerViewUpdate {
 
     static PlayerData getData(Player player) {
         return PlayerDataContainer.getData(player);
@@ -52,11 +52,11 @@ public interface PlayerData extends StatusParameterInterface, PlayerInputInterfa
         };
     }
 
-    BaseInventory getBaseViewInventory();
+    SomInventory getBaseViewInventory();
 
     SomInventoryType getViewInventory();
 
-    PlayerEntity getPlayerEntity();
+    PlayerEntityContainer getPlayerEntity();
 
     PlayerCharacon getPlayerCharacon();
 
@@ -76,11 +76,13 @@ public interface PlayerData extends StatusParameterInterface, PlayerInputInterfa
 
     PetInventory getPetInventory();
 
+    PlayerOther getPlayerOther();
+
     PlayerUserMenu getUserMenu();
     PlayerSettingMenu getSettingMenu();
     TeleportGateMenu getTeleportGateMenu();
 
-    default BaseInventory getBaseInventory(SomInventoryType type) {
+    default SomInventory getBaseInventory(SomInventoryType type) {
         switch (type) {
             case ItemInventory -> {
                 return getItemInventory();
@@ -248,5 +250,9 @@ public interface PlayerData extends StatusParameterInterface, PlayerInputInterfa
     @Override
     default void onCloseGUI(InventoryCloseEvent event) {
         getPlayerInput().onCloseGUI(event);
+    }
+
+    default String getNick() {
+        return getPlayerOther().getNick();
     }
 }

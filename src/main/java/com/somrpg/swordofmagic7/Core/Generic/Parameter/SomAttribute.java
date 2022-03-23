@@ -1,84 +1,56 @@
 package com.somrpg.swordofmagic7.Core.Generic.Parameter;
 
-public class SomAttribute implements AttributeInterface{
-    private int STR = 0;
-    private int INT = 0;
-    private int DEX = 0;
-    private int SPI = 0;
-    private int VIT = 0;
+public interface SomAttribute {
 
-    @Override
-    public void setSTR(int STR) {
-        this.STR = STR;
+    SomAttributeContainer getAttributeContainer();
+
+    default void setSTR(int STR) {
+        getAttributeContainer().setSTR(STR);
+    }
+    default void addSTR(int STR) {
+        getAttributeContainer().addSTR(STR);
+    }
+    default int getSTR() {
+        return getAttributeContainer().getSTR();
     }
 
-    @Override
-    public void addSTR(int STR) {
-        this.STR += STR;
+    default void setINT(int INT) {
+        getAttributeContainer().setINT(INT);
+    }
+    default void addINT(int INT) {
+        getAttributeContainer().addINT(INT);
+    }
+    default int getINT() {
+        return getAttributeContainer().getINT();
     }
 
-    @Override
-    public int getSTR() {
-        return STR;
+    default void setDEX(int DEX) {
+        getAttributeContainer().setDEX(DEX);
+    }
+    default void addDEX(int DEX) {
+        getAttributeContainer().addDEX(DEX);
+    }
+    default int getDEX() {
+        return getAttributeContainer().getDEX();
     }
 
-    @Override
-    public void setINT(int INT) {
-        this.INT = INT;
+    default void setSPI(int SPI) {
+        getAttributeContainer().setSPI(SPI);
+    }
+    default void addSPI(int SPI) {
+        getAttributeContainer().addSPI(SPI);
+    }
+    default int getSPI() {
+        return getAttributeContainer().getSPI();
     }
 
-    @Override
-    public void addINT(int INT) {
-        this.INT += INT;
+    default void setVIT(int VIT) {
+        getAttributeContainer().setVIT(VIT);
     }
-
-    @Override
-    public int getINT() {
-        return INT;
+    default void addVIT(int VIT) {
+        getAttributeContainer().addVIT(VIT);
     }
-
-    @Override
-    public void setDEX(int DEX) {
-        this.DEX = DEX;
-    }
-
-    @Override
-    public void addDEX(int DEX) {
-        this.DEX += DEX;
-    }
-
-    @Override
-    public int getDEX() {
-        return DEX;
-    }
-
-    @Override
-    public void setSPI(int SPI) {
-        this.SPI = SPI;
-    }
-
-    @Override
-    public void addSPI(int SPI) {
-        this.SPI += SPI;
-    }
-
-    @Override
-    public int getSPI() {
-        return SPI;
-    }
-
-    @Override
-    public void setVIT(int VIT) {
-        this.VIT = VIT;
-    }
-
-    @Override
-    public void addVIT(int VIT) {
-        this.VIT += VIT;
-    }
-
-    @Override
-    public int getVIT() {
-        return VIT;
+    default int getVIT() {
+        return getAttributeContainer().getVIT();
     }
 }

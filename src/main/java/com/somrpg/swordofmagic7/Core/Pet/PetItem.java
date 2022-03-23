@@ -7,14 +7,14 @@ import java.util.List;
 
 public class PetItem extends SomItemStack {
 
-    private final PetEntity petEntity;
+    private final PetEntityContainer petEntity;
 
     public PetItem(String Id, String display, Material material, List<String> lore) {
         super(Id, display, material, lore);
-        petEntity = new PetEntity(this);
+        petEntity = new PetEntityContainer(this);
     }
 
-    public PetEntity getPetEntity() {
+    public PetEntityContainer getPetEntity() {
         return petEntity;
     }
 }

@@ -10,7 +10,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseInventory implements SomInventoryInterface {
+public class BaseInventory implements SomInventory {
 
     private final PlayerData playerData;
     private final PlayerInventory playerInventory;

@@ -1,7 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
 import com.somrpg.swordofmagic7.Core.Equipment.EquipmentItem;
-import com.somrpg.swordofmagic7.Core.Player.PlayerEntity;
+import com.somrpg.swordofmagic7.Core.Player.PlayerEntityContainer;
 
 public interface PlayerStatusCalculation {
     static double levelMultiply(int level) {
@@ -11,7 +11,7 @@ public interface PlayerStatusCalculation {
     PlayerData getPlayerData();
 
     default void statusUpdate() {
-        PlayerEntity playerEntity = getPlayerData().getPlayerEntity();
+        PlayerEntityContainer playerEntity = getPlayerData().getPlayerEntity();
         double multiply = levelMultiply(playerEntity.getLevel());
         double MaxHealth = 120 + multiply*12;
         double HealthRegen = 1;

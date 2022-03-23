@@ -2,7 +2,7 @@ package com.somrpg.swordofmagic7.Core.Effect;
 
 import java.util.List;
 
-public enum EffectType {
+public enum SomEffectType {
     Stun("スタン", false, "移動できなくなります"),
     Silence("沈黙", false, "スキルが使えなくなります"),
     Freeze("氷結", false, "[スタン]と[沈黙]を合わせた効果です"),
@@ -50,20 +50,20 @@ public enum EffectType {
     private int MaxStack;
     private boolean view = true;
 
-    EffectType(String Display, boolean Buff, String Lore) {
+    SomEffectType(String Display, boolean Buff, String Lore) {
         this.Display = Display;
         this.Buff = Buff;
         this.Lore = List.of(Lore.split("\n"));
     }
 
-    EffectType(String Display, EffectRank effectRank, boolean Buff, String Lore) {
+    SomEffectType(String Display, EffectRank effectRank, boolean Buff, String Lore) {
         this.Display = Display;
         this.effectRank = effectRank;
         this.Buff = Buff;
         this.Lore = List.of(Lore.split("\n"));
     }
 
-    EffectType(String Display, EffectRank effectRank, boolean Buff, boolean view, String Lore) {
+    SomEffectType(String Display, EffectRank effectRank, boolean Buff, boolean view, String Lore) {
         this.Display = Display;
         this.effectRank = effectRank;
         this.Buff = Buff;
@@ -71,7 +71,7 @@ public enum EffectType {
         this.Lore = List.of(Lore.split("\n"));
     }
 
-    EffectType(String Display, int MaxStack, boolean Buff, String Lore) {
+    SomEffectType(String Display, int MaxStack, boolean Buff, String Lore) {
         this.Display = Display;
         this.MaxStack = MaxStack;
         this.Buff = Buff;

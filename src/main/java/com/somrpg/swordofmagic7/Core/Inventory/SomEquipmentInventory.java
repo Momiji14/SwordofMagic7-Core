@@ -6,7 +6,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.Map;
 
-public interface SomEquipmentInventory extends SomInventoryInterface {
+public interface SomEquipmentInventory extends SomInventory {
 
     Map<SomEquipmentSlot, EquipmentItem> getEquipmentSlot();
 
