@@ -1,24 +1,20 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
 import com.somrpg.swordofmagic7.Core.Generic.Entity.BaseEntityContainer;
-import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatus;
 import com.somrpg.swordofmagic7.Core.Inventory.*;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
 import com.somrpg.swordofmagic7.Core.Map.MapDataInterface;
-import com.somrpg.swordofmagic7.Core.Menu.BaseMenu;
-import com.somrpg.swordofmagic7.Core.Menu.PlayerSettingMenu;
-import com.somrpg.swordofmagic7.Core.Menu.PlayerUserMenu;
+import com.somrpg.swordofmagic7.Core.Menu.SettingMenu;
+import com.somrpg.swordofmagic7.Core.Menu.UserMenu;
 import com.somrpg.swordofmagic7.Core.Menu.TeleportGateMenu;
 import com.somrpg.swordofmagic7.Core.Player.*;
 import com.somrpg.swordofmagic7.Core.Player.Container.*;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 
 import java.util.List;
 
-public interface PlayerData extends PlayerInput, PlayerEntity, PlayerSetting, PlayerBank, PlayerViewUpdate, PlayerOther {
+public interface PlayerData extends PlayerEntity, PlayerSetting, PlayerBank, PlayerViewUpdate, PlayerOther, PlayerInput, PlayerMenu {
 
     static PlayerData getData(Player player) {
         return PlayerDataContainer.getData(player);
@@ -50,6 +46,7 @@ public interface PlayerData extends PlayerInput, PlayerEntity, PlayerSetting, Pl
     PlayerSettingContainer getPlayerSettingContainer();
     PlayerStatisticsContainer getPlayerStatisticsContainer();
     PlayerBankContainer getPlayerBankContainer();
+    PlayerOtherContainer getPlayerOtherContainer();
 
     //Interface
     PlayerEntity getPlayerEntity();
@@ -84,12 +81,6 @@ public interface PlayerData extends PlayerInput, PlayerEntity, PlayerSetting, Pl
     default SomInventory getBaseViewInventory() {
         return getBaseInventory(getViewInventory());
     }
-
-    //Menu
-    PlayerUserMenu getUserMenu();
-    PlayerSettingMenu getSettingMenu();
-    TeleportGateMenu getTeleportGateMenu();
-
 
     //Map
     void setMapData(MapData mapData);

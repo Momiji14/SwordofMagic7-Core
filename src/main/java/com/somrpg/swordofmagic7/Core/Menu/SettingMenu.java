@@ -7,7 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class PlayerSettingMenu implements BaseMenu {
+public interface SettingMenu extends BaseMenu {
     ItemStack DamageLogIcon = ViewableItemStack.create("ダメージログ", Material.RED_DYE, "ダメージログ表示を切り替えます").viewItemStack();
     ItemStack ExpLogIcon = ViewableItemStack.create("経験値ログ", Material.EXPERIENCE_BOTTLE, "経験値ログ表示を切り替えます").viewItemStack();
     ItemStack DropLogIcon = ViewableItemStack.create("ドロップログ", Material.CHEST, "ドロップログ表示を切り替えます").viewItemStack();
@@ -16,29 +16,18 @@ public class PlayerSettingMenu implements BaseMenu {
     ItemStack StrafeModeIcon = ViewableItemStack.create("ストレイフモード", Material.FEATHER, "ストレイフの発動条件を切り替えます").viewItemStack();
     ItemStack ViewDigitIcon = ViewableItemStack.create("表示桁数", Material.COMMAND_BLOCK, "ステータスなどの数値の表示桁数を変更します").viewItemStack();
 
-    private final PlayerData playerData;
-
-    public PlayerSettingMenu(PlayerData playerData) {
-        this.playerData = playerData;
-    }
-
     @Override
-    public PlayerData getPlayerData() {
-        return playerData;
-    }
-
-    @Override
-    public String getGUIDisplay() {
+    default String getGUIDisplay() {
         return "§l設定メニュー";
     }
 
     @Override
-    public int getSize() {
+    default int getSize() {
         return 1;
     }
 
     @Override
-    public ItemStack[] getContent() {
+    default ItemStack[] getContent() {
         ItemStack[] content = new ItemStack[getSize()*9];
         content[0] = DamageLogIcon;
         content[1] = ExpLogIcon;
@@ -51,7 +40,7 @@ public class PlayerSettingMenu implements BaseMenu {
     }
 
     @Override
-    public void onClick(Inventory clickedInv, ItemStack clickedItem, int slot) {
+    default void onClick(Inventory clickedInv, ItemStack clickedItem, int slot) {
         if (clickedItem.equals(DamageLogIcon)) {
             damageLog();
         } else if (clickedItem.equals(ExpLogIcon)) {
@@ -69,7 +58,7 @@ public class PlayerSettingMenu implements BaseMenu {
         }
     }
 
-    public void damageLog() {
+    default void damageLog() {
         switch (getPlayerData().getPlayerSetting().getDamageLog()) {
             case Disable -> getPlayerData().setDamageLog(DamageLog.DamageOnly);
             case DamageOnly -> getPlayerData().setDamageLog(DamageLog.Detail);
@@ -78,7 +67,7 @@ public class PlayerSettingMenu implements BaseMenu {
         }
     }
 
-    public void expLog() {
+    default void expLog() {
         switch (getPlayerData().getExpLog()) {
             case Disable -> getPlayerData().setExpLog(ExpLog.Class);
             case Class -> getPlayerData().setExpLog(ExpLog.Player);
@@ -87,7 +76,7 @@ public class PlayerSettingMenu implements BaseMenu {
         }
     }
 
-    public void dropLog() {
+    default void dropLog() {
         switch (getPlayerData().getDropLog()) {
             case Disable -> getPlayerData().setDropLog(DropLog.Item);
             case Item -> getPlayerData().setDropLog(DropLog.Rune);
@@ -96,14 +85,14 @@ public class PlayerSettingMenu implements BaseMenu {
         }
     }
 
-    public void pvpMode() {
+    default void pvpMode() {
         switch (getPlayerData().getPlayerPvPMode()) {
             case Hostile -> getPlayerData().setPlayerPvPMode(PlayerPvPMode.Friendly);
             case Friendly -> getPlayerData().setPlayerPvPMode(PlayerPvPMode.Hostile);
         }
     }
 
-    public void castMode() {
+    default void castMode() {
         switch (getPlayerData().getPlayerCastMode()) {
             case Hold -> getPlayerData().setPlayerCastMode(PlayerCastMode.Renewed);
             case Renewed -> getPlayerData().setPlayerCastMode(PlayerCastMode.Legacy);
@@ -111,7 +100,7 @@ public class PlayerSettingMenu implements BaseMenu {
         }
     }
 
-    public void strafeMode() {
+    default void strafeMode() {
         switch (getPlayerData().getPlayerStrafeMode()) {
             case DoubleJump -> getPlayerData().setPlayerStrafMode(PlayerStrafeMode.AirDash);
             case AirDash -> getPlayerData().setPlayerStrafMode(PlayerStrafeMode.Both);
@@ -119,7 +108,7 @@ public class PlayerSettingMenu implements BaseMenu {
         }
     }
 
-    public void viewDigit() {
+    default void viewDigit() {
         int digit = getPlayerData().getViewDigit();
         if (digit < 10) {
             getPlayerData().setViewDigit(digit+1);

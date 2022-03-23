@@ -8,36 +8,25 @@ import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class PlayerUserMenu implements BaseMenu {
-    private static final ItemStack ItemInventoryIcon = ViewableItemStack.create(SomInventoryType.ItemInventory.getDisplay(),Material.CHEST, "インベントリ表示をアイテムに切り替えます").viewItemStack();
-    private static final ItemStack RuneInventoryIcon = ViewableItemStack.create(SomInventoryType.RuneInventory.getDisplay(),Material.ENDER_CHEST, "インベントリ表示をルーンに切り替えます").viewItemStack();
-    private static final ItemStack PetInventoryIcon = ViewableItemStack.create(SomInventoryType.PetInventory.getDisplay(),Material.NOTE_BLOCK, "インベントリ表示をペットケージに切り替えます").viewItemStack();
-    private static final ItemStack SkillSlotIcon = ViewableItemStack.create(SomInventoryType.SkillSlot.getDisplay(),Material.END_CRYSTAL, "インベントリ表示をスキルスロットに切り替えます").viewItemStack();
-    private static final ItemStack SettingMenuIcon = ViewableItemStack.create(SomInventoryType.SkillSlot.getDisplay(),Material.CRAFTING_TABLE, "設定メニューを開きます").viewItemStack();
-
-    private final PlayerData playerData;
-
-    public PlayerUserMenu(PlayerData playerData) {
-        this.playerData = playerData;
-    }
+public interface UserMenu extends BaseMenu {
+    ItemStack ItemInventoryIcon = ViewableItemStack.create(SomInventoryType.ItemInventory.getDisplay(),Material.CHEST, "インベントリ表示をアイテムに切り替えます").viewItemStack();
+    ItemStack RuneInventoryIcon = ViewableItemStack.create(SomInventoryType.RuneInventory.getDisplay(),Material.ENDER_CHEST, "インベントリ表示をルーンに切り替えます").viewItemStack();
+    ItemStack PetInventoryIcon = ViewableItemStack.create(SomInventoryType.PetInventory.getDisplay(),Material.NOTE_BLOCK, "インベントリ表示をペットケージに切り替えます").viewItemStack();
+    ItemStack SkillSlotIcon = ViewableItemStack.create(SomInventoryType.SkillSlot.getDisplay(),Material.END_CRYSTAL, "インベントリ表示をスキルスロットに切り替えます").viewItemStack();
+    ItemStack SettingMenuIcon = ViewableItemStack.create(SomInventoryType.SkillSlot.getDisplay(),Material.CRAFTING_TABLE, "設定メニューを開きます").viewItemStack();
 
     @Override
-    public PlayerData getPlayerData() {
-        return playerData;
-    }
-
-    @Override
-    public String getGUIDisplay() {
+    default String getGUIDisplay() {
         return "§lユーザーメニュー";
     }
 
     @Override
-    public int getSize() {
+    default int getSize() {
         return 3;
     }
 
     @Override
-    public ItemStack[] getContent() {
+    default ItemStack[] getContent() {
         ItemStack[] content = new ItemStack[getSize()*9];
         content[0] = ItemInventoryIcon;
         content[1] = RuneInventoryIcon;
@@ -52,7 +41,7 @@ public class PlayerUserMenu implements BaseMenu {
     }
 
     @Override
-    public void onClick(Inventory clickedInv, ItemStack clickedItem, int slot) {
+    default void onClick(Inventory clickedInv, ItemStack clickedItem, int slot) {
         if (clickedItem.equals(ItemInventoryIcon)) {
             getPlayerData().setViewInventory(SomInventoryType.ItemInventory);
         } else if (clickedItem.equals(RuneInventoryIcon)) {

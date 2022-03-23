@@ -13,26 +13,20 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Map;
 
-public class TeleportGateMenu implements BaseMenu {
-
-    private final PlayerData playerData;
-
-    public TeleportGateMenu(PlayerData playerData) {
-        this.playerData = playerData;
-    }
+public interface TeleportGateMenu extends BaseMenu {
 
     @Override
-    public String getGUIDisplay() {
+    default String getGUIDisplay() {
         return "§l転移門";
     }
 
     @Override
-    public int getSize() {
+    default int getSize() {
         return 5;
     }
 
     @Override
-    public ItemStack[] getContent() {
+    default ItemStack[] getContent() {
         ItemStack[] itemStack = new ItemStack[45];
         for (Map.Entry<Integer, String> gui : TeleportGateLoader.TeleportGateMenu.entrySet()) {
             if (gui.getKey() < 45) {
@@ -45,7 +39,7 @@ public class TeleportGateMenu implements BaseMenu {
     }
 
     @Override
-    public void onClick(Inventory clickedInv, ItemStack clickedItem, int slot) {
+    default void onClick(Inventory clickedInv, ItemStack clickedItem, int slot) {
         TeleportGate teleport = DataBase.getTeleportGate(TeleportGateLoader.TeleportGateMenu.get(slot));
         assert teleport != null;
         if (teleport.isDefaultActive() || getPlayerData().getActiveTeleportGate().contains(teleport.getId()) || getPlayer().hasPermission("som7.builder")) {
@@ -56,10 +50,5 @@ public class TeleportGateMenu implements BaseMenu {
         } else {
             getPlayerData().sendMessage("§e[転移門]§aが§b[有効化]§aされていません", SomSound.Nope);
         }
-    }
-
-    @Override
-    public PlayerData getPlayerData() {
-        return playerData;
     }
 }

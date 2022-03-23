@@ -1,12 +1,11 @@
 package com.somrpg.swordofmagic7.Core.Player.Container;
 
-import com.somrpg.swordofmagic7.Core.Generic.Entity.BaseEntity;
 import com.somrpg.swordofmagic7.Core.Generic.Entity.BaseEntityContainer;
 import com.somrpg.swordofmagic7.Core.Inventory.*;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
 import com.somrpg.swordofmagic7.Core.Map.MapDataInterface;
-import com.somrpg.swordofmagic7.Core.Menu.PlayerSettingMenu;
-import com.somrpg.swordofmagic7.Core.Menu.PlayerUserMenu;
+import com.somrpg.swordofmagic7.Core.Menu.SettingMenu;
+import com.somrpg.swordofmagic7.Core.Menu.UserMenu;
 import com.somrpg.swordofmagic7.Core.Menu.TeleportGateMenu;
 import com.somrpg.swordofmagic7.Core.Player.*;
 import com.somrpg.swordofmagic7.Core.Player.Interface.*;
@@ -40,6 +39,7 @@ public class PlayerDataContainer implements PlayerData {
     private final PlayerSettingContainer playerSetting;
     private final PlayerStatisticsContainer playerStatistics;
     private final PlayerBankContainer playerBank;
+    private final PlayerMenuContainer playerMenu;
     private final PlayerOtherContainer playerOther;
 
     private final PlayerCharacon playerCharacon;
@@ -50,19 +50,18 @@ public class PlayerDataContainer implements PlayerData {
     private final RuneInventory runeInventory;
     private final PetInventory petInventory;
 
-    private final PlayerUserMenu playerUserMenu;
-    private final PlayerSettingMenu playerSettingMenu;
-    private final TeleportGateMenu teleportGateMenu;
 
     private MapDataInterface mapData;
 
     PlayerDataContainer(Player player) {
         this.player = player;
         playerEntity = new PlayerEntityContainer(this);
-        playerOther = new PlayerOtherContainer(this);
         playerSetting = new PlayerSettingContainer(this);
         playerStatistics = new PlayerStatisticsContainer(this);
+        playerMenu = new PlayerMenuContainer(this);
         playerBank = new PlayerBankContainer(this);
+
+        playerOther = new PlayerOtherContainer(this);
 
         playerCharacon = new PlayerCharacon(this);
         playerDisplay = new PlayerDisplayContainer(this);
@@ -71,10 +70,6 @@ public class PlayerDataContainer implements PlayerData {
         itemInventory = new ItemInventoryContainer(this);
         runeInventory = new RuneInventoryContainer(this);
         petInventory = new PetInventoryContainer(this);
-
-        playerUserMenu = new PlayerUserMenu(this);
-        playerSettingMenu = new PlayerSettingMenu(this);
-        teleportGateMenu = new TeleportGateMenu(this);
     }
 
     //this
@@ -103,6 +98,9 @@ public class PlayerDataContainer implements PlayerData {
     }
     @Override public PlayerBankContainer getPlayerBankContainer() {
         return playerBank;
+    }
+    @Override public PlayerMenuContainer getPlayerMenuContainer() {
+        return playerMenu;
     }
     @Override public PlayerOtherContainer getPlayerOtherContainer() {
         return playerOther;
@@ -145,17 +143,6 @@ public class PlayerDataContainer implements PlayerData {
     }
     @Override public PetInventory getPetInventory() {
         return petInventory;
-    }
-
-    //Menu
-    @Override public PlayerUserMenu getUserMenu() {
-        return playerUserMenu;
-    }
-    @Override public PlayerSettingMenu getSettingMenu() {
-        return playerSettingMenu;
-    }
-    @Override public TeleportGateMenu getTeleportGateMenu() {
-        return teleportGateMenu;
     }
 
     //Map
