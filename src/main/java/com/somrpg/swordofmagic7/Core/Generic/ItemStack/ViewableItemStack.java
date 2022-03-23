@@ -105,4 +105,17 @@ public class ViewableItemStack {
         item.setAmount(amount);
         return item;
     }
+
+    public ItemStack viewItemStackNonDeco() {
+        return viewItemStackNonDeco(amount);
+    }
+
+    public ItemStack viewItemStackNonDeco(int amount) {
+        ItemStack item = viewItemStack(amount);
+        ItemMeta meta = item.getItemMeta();
+        meta.displayName(Component.text(getDisplay()));
+        meta.lore(DecoContent.loreToComponent(getLore()));
+        item.setItemMeta(meta);
+        return item;
+    }
 }

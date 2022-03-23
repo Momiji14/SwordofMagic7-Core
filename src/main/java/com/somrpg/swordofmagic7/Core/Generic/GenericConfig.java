@@ -22,9 +22,9 @@ public interface GenericConfig {
 
     ItemStack AirItem = new ItemStack(Material.AIR);
 
-    ItemStack GUIPartition = ViewableItemStack.create(" ", Material.IRON_BARS, 1).viewItemStack();
-    ItemStack AnvilUIFlame = ViewableItemStack.create(" ", Material.IRON_BARS, 3).viewItemStack();
-    ItemStack NoneFlame = ViewableItemStack.create(" ", Material.IRON_BARS, 4).viewItemStack();
+    ItemStack GUIPartition = ViewableItemStack.create(" ", Material.IRON_BARS, 1).viewItemStackNonDeco();
+    ItemStack AnvilUIFlame = ViewableItemStack.create(" ", Material.IRON_BARS, 3).viewItemStackNonDeco();
+    ItemStack NoneFlame = ViewableItemStack.create(" ", Material.IRON_BARS, 4).viewItemStackNonDeco();
 
     double AttributeValue_STR_ATK = 0.01;
     double AttributeValue_STR_DamageATK = 0.002;

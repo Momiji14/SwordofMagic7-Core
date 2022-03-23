@@ -11,17 +11,17 @@ import java.util.Map;
 
 public interface SomCraftDisplay extends BaseMenu {
 
-    ItemStack NextPage = ViewableItemStack.create("次ページ", Material.BOOK).viewItemStack();
-    ItemStack PreviousPage = ViewableItemStack.create("前ページ", Material.BOOK).viewItemStack();
+    ItemStack NextPage = ViewableItemStack.create("§e§l次ページ", Material.BOOK).viewItemStackNonDeco();
+    ItemStack PreviousPage = ViewableItemStack.create("§e§l前ページ", Material.BOOK).viewItemStackNonDeco();
 
     static ItemStack CraftGUIAmountChangeIcon(int amount) {
         String display = String.valueOf(amount);
         if (amount > 0 ) display = "+" + display;
-        return ViewableItemStack.create(display, Material.IRON_BARS, 2).viewItemStack();
+        return ViewableItemStack.create("§e§l" + display, Material.IRON_BARS, 2).viewItemStackNonDeco();
     }
 
     static ItemStack CraftGUIAmountIcon(int amount) {
-        return ViewableItemStack.create("§ex" + amount, Material.GOLD_NUGGET).viewItemStack();
+        return ViewableItemStack.create("§e§lx" + amount, Material.GOLD_NUGGET).viewItemStackNonDeco();
     }
 
     void open(CraftData craftData);
