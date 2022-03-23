@@ -40,6 +40,12 @@ public interface BaseMenu {
         return inv;
     }
 
+    default void review() {
+        if (getPlayer().getOpenInventory().title().equals(getGUIDisplayComponent())) {
+            getPlayer().getOpenInventory().getTopInventory().setContents(getContent());
+        }
+    }
+
     default void onClick(InventoryClickEvent event) {
         if (event.getView().title().equals(getGUIDisplayComponent())) {
             onClick(event.getClickedInventory(), event.getCurrentItem(), event.getClick(), event.getAction(), event.getSlot());

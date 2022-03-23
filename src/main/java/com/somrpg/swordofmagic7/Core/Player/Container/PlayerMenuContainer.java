@@ -12,6 +12,8 @@ public class PlayerMenuContainer implements PlayerMenu {
     private final AttributeMenu attributeMenu;
     private final TeleportGateMenu teleportGateMenu;
 
+    private final
+
     PlayerMenuContainer(PlayerData playerData) {
         this.playerData = playerData;
 

@@ -6,6 +6,8 @@ import com.somrpg.swordofmagic7.Core.Map.TeleportGate.TeleportGate;
 import com.somrpg.swordofmagic7.Core.Map.TeleportGate.TeleportGateData;
 import com.somrpg.swordofmagic7.Core.Map.WarpGate.WarpGate;
 import com.somrpg.swordofmagic7.Core.Map.WarpGate.WarpGateData;
+import com.somrpg.swordofmagic7.Core.Production.*;
+import com.somrpg.swordofmagic7.Core.Production.Base.SomRecipe;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import org.bukkit.Material;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -21,6 +23,8 @@ public interface DataBase {
 
     SomItemStack ErrorItemStack = new SomItemStack("Error SomItemStack", Material.BARRIER);
     Map<String, SomItemStack> SomItemDataList = new HashMap<>();
+    Map<String, SomRecipe> SomRecipeList = new HashMap<>();
+    Map<String, ShopData> ShopDataList = new HashMap<>();
     Map<String, MapData> MapDataList = new HashMap<>();
     Map<String, WarpGateData> WarpGateList = new HashMap<>();
     Map<String, TeleportGateData> TeleportGateList = new HashMap<>();
@@ -86,6 +90,14 @@ public interface DataBase {
     static TeleportGate getTeleportGate(String key) {
         if (TeleportGateList.containsKey(key)) {
             return TeleportGateList.get(key);
+        }
+        return null;
+    }
+
+    @Nullable
+    static ShopData getShopData(String key) {
+        if (ShopDataList.containsKey(key)) {
+            return ShopDataList.get(key);
         }
         return null;
     }
