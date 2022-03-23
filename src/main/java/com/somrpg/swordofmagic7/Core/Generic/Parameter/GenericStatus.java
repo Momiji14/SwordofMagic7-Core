@@ -2,6 +2,21 @@ package com.somrpg.swordofmagic7.Core.Generic.Parameter;
 
 public interface GenericStatus {
 
+    GenericStatusContainer getGenericStatusContainer();
+
+    default void setStatusParameter(double maxHealth, double healthRegen, double maxMana, double manaRegen, double atk, double def, double acc, double eva, double criticalRate, double criticalResist) {
+        setMaxHealth(maxHealth);
+        setHealthRegen(healthRegen);
+        setMaxMana(maxMana);
+        setManaRegen(manaRegen);
+        setATK(atk);
+        setDEF(def);
+        setACC(acc);
+        setEVA(eva);
+        setCriticalRate(criticalRate);
+        setCriticalResist(criticalResist);
+    }
+
     default void addStatusParameter(GenericStatus param) {
         setMaxHealth(getMaxHealth() + param.getMaxHealth());
         setHealthRegen(getManaRegen() + param.getHealthRegen());
@@ -41,24 +56,64 @@ public interface GenericStatus {
         setCriticalResist(param.getCriticalResist());
     }
 
-    void setMaxHealth(double maxHealth);
-    double getMaxHealth();
-    void setHealthRegen(double healthRegen);
-    double getHealthRegen();
-    void setMaxMana(double maxMana);
-    double getMaxMana();
-    void setManaRegen(double manaRegen);
-    double getManaRegen();
-    void setATK(double ATK);
-    double getATK();
-    void setDEF(double DEF);
-    double getDEF();
-    void setACC(double ACC);
-    double getACC();
-    void setEVA(double EVA);
-    double getEVA();
-    void setCriticalRate(double criticalRate);
-    double getCriticalRate();
-    void setCriticalResist(double criticalResist);
-    double getCriticalResist();
+    default void setMaxHealth(double maxHealth) {
+        getGenericStatusContainer().setMaxHealth(maxHealth);
+    }
+    default double getMaxHealth() {
+        return getGenericStatusContainer().getMaxHealth();
+    }
+    default void setHealthRegen(double healthRegen) {
+        getGenericStatusContainer().setHealthRegen(healthRegen);
+    }
+    default double getHealthRegen() {
+        return getGenericStatusContainer().getHealthRegen();
+    }
+    default void setMaxMana(double maxMana) {
+        getGenericStatusContainer().setMaxMana(maxMana);
+    }
+    default double getMaxMana() {
+        return getGenericStatusContainer().getMaxMana();
+    }
+    default void setManaRegen(double manaRegen) {
+        getGenericStatusContainer().setManaRegen(manaRegen);
+    }
+    default double getManaRegen() {
+        return getGenericStatusContainer().getManaRegen();
+    }
+    default void setATK(double ATK) {
+        getGenericStatusContainer().setATK(ATK);
+    }
+    default double getATK() {
+        return getGenericStatusContainer().getATK();
+    }
+    default void setDEF(double DEF) {
+        getGenericStatusContainer().setDEF(DEF);
+    }
+    default double getDEF() {
+        return getGenericStatusContainer().getDEF();
+    }
+    default void setACC(double ACC) {
+        getGenericStatusContainer().setACC(ACC);
+    }
+    default double getACC() {
+        return getGenericStatusContainer().getACC();
+    }
+    default void setEVA(double EVA) {
+        getGenericStatusContainer().setEVA(EVA);
+    }
+    default double getEVA() {
+        return getGenericStatusContainer().getEVA();
+    }
+    default void setCriticalRate(double criticalRate) {
+        getGenericStatusContainer().setCriticalRate(criticalRate);
+    }
+    default double getCriticalRate() {
+        return getGenericStatusContainer().getCriticalRate();
+    }
+    default void setCriticalResist(double criticalResist) {
+        getGenericStatusContainer().setCriticalResist(criticalResist);
+    }
+    default double getCriticalResist() {
+        return getGenericStatusContainer().getCriticalResist();
+    }
 }

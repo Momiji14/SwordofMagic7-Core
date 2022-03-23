@@ -20,6 +20,13 @@ public class GenericStatusContainer extends SomLevel implements GenericStatus {
     public GenericStatusContainer(@NonNull FileConfiguration data) {
         load(data);
     }
+
+    @Override
+    public GenericStatusContainer getGenericStatusContainer() {
+        return this;
+    }
+
+    @Override
     public void setStatusParameter(double maxHealth, double healthRegen, double maxMana, double manaRegen, double atk, double def, double acc, double eva, double criticalRate, double criticalResist) {
         MaxHealth = maxHealth;
         HealthRegen = healthRegen;

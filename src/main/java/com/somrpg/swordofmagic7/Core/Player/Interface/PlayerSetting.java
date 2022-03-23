@@ -77,6 +77,10 @@ public interface PlayerSetting {
         return getPlayerSetting().getViewDigit();
     }
 
-    void save(FileConfiguration data);
-    void load(FileConfiguration data);
+    default void saveSetting(FileConfiguration data) {
+        getPlayerSetting().saveSetting(data);
+    }
+    default void loadSetting(FileConfiguration data) {
+        getPlayerSetting().loadSetting(data);
+    }
 }

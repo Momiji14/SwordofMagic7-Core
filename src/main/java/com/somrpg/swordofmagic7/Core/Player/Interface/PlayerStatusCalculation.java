@@ -23,7 +23,7 @@ public interface PlayerStatusCalculation {
         double EVA = 2 + multiply*0.2;
         double CriticalRate = 10 + multiply;
         double CriticalResist = 10 + multiply;
-        playerEntity.setStatusParameter(MaxHealth, HealthRegen, MaxMana, ManaRegen, ATK, DEF, ACC, EVA, CriticalRate, CriticalResist);
+        getPlayerData().setStatusParameter(MaxHealth, HealthRegen, MaxMana, ManaRegen, ATK, DEF, ACC, EVA, CriticalRate, CriticalResist);
         for (EquipmentItem equipmentItem : getPlayerData().getItemInventory().getEquipmentSlot().values()) {
             playerEntity.addStatusParameter(equipmentItem.getStatusParameter());
         }
