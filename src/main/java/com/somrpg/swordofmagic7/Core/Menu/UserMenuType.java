@@ -14,4 +14,12 @@ public enum UserMenuType {
     public String getDisplay() {
         return display;
     }
+
+    public boolean isCategorize() {
+        return this == Categorize;
+    }
+
+    public boolean isListDisplay() {
+        return this == ListDisplay;
+    }
 }

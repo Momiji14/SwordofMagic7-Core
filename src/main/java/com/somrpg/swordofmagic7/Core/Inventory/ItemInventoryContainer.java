@@ -22,24 +22,20 @@ public class ItemInventoryContainer extends BaseInventory implements ItemInvento
     }
 
     @Override
-    public void addContent(@NonNull SomItemStack itemData) {
-        if (itemData instanceof BaseItem item) {
-            if (getList().size() < GenericConfig.ItemInventoryMaxSlot) {
-                if (hasContent(item.getId())) {
-                    ItemCategory category = item.getItemCategory();
-                    if (category.isEquipment() || category.isTool()) {
-                        getList().add(item);
-                    } else {
-                        getContent(item.getId()).addAmount(item.getAmount());
-                    }
-                } else {
-                    getList().add(item);
+    public void addContent(@NonNull BaseItem itemData) {
+        if (getList().size() < GenericConfig.ItemInventoryMaxSlot) {
+            for (SomItemStack itemStack : getList()) {
+                if (SomItemStack.equal(itemStack, itemData)) {
+                    itemStack.addAmount(itemData.getAmount());
+                    return;
                 }
-            } else {
-                getPlayerData().sendMessage("§e" + getInventoryType().getDisplay() + "§aが一杯です", SomSound.Nope);
             }
+            getList().add(itemData);
+        } else {
+            getPlayerData().sendMessage("§e" + getInventoryType().getDisplay() + "§aが一杯です", SomSound.Nope);
         }
     }
+
 
     @Override
     public Map<SomEquipmentSlot, EquipmentItem> getEquipmentSlot() {

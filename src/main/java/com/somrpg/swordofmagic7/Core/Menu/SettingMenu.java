@@ -131,5 +131,6 @@ public interface SettingMenu extends BaseMenu {
             case Categorize -> getPlayerData().setUserMenuType(UserMenuType.ListDisplay);
             case ListDisplay -> getPlayerData().setUserMenuType(UserMenuType.Categorize);
         }
+        getPlayerData().getUserMenu().openGUI();
     }
 }

@@ -1,7 +1,11 @@
 package com.somrpg.swordofmagic7.Core.Inventory;
 
+import com.somrpg.swordofmagic7.Core.Equipment.EquipmentItem;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
+import com.somrpg.swordofmagic7.Core.Item.BaseItem;
+import com.somrpg.swordofmagic7.Core.Item.RuneItem;
+import com.somrpg.swordofmagic7.Core.Pet.PetItem;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -23,18 +27,23 @@ public interface SomInventory {
     SomInventoryType getInventoryType();
     PlayerInventory getInventory();
 
-    default void addContent(@NonNull SomItemStack content) {
-        getList().add(content);
-    }
-
     default void removeContent(@NonNull SomItemStack content) {
-        getList().remove(content);
+        for (SomItemStack itemStack : getList()) {
+            if (SomItemStack.equal(itemStack, content)) {
+                itemStack.setAmount(-content.getAmount());
+            }
+        }
+        getList().removeIf(somItemStack -> somItemStack.getAmount() <= 0);
     }
 
-    default boolean hasContent(@NonNull String Id) {
+    default boolean hasContent(@NonNull SomItemStack content) {
+        return hasContent(content, content.getAmount());
+    }
+
+    default boolean hasContent(@NonNull SomItemStack content, int amount) {
         for (SomItemStack itemStack : getList()) {
-            if (itemStack.getId().equals(Id)) {
-                return true;
+            if (SomItemStack.equal(itemStack, content)) {
+                return itemStack.getAmount() >= amount;
             }
         }
         return false;

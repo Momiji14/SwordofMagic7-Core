@@ -61,7 +61,7 @@ public interface UserMenu extends BaseMenu {
                 content[7] = AttributeMenuIcon;
                 content[8] = SettingMenuIcon;
 
-                int i = 17;
+                int i = 18;
                 for (ItemStack itemStack : getPlayerData().getSettingMenu().getContent()) {
                     content[i] = itemStack;
                     i++;
@@ -89,6 +89,10 @@ public interface UserMenu extends BaseMenu {
             getPlayerData().getAttributeMenu().openGUI();
         } else if (clickedItem.equals(SettingMenuIcon)) {
             getPlayerData().getSettingMenu().openGUI();
+        }
+
+        if (getPlayerData().getUserMenuType().isListDisplay()) {
+            getPlayerData().getSettingMenu().onClick(clickedInv, clickedItem, clickType, action, slot);
         }
     }
 }

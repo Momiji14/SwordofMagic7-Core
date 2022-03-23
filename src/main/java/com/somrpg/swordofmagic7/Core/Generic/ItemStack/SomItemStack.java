@@ -13,6 +13,14 @@ import java.util.*;
 
 public class SomItemStack extends ViewableItemStack {
 
+    public static boolean equal(SomItemStack itemStack, SomItemStack itemStack2) {
+        if (itemStack instanceof EquipmentItem item && itemStack2 instanceof EquipmentItem item2) {
+            return item.getPlus() == item2.getPlus();
+        } else if (itemStack instanceof RuneItem item && itemStack2 instanceof RuneItem item2) {
+            return item.getLevel() == item2.getLevel() && item.getQuality() == item2.getQuality();
+        } else return itemStack == itemStack2;
+    }
+
     private final String Id;
     private String uuid = String.valueOf(UUID.randomUUID());
     private ItemOwner itemOwner = new ItemOwner();

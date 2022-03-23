@@ -20,7 +20,7 @@ public class CommandGetRune implements PlayerCommandExecutor {
             if (item instanceof RuneItem runeItem) {
                 runeItem.setLevel(level);
                 runeItem.setQuality(quality);
-                playerData.getItemInventory().addContent(runeItem);
+                playerData.getRuneInventory().addContent(runeItem);
             } else {
                 playerData.sendMessage("§c存在しないルーンです", SomSound.Nope);
             }
