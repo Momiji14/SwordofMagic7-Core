@@ -8,7 +8,7 @@ import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatusContainer;
 import java.util.Collection;
 import java.util.HashSet;
 
-public class BaseEntityContainer implements BaseEntity, SomAttribute {
+public class BaseEntityContainer implements BaseEntity {
     private double Health = 0;
     private double Mana = 0;
     private final Collection<EffectData> EffectSet = new HashSet<>();

@@ -82,7 +82,7 @@ public interface PlayerDisplay {
     static void setSideBar(Collection<Player> players, String key, List<String> data) {
         for (Player player : players) {
             if (player.isOnline()) {
-                PlayerData.getData(player).getPlayerViewBar().setSideBar(key, data);
+                PlayerData.getData(player).getPlayerDisplay().setSideBar(key, data);
             }
         }
     }
@@ -90,7 +90,7 @@ public interface PlayerDisplay {
     static void resetSideBar(Collection<Player> players, String key) {
         for (Player player : players) {
             if (player.isOnline()) {
-                PlayerData.getData(player).getPlayerViewBar().resetSideBar(key);
+                PlayerData.getData(player).getPlayerDisplay().resetSideBar(key);
             }
         }
     }

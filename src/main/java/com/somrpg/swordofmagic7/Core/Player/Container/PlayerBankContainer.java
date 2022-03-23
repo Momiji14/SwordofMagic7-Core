@@ -14,6 +14,11 @@ public class PlayerBankContainer implements PlayerBank {
     }
 
     @Override
+    public PlayerBankContainer getPlayerBankContainer() {
+        return this;
+    }
+
+    @Override
     public void setMel(int mel) {
         Mel = mel;
     }

@@ -21,7 +21,6 @@ import java.util.*;
 import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.DataBasePath;
 
 public class PlayerDataContainer implements PlayerData {
-
     private static final HashMap<String, PlayerData> playerDataList = new HashMap<>();
     public static PlayerData getData(Player player) {
         String uuid = String.valueOf(player.getUniqueId());
@@ -38,10 +37,10 @@ public class PlayerDataContainer implements PlayerData {
 
     private File playerFile;
     private final PlayerEntityContainer playerEntity;
-    private final PlayerOtherContainer playerOther;
-    private final PlayerStatisticsContainer playerStatistics;
     private final PlayerSettingContainer playerSetting;
+    private final PlayerStatisticsContainer playerStatistics;
     private final PlayerBankContainer playerBank;
+    private final PlayerOtherContainer playerOther;
 
     private final PlayerCharacon playerCharacon;
     private final PlayerDisplay playerDisplay;
@@ -69,7 +68,6 @@ public class PlayerDataContainer implements PlayerData {
         playerDisplay = new PlayerDisplayContainer(this);
         playerInput = new PlayerInputContainer(this);
 
-
         itemInventory = new ItemInventoryContainer(this);
         runeInventory = new RuneInventoryContainer(this);
         petInventory = new PetInventoryContainer(this);
@@ -79,6 +77,7 @@ public class PlayerDataContainer implements PlayerData {
         teleportGateMenu = new TeleportGateMenu(this);
     }
 
+    //this
     @Override public Player getPlayer() {
         return player;
     }
@@ -89,89 +88,81 @@ public class PlayerDataContainer implements PlayerData {
         return this;
     }
 
-    @Override public PlayerEntityContainer getPlayerEntityContainer() {
-        return playerEntity;
-    }
+    //Container
     @Override public BaseEntityContainer getBaseEntityContainer() {
         return playerEntity;
     }
-    @Override public PlayerOtherContainer getPlayerOtherContainer() {
-        return playerOther;
-    }
-    @Override public PlayerBankContainer getPlayerBankContainer() {
-        return playerBank;
+    @Override public PlayerEntityContainer getPlayerEntityContainer() {
+        return playerEntity;
     }
     @Override public PlayerSettingContainer getPlayerSettingContainer() {
         return playerSetting;
     }
-
-    @Override public SomInventory getBaseViewInventory() {
-        return getBaseInventory(getViewInventory());
-    }
-    @Override public SomInventoryType getViewInventory() {
-        return getPlayerSetting().getViewInventory();
-    }
-
-    @Override public PlayerCharacon getPlayerCharacon() {
-        return playerCharacon;
-    }
-    @Override public PlayerDisplay getPlayerViewBar() {
-        return playerDisplay;
-    }
-
-
-    @Override
-    public PlayerInput getPlayerInput() {
-        return playerInput;
-    }
-
-    @Override
-    public PlayerStatistics getPlayerStatistics() {
+    @Override public PlayerStatisticsContainer getPlayerStatisticsContainer() {
         return playerStatistics;
     }
-
-    @Override
-    public PlayerUserMenu getUserMenu() {
-        return playerUserMenu;
+    @Override public PlayerBankContainer getPlayerBankContainer() {
+        return playerBank;
     }
-
-    @Override
-    public PlayerSettingMenu getSettingMenu() {
-        return playerSettingMenu;
-    }
-
-    @Override
-    public ItemInventory getItemInventory() {
-        return itemInventoryContainer;
-    }
-
-    @Override
-    public RuneInventory getRuneInventory() {
-        return runeInventoryContainer;
-    }
-
-    @Override
-    public PetInventory getPetInventory() {
-        return petInventoryContainer;
-    }
-
-    @Override
-    public PlayerOther getPlayerOther() {
+    @Override public PlayerOtherContainer getPlayerOtherContainer() {
         return playerOther;
     }
 
-    @Override
-    public TeleportGateMenu getTeleportGateMenu() {
+    //Interface
+    @Override public PlayerEntity getPlayerEntity() {
+        return playerEntity;
+    }
+    @Override public PlayerSetting getPlayerSetting() {
+        return playerSetting;
+    }
+    @Override public PlayerStatistics getPlayerStatistics() {
+        return playerStatistics;
+    }
+    @Override public PlayerBank getPlayerBank() {
+        return playerBank;
+    }
+    @Override public PlayerOther getPlayerOther() {
+        return playerOther;
+    }
+
+    //Other
+    @Override public PlayerCharacon getPlayerCharacon() {
+        return playerCharacon;
+    }
+    @Override public PlayerDisplay getPlayerDisplay() {
+        return playerDisplay;
+    }
+    @Override public PlayerInput getPlayerInput() {
+        return playerInput;
+    }
+
+    //Inventory
+    @Override public ItemInventory getItemInventory() {
+        return itemInventory;
+    }
+    @Override public RuneInventory getRuneInventory() {
+        return runeInventory;
+    }
+    @Override public PetInventory getPetInventory() {
+        return petInventory;
+    }
+
+    //Menu
+    @Override public PlayerUserMenu getUserMenu() {
+        return playerUserMenu;
+    }
+    @Override public PlayerSettingMenu getSettingMenu() {
+        return playerSettingMenu;
+    }
+    @Override public TeleportGateMenu getTeleportGateMenu() {
         return teleportGateMenu;
     }
 
-    @Override
-    public void setMapData(MapData mapData) {
+    //Map
+    @Override public void setMapData(MapData mapData) {
         this.mapData = mapData;
     }
-
-    @Override
-    public MapDataInterface getMapData() {
+    @Override public MapDataInterface getMapData() {
         return mapData;
     }
 
@@ -195,9 +186,7 @@ public class PlayerDataContainer implements PlayerData {
             data.set("PetInventoryContainer", getPetInventory().getContentsToString());
 
             //その他
-            data.set("ActiveTeleportGate", getActiveTeleportGate());
-
-            getPlayerSetting().save(data);
+            getPlayerSetting().saveSetting(data);
 
             data.save(playerFile);
             sendMessage("§eプレイヤーデータ§aの§b保存§aが§b完了§aしました", SomSound.Tick);
@@ -218,19 +207,20 @@ public class PlayerDataContainer implements PlayerData {
             }
             FileConfiguration data = YamlConfiguration.loadConfiguration(playerFile);
 
+            //基本データ
             setMel(data.getInt("Mel", 10000));
             setLevel(data.getInt("Level", 1));
             setExp(data.getInt("Exp", 0));
             getPlayerEntity().setHealthUnsafe(data.getDouble("Health", Double.MAX_VALUE));
             getPlayerEntity().setManaUnsafe(data.getDouble("Mana", Double.MAX_VALUE));
 
+            //各インベントリ
             getItemInventory().fromContentsFromString(data.getStringList("ItemInventoryContainer"));
             getRuneInventory().fromContentsFromString(data.getStringList("RuneInventoryContainer"));
             getPetInventory().fromContentsFromString(data.getStringList("PetInventoryContainer"));
 
-            setActiveTeleportGate(new HashSet<>(data.getStringList("ActiveTeleportGate")));
-
-            getPlayerSetting().load(data);
+            //その他
+            getPlayerSetting().loadSetting(data);
 
             getPlayerEntity().statusUpdate();
             viewUpdate();

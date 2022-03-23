@@ -22,37 +22,4 @@ public class PlayerInputContainer implements PlayerInput {
         return playerData;
     }
 
-    @Override
-    public void onClickGUI(InventoryClickEvent event) {
-        InventoryView view = event.getView();
-        Inventory clickedInv = event.getClickedInventory();
-        int slot = event.getSlot();
-        ItemStack clickedItem = event.getCurrentItem();
-        view.setCursor(null);
-        if (clickedItem != null) {
-            if (view.getTopInventory() == clickedInv) {
-                getPlayerData().getUserMenu().onClick(event);
-                getPlayerData().getSettingMenu().onClick(event);
-                getPlayerData().getTeleportGateMenu().onClick(event);
-            } else if (view.getBottomInventory() == clickedInv) {
-                switch (slot) {
-                    case 26 -> getPlayerData().getUserMenu().openGUI();
-                    case 17 -> getPlayerData().getBaseViewInventory().addScroll(1);
-                    case 35 -> getPlayerData().getBaseViewInventory().addScroll(-1);
-                    default -> {
-                        if (getPlayerData().getViewInventory().isItemInventory()) {
-
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    @Override
-    public void onCloseGUI(InventoryCloseEvent event) {
-        SomSound.Close.play(getPlayerData().getPlayer());
-        getPlayerData().getPlayerEntity().statusUpdate();
-        getPlayerData().viewUpdate();
-    }
 }

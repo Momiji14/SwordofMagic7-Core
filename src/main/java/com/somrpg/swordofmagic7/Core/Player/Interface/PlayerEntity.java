@@ -13,7 +13,6 @@ public interface PlayerEntity extends BaseEntity, PlayerStatusCalculation {
     default void setLevel(int level) {
         getPlayerEntityContainer().setLevel(level);
     }
-
     default int getLevel() {
         return getPlayerEntityContainer().getLevel();
     }
@@ -21,7 +20,6 @@ public interface PlayerEntity extends BaseEntity, PlayerStatusCalculation {
     default void setExp(int exp) {
         getPlayerEntityContainer().setExp(exp);
     }
-
     default int getExp() {
         return getPlayerEntityContainer().getExp();
     }

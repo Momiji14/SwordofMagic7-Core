@@ -2,7 +2,9 @@ package com.somrpg.swordofmagic7.Core.Generic.Entity;
 
 import com.somrpg.swordofmagic7.Core.Effect.EffectData;
 import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatus;
+import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatusContainer;
 import com.somrpg.swordofmagic7.Core.Generic.Parameter.SomAttribute;
+import com.somrpg.swordofmagic7.Core.Generic.Parameter.SomAttributeContainer;
 import com.somrpg.swordofmagic7.Core.SomCore;
 
 import java.util.Collection;
@@ -10,6 +12,13 @@ import java.util.Collection;
 public interface BaseEntity extends GenericStatus, SomAttribute {
 
     BaseEntityContainer getBaseEntityContainer();
+    default GenericStatusContainer getGenericStatusContainer() {
+        return getBaseEntityContainer().getGenericStatusContainer();
+    }
+
+    default SomAttributeContainer getAttributeContainer() {
+        return getBaseEntityContainer().getAttributeContainer();
+    }
 
     default void setHealth(double health) {
         getBaseEntityContainer().setHealth(health);
