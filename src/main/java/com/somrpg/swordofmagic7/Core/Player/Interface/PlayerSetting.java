@@ -1,6 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
 import com.somrpg.swordofmagic7.Core.Inventory.SomInventoryType;
+import com.somrpg.swordofmagic7.Core.Menu.UserMenuType;
 import com.somrpg.swordofmagic7.Core.Player.Enum.*;
 import com.somrpg.swordofmagic7.Core.Player.Container.PlayerSettingContainer;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -10,7 +11,7 @@ public interface PlayerSetting {
     PlayerData getPlayerData();
 
     default PlayerSetting getPlayerSetting() {
-        return getPlayerData().getPlayerSetting();
+        return getPlayerData().getPlayerSettingContainer();
     }
 
     default void setPlayerStrafMode(PlayerStrafeMode playerStrafMode) {
@@ -72,9 +73,15 @@ public interface PlayerSetting {
     default void setViewDigit(int digit) {
         getPlayerSetting().setViewDigit(digit);
     }
-
     default int getViewDigit() {
         return getPlayerSetting().getViewDigit();
+    }
+
+    default void setUserMenuType(UserMenuType type) {
+        getPlayerSetting().setUserMenuType(type);
+    }
+    default UserMenuType getUserMenuType() {
+        return getPlayerSetting().getUserMenuType();
     }
 
     default void saveSetting(FileConfiguration data) {

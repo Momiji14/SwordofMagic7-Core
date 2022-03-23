@@ -33,11 +33,4 @@ public interface PlayerOther {
     default int getAttributePoint() {
         return getPlayerOtherContainer().getAttributePoint();
     }
-
-    default void setUserMenuType(UserMenuType type) {
-        getPlayerOtherContainer().setUserMenuType(type);
-    }
-    default UserMenuType getUserMenuType() {
-        return getPlayerOtherContainer().getUserMenuType();
-    }
 }

@@ -14,7 +14,6 @@ public class PlayerOtherContainer implements PlayerOther {
 
     private final PlayerData playerData;
     private Set<String> activeTeleportGate = new HashSet<>();
-    private UserMenuType userMenuType = UserMenuType.Categorize;
     private int AttributePoint = 0;
 
     PlayerOtherContainer(PlayerData playerData) {
@@ -51,12 +50,5 @@ public class PlayerOtherContainer implements PlayerOther {
     }
     @Override public int getAttributePoint() {
         return AttributePoint;
-    }
-
-    @Override public void setUserMenuType(UserMenuType userMenuType) {
-        this.userMenuType = userMenuType;
-    }
-    @Override public UserMenuType getUserMenuType() {
-        return userMenuType;
     }
 }

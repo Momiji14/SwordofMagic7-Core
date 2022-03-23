@@ -28,22 +28,45 @@ public interface UserMenu extends BaseMenu {
 
     @Override
     default int getSize() {
-        return 3;
+        int size = 0;
+        switch (getPlayerData().getUserMenuType()) {
+            case Categorize -> size = 3;
+            case ListDisplay -> size = 6;
+        }
+        return size;
     }
 
     @Override
     default ItemStack[] getContent() {
         ItemStack[] content = new ItemStack[getSize()*9];
-        content[0] = ItemInventoryIcon;
-        content[1] = RuneInventoryIcon;
-        content[2] = PetInventoryIcon;
-        content[3] = SkillSlotIcon;
+        switch (getPlayerData().getUserMenuType()) {
+            case Categorize -> {
+                content[0] = ItemInventoryIcon;
+                content[1] = RuneInventoryIcon;
+                content[2] = PetInventoryIcon;
+                content[3] = SkillSlotIcon;
 
-        content[18] = AttributeMenuIcon;
-        content[26] = SettingMenuIcon;
+                content[18] = AttributeMenuIcon;
+                content[26] = SettingMenuIcon;
 
-        for (int i = 9; i < 18; i++) {
-            content[i] = GenericConfig.GUIPartition;
+                for (int i = 9; i < 18; i++) {
+                    content[i] = GenericConfig.GUIPartition;
+                }
+            }
+            case ListDisplay -> {
+                content[0] = ItemInventoryIcon;
+                content[1] = RuneInventoryIcon;
+                content[2] = PetInventoryIcon;
+                content[3] = SkillSlotIcon;
+                content[7] = AttributeMenuIcon;
+                content[8] = SettingMenuIcon;
+
+                int i = 17;
+                for (ItemStack itemStack : getPlayerData().getSettingMenu().getContent()) {
+                    content[i] = itemStack;
+                    i++;
+                }
+            }
         }
         return content;
     }

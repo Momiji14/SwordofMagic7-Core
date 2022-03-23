@@ -72,7 +72,7 @@ public class SomItemStack extends ViewableItemStack {
                 i++;
             }
         }
-        data.append(",Owner:").append(getItemOwner()).append(",UUID:").append(getUUID());
+        data.append(",Owner:").append(getItemOwner().getOwner()).append(",UUID:").append(getUUID());
         return data.toString();
     }
 

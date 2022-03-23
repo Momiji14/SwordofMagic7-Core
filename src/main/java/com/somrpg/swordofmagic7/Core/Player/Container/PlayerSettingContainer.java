@@ -1,6 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Player.Container;
 
 import com.somrpg.swordofmagic7.Core.Inventory.SomInventoryType;
+import com.somrpg.swordofmagic7.Core.Menu.UserMenuType;
 import com.somrpg.swordofmagic7.Core.Player.Enum.*;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerSetting;
@@ -19,6 +20,7 @@ public class PlayerSettingContainer implements PlayerSetting {
     private boolean playMode = true;
     private PlayerCastMode castMode = PlayerCastMode.Hold;
     private int viewDigit = 0;
+    private UserMenuType userMenuType = UserMenuType.Categorize;
 
     private DamageLog damageLog = DamageLog.Disable;
     private ExpLog expLog = ExpLog.Disable;
@@ -106,30 +108,32 @@ public class PlayerSettingContainer implements PlayerSetting {
         return dropLog;
     }
 
-    @Override
-    public void setViewInventory(SomInventoryType type) {
+    @Override public void setViewInventory(SomInventoryType type) {
         setViewInventory(type, true);
     }
-
     public void setViewInventory(SomInventoryType type, boolean log) {
         viewInventory = type;
         getPlayerData().viewUpdate();
         if (log) getPlayerData().sendMessage("§bインベントリ表示§aを§e[" + viewInventory.getDisplay() + "]§aに変更しました", SomSound.Tick);
     }
-
-    @Override
-    public SomInventoryType getViewInventory() {
+    @Override public SomInventoryType getViewInventory() {
         return viewInventory;
     }
 
-    @Override
-    public void setViewDigit(int digit) {
+    @Override public void setViewDigit(int digit) {
         viewDigit = digit;
+        getPlayerData().sendMessage("§e表示桁数§aを§e[" + viewDigit + "]§aに変更しました", SomSound.Tick);
+    }
+    @Override public int getViewDigit() {
+        return viewDigit;
     }
 
-    @Override
-    public int getViewDigit() {
-        return viewDigit;
+    @Override public void setUserMenuType(UserMenuType userMenuType) {
+        this.userMenuType = userMenuType;
+        getPlayerData().sendMessage("§eユーザーメニュー配置§aを§e[" + userMenuType.getDisplay() + "]§aに変更しました", SomSound.Tick);
+    }
+    @Override public UserMenuType getUserMenuType() {
+        return userMenuType;
     }
 
     private static final String PathCastMode = "Setting.CastMode";
@@ -138,6 +142,7 @@ public class PlayerSettingContainer implements PlayerSetting {
     private static final String PathExpLog = "Setting.ExpLog";
     private static final String PathDropLog = "Setting.DropLog";
     private static final String PathViewDigit = "Setting.ViewDigit";
+    private static final String PathUserMenuType = "Setting.UserMenuType";
 
     @Override
     public void saveSetting(FileConfiguration data) {
@@ -147,6 +152,7 @@ public class PlayerSettingContainer implements PlayerSetting {
         data.set(PathExpLog, getExpLog().toString());
         data.set(PathDropLog, getDropLog().toString());
         data.set(PathViewDigit, getViewDigit());
+        data.set(PathUserMenuType, getUserMenuType().toString());
     }
 
     @Override
@@ -157,5 +163,6 @@ public class PlayerSettingContainer implements PlayerSetting {
         expLog = ExpLog.valueOf(data.getString(PathExpLog, getExpLog().toString()));
         dropLog = DropLog.valueOf(data.getString(PathDropLog, getDropLog().toString()));
         viewDigit = data.getInt(PathViewDigit, getViewDigit());
+        userMenuType = UserMenuType.valueOf(data.getString(PathUserMenuType, getUserMenuType().toString()));
     }
 }
