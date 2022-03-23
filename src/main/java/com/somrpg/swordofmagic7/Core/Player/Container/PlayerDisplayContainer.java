@@ -1,4 +1,4 @@
-package com.somrpg.swordofmagic7.Core.Player;
+package com.somrpg.swordofmagic7.Core.Player.Container;
 
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerDisplay;

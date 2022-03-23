@@ -3,7 +3,7 @@ package com.somrpg.swordofmagic7.Core.Player.Interface;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 
-public interface PlayerInputInterface {
+public interface PlayerInput {
 
     PlayerData getPlayerData();
 

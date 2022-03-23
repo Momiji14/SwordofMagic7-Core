@@ -1,5 +1,6 @@
-package com.somrpg.swordofmagic7.Core.Player;
+package com.somrpg.swordofmagic7.Core.Player.Container;
 
+import com.somrpg.swordofmagic7.Core.Generic.Entity.BaseEntity;
 import com.somrpg.swordofmagic7.Core.Generic.Entity.BaseEntityContainer;
 import com.somrpg.swordofmagic7.Core.Inventory.*;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
@@ -7,18 +8,15 @@ import com.somrpg.swordofmagic7.Core.Map.MapDataInterface;
 import com.somrpg.swordofmagic7.Core.Menu.PlayerSettingMenu;
 import com.somrpg.swordofmagic7.Core.Menu.PlayerUserMenu;
 import com.somrpg.swordofmagic7.Core.Menu.TeleportGateMenu;
-import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
-import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerOther;
+import com.somrpg.swordofmagic7.Core.Player.*;
+import com.somrpg.swordofmagic7.Core.Player.Interface.*;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.DataBasePath;
 
@@ -41,33 +39,32 @@ public class PlayerDataContainer implements PlayerData {
     private File playerFile;
     private final PlayerEntityContainer playerEntity;
     private final PlayerCharacon playerCharacon;
-    private final PlayerDisplayContainer playerDisplayContainer;
+    private final PlayerDisplay playerDisplayContainer;
     private final PlayerBank playerBank;
-    private final PlayerSetting playerSetting;
+    private final PlayerSetting playerSettingContainer;
     private final PlayerInput playerInput;
     private final PlayerStatistics playerStatistics;
-    private final PlayerOther playerOther;
+    private final PlayerOtherContainer playerOther;
 
-    private final ItemInventoryContainer itemInventoryContainer;
-    private final RuneInventoryContainer runeInventoryContainer;
-    private final PetInventoryContainer petInventoryContainer;
+    private final ItemInventory itemInventoryContainer;
+    private final RuneInventory runeInventoryContainer;
+    private final PetInventory petInventoryContainer;
 
     private final PlayerUserMenu playerUserMenu;
     private final PlayerSettingMenu playerSettingMenu;
     private final TeleportGateMenu teleportGateMenu;
 
     private MapDataInterface mapData;
-    private List<String> activeTeleportGate = new ArrayList<>();
 
     PlayerDataContainer(Player player) {
         this.player = player;
         playerEntity = new PlayerEntityContainer(this);
         playerCharacon = new PlayerCharacon(this);
         playerDisplayContainer = new PlayerDisplayContainer(this);
-        playerBank = new PlayerBank(this);
-        playerInput = new PlayerInput(this);
-        playerSetting = new PlayerSetting(this);
-        playerStatistics = new PlayerStatistics(this);
+        playerBank = new PlayerBankContainer(this);
+        playerInput = new PlayerInputContainer(this);
+        playerSettingContainer = new PlayerSettingContainer(this);
+        playerStatistics = new PlayerStatisticsContainer(this);
         playerOther = new PlayerOtherContainer(this);
 
         itemInventoryContainer = new ItemInventoryContainer(this);
@@ -80,18 +77,23 @@ public class PlayerDataContainer implements PlayerData {
     }
 
     @Override
+    public PlayerOtherContainer getPlayerOtherContainer() {
+        return playerOther;
+    }
+
+    @Override
     public PlayerData getPlayerData() {
         return this;
     }
 
     @Override
-    public PlayerDataContainer getPlayerDataContainer() {
-        return this;
+    public Set<String> getActiveTeleportGate() {
+        return null;
     }
 
     @Override
-    public BaseEntityContainer getBaseEntityContainer() {
-        return playerEntity;
+    public PlayerDataContainer getPlayerDataContainer() {
+        return this;
     }
 
     @Override
@@ -110,7 +112,27 @@ public class PlayerDataContainer implements PlayerData {
     }
 
     @Override
-    public PlayerEntityContainer getPlayerEntity() {
+    public void save(FileConfiguration data) {
+
+    }
+
+    @Override
+    public void load(FileConfiguration data) {
+
+    }
+
+    @Override
+    public PlayerEntity getPlayerEntity() {
+        return playerEntity;
+    }
+
+    @Override
+    public BaseEntityContainer getBaseEntityContainer() {
+        return playerEntity;
+    }
+
+    @Override
+    public PlayerEntityContainer getPlayerEntityContainer() {
         return playerEntity;
     }
 
@@ -120,7 +142,7 @@ public class PlayerDataContainer implements PlayerData {
     }
 
     @Override
-    public PlayerDisplayContainer getPlayerViewBar() {
+    public PlayerDisplay getPlayerViewBar() {
         return playerDisplayContainer;
     }
 
@@ -131,7 +153,7 @@ public class PlayerDataContainer implements PlayerData {
 
     @Override
     public PlayerSetting getPlayerSetting() {
-        return playerSetting;
+        return playerSettingContainer;
     }
 
     @Override
@@ -155,28 +177,23 @@ public class PlayerDataContainer implements PlayerData {
     }
 
     @Override
-    public List<String> getActiveTeleportGate() {
-        return activeTeleportGate;
-    }
-
-    @Override
-    public ItemInventoryContainer getItemInventory() {
+    public ItemInventory getItemInventory() {
         return itemInventoryContainer;
     }
 
     @Override
-    public RuneInventoryContainer getRuneInventory() {
+    public RuneInventory getRuneInventory() {
         return runeInventoryContainer;
     }
 
     @Override
-    public PetInventoryContainer getPetInventory() {
+    public PetInventory getPetInventory() {
         return petInventoryContainer;
     }
 
     @Override
     public PlayerOther getPlayerOther() {
-        return null;
+        return playerOther;
     }
 
     @Override
@@ -247,7 +264,7 @@ public class PlayerDataContainer implements PlayerData {
             getRuneInventory().fromContentsFromString(data.getStringList("RuneInventoryContainer"));
             getPetInventory().fromContentsFromString(data.getStringList("PetInventoryContainer"));
 
-            activeTeleportGate = data.getStringList("ActiveTeleportGate");
+            setActiveTeleportGate(new HashSet<>(data.getStringList("ActiveTeleportGate")));
 
             getPlayerSetting().load(data);
 

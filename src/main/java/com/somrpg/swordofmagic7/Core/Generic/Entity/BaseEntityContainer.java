@@ -19,6 +19,11 @@ public class BaseEntityContainer extends GenericStatusContainer implements BaseE
     }
 
     @Override
+    public BaseEntityContainer getBaseEntityContainer() {
+        return this;
+    }
+
+    @Override
     public void setHealth(double health) {
         Health = Math.max(0, Math.min(getMaxHealth(), health));
     }
@@ -56,11 +61,6 @@ public class BaseEntityContainer extends GenericStatusContainer implements BaseE
     @Override
     public void setManaUnsafe(double mana) {
         Mana = mana;
-    }
-
-    @Override
-    public BaseEntityContainer getBaseEntityContainer() {
-        return this;
     }
 
     @Override

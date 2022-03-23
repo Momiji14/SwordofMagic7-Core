@@ -1,16 +1,16 @@
-package com.somrpg.swordofmagic7.Core.Player;
+package com.somrpg.swordofmagic7.Core.Player.Container;
 
 import com.somrpg.swordofmagic7.Core.Inventory.SomInventoryType;
 import com.somrpg.swordofmagic7.Core.Player.Enum.*;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
-import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerSettingInterface;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerSetting;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.configuration.file.FileConfiguration;
 
-public class PlayerSetting implements PlayerSettingInterface {
+public class PlayerSettingContainer implements PlayerSetting {
     private final PlayerData playerData;
 
-    PlayerSetting(PlayerData playerData) {
+    PlayerSettingContainer(PlayerData playerData) {
         this.playerData = playerData;
     }
 
@@ -139,6 +139,7 @@ public class PlayerSetting implements PlayerSettingInterface {
     private static final String PathDropLog = "Setting.DropLog";
     private static final String PathViewDigit = "Setting.ViewDigit";
 
+    @Override
     public void save(FileConfiguration data) {
         data.set(PathCastMode, getPlayerCastMode().toString());
         data.set(PathStrafeMode, getPlayerStrafeMode().toString());
@@ -148,6 +149,7 @@ public class PlayerSetting implements PlayerSettingInterface {
         data.set(PathViewDigit, getViewDigit());
     }
 
+    @Override
     public void load(FileConfiguration data) {
         castMode = PlayerCastMode.valueOf(data.getString(PathCastMode, getPlayerCastMode().toString()));
         strafeMode = PlayerStrafeMode.valueOf(data.getString(PathStrafeMode, getPlayerStrafeMode().toString()));

@@ -15,7 +15,7 @@ public class PlayerCharacon {
     private boolean wallKicked = false;
     private BukkitTask wallKickTask;
 
-    PlayerCharacon(PlayerData playerData) {
+    public PlayerCharacon(PlayerData playerData) {
         this.playerData = playerData;
         player = playerData.getPlayer();
         player.setAllowFlight(true);

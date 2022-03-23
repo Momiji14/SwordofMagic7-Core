@@ -1,15 +1,15 @@
-package com.somrpg.swordofmagic7.Core.Player;
+package com.somrpg.swordofmagic7.Core.Player.Container;
 
-import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerBankInterface;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerBank;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 
-public class PlayerBank implements PlayerBankInterface {
+public class PlayerBankContainer implements PlayerBank {
 
     private final PlayerData playerData;
     private int Mel = 10000;
 
-    PlayerBank(PlayerData playerData) {
+    PlayerBankContainer(PlayerData playerData) {
         this.playerData = playerData;
     }
 

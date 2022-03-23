@@ -9,6 +9,7 @@ import com.somrpg.swordofmagic7.Core.Menu.PlayerSettingMenu;
 import com.somrpg.swordofmagic7.Core.Menu.PlayerUserMenu;
 import com.somrpg.swordofmagic7.Core.Menu.TeleportGateMenu;
 import com.somrpg.swordofmagic7.Core.Player.*;
+import com.somrpg.swordofmagic7.Core.Player.Container.*;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -16,7 +17,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 
 import java.util.List;
 
-public interface PlayerData extends GenericStatus, PlayerInputInterface, PlayerEntity, PlayerSettingInterface, PlayerBankInterface, PlayerViewUpdate {
+public interface PlayerData extends PlayerInput, PlayerEntity, PlayerSetting, PlayerBank, PlayerViewUpdate, PlayerOther {
 
     static PlayerData getData(Player player) {
         return PlayerDataContainer.getData(player);
@@ -56,13 +57,13 @@ public interface PlayerData extends GenericStatus, PlayerInputInterface, PlayerE
 
     SomInventoryType getViewInventory();
 
-    PlayerEntityContainer getPlayerEntity();
+    PlayerEntity getPlayerEntity();
 
     PlayerCharacon getPlayerCharacon();
 
     PlayerDisplay getPlayerViewBar();
 
-    PlayerInputInterface getPlayerInput();
+    PlayerInput getPlayerInput();
 
     PlayerStatistics getPlayerStatistics();
 
@@ -100,8 +101,6 @@ public interface PlayerData extends GenericStatus, PlayerInputInterface, PlayerE
     void setMapData(MapData mapData);
 
     MapDataInterface getMapData();
-
-    List<String> getActiveTeleportGate();
 
     void save();
 
@@ -250,9 +249,5 @@ public interface PlayerData extends GenericStatus, PlayerInputInterface, PlayerE
     @Override
     default void onCloseGUI(InventoryCloseEvent event) {
         getPlayerInput().onCloseGUI(event);
-    }
-
-    default String getNick() {
-        return getPlayerOther().getNick();
     }
 }

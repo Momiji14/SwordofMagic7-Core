@@ -2,9 +2,10 @@ package com.somrpg.swordofmagic7.Core.Player.Interface;
 
 import com.somrpg.swordofmagic7.Core.Inventory.SomInventoryType;
 import com.somrpg.swordofmagic7.Core.Player.Enum.*;
-import com.somrpg.swordofmagic7.Core.Player.PlayerSetting;
+import com.somrpg.swordofmagic7.Core.Player.Container.PlayerSettingContainer;
+import org.bukkit.configuration.file.FileConfiguration;
 
-public interface PlayerSettingInterface {
+public interface PlayerSetting {
 
     PlayerData getPlayerData();
 
@@ -75,4 +76,7 @@ public interface PlayerSettingInterface {
     default int getViewDigit() {
         return getPlayerSetting().getViewDigit();
     }
+
+    void save(FileConfiguration data);
+    void load(FileConfiguration data);
 }

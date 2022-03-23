@@ -1,4 +1,4 @@
-package com.somrpg.swordofmagic7.Core.Player;
+package com.somrpg.swordofmagic7.Core.Player.Container;
 
 import com.somrpg.swordofmagic7.Core.Generic.Entity.BaseEntityContainer;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
@@ -17,7 +17,12 @@ public class PlayerEntityContainer extends BaseEntityContainer implements Player
     }
 
     @Override
-    public PlayerEntityContainer getPlayerEntity() {
+    public PlayerEntityContainer getPlayerEntityContainer() {
+        return this;
+    }
+
+    @Override
+    public BaseEntityContainer getBaseEntityContainer() {
         return this;
     }
 }

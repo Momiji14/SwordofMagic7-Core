@@ -44,6 +44,7 @@ public class GenericStatusContainer extends SomLevel implements GenericStatus {
         CriticalResist = data.getDouble("CriticalResist", 0);
     }
 
+    @Override
     public void addStatusParameter(GenericStatus param) {
         MaxHealth += param.getMaxHealth();
         HealthRegen += param.getHealthRegen();
@@ -57,6 +58,7 @@ public class GenericStatusContainer extends SomLevel implements GenericStatus {
         CriticalResist += param.getCriticalResist();
     }
 
+    @Override
     public void multiplyStatusParameter(GenericStatus param) {
         MaxHealth *= param.getMaxHealth();
         HealthRegen *= param.getHealthRegen();
@@ -70,6 +72,7 @@ public class GenericStatusContainer extends SomLevel implements GenericStatus {
         CriticalResist *= param.getCriticalResist();
     }
 
+    @Override
     public void setStatusParameter(GenericStatus param) {
         MaxHealth = param.getMaxHealth();
         HealthRegen = param.getHealthRegen();

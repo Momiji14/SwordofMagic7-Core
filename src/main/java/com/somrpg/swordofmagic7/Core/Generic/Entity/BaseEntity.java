@@ -6,7 +6,7 @@ import com.somrpg.swordofmagic7.Core.SomCore;
 
 import java.util.Collection;
 
-public interface BaseEntity {
+public interface BaseEntity extends GenericStatus {
 
     BaseEntityContainer getBaseEntityContainer();
 
