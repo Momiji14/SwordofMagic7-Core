@@ -1,13 +1,15 @@
 package com.somrpg.swordofmagic7.Core.Production;
 
+import com.somrpg.swordofmagic7.Core.Production.Base.CraftData;
+import com.somrpg.swordofmagic7.Core.Production.Base.CraftSlot;
 import com.somrpg.swordofmagic7.Core.Production.Base.SomCraftItem;
 
 import java.util.Map;
 
-public interface ShopData {
+public interface ShopData extends CraftData {
 
-    static ShopData create(String display, Map<Integer, SomCraftItem> craftItems) {
-        return new ShopDataContainer(display, craftItems);
+    static ShopData create(String display, Map<Integer, CraftSlot> craftSlots) {
+        return new ShopDataContainer(display, craftSlots);
     }
 
 }

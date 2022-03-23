@@ -1,4 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Production;
 
-public interface ShopDisplay {
+import com.somrpg.swordofmagic7.Core.Production.Base.SomCraftDisplay;
+
+public interface ShopDisplay extends SomCraftDisplay  {
+
 }

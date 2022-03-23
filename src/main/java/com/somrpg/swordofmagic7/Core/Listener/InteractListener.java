@@ -25,9 +25,8 @@ public class InteractListener implements Listener {
             if (npcRegistry.isNPC(entity)) {
                 NPC npc = npcRegistry.getNPC(entity);
                 String shop = DecoContent.uncolored(entity.getCustomName());
-                if (DataBase.CraftDataList.containsKey(shop)) {
-                    playerData.Shop.ShopOpen(DataBase.getCraftData(shop));
-                    playSound(player, SoundList.MenuOpen);
+                if (DataBase.ShopDataList.containsKey(shop)) {
+                    playerData.getShopDisplay().open(DataBase.getShopData(shop));
                 }
             }
         }

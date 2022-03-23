@@ -27,6 +27,7 @@ public final class SomCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerControlListener(), plugin);
         getServer().getPluginManager().registerEvents(new PhysicsListener(), plugin);
         getServer().getPluginManager().registerEvents(new BlockListener(), plugin);
+        getServer().getPluginManager().registerEvents(new InteractListener(), plugin);
 
         CommandRegisterExecutor.registerExecutors();
         PlayerList.load();

@@ -5,19 +5,19 @@ import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Menu.BaseMenu;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Production.CheckReturn;
-import com.somrpg.swordofmagic7.Core.Production.CraftDataContainer;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.List;
 import java.util.Map;
 
 public class SomCraftDisplayContainer implements BaseMenu, SomCraftDisplay {
     private String display;
     private ItemStack[] content = new ItemStack[54];
-    private Map<Integer, SomCraftItem> recipes;
+    private Map<Integer, CraftSlot> craftSlots;
     private int amount = 1;
     private int page = 1;
     private int maxPage = 1;
@@ -43,14 +43,14 @@ public class SomCraftDisplayContainer implements BaseMenu, SomCraftDisplay {
     }
 
     @Override
-    public void open(CraftDataContainer craftData) {
+    public void open(CraftData craftData) {
         display = craftData.getDisplay();
-        recipes = craftData.getCraftItems();
+        craftSlots = craftData.getCraftSlots();
         content = new ItemStack[54];
         for (int slot = 0; slot < 45; slot++) {
             int index = getOffset()+slot;
-            if (craftData.getCraftItems().containsKey(index)) {
-                content[slot] = craftData.getCraftItems().get(index).getSomItemStack().viewItemStack();
+            if (craftData.getCraftSlots().containsKey(index)) {
+                content[slot] = craftData.getCraftSlots().get(index).getCraftItem().viewItemStack();
             }
         }
         content[46] = SomCraftDisplay.CraftGUIAmountChangeIcon(-100);
@@ -108,14 +108,14 @@ public class SomCraftDisplayContainer implements BaseMenu, SomCraftDisplay {
     }
 
     @Override
-    public Map<Integer, SomCraftItem> getCraftRecipes() {
-        return recipes;
+    public Map<Integer, CraftSlot> getCraftSlots() {
+        return craftSlots;
     }
 
     @Override
     public void onClick(Inventory clickedInv, ItemStack clickedItem, ClickType clickType, InventoryAction action, int slot) {
         if (slot < 45) {
-            SomCraftItem craftItem = getCraftRecipes().get(getOffset()+slot);
+            SomCraftItem craftItem = getCraftSlots().get(getOffset()+slot).getCraftItem();
             onClickProduct(craftItem);
         }
     }

@@ -4,7 +4,7 @@ import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Production.Base.SomCraftItemContainer;
 import com.somrpg.swordofmagic7.Core.Production.Base.SomRecipe;
 
-public class ShopItemContainer extends SomCraftItemContainer implements ShopItem {
+public class ShopItemContainer extends SomCraftItemContainer implements ShopItem{
 
     private int price;
 

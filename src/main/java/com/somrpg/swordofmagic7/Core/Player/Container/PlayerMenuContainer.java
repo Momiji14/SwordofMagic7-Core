@@ -3,6 +3,8 @@ package com.somrpg.swordofmagic7.Core.Player.Container;
 import com.somrpg.swordofmagic7.Core.Menu.*;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerMenu;
+import com.somrpg.swordofmagic7.Core.Production.ShopDisplay;
+import com.somrpg.swordofmagic7.Core.Production.ShopDisplayContainer;
 
 public class PlayerMenuContainer implements PlayerMenu {
 
@@ -12,7 +14,7 @@ public class PlayerMenuContainer implements PlayerMenu {
     private final AttributeMenu attributeMenu;
     private final TeleportGateMenu teleportGateMenu;
 
-    private final
+    private final ShopDisplay shopDisplay;
 
     PlayerMenuContainer(PlayerData playerData) {
         this.playerData = playerData;
@@ -21,6 +23,8 @@ public class PlayerMenuContainer implements PlayerMenu {
         attributeMenu = new AttributeMenuContainer(playerData);
         settingMenu = new SettingMenuContainer(playerData);
         teleportGateMenu = new TeleportGateContainer(playerData);
+
+        shopDisplay = new ShopDisplayContainer(playerData);
     }
 
     @Override
@@ -39,5 +43,8 @@ public class PlayerMenuContainer implements PlayerMenu {
     }
     @Override public TeleportGateMenu getTeleportGateMenu() {
         return teleportGateMenu;
+    }
+    @Override public ShopDisplay getShopDisplay() {
+        return shopDisplay;
     }
 }

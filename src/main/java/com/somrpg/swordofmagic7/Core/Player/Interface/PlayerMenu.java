@@ -5,6 +5,7 @@ import com.somrpg.swordofmagic7.Core.Menu.SettingMenu;
 import com.somrpg.swordofmagic7.Core.Menu.TeleportGateMenu;
 import com.somrpg.swordofmagic7.Core.Menu.UserMenu;
 import com.somrpg.swordofmagic7.Core.Player.Container.PlayerMenuContainer;
+import com.somrpg.swordofmagic7.Core.Production.ShopDisplay;
 
 public interface PlayerMenu {
 
@@ -23,4 +24,7 @@ public interface PlayerMenu {
         return getPlayerMenuContainer().getTeleportGateMenu();
     }
 
+    default ShopDisplay getShopDisplay() {
+        return getPlayerMenuContainer().getShopDisplay();
+    }
 }

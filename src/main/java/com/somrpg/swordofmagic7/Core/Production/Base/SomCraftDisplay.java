@@ -2,10 +2,10 @@ package com.somrpg.swordofmagic7.Core.Production.Base;
 
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
 import com.somrpg.swordofmagic7.Core.Production.CheckReturn;
-import com.somrpg.swordofmagic7.Core.Production.CraftDataContainer;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.List;
 import java.util.Map;
 
 public interface SomCraftDisplay {
@@ -23,7 +23,7 @@ public interface SomCraftDisplay {
         return ViewableItemStack.create("§ex" + amount, Material.GOLD_NUGGET).viewItemStack();
     }
 
-    void open(CraftDataContainer craftData);
+    void open(CraftData craftData);
 
     int getRawSize();
 
@@ -33,7 +33,7 @@ public interface SomCraftDisplay {
 
     void craft(SomCraftItem craftItem, CheckReturn checkReturn);
 
-    Map<Integer, SomCraftItem> getCraftRecipes();
+    Map<Integer, CraftSlot> getCraftSlots();
 
     void onClickProduct(SomCraftItem craftItem);
 
