@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.List;
 import java.util.Map;
 
-public class SomCraftDisplayContainer implements BaseMenu, SomCraftDisplay {
+public class SomCraftDisplayContainer implements SomCraftDisplay {
     private String display;
     private ItemStack[] content = new ItemStack[54];
     private Map<Integer, CraftSlot> craftSlots;
@@ -102,7 +102,7 @@ public class SomCraftDisplayContainer implements BaseMenu, SomCraftDisplay {
                 playerData.getItemInventory().removeContent(itemStack);
             }
             SomItemStack itemStack = craftItem.getSomItemStack();
-            getPlayerData().sendMessage("§e[" + itemStack.getDisplay() + "§ax" + itemStack.getAmount() * getAmount() + "]§aを§b" + getChar() + "§aしました", SomSound.LevelUp);
+            getPlayerData().sendMessage("§e[" + itemStack.getDisplay() + "§ax" + itemStack.getAmount() * getAmount() + "§e]§aを§b" + getChar() + "§aしました", SomSound.LevelUp);
         } else {
             getPlayerData().sendMessage(checkReturn.getRequirements(), SomSound.Nope);
         }

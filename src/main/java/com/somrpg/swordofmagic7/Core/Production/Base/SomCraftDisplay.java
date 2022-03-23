@@ -1,6 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Production.Base;
 
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
+import com.somrpg.swordofmagic7.Core.Menu.BaseMenu;
 import com.somrpg.swordofmagic7.Core.Production.CheckReturn;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -8,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.List;
 import java.util.Map;
 
-public interface SomCraftDisplay {
+public interface SomCraftDisplay extends BaseMenu {
 
     ItemStack NextPage = ViewableItemStack.create("次ページ", Material.BOOK).viewItemStack();
     ItemStack PreviousPage = ViewableItemStack.create("前ページ", Material.BOOK).viewItemStack();

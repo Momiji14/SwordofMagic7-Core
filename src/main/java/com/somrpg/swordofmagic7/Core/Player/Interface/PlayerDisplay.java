@@ -13,6 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.*;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,13 +30,14 @@ public interface PlayerDisplay {
     void setSideBar(String key, List<String> data);
     void resetSideBar(String key);
     HashMap<String, List<String>> getSideBar();
-    List<String> getScoreKey();
+
     default void startTickUpdate() {
         Player player = getPlayer();
         player.setHealthScale(20);
         Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
         Objective sidebarObject = board.registerNewObjective("Sidebar", "dummy", Component.text(DecoContent.decoDisplay("§bSword of Magic Ⅶ")));
         sidebarObject.setDisplaySlot(DisplaySlot.SIDEBAR);
+        player.setScoreboard(board);
         Team team = board.registerNewTeam(player.getName());
         team.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.FOR_OWN_TEAM);
         team.addEntry(player.getName());
@@ -55,17 +57,19 @@ public interface PlayerDisplay {
 
             player.sendActionBar(Component.text(actionBar));
 
-            for (List<String> textList : getSideBar().values()) {
-                getScoreKey().addAll(textList);
-            }
+
+            setSideBar("Mel", Collections.singletonList(DecoContent.decoLore("所持金") + getPlayerData().getMel() + "メル"));
+
             int i = 15;
-            for (String scoreName : getScoreKey()) {
-                Score sidebarScore = sidebarObject.getScore(scoreName);
-                sidebarScore.setScore(i);
-                i--;
-                if (i < 0) break;
+            exit:
+            for (List<String> textList : getSideBar().values()) {
+                for (String scoreName : textList) {
+                    Score sidebarScore = sidebarObject.getScore(scoreName);
+                    sidebarScore.setScore(i);
+                    i--;
+                    if (i < 0) break exit;
+                }
             }
-            player.setScoreboard(board);
         }, 2);
 
         PotionEffect jumpPotion = new PotionEffect(PotionEffectType.JUMP, 21, 0, false, false, false);

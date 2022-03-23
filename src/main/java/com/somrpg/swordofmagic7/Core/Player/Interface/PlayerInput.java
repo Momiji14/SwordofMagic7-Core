@@ -23,6 +23,7 @@ public interface PlayerInput {
                 getPlayerData().getUserMenu().onClick(event);
                 getPlayerData().getSettingMenu().onClick(event);
                 getPlayerData().getTeleportGateMenu().onClick(event);
+                getPlayerData().getShopDisplay().onClick(event);
             } else if (view.getBottomInventory() == clickedInv) {
                 switch (slot) {
                     case 26 -> getPlayerData().getUserMenu().openGUI();

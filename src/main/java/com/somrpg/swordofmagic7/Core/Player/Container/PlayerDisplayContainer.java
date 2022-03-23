@@ -12,7 +12,6 @@ public class PlayerDisplayContainer implements PlayerDisplay {
 
     private final PlayerData playerData;
     private final Player player;
-    private final List<String> ScoreKey = new ArrayList<>();
     private final HashMap<String, List<String>> SideBar = new HashMap<>();
 
     PlayerDisplayContainer(PlayerData playerData) {
@@ -40,10 +39,5 @@ public class PlayerDisplayContainer implements PlayerDisplay {
     @Override
     public HashMap<String, List<String>> getSideBar() {
         return SideBar;
-    }
-
-    @Override
-    public List<String> getScoreKey() {
-        return ScoreKey;
     }
 }
