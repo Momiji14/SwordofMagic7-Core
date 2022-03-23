@@ -153,6 +153,16 @@ public class PlayerDataContainer implements PlayerData {
         return mapData;
     }
 
+
+    private static final String PathMel = "Mel";
+    private static final String PathLevel = "Level";
+    private static final String PathExp = "Exp";
+    private static final String PathHealth = "Health";
+    private static final String PathMana = "Mana";
+    private static final String PathItemInventory = "ItemInventory";
+    private static final String PathRuneInventory = "RuneInventory";
+    private static final String PathPetInventory = "ItemInventory";
+
     @Override
     public void save() {
         try {
@@ -161,16 +171,16 @@ public class PlayerDataContainer implements PlayerData {
             FileConfiguration data = YamlConfiguration.loadConfiguration(playerFile);
 
             //基本データ
-            data.set("Mel", getMel());
-            data.set("Level", getLevel());
-            data.set("Exp", getExp());
-            data.set("Health", getHealth());
-            data.set("Mana", getMana());
+            data.set(PathMel, getMel());
+            data.set(PathLevel, getLevel());
+            data.set(PathExp, getExp());
+            data.set(PathHealth, getHealth());
+            data.set(PathMana, getMana());
 
             //各インベントリ
-            data.set("ItemInventoryContainer", getItemInventory().getContentsToString());
-            data.set("RuneInventoryContainer", getRuneInventory().getContentsToString());
-            data.set("PetInventoryContainer", getPetInventory().getContentsToString());
+            data.set(PathItemInventory, getItemInventory().getContentsToString());
+            data.set(PathRuneInventory, getRuneInventory().getContentsToString());
+            data.set(PathPetInventory, getPetInventory().getContentsToString());
 
             //その他
             getPlayerSetting().saveSetting(data);
@@ -195,16 +205,16 @@ public class PlayerDataContainer implements PlayerData {
             FileConfiguration data = YamlConfiguration.loadConfiguration(playerFile);
 
             //基本データ
-            setMel(data.getInt("Mel", 10000));
-            setLevel(data.getInt("Level", 1));
-            setExp(data.getInt("Exp", 0));
-            getPlayerEntity().setHealthUnsafe(data.getDouble("Health", Double.MAX_VALUE));
-            getPlayerEntity().setManaUnsafe(data.getDouble("Mana", Double.MAX_VALUE));
+            setMel(data.getInt(PathMel, 10000));
+            setLevel(data.getInt(PathLevel, 1));
+            setExp(data.getInt(PathExp, 0));
+            getPlayerEntity().setHealthUnsafe(data.getDouble(PathHealth, Double.MAX_VALUE));
+            getPlayerEntity().setManaUnsafe(data.getDouble(PathMana, Double.MAX_VALUE));
 
             //各インベントリ
-            getItemInventory().fromContentsFromString(data.getStringList("ItemInventoryContainer"));
-            getRuneInventory().fromContentsFromString(data.getStringList("RuneInventoryContainer"));
-            getPetInventory().fromContentsFromString(data.getStringList("PetInventoryContainer"));
+            getItemInventory().fromContentsFromString(data.getStringList(PathItemInventory));
+            getRuneInventory().fromContentsFromString(data.getStringList(PathRuneInventory));
+            getPetInventory().fromContentsFromString(data.getStringList(PathPetInventory));
 
             //その他
             getPlayerSetting().loadSetting(data);
