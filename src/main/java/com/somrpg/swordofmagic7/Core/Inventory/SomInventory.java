@@ -1,11 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Inventory;
 
-import com.somrpg.swordofmagic7.Core.Equipment.EquipmentItem;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
-import com.somrpg.swordofmagic7.Core.Item.BaseItem;
-import com.somrpg.swordofmagic7.Core.Item.RuneItem;
-import com.somrpg.swordofmagic7.Core.Pet.PetItem;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -73,22 +69,5 @@ public interface SomInventory {
         }
     }
 
-    default void viewInventory() {
-        int index = 0;
-        for (int slot = 9; slot < 36; slot++) {
-            switch (slot) {
-                case 17 -> getInventory().setItem(slot, UpScrollIcon);
-                case 26 -> getInventory().setItem(slot, UserMenuIcon);
-                case 35 -> getInventory().setItem(slot, DownScrollIcon);
-                default -> {
-                    if (getList().size() > index) {
-                        getInventory().setItem(slot, getList().get(index).viewItemStack());
-                        index++;
-                    } else {
-                        getInventory().setItem(slot, null);
-                    }
-                }
-            }
-        }
-    }
+    void viewInventory();
 }

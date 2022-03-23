@@ -1,7 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Inventory;
 
-import com.somrpg.swordofmagic7.Core.Equipment.EquipmentItem;
-import com.somrpg.swordofmagic7.Core.Equipment.SomEquipmentSlot;
+import com.somrpg.swordofmagic7.Core.Item.EquipmentItem;
+import com.somrpg.swordofmagic7.Core.Item.SomEquipmentSlot;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.Map;

@@ -2,7 +2,7 @@ package com.somrpg.swordofmagic7.Core.Generic.ItemStack;
 
 import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
 import com.somrpg.swordofmagic7.Core.DataBase.SomItemDataLoader;
-import com.somrpg.swordofmagic7.Core.Equipment.EquipmentItem;
+import com.somrpg.swordofmagic7.Core.Item.EquipmentItem;
 import com.somrpg.swordofmagic7.Core.Item.RuneItem;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import org.bukkit.Material;
@@ -74,30 +74,29 @@ public class SomItemStack extends ViewableItemStack {
             data.append(",Level:").append(item.getLevel()).append(",Quality:").append(item.getQuality());
         } else if (this instanceof EquipmentItem item) {
             data.append(",Plus:").append(item.getPlus());
-            int i = 0;
-            for (String uuid : item.getRune()) {
-                data.append(",Rune").append(i).append(":").append(uuid);
-                i++;
+            for (RuneItem runeItem : item.getRune()) {
+                data.append("<Rune>").append(",Rune").append(":").append(runeItem.toDataString());
             }
         }
-        data.append(",Owner:").append(getItemOwner().getOwner()).append(",UUID:").append(getUUID());
+        //data.append(",Owner:").append(getItemOwner().getOwner()).append(",UUID:").append(getUUID());
         return data.toString();
     }
 
     public static SomItemStack fromDataString(@NonNull String data) {
         try {
-            String[] split = data.split(",");
+            String[] itemSeparate = data.split("<Rune>");
+            String[] split = itemSeparate[0].split(",");
             Map<String, String> mapData = new HashMap<>();
             for (String str : split) {
                 String[] split2 = str.split(":");
                 mapData.put(split2[0], split2[1]);
             }
             String id = mapData.get("Id");
-            String owner = mapData.get("Owner");
-            String uuid = mapData.get("UUID");
+            //String owner = mapData.get("Owner");
+            //String uuid = mapData.get("UUID");
             SomItemStack item = SomItemDataLoader.getItem(id);
-            item.setItemOwner(new ItemOwner(owner));
-            item.setUUID(uuid);
+            //item.setItemOwner(new ItemOwner(owner));
+            //item.setUUID(uuid);
             if (item instanceof RuneItem runeItem) {
                 int level = Integer.parseInt(mapData.get("Level"));
                 double quality = Double.parseDouble(mapData.get("Quality"));
@@ -106,11 +105,9 @@ public class SomItemStack extends ViewableItemStack {
             } else if (item instanceof EquipmentItem equipmentItem) {
                 int plus = Integer.parseInt(mapData.get("Plus"));
                 equipmentItem.setPlus(plus);
-                int i = 0;
-                while (mapData.containsKey("Rune" + i)) {
-                    String runeUUID = mapData.get("Rune" + i);
-                    equipmentItem.getRune().add(runeUUID);
-                    i++;
+                for (int i = 1; i < itemSeparate.length; i++) {
+                    RuneItem runeItem = (RuneItem) fromDataString(itemSeparate[i]);
+                    equipmentItem.getRune().add(runeItem);
                 }
             }
             return item;

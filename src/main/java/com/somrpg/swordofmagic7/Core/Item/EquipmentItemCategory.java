@@ -1,4 +1,4 @@
-package com.somrpg.swordofmagic7.Core.Equipment;
+package com.somrpg.swordofmagic7.Core.Item;
 
 import org.bukkit.Material;
 

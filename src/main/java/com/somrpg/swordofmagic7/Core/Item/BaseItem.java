@@ -14,10 +14,6 @@ public class BaseItem extends SomItemStack {
         super(data.getId(), data.getDisplay(), data.getMaterial(), data.getLore());
         this.itemCategory = itemCategory;
         this.sell = sell;
-
-        getLore().add(decoPartition("アイテム情報"));
-        getLore().add(decoLore("カテゴリ") + getItemCategory().getDisplay());
-        getLore().add(decoLore("売値") + getSell());
     }
 
     public ItemCategory getItemCategory() {

@@ -1,6 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
-import com.somrpg.swordofmagic7.Core.Equipment.EquipmentItem;
+import com.somrpg.swordofmagic7.Core.Item.EquipmentItem;
 import com.somrpg.swordofmagic7.Core.Player.Container.PlayerEntityContainer;
 
 public interface PlayerStatusCalculation {

@@ -1,8 +1,7 @@
-package com.somrpg.swordofmagic7.Core.Equipment;
+package com.somrpg.swordofmagic7.Core.Item;
 
 import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatus;
 import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatusContainer;
-import com.somrpg.swordofmagic7.Core.Item.BaseItem;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
@@ -13,8 +12,9 @@ public class EquipmentItem extends BaseItem {
     private final EquipmentItemCategory equipmentItemCategory;
     private final SomEquipmentSlot equipmentSlot;
     private int plus = 0;
+    private int reqLevel = 1;
     private int runeSlot = 1;
-    private final List<String> rune = new ArrayList<>();
+    private final List<RuneItem> rune = new ArrayList<>();
 
     public EquipmentItem(@NonNull BaseItem data, @NonNull EquipmentItemCategory equipmentItemCategory, @NonNull SomEquipmentSlot equipmentSlot) {
         super(data, data.getItemCategory(), data.getSell());
@@ -52,7 +52,15 @@ public class EquipmentItem extends BaseItem {
         return runeSlot;
     }
 
-    public List<String> getRune() {
+    public List<RuneItem> getRune() {
         return rune;
+    }
+
+    public void setReqLevel(int reqLevel) {
+        this.reqLevel = reqLevel;
+    }
+
+    public int getReqLevel() {
+        return reqLevel;
     }
 }

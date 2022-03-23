@@ -1,8 +1,8 @@
 package com.somrpg.swordofmagic7.Core.DataBase;
 
-import com.somrpg.swordofmagic7.Core.Equipment.EquipmentItem;
-import com.somrpg.swordofmagic7.Core.Equipment.EquipmentItemCategory;
-import com.somrpg.swordofmagic7.Core.Equipment.SomEquipmentSlot;
+import com.somrpg.swordofmagic7.Core.Item.EquipmentItem;
+import com.somrpg.swordofmagic7.Core.Item.EquipmentItemCategory;
+import com.somrpg.swordofmagic7.Core.Item.SomEquipmentSlot;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatusContainer;
 import com.somrpg.swordofmagic7.Core.Item.BaseItem;
@@ -39,6 +39,9 @@ public interface SomItemDataLoader extends DataBase {
                         SomEquipmentSlot equipmentSlot = SomEquipmentSlot.valueOf(data.getString("EquipmentSlot"));
                         item = new EquipmentItem(baseItem, equipmentItemCategory, equipmentSlot);
                     }
+                }
+                if (material == Material.PLAYER_HEAD) {
+                    item.setMaterialData(data.getString("PlayerHead"));
                 }
                 DataBase.SomItemDataList.put(fileName, item);
             } catch (Exception e) {

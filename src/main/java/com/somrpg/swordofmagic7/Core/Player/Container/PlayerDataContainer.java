@@ -9,6 +9,7 @@ import com.somrpg.swordofmagic7.Core.Menu.UserMenu;
 import com.somrpg.swordofmagic7.Core.Menu.TeleportGateMenu;
 import com.somrpg.swordofmagic7.Core.Player.*;
 import com.somrpg.swordofmagic7.Core.Player.Interface.*;
+import com.somrpg.swordofmagic7.Core.SomCore;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -159,9 +160,9 @@ public class PlayerDataContainer implements PlayerData {
     private static final String PathExp = "Exp";
     private static final String PathHealth = "Health";
     private static final String PathMana = "Mana";
-    private static final String PathItemInventory = "ItemInventory";
-    private static final String PathRuneInventory = "RuneInventory";
-    private static final String PathPetInventory = "ItemInventory";
+    private static final String PathItemInventory = "Inventory.Item";
+    private static final String PathRuneInventory = "Inventory.Rune";
+    private static final String PathPetInventory = "Inventory.Pet";
 
     @Override
     public void save() {
@@ -178,6 +179,7 @@ public class PlayerDataContainer implements PlayerData {
             data.set(PathMana, getMana());
 
             //各インベントリ
+
             data.set(PathItemInventory, getItemInventory().getContentsToString());
             data.set(PathRuneInventory, getRuneInventory().getContentsToString());
             data.set(PathPetInventory, getPetInventory().getContentsToString());

@@ -1,5 +1,10 @@
 package com.somrpg.swordofmagic7.Core.Generic.Parameter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.somrpg.swordofmagic7.Core.Generic.DecoContent.decoLore;
+
 public interface GenericStatus {
 
     GenericStatusContainer getGenericStatusContainer();
@@ -122,5 +127,21 @@ public interface GenericStatus {
     }
     default double getCriticalResist() {
         return getGenericStatusContainer().getCriticalResist();
+    }
+
+    default List<String> toStringList() {
+        List<String> list = new ArrayList<>();
+        if (getMaxHealth() > 0) list.add(decoLore("最大体力") + getMaxHealth());
+        if (getHealthRegen() > 0) list.add(decoLore("体力自動回復") + getHealthRegen());
+        if (getMaxMana() > 0) list.add(decoLore("最大マナ") + getMaxMana());
+        if (getManaRegen() > 0) list.add(decoLore("マナ自動回復") + getManaRegen());
+        if (getATK() > 0) list.add(decoLore("攻撃力") + getATK());
+        if (getDEF() > 0) list.add(decoLore("防御力") + getDEF());
+        if (getACC() > 0) list.add(decoLore("命中") + getACC());
+        if (getEVA() > 0) list.add(decoLore("回避") + getEVA());
+        if (getHLP() > 0) list.add(decoLore("治癒力") + getHLP());
+        if (getCriticalRate() > 0) list.add(decoLore("クリティカル発生") + getCriticalRate());
+        if (getCriticalResist() > 0) list.add(decoLore("クリティカル耐性") + getCriticalResist());
+        return list;
     }
 }

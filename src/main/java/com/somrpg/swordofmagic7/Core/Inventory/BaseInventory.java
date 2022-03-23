@@ -62,4 +62,24 @@ public class BaseInventory implements SomInventory {
     public PlayerInventory getInventory() {
         return playerInventory;
     }
+
+    @Override
+    public void viewInventory() {
+        int index = 0;
+        for (int slot = 9; slot < 36; slot++) {
+            switch (slot) {
+                case 17 -> getInventory().setItem(slot, UpScrollIcon);
+                case 26 -> getInventory().setItem(slot, UserMenuIcon);
+                case 35 -> getInventory().setItem(slot, DownScrollIcon);
+                default -> {
+                    if (getList().size() > index) {
+                        getInventory().setItem(slot, getList().get(index).viewItemStackDigit(getPlayerData().getViewDigit()));
+                        index++;
+                    } else {
+                        getInventory().setItem(slot, null);
+                    }
+                }
+            }
+        }
+    }
 }
