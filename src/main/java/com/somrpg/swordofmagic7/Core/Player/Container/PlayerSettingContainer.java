@@ -140,7 +140,7 @@ public class PlayerSettingContainer implements PlayerSetting {
     private static final String PathViewDigit = "Setting.ViewDigit";
 
     @Override
-    public void saveSetting(FileConfiguration data) {
+    public void save(FileConfiguration data) {
         data.set(PathCastMode, getPlayerCastMode().toString());
         data.set(PathStrafeMode, getPlayerStrafeMode().toString());
         data.set(PathDamageLog, getDamageLog().toString());
@@ -150,7 +150,7 @@ public class PlayerSettingContainer implements PlayerSetting {
     }
 
     @Override
-    public void loadSetting(FileConfiguration data) {
+    public void load(FileConfiguration data) {
         castMode = PlayerCastMode.valueOf(data.getString(PathCastMode, getPlayerCastMode().toString()));
         strafeMode = PlayerStrafeMode.valueOf(data.getString(PathStrafeMode, getPlayerStrafeMode().toString()));
         damageLog = DamageLog.valueOf(data.getString(PathDamageLog, getDamageLog().toString()));
