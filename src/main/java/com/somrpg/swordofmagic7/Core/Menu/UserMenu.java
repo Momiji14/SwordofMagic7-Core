@@ -11,13 +11,13 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public interface UserMenu extends BaseMenu {
-    ItemStack ItemInventoryIcon = ViewableItemStack.create(SomInventoryType.ItemInventory.getDisplay(),Material.CHEST, "インベントリ表示をアイテムに切り替えます").viewItemStack();
-    ItemStack RuneInventoryIcon = ViewableItemStack.create(SomInventoryType.RuneInventory.getDisplay(),Material.ENDER_CHEST, "インベントリ表示をルーンに切り替えます").viewItemStack();
-    ItemStack PetInventoryIcon = ViewableItemStack.create(SomInventoryType.PetInventory.getDisplay(),Material.NOTE_BLOCK, "インベントリ表示をペットケージに切り替えます").viewItemStack();
-    ItemStack SkillSlotIcon = ViewableItemStack.create(SomInventoryType.SkillSlot.getDisplay(),Material.END_CRYSTAL, "インベントリ表示をスキルスロットに切り替えます").viewItemStack();
+    ItemStack ItemInventoryIcon = ViewableItemStack.create(SomInventoryType.ItemInventory.getDisplay(), Material.CHEST, "インベントリ表示をアイテムに切り替えます").viewItemStack();
+    ItemStack RuneInventoryIcon = ViewableItemStack.create(SomInventoryType.RuneInventory.getDisplay(), Material.ENDER_CHEST, "インベントリ表示をルーンに切り替えます").viewItemStack();
+    ItemStack PetInventoryIcon = ViewableItemStack.create(SomInventoryType.PetInventory.getDisplay(), Material.NOTE_BLOCK, "インベントリ表示をペットケージに切り替えます").viewItemStack();
+    ItemStack SkillSlotIcon = ViewableItemStack.create(SomInventoryType.SkillSlot.getDisplay(), Material.END_CRYSTAL, "インベントリ表示をスキルスロットに切り替えます").viewItemStack();
 
-    ItemStack AttributeMenuIcon = ViewableItemStack.create(AttributeMenu.display,Material.CRAFTING_TABLE, "設定メニューを開きます").viewItemStack();
-    ItemStack SettingMenuIcon = ViewableItemStack.create(SettingMenu.display,Material.CRAFTING_TABLE, "設定メニューを開きます").viewItemStack();
+    ItemStack AttributeMenuIcon = ViewableItemStack.create(AttributeMenu.display, Material.RED_DYE, "アトリビュートメニューを開きます").viewItemStack();
+    ItemStack SettingMenuIcon = ViewableItemStack.create(SettingMenu.display, Material.CRAFTING_TABLE, "設定メニューを開きます").viewItemStack();
 
     String display = "ユーザーメニュー";
 

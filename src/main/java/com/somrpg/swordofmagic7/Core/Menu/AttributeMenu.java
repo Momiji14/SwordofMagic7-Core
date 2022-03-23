@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.somrpg.swordofmagic7.Core.Generic.DecoContent.decoLore;
+import static com.somrpg.swordofmagic7.Core.Generic.DecoContent.decoPartition;
 import static com.somrpg.swordofmagic7.Core.Generic.DecoFormat.ScaleDigit;
 
 public interface AttributeMenu extends BaseMenu {
@@ -62,8 +63,12 @@ public interface AttributeMenu extends BaseMenu {
         }
     }
 
+    String partition = decoPartition("ステータス情報");
+
     default ViewableItemStack getSTR() {
         List<String> lore = new ArrayList<>();
+        lore.add("物理攻撃に関するステータスに影響します");
+        lore.add(partition);
         lore.add(decoAttributeLore("物理ダメージ倍率", GenericConfig.AttributeValue_STR_DamageATK));
         lore.add(decoAttributeLore("攻撃力", GenericConfig.AttributeValue_STR_ATK));
         return ViewableItemStack.create("筋力", Material.RED_DYE, lore);
@@ -71,6 +76,8 @@ public interface AttributeMenu extends BaseMenu {
 
     default ViewableItemStack getINT() {
         List<String> lore = new ArrayList<>();
+        lore.add("魔法攻撃に関するステータスに影響します");
+        lore.add(partition);
         lore.add(decoAttributeLore("魔法ダメージ倍率", GenericConfig.AttributeValue_INT_DamageMAT));
         lore.add(decoAttributeLore("魔法ダメージ軽減", GenericConfig.AttributeValue_INT_ResistMAT));
         lore.add(decoAttributeLore("攻撃力", GenericConfig.AttributeValue_INT_ATK));
@@ -79,6 +86,8 @@ public interface AttributeMenu extends BaseMenu {
 
     default ViewableItemStack getDEX() {
         List<String> lore = new ArrayList<>();
+        lore.add("回避とクリティカルダメージに影響します");
+        lore.add(partition);
         lore.add(decoAttributeLore("回避", GenericConfig.AttributeValue_DEX_EVA));
         lore.add(decoAttributeLore("クリティカルダメージ", GenericConfig.AttributeValue_DEX_CriticalDamage));
         return ViewableItemStack.create("敏捷", Material.YELLOW_DYE, lore);
@@ -86,6 +95,8 @@ public interface AttributeMenu extends BaseMenu {
 
     default ViewableItemStack getTEC() {
         List<String> lore = new ArrayList<>();
+        lore.add("クリティカル発生と命中に影響します");
+        lore.add(partition);
         lore.add(decoAttributeLore("命中", GenericConfig.AttributeValue_TEC_ACC));
         lore.add(decoAttributeLore("クリティカル発生", GenericConfig.AttributeValue_TEC_CriticalRate));
         return ViewableItemStack.create("技量", Material.LIME_DYE, lore);
@@ -93,6 +104,8 @@ public interface AttributeMenu extends BaseMenu {
 
     default ViewableItemStack getSPI() {
         List<String> lore = new ArrayList<>();
+        lore.add("マナと魔法防御・治癒力に影響します");
+        lore.add(partition);
         lore.add(decoAttributeLore("最大マナ", GenericConfig.AttributeValue_SPI_MaxMana));
         lore.add(decoAttributeLore("マナ自動回復", GenericConfig.AttributeValue_SPI_ManaRegen));
         lore.add(decoAttributeLore("治癒力", GenericConfig.AttributeValue_SPI_HLP));
@@ -102,6 +115,8 @@ public interface AttributeMenu extends BaseMenu {
 
     default ViewableItemStack getVIT() {
         List<String> lore = new ArrayList<>();
+        lore.add("体力と防御・クリティカル耐性に影響します");
+        lore.add(partition);
         lore.add(decoAttributeLore("最大体力", GenericConfig.AttributeValue_VIT_MaxHealth));
         lore.add(decoAttributeLore("体力自動回復", GenericConfig.AttributeValue_VIT_HealthRegen));
         lore.add(decoAttributeLore("防御力", GenericConfig.AttributeValue_VIT_DEF));
