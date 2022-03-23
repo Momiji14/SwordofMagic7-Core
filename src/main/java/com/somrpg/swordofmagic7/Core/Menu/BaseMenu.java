@@ -6,16 +6,19 @@ import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 public interface BaseMenu {
 
     String getGUIDisplay();
 
     default Component getGUIDisplayComponent() {
-        return Component.text(getGUIDisplay());
+        return Component.text("§l" + getGUIDisplay());
     }
 
     PlayerData getPlayerData();
@@ -39,9 +42,9 @@ public interface BaseMenu {
 
     default void onClick(InventoryClickEvent event) {
         if (event.getView().title().equals(getGUIDisplayComponent())) {
-            onClick(event.getClickedInventory(), event.getCurrentItem(), event.getSlot());
+            onClick(event.getClickedInventory(), event.getCurrentItem(), event.getClick(), event.getAction(), event.getSlot());
         }
     }
 
-    void onClick(Inventory clickedInv, ItemStack clickedItem, int slot);
+    void onClick(Inventory clickedInv, ItemStack clickedItem, ClickType clickType, InventoryAction action, int slot);
 }

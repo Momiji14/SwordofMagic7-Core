@@ -5,6 +5,8 @@ import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
 import com.somrpg.swordofmagic7.Core.Inventory.SomInventoryType;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import org.bukkit.Material;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -13,11 +15,15 @@ public interface UserMenu extends BaseMenu {
     ItemStack RuneInventoryIcon = ViewableItemStack.create(SomInventoryType.RuneInventory.getDisplay(),Material.ENDER_CHEST, "インベントリ表示をルーンに切り替えます").viewItemStack();
     ItemStack PetInventoryIcon = ViewableItemStack.create(SomInventoryType.PetInventory.getDisplay(),Material.NOTE_BLOCK, "インベントリ表示をペットケージに切り替えます").viewItemStack();
     ItemStack SkillSlotIcon = ViewableItemStack.create(SomInventoryType.SkillSlot.getDisplay(),Material.END_CRYSTAL, "インベントリ表示をスキルスロットに切り替えます").viewItemStack();
-    ItemStack SettingMenuIcon = ViewableItemStack.create(SomInventoryType.SkillSlot.getDisplay(),Material.CRAFTING_TABLE, "設定メニューを開きます").viewItemStack();
+
+    ItemStack AttributeMenuIcon = ViewableItemStack.create(AttributeMenu.display,Material.CRAFTING_TABLE, "設定メニューを開きます").viewItemStack();
+    ItemStack SettingMenuIcon = ViewableItemStack.create(SettingMenu.display,Material.CRAFTING_TABLE, "設定メニューを開きます").viewItemStack();
+
+    String display = "ユーザーメニュー";
 
     @Override
     default String getGUIDisplay() {
-        return "§lユーザーメニュー";
+        return display;
     }
 
     @Override
@@ -32,7 +38,9 @@ public interface UserMenu extends BaseMenu {
         content[1] = RuneInventoryIcon;
         content[2] = PetInventoryIcon;
         content[3] = SkillSlotIcon;
-        content[8] = SettingMenuIcon;
+
+        content[18] = AttributeMenuIcon;
+        content[26] = SettingMenuIcon;
 
         for (int i = 9; i < 18; i++) {
             content[i] = GenericConfig.GUIPartition;
@@ -41,7 +49,8 @@ public interface UserMenu extends BaseMenu {
     }
 
     @Override
-    default void onClick(Inventory clickedInv, ItemStack clickedItem, int slot) {
+    default void onClick(Inventory clickedInv, ItemStack clickedItem, ClickType clickType, InventoryAction action, int slot) {
+        //上段
         if (clickedItem.equals(ItemInventoryIcon)) {
             getPlayerData().setViewInventory(SomInventoryType.ItemInventory);
         } else if (clickedItem.equals(RuneInventoryIcon)) {
@@ -50,6 +59,11 @@ public interface UserMenu extends BaseMenu {
             getPlayerData().setViewInventory(SomInventoryType.PetInventory);
         } else if (clickedItem.equals(SkillSlotIcon)) {
             getPlayerData().setViewInventory(SomInventoryType.SkillSlot);
+        }
+
+        //下段
+        if (clickedItem.equals(AttributeMenuIcon)) {
+            getPlayerData().getAttributeMenu().openGUI();
         } else if (clickedItem.equals(SettingMenuIcon)) {
             getPlayerData().getSettingMenu().openGUI();
         }

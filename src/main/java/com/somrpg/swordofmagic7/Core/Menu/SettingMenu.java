@@ -4,6 +4,8 @@ import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
 import com.somrpg.swordofmagic7.Core.Player.Enum.*;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import org.bukkit.Material;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -15,10 +17,13 @@ public interface SettingMenu extends BaseMenu {
     ItemStack CastModeIcon = ViewableItemStack.create("キャストモード", Material.END_CRYSTAL, "スキルの発動方法を切り替えます").viewItemStack();
     ItemStack StrafeModeIcon = ViewableItemStack.create("ストレイフモード", Material.FEATHER, "ストレイフの発動条件を切り替えます").viewItemStack();
     ItemStack ViewDigitIcon = ViewableItemStack.create("表示桁数", Material.COMMAND_BLOCK, "ステータスなどの数値の表示桁数を変更します").viewItemStack();
+    ItemStack UserMenuTypeIcon = ViewableItemStack.create("ユーザーメニュー配置", Material.BOOK, "ユーザーメニューのアイコン配置を変更します").viewItemStack();
+
+    String display = "設定メニュー";
 
     @Override
     default String getGUIDisplay() {
-        return "§l設定メニュー";
+        return display;
     }
 
     @Override
@@ -36,11 +41,13 @@ public interface SettingMenu extends BaseMenu {
         content[4] = CastModeIcon;
         content[5] = StrafeModeIcon;
         content[6] = ViewDigitIcon;
+
+        content[8] = UserMenuTypeIcon;
         return content;
     }
 
     @Override
-    default void onClick(Inventory clickedInv, ItemStack clickedItem, int slot) {
+    default void onClick(Inventory clickedInv, ItemStack clickedItem, ClickType clickType, InventoryAction action, int slot) {
         if (clickedItem.equals(DamageLogIcon)) {
             damageLog();
         } else if (clickedItem.equals(ExpLogIcon)) {
@@ -55,6 +62,8 @@ public interface SettingMenu extends BaseMenu {
             strafeMode();
         } else if (clickedItem.equals(ViewDigitIcon)) {
             viewDigit();
+        } else if (clickedItem.equals(UserMenuTypeIcon)) {
+            userMenuType();
         }
     }
 
@@ -114,6 +123,13 @@ public interface SettingMenu extends BaseMenu {
             getPlayerData().setViewDigit(digit+1);
         } else {
             getPlayerData().setViewDigit(0);
+        }
+    }
+
+    default void userMenuType() {
+        switch (getPlayerData().getUserMenuType()) {
+            case Categorize -> getPlayerData().setUserMenuType(UserMenuType.ListDisplay);
+            case ListDisplay -> getPlayerData().setUserMenuType(UserMenuType.Categorize);
         }
     }
 }

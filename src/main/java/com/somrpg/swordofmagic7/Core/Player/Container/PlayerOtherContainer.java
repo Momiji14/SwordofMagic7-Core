@@ -1,5 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Player.Container;
 
+import com.somrpg.swordofmagic7.Core.Menu.AttributeMenuContainer;
+import com.somrpg.swordofmagic7.Core.Menu.UserMenuType;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerOther;
 
@@ -12,6 +14,8 @@ public class PlayerOtherContainer implements PlayerOther {
 
     private final PlayerData playerData;
     private Set<String> activeTeleportGate = new HashSet<>();
+    private UserMenuType userMenuType = UserMenuType.Categorize;
+    private int AttributePoint = 0;
 
     PlayerOtherContainer(PlayerData playerData) {
         this.playerData = playerData;
@@ -32,13 +36,27 @@ public class PlayerOtherContainer implements PlayerOther {
         return null;
     }
 
-    @Override
-    public Set<String> getActiveTeleportGate() {
+    @Override public Set<String> getActiveTeleportGate() {
         return activeTeleportGate;
     }
-
-    @Override
-    public void setActiveTeleportGate(Set<String> gate) {
+    @Override public void setActiveTeleportGate(Set<String> gate) {
         activeTeleportGate = gate;
+    }
+
+    @Override public void setAttributePoint(int point) {
+        AttributePoint = point;
+    }
+    @Override public void addAttributePoint(int point) {
+        AttributePoint += point;
+    }
+    @Override public int getAttributePoint() {
+        return AttributePoint;
+    }
+
+    @Override public void setUserMenuType(UserMenuType userMenuType) {
+        this.userMenuType = userMenuType;
+    }
+    @Override public UserMenuType getUserMenuType() {
+        return userMenuType;
     }
 }

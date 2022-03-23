@@ -20,10 +20,14 @@ public class ViewableItemStack {
     private int amount = 1;
     private int customModelData = 0;
 
-    public ViewableItemStack(@NonNull String display, @NonNull Material material, @NonNull List<String> lore) {
+    ViewableItemStack(@NonNull String display, @NonNull Material material, @NonNull List<String> lore) {
         this.display = display;
         this.material = material;
         this.lore = lore;
+    }
+
+    public static ViewableItemStack create(@NonNull String display, @NonNull Material material, @NonNull List<String> lore) {
+        return new ViewableItemStack(display, material, lore);
     }
 
     public static ViewableItemStack create(@NonNull String display, @NonNull Material material, @NonNull String lore, int customModelData) {

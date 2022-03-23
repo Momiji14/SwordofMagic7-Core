@@ -8,6 +8,8 @@ import com.somrpg.swordofmagic7.Core.SomCore;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -15,9 +17,11 @@ import java.util.Map;
 
 public interface TeleportGateMenu extends BaseMenu {
 
+    String display = "転移門";
+
     @Override
     default String getGUIDisplay() {
-        return "§l転移門";
+        return display;
     }
 
     @Override
@@ -39,7 +43,7 @@ public interface TeleportGateMenu extends BaseMenu {
     }
 
     @Override
-    default void onClick(Inventory clickedInv, ItemStack clickedItem, int slot) {
+    default void onClick(Inventory clickedInv, ItemStack clickedItem, ClickType clickType, InventoryAction action, int slot) {
         TeleportGate teleport = DataBase.getTeleportGate(TeleportGateLoader.TeleportGateMenu.get(slot));
         assert teleport != null;
         if (teleport.isDefaultActive() || getPlayerData().getActiveTeleportGate().contains(teleport.getId()) || getPlayer().hasPermission("som7.builder")) {

@@ -21,9 +21,10 @@ public interface PlayerStatusCalculation {
         double DEF = 50 + multiply*5;
         double ACC = 10 + multiply;
         double EVA = 2 + multiply*0.2;
+        double HLP = 50 + multiply*5;
         double CriticalRate = 10 + multiply;
         double CriticalResist = 10 + multiply;
-        getPlayerData().setStatusParameter(MaxHealth, HealthRegen, MaxMana, ManaRegen, ATK, DEF, ACC, EVA, CriticalRate, CriticalResist);
+        getPlayerData().setStatusParameter(MaxHealth, HealthRegen, MaxMana, ManaRegen, ATK, DEF, ACC, EVA, HLP, CriticalRate, CriticalResist);
         for (EquipmentItem equipmentItem : getPlayerData().getItemInventory().getEquipmentSlot().values()) {
             playerEntity.addStatusParameter(equipmentItem.getStatusParameter());
         }

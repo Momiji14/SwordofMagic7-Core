@@ -13,6 +13,7 @@ public class GenericStatusContainer extends SomLevel implements GenericStatus {
     private double DEF = 0;
     private double ACC = 0;
     private double EVA = 0;
+    private double HLP = 0;
     private double CriticalRate = 0;
     private double CriticalResist = 0;
 
@@ -27,7 +28,7 @@ public class GenericStatusContainer extends SomLevel implements GenericStatus {
     }
 
     @Override
-    public void setStatusParameter(double maxHealth, double healthRegen, double maxMana, double manaRegen, double atk, double def, double acc, double eva, double criticalRate, double criticalResist) {
+    public void setStatusParameter(double maxHealth, double healthRegen, double maxMana, double manaRegen, double atk, double def, double acc, double eva, double hlp, double criticalRate, double criticalResist) {
         MaxHealth = maxHealth;
         HealthRegen = healthRegen;
         MaxMana = maxMana;
@@ -36,6 +37,7 @@ public class GenericStatusContainer extends SomLevel implements GenericStatus {
         DEF = def;
         ACC = acc;
         EVA = eva;
+        HLP = hlp;
         CriticalRate = criticalRate;
         CriticalResist = criticalResist;
     }
@@ -47,6 +49,7 @@ public class GenericStatusContainer extends SomLevel implements GenericStatus {
         DEF = data.getDouble("DEF", 0);
         ACC = data.getDouble("ACC", 0);
         EVA = data.getDouble("EVA", 0);
+        HLP = data.getDouble("HLP", 0);
         CriticalRate = data.getDouble("CriticalRate", 0);
         CriticalResist = data.getDouble("CriticalResist", 0);
     }
@@ -61,6 +64,7 @@ public class GenericStatusContainer extends SomLevel implements GenericStatus {
         DEF += param.getDEF();
         ACC += param.getACC();
         EVA += param.getEVA();
+        HLP += param.getHLP();
         CriticalRate += param.getCriticalRate();
         CriticalResist += param.getCriticalResist();
     }
@@ -75,6 +79,7 @@ public class GenericStatusContainer extends SomLevel implements GenericStatus {
         DEF *= param.getDEF();
         ACC *= param.getACC();
         EVA *= param.getEVA();
+        HLP *= param.getHLP();
         CriticalRate *= param.getCriticalRate();
         CriticalResist *= param.getCriticalResist();
     }
@@ -89,6 +94,7 @@ public class GenericStatusContainer extends SomLevel implements GenericStatus {
         DEF = param.getDEF();
         ACC = param.getACC();
         EVA = param.getEVA();
+        HLP = param.getHLP();
         CriticalRate = param.getCriticalRate();
         CriticalResist = param.getCriticalResist();
     }
@@ -171,6 +177,16 @@ public class GenericStatusContainer extends SomLevel implements GenericStatus {
     @Override
     public double getEVA() {
         return EVA;
+    }
+
+    @Override
+    public void setHLP(double HLP) {
+        this.HLP = HLP;
+    }
+
+    @Override
+    public double getHLP() {
+        return HLP;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
+import com.somrpg.swordofmagic7.Core.Menu.AttributeMenuContainer;
+import com.somrpg.swordofmagic7.Core.Menu.UserMenuType;
 import com.somrpg.swordofmagic7.Core.Player.Container.PlayerOtherContainer;
 
 import java.util.List;
@@ -20,5 +22,22 @@ public interface PlayerOther {
     }
     default void setActiveTeleportGate(Set<String> gate) {
         getPlayerOtherContainer().setActiveTeleportGate(gate);
+    }
+
+    default void setAttributePoint(int point) {
+        getPlayerOtherContainer().setAttributePoint(point);
+    }
+    default void addAttributePoint(int point) {
+        getPlayerOtherContainer().addAttributePoint(point);
+    }
+    default int getAttributePoint() {
+        return getPlayerOtherContainer().getAttributePoint();
+    }
+
+    default void setUserMenuType(UserMenuType type) {
+        getPlayerOtherContainer().setUserMenuType(type);
+    }
+    default UserMenuType getUserMenuType() {
+        return getPlayerOtherContainer().getUserMenuType();
     }
 }

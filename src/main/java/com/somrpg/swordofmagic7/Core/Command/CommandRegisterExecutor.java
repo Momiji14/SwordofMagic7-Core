@@ -39,6 +39,7 @@ public class CommandRegisterExecutor {
         executors.put("pvpMode", new CommandPvPMode());
         executors.put("castMode", new CommandCastMode());
         executors.put("strafeMode", new CommandStrafeMode());
+        executors.put("userMenuType", new CommandStrafeMode());
         
         for (Map.Entry<String, CommandExecutor> executor : executors.entrySet()) {
             try {

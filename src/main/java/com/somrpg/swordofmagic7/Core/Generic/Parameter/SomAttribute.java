@@ -34,6 +34,16 @@ public interface SomAttribute {
         return getAttributeContainer().getDEX();
     }
 
+    default void setTEC(int TEC) {
+        getAttributeContainer().setTEC(TEC);
+    }
+    default void addTEC(int TEC) {
+        getAttributeContainer().addTEC(TEC);
+    }
+    default int getTEC() {
+        return getAttributeContainer().getTEC();
+    }
+
     default void setSPI(int SPI) {
         getAttributeContainer().setSPI(SPI);
     }

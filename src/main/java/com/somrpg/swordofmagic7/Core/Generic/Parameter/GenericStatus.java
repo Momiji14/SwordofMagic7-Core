@@ -4,13 +4,14 @@ public interface GenericStatus {
 
     GenericStatusContainer getGenericStatusContainer();
 
-    default void setStatusParameter(double maxHealth, double healthRegen, double maxMana, double manaRegen, double atk, double def, double acc, double eva, double criticalRate, double criticalResist) {
+    default void setStatusParameter(double maxHealth, double healthRegen, double maxMana, double manaRegen, double atk, double def, double acc, double eva, double hlp, double criticalRate, double criticalResist) {
         setMaxHealth(maxHealth);
         setHealthRegen(healthRegen);
         setMaxMana(maxMana);
         setManaRegen(manaRegen);
         setATK(atk);
         setDEF(def);
+        setHLP(hlp);
         setACC(acc);
         setEVA(eva);
         setCriticalRate(criticalRate);
@@ -103,6 +104,12 @@ public interface GenericStatus {
     }
     default double getEVA() {
         return getGenericStatusContainer().getEVA();
+    }
+    default void setHLP(double HLP) {
+        getGenericStatusContainer().setHLP(HLP);
+    }
+    default double getHLP() {
+        return getGenericStatusContainer().getHLP();
     }
     default void setCriticalRate(double criticalRate) {
         getGenericStatusContainer().setCriticalRate(criticalRate);
