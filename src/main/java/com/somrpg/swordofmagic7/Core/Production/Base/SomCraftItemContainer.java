@@ -8,12 +8,13 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SomCraftItemContainer extends SomRecipeContainer implements SomCraftItem {
+public class SomCraftItemContainer implements SomCraftItem {
 
     private final SomItemStack somItemStack;
+    private final SomRecipe recipe;
 
     protected SomCraftItemContainer(SomRecipe recipe, SomItemStack somItemStack) {
-        super(recipe.getRecipe());
+        this.recipe = recipe != null ? recipe : SomRecipe.create(new ArrayList<>());
         this.somItemStack = somItemStack;
     }
 
@@ -35,5 +36,15 @@ public class SomCraftItemContainer extends SomRecipeContainer implements SomCraf
     @Override
     public String getPartition() {
         return "作成情報";
+    }
+
+    @Override
+    public SomRecipe getRecipe() {
+        return recipe;
+    }
+
+    @Override
+    public List<String> toStringList() {
+        return recipe.toStringList();
     }
 }

@@ -55,6 +55,8 @@ public interface DataBase {
     static void dataLoadable() {
         SomItemDataLoader.load();
         MapDataLoader.load();
+        RecipeLoader.load();
+        ShopDataLoader.load();
     }
 
     static void singleLoad() {

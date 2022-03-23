@@ -3,7 +3,9 @@ package com.somrpg.swordofmagic7.Core.Production.Base;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import org.bukkit.inventory.ItemStack;
 
-public interface SomCraftItem extends SomRecipe {
+import java.util.List;
+
+public interface SomCraftItem {
 
     static SomCraftItem create(SomRecipe recipe, SomItemStack somItemStack) {
         return new SomCraftItemContainer(recipe, somItemStack);
@@ -14,4 +16,8 @@ public interface SomCraftItem extends SomRecipe {
     ItemStack viewItemStack();
 
     String getPartition();
+
+    SomRecipe getRecipe();
+
+    List<String> toStringList();
 }

@@ -2,10 +2,11 @@ package com.somrpg.swordofmagic7.Core.Player.Level;
 
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 
-public class LifeReqExp {
-    private static final int[] reqExp = new int[GenericConfig.LifeMaxLevel];
+public interface LifeReqExp {
+    int[] reqExp = new int[GenericConfig.LifeMaxLevel];
 
-    public static int getReqExp(int level) {
+    static int getReqExp(int level) {
+        if (level < 1) return Integer.MAX_VALUE;
         int index = level-1;
         if (reqExp[index] == 0) {
             for (int i = 0; i < reqExp.length; i++) {

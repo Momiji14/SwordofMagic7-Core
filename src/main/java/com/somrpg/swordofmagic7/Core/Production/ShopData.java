@@ -12,4 +12,6 @@ public interface ShopData extends CraftData {
         return new ShopDataContainer(display, craftSlots);
     }
 
+    String getPartition();
+
 }

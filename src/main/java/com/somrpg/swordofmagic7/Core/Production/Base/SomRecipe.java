@@ -9,9 +9,7 @@ public interface SomRecipe {
         return new SomRecipeContainer(recipe);
     }
 
-    void setRecipe(List<SomItemStack> recipes);
-
-    List<SomItemStack> getRecipe();
+    List<SomItemStack> getReqStack();
 
     List<String> toStringList();
 }

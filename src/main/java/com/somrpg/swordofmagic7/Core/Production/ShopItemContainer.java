@@ -4,7 +4,10 @@ import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Production.Base.SomCraftItemContainer;
 import com.somrpg.swordofmagic7.Core.Production.Base.SomRecipe;
 
-public class ShopItemContainer extends SomCraftItemContainer implements ShopItem{
+import java.util.ArrayList;
+import java.util.List;
+
+public class ShopItemContainer extends SomCraftItemContainer implements ShopItem {
 
     private int price;
 
@@ -21,6 +24,14 @@ public class ShopItemContainer extends SomCraftItemContainer implements ShopItem
     @Override
     public int getPrice() {
         return price;
+    }
+
+    @Override
+    public List<String> toStringList() {
+        List<String> list = new ArrayList<>();
+        list.add("§7・§e§l" + getPrice() + "メル");
+        list.addAll(getRecipe().toStringList());
+        return list;
     }
 
 }

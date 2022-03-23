@@ -3,6 +3,7 @@ version: '${project.version}'
 main: com.somrpg.swordofmagic7.Core.SomCore
 api-version: 1.18
 authors: [ MomiNeko ]
+depend: [ HolographicDisplays, Citizens, LibsDisguises, ProtocolLib ]
 
 commands:
   somreload:

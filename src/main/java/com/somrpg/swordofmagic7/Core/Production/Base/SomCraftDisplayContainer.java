@@ -5,6 +5,7 @@ import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Menu.BaseMenu;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Production.CheckReturn;
+import com.somrpg.swordofmagic7.Core.SomCore;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
@@ -82,7 +83,7 @@ public class SomCraftDisplayContainer implements BaseMenu, SomCraftDisplay {
 
     @Override
     public CheckReturn isCraftAble(SomCraftItem craftItem, CheckReturn checkReturn) {
-        for (SomItemStack itemStack : craftItem.getRecipe()) {
+        for (SomItemStack itemStack : craftItem.getRecipe().getReqStack()) {
             int amount = itemStack.getAmount() * getAmount();
             if (getPlayerData().getItemInventory().hasContent(itemStack, amount)) {
                 checkReturn.getRequirements().add("§7・§e" + itemStack.getDisplay() + "§ax" + itemStack.getAmount() + " §b✔");
@@ -97,7 +98,7 @@ public class SomCraftDisplayContainer implements BaseMenu, SomCraftDisplay {
     @Override
     public void craft(SomCraftItem craftItem, CheckReturn checkReturn) {
         if (checkReturn.isOK()) {
-            for (SomItemStack itemStack : craftItem.getRecipe()) {
+            for (SomItemStack itemStack : craftItem.getRecipe().getReqStack()) {
                 playerData.getItemInventory().removeContent(itemStack);
             }
             SomItemStack itemStack = craftItem.getSomItemStack();

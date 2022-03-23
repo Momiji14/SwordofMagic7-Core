@@ -11,4 +11,9 @@ public class ShopDataContainer extends CraftDataContainer implements ShopData {
     public ShopDataContainer(String display, Map<Integer, CraftSlot> craftSlots) {
         super(display, craftSlots);
     }
+
+    @Override
+    public String getPartition() {
+        return "販売情報";
+    }
 }
