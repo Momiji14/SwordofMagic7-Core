@@ -9,74 +9,78 @@ public interface PlayerSetting {
 
     PlayerData getPlayerData();
 
-    default PlayerSetting getPlayerSetting() {
-        return getPlayerData().getPlayerSetting();
+    default PlayerSettingContainer getPlayerSettingContainer() {
+        return getPlayerData().getPlayerSettingContainer();
     }
 
     default void setPlayerStrafMode(PlayerStrafeMode playerStrafMode) {
-        getPlayerSetting().setPlayerStrafMode(playerStrafMode);
+        getPlayerSettingContainer().setPlayerStrafMode(playerStrafMode);
     }
     default PlayerStrafeMode getPlayerStrafeMode() {
-        return getPlayerSetting().getPlayerStrafeMode();
+        return getPlayerSettingContainer().getPlayerStrafeMode();
     }
 
     default void setPlayerPvPMode(PlayerPvPMode playerPvPMode) {
-        getPlayerSetting().setPlayerPvPMode(playerPvPMode);
+        getPlayerSettingContainer().setPlayerPvPMode(playerPvPMode);
     }
     default PlayerPvPMode getPlayerPvPMode() {
-        return getPlayerSetting().getPlayerPvPMode();
+        return getPlayerSettingContainer().getPlayerPvPMode();
     }
 
     default void setPlayMode(boolean playMode) {
-        getPlayerSetting().setPlayMode(playMode);
+        getPlayerSettingContainer().setPlayMode(playMode);
     }
     default boolean isPlayMode() {
-        return getPlayerSetting().isPlayMode();
+        return getPlayerSettingContainer().isPlayMode();
     }
 
     default void setPlayerCastMode(PlayerCastMode castMode) {
-        getPlayerSetting().setPlayerCastMode(castMode);
+        getPlayerSettingContainer().setPlayerCastMode(castMode);
     }
     default PlayerCastMode getPlayerCastMode() {
-        return getPlayerSetting().getPlayerCastMode();
+        return getPlayerSettingContainer().getPlayerCastMode();
     }
 
     default void setDamageLog(DamageLog damageLog) {
-        getPlayerSetting().setDamageLog(damageLog);
+        getPlayerSettingContainer().setDamageLog(damageLog);
     }
     default DamageLog getDamageLog() {
-        return getPlayerSetting().getDamageLog();
+        return getPlayerSettingContainer().getDamageLog();
     }
 
     default void setExpLog(ExpLog expLog) {
-        getPlayerSetting().setExpLog(expLog);
+        getPlayerSettingContainer().setExpLog(expLog);
     }
     default ExpLog getExpLog() {
-        return getPlayerSetting().getExpLog();
+        return getPlayerSettingContainer().getExpLog();
     }
 
     default void setDropLog(DropLog dropLog) {
-        getPlayerSetting().setDropLog(dropLog);
+        getPlayerSettingContainer().setDropLog(dropLog);
     }
     default DropLog getDropLog() {
-        return getPlayerSetting().getDropLog();
+        return getPlayerSettingContainer().getDropLog();
     }
 
     default void setViewInventory(SomInventoryType type) {
-        getPlayerSetting().setViewInventory(type);
+        getPlayerSettingContainer().setViewInventory(type);
     }
     default SomInventoryType getViewInventory() {
-        return getPlayerSetting().getViewInventory();
+        return getPlayerSettingContainer().getViewInventory();
     }
 
     default void setViewDigit(int digit) {
-        getPlayerSetting().setViewDigit(digit);
+        getPlayerSettingContainer().setViewDigit(digit);
     }
 
     default int getViewDigit() {
-        return getPlayerSetting().getViewDigit();
+        return getPlayerSettingContainer().getViewDigit();
     }
 
-    void save(FileConfiguration data);
-    void load(FileConfiguration data);
+    default void saveSetting(FileConfiguration data) {
+        getPlayerSettingContainer().loadSetting(data);
+    }
+    default void loadSetting(FileConfiguration data) {
+        getPlayerSettingContainer().loadSetting(data);
+    }
 }

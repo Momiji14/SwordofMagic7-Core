@@ -38,17 +38,18 @@ public class PlayerDataContainer implements PlayerData {
 
     private File playerFile;
     private final PlayerEntityContainer playerEntity;
-    private final PlayerCharacon playerCharacon;
-    private final PlayerDisplay playerDisplayContainer;
-    private final PlayerBank playerBank;
-    private final PlayerSetting playerSettingContainer;
-    private final PlayerInput playerInput;
-    private final PlayerStatistics playerStatistics;
     private final PlayerOtherContainer playerOther;
+    private final PlayerStatisticsContainer playerStatistics;
+    private final PlayerSettingContainer playerSetting;
+    private final PlayerBankContainer playerBank;
 
-    private final ItemInventory itemInventoryContainer;
-    private final RuneInventory runeInventoryContainer;
-    private final PetInventory petInventoryContainer;
+    private final PlayerCharacon playerCharacon;
+    private final PlayerDisplay playerDisplay;
+    private final PlayerInput playerInput;
+
+    private final ItemInventory itemInventory;
+    private final RuneInventory runeInventory;
+    private final PetInventory petInventory;
 
     private final PlayerUserMenu playerUserMenu;
     private final PlayerSettingMenu playerSettingMenu;
@@ -59,102 +60,65 @@ public class PlayerDataContainer implements PlayerData {
     PlayerDataContainer(Player player) {
         this.player = player;
         playerEntity = new PlayerEntityContainer(this);
-        playerCharacon = new PlayerCharacon(this);
-        playerDisplayContainer = new PlayerDisplayContainer(this);
-        playerBank = new PlayerBankContainer(this);
-        playerInput = new PlayerInputContainer(this);
-        playerSettingContainer = new PlayerSettingContainer(this);
-        playerStatistics = new PlayerStatisticsContainer(this);
         playerOther = new PlayerOtherContainer(this);
+        playerSetting = new PlayerSettingContainer(this);
+        playerStatistics = new PlayerStatisticsContainer(this);
+        playerBank = new PlayerBankContainer(this);
 
-        itemInventoryContainer = new ItemInventoryContainer(this);
-        runeInventoryContainer = new RuneInventoryContainer(this);
-        petInventoryContainer = new PetInventoryContainer(this);
+        playerCharacon = new PlayerCharacon(this);
+        playerDisplay = new PlayerDisplayContainer(this);
+        playerInput = new PlayerInputContainer(this);
+
+
+        itemInventory = new ItemInventoryContainer(this);
+        runeInventory = new RuneInventoryContainer(this);
+        petInventory = new PetInventoryContainer(this);
 
         playerUserMenu = new PlayerUserMenu(this);
         playerSettingMenu = new PlayerSettingMenu(this);
         teleportGateMenu = new TeleportGateMenu(this);
     }
 
-    @Override
-    public PlayerOtherContainer getPlayerOtherContainer() {
-        return playerOther;
-    }
-
-    @Override
-    public PlayerData getPlayerData() {
-        return this;
-    }
-
-    @Override
-    public Set<String> getActiveTeleportGate() {
-        return null;
-    }
-
-    @Override
-    public PlayerDataContainer getPlayerDataContainer() {
-        return this;
-    }
-
-    @Override
-    public Player getPlayer() {
+    @Override public Player getPlayer() {
         return player;
     }
-
-    @Override
-    public SomInventory getBaseViewInventory() {
-        return getBaseInventory(getViewInventory());
+    @Override public PlayerData getPlayerData() {
+        return this;
+    }
+    @Override public PlayerDataContainer getPlayerDataContainer() {
+        return this;
     }
 
-    @Override
-    public SomInventoryType getViewInventory() {
+    @Override public PlayerEntityContainer getPlayerEntityContainer() {
+        return playerEntity;
+    }
+    @Override public BaseEntityContainer getBaseEntityContainer() {
+        return playerEntity;
+    }
+    @Override public PlayerOtherContainer getPlayerOtherContainer() {
+        return playerOther;
+    }
+    @Override public PlayerBankContainer getPlayerBankContainer() {
+        return playerBank;
+    }
+    @Override public PlayerSettingContainer getPlayerSettingContainer() {
+        return playerSetting;
+    }
+
+    @Override public SomInventory getBaseViewInventory() {
+        return getBaseInventory(getViewInventory());
+    }
+    @Override public SomInventoryType getViewInventory() {
         return getPlayerSetting().getViewInventory();
     }
 
-    @Override
-    public void save(FileConfiguration data) {
-
-    }
-
-    @Override
-    public void load(FileConfiguration data) {
-
-    }
-
-    @Override
-    public PlayerEntity getPlayerEntity() {
-        return playerEntity;
-    }
-
-    @Override
-    public BaseEntityContainer getBaseEntityContainer() {
-        return playerEntity;
-    }
-
-    @Override
-    public PlayerEntityContainer getPlayerEntityContainer() {
-        return playerEntity;
-    }
-
-    @Override
-    public PlayerCharacon getPlayerCharacon() {
+    @Override public PlayerCharacon getPlayerCharacon() {
         return playerCharacon;
     }
-
-    @Override
-    public PlayerDisplay getPlayerViewBar() {
-        return playerDisplayContainer;
+    @Override public PlayerDisplay getPlayerViewBar() {
+        return playerDisplay;
     }
 
-    @Override
-    public PlayerBank getPlayerBank() {
-        return playerBank;
-    }
-
-    @Override
-    public PlayerSetting getPlayerSetting() {
-        return playerSettingContainer;
-    }
 
     @Override
     public PlayerInput getPlayerInput() {

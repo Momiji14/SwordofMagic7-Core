@@ -8,11 +8,12 @@ import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatusContainer;
 import java.util.Collection;
 import java.util.HashSet;
 
-public class BaseEntityContainer extends GenericStatusContainer implements BaseEntity, SomAttribute {
+public class BaseEntityContainer implements BaseEntity, SomAttribute {
     private double Health = 0;
     private double Mana = 0;
     private final Collection<EffectData> EffectSet = new HashSet<>();
-    private final SomAttributeContainer attribute = new SomAttributeContainer();
+    private final SomAttributeContainer attributeContainer = new SomAttributeContainer();
+    private final GenericStatusContainer genericStatusContainer = new GenericStatusContainer();
 
     public BaseEntityContainer() {
         startEffectTimer();
@@ -21,6 +22,16 @@ public class BaseEntityContainer extends GenericStatusContainer implements BaseE
     @Override
     public BaseEntityContainer getBaseEntityContainer() {
         return this;
+    }
+
+    @Override
+    public GenericStatusContainer getGenericStatusContainer() {
+        return genericStatusContainer;
+    }
+
+    @Override
+    public SomAttributeContainer getAttributeContainer() {
+        return attributeContainer;
     }
 
     @Override
@@ -66,10 +77,5 @@ public class BaseEntityContainer extends GenericStatusContainer implements BaseE
     @Override
     public Collection<EffectData> getEffectSet() {
         return EffectSet;
-    }
-
-    @Override
-    public SomAttributeContainer getAttributeContainer() {
-        return attribute;
     }
 }
