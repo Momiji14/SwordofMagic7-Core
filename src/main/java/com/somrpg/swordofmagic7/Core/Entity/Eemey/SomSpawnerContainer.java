@@ -38,6 +38,7 @@ public class SomSpawnerContainer implements SomSpawner {
     @Override
     public void start() {
         if (!isStarted()) {
+            SomCore.log(file.getName() + "'s spawner started");
             isStarted = true;
             SomCore.getSomTask().AsyncTaskTimer(() -> {
                 getSpawnedEnemy().removeIf(EnemyController::isDead);
@@ -50,12 +51,16 @@ public class SomSpawnerContainer implements SomSpawner {
                         Location origin = new Location(getLocation().getWorld(), x, y, z);
                         for (int i2 = 0; i2 < getRadiusY(); i2++) {
                             if (!origin.getBlock().getType().isSolid() && origin.clone().add(VectorDown).getBlock().getType().isSolid()) {
-                                EnemyController.spawn(getEnemyData(), origin, getLevel());
+                                SomCore.getSomTask().SyncTask(() -> {
+                                    EnemyController.spawn(getEnemyData(), origin, getLevel());
+                                });
                             }
                         }
                     }
                 }
             }, 50);
+        } else {
+            SomCore.log(file.getName() + "'s spawner already");
         }
     }
 

@@ -19,7 +19,7 @@ public interface SomSpawnerLoader {
     Map<String, SomSpawner> SpawnerDataList = new HashMap<>();
 
     static void load() {
-        for (File file : DataBase.dump(new File(DataBasePath, "MobSpawner/"))) {
+        for (File file : DataBase.dump(new File(DataBasePath, "Spawner/"))) {
             try {
                 String fileName = file.getName().replace(".yml", "");
                 FileConfiguration data = YamlConfiguration.loadConfiguration(file);
