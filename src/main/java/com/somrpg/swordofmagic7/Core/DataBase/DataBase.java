@@ -21,11 +21,10 @@ import java.util.Map;
 
 public interface DataBase {
 
-    SomItemStack ErrorItemStack = new SomItemStack("Error SomItemStack", Material.BARRIER);
-    Map<String, SomItemStack> SomItemDataList = new HashMap<>();
+
     Map<String, SomRecipe> SomRecipeList = new HashMap<>();
     Map<String, ShopData> ShopDataList = new HashMap<>();
-    Map<String, MapData> MapDataList = new HashMap<>();
+
     Map<String, WarpGateData> WarpGateList = new HashMap<>();
     Map<String, TeleportGateData> TeleportGateList = new HashMap<>();
 
@@ -62,22 +61,6 @@ public interface DataBase {
     static void singleLoad() {
         WarpGateLoader.load();
         TeleportGateLoader.load();
-    }
-
-    @Nullable
-    static SomItemStack getSomItemStack(String key) {
-        if (SomItemDataList.containsKey(key)) {
-            return SomItemDataList.get(key).clone();
-        }
-        return null;
-    }
-
-    @Nullable
-    static MapData getMapData(String key) {
-        if (MapDataList.containsKey(key)) {
-            return MapDataList.get(key);
-        }
-        return null;
     }
 
     @Nullable

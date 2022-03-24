@@ -1,5 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Generic;
 
+import com.somrpg.swordofmagic7.Core.ClassesSkills.ClassData;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -14,6 +15,9 @@ public interface GenericConfig {
 
     int GenericDigit = 2;
 
+    int ClassSlot = 4;
+    int[] SlotReqLevel = {1, 10, 30, 50};
+    ClassData defaultClass = getClassData("Novice");
     int PlayerMaxLevel = 50;
     int ClassMaxLevel = 15;
     int LifeMaxLevel = 30;

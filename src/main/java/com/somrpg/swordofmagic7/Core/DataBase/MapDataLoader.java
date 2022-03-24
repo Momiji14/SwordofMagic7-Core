@@ -3,12 +3,18 @@ package com.somrpg.swordofmagic7.Core.DataBase;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.DataBasePath;
 
-public interface MapDataLoader extends DataBase {
+public interface MapDataLoader {
+
+    Map<String, MapData> MapDataList = new HashMap<>();
+
     static void load() {
         for (File file : DataBase.dump(new File(DataBasePath, "MapData"))) {
             try {
@@ -51,4 +57,13 @@ public interface MapDataLoader extends DataBase {
             }
         }
     }
+
+    @Nullable
+    static MapData getMapData(String key) {
+        if (MapDataList.containsKey(key)) {
+            return MapDataList.get(key);
+        }
+        return null;
+    }
+
 }

@@ -11,13 +11,21 @@ import com.somrpg.swordofmagic7.Core.Item.RuneItem;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.DataBasePath;
 
 public interface SomItemDataLoader extends DataBase {
+
+    SomItemStack ErrorItemStack = new SomItemStack("Error SomItemStack", Material.BARRIER);
+    Map<String, SomItemStack> SomItemDataList = new HashMap<>();
+
     static void load() {
         for (File file : DataBase.dump(new File(DataBasePath, "ItemData"))) {
             try {
@@ -59,7 +67,7 @@ public interface SomItemDataLoader extends DataBase {
                 List<String> lore = data.getStringList("Lore");
                 SomItemStack item = new SomItemStack(fileName, display, material, lore);
                 RuneItem runeItem = new RuneItem(item, new GenericStatusContainer(data));
-                DataBase.SomItemDataList.put(fileName, runeItem);
+                SomItemDataList.put(fileName, runeItem);
             } catch (Exception e) {
                 e.printStackTrace();
                 DataBase.loadError(file);
@@ -69,8 +77,9 @@ public interface SomItemDataLoader extends DataBase {
 
     static SomItemStack getItem(String id) {
         if (SomItemDataList.containsKey(id)) {
-            return SomItemDataList.get(id);
+            return SomItemDataList.get(id).clone();
         }
-        return new SomItemStack("Error Id -> " + id, Material.BARRIER);
+        return null;
+        //return new SomItemStack("Error Id -> " + id, Material.BARRIER);
     }
 }
