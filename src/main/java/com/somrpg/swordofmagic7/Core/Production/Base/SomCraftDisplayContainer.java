@@ -2,6 +2,7 @@ package com.somrpg.swordofmagic7.Core.Production.Base;
 
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
+import com.somrpg.swordofmagic7.Core.Item.BaseItem;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Production.CheckReturn;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
@@ -99,6 +100,7 @@ public class SomCraftDisplayContainer implements SomCraftDisplay {
                 playerData.getItemInventory().removeContent(itemStack);
             }
             SomItemStack itemStack = craftItem.getSomItemStack();
+            getPlayerData().getItemInventory().addContent((BaseItem) itemStack);
             getPlayerData().sendMessage("§e[" + itemStack.getDisplay() + "§ax" + itemStack.getAmount() * getAmount() + "§e]§aを§b" + getChar() + "§aしました", SomSound.LevelUp);
         } else {
             getPlayerData().sendMessage(checkReturn.getRequirements(), SomSound.Nope);

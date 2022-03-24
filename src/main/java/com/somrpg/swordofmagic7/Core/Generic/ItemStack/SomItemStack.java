@@ -14,6 +14,7 @@ import java.util.*;
 public class SomItemStack extends ViewableItemStack implements Cloneable {
 
     public static boolean equal(SomItemStack itemStack, SomItemStack itemStack2) {
+        if (!Objects.equals(itemStack.getId(), itemStack2.getId())) return false;
         if (itemStack instanceof EquipmentItem item && itemStack2 instanceof EquipmentItem item2) {
             return item.getPlus() == item2.getPlus();
         } else if (itemStack instanceof RuneItem item && itemStack2 instanceof RuneItem item2) {
