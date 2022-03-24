@@ -1,8 +1,17 @@
 package com.somrpg.swordofmagic7.Core.Player.Inventory;
 
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
+import org.bukkit.inventory.ItemStack;
 
 public interface SkillHolder {
+
+    static SkillHolder create(String key, SkillHolderType type) {
+        SkillHolder skillHolder = new SkillHolderContainer();
+        skillHolder.setKey(key);
+        skillHolder.setType(type);
+        return skillHolder;
+    }
 
     static SkillHolder fromDataString(String data) {
         SkillHolder skillHolder = new SkillHolderContainer();
@@ -25,4 +34,6 @@ public interface SkillHolder {
     SkillHolderType getType();
 
     void setType(SkillHolderType type);
+
+    ItemStack viewItemStack(PlayerData playerData, int slot);
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface SkillSlot {
 
+    void setSelectSlot(int slot);
+
     void SkillSlotUse(int slot);
 
     SkillHolder getSkillSlot(int slot);

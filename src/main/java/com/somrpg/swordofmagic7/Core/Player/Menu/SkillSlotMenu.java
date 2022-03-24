@@ -1,4 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Player.Menu;
 
-public interface SkillSlotMenu {
+import com.somrpg.swordofmagic7.Core.Generic.Item.BaseItem;
+
+public interface SkillSlotMenu extends BaseMenu  {
+
 }

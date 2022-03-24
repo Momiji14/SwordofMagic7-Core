@@ -6,7 +6,7 @@ import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-public class SomCookItem extends SomPotionItem {
+public class SomCookItem extends SomPotionItem implements Cloneable {
 
     private GenericStatus fixed;
     private GenericStatus multiply;
@@ -34,4 +34,14 @@ public class SomCookItem extends SomPotionItem {
         }
     }
 
+    public SomCookItem cloneCookItem() {
+        return clone();
+    }
+
+    @Override
+    public SomCookItem clone() {
+        SomCookItem clone = (SomCookItem) super.clone();
+        // TODO: このクローンが元の内部を変更できないようにミュータブルな状態をここにコピーします
+        return clone;
+    }
 }

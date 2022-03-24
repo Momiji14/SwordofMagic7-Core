@@ -37,10 +37,13 @@ public class RuneItem extends SomItemStack implements Cloneable {
     }
 
     public RuneItem cloneRune() {
-        try {
-            return (RuneItem) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
-        }
+        return clone();
+    }
+
+    @Override
+    public RuneItem clone() {
+        RuneItem clone = (RuneItem) super.clone();
+        // TODO: このクローンが元の内部を変更できないようにミュータブルな状態をここにコピーします
+        return clone;
     }
 }

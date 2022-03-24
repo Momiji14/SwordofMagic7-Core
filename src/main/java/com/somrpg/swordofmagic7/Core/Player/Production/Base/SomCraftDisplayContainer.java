@@ -100,7 +100,7 @@ public class SomCraftDisplayContainer implements SomCraftDisplay {
                 playerData.getItemInventory().removeContent(itemStack);
             }
             BaseItem itemStack = craftItem.getItem();
-            getPlayerData().getItemInventory().addContent(itemStack.cloneBaseItem());
+            getPlayerData().getItemInventory().addContent(itemStack.cloneItem());
             getPlayerData().sendMessage("§e[" + itemStack.getDisplay() + "§ax" + itemStack.getAmount() * getAmount() + "§e]§aを§b" + getChar() + "§aしました", SomSound.LevelUp);
         } else {
             getPlayerData().sendMessage(checkReturn.getRequirements(), SomSound.Nope);

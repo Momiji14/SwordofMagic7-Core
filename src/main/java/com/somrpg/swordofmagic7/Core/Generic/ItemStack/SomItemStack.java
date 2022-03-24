@@ -130,11 +130,19 @@ public class SomItemStack extends ViewableItemStack implements Cloneable {
         }
     }
 
-    public SomItemStack cloneSomItemStack() {
+
+    @Override
+    public SomItemStack clone() {
         try {
-            return (SomItemStack) super.clone();
+            SomItemStack clone = (SomItemStack) super.clone();
+            // TODO: このクローンが元の内部を変更できないようにミュータブルな状態をここにコピーします
+            return clone;
         } catch (CloneNotSupportedException e) {
             throw new AssertionError();
         }
+    }
+
+    public SomItemStack cloneSomItemStack() {
+        return clone();
     }
 }

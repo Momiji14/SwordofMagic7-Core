@@ -18,8 +18,10 @@ public class PlayerControlListener implements Listener {
     public void onJump(PlayerJumpEvent event) {
         Player player = event.getPlayer();
         PlayerData playerData = PlayerData.getData(player);
-        playerData.getPlayerCharacon().resetStrafe();
-        player.setAllowFlight(playerData.getPlayerSetting().getPlayerStrafeMode().isDoubleJump());
+        if (playerData.isPlayMode()) {
+            playerData.getPlayerCharacon().resetStrafe();
+            player.setAllowFlight(playerData.getPlayerSetting().getPlayerStrafeMode().isDoubleJump());
+        }
     }
 
     @EventHandler

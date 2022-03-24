@@ -7,6 +7,7 @@ import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -16,25 +17,21 @@ public class SkillSlotContainer implements SkillSlot {
 
     private final PlayerData playerData;
     private final SkillHolder[] skillSlot = new SkillHolder[32];
+    private int selectSlot = -1;
 
     public SkillSlotContainer(PlayerData playerData) {
         this.playerData = playerData;
     }
 
     public ItemStack viewItemStack(int slot) {
-        ItemStack item = ViewableItemStack.create("§7§lスロット[" + (slot+1) + "]", Material.IRON_BARS, 1).viewItemStackNonDeco();
-
-        switch (getSkillSlot(slot).getType()) {
-            case Skill -> {
-
-            }
-            case Item -> {
-                SomItemStack itemStack = playerData.getItemInventory().getContent(getSkillSlot(slot).getKey());
-                if (itemStack == null) itemStack = SomItemDataLoader.getItem(getSkillSlot(slot).getKey());
-                if (itemStack != null) item = itemStack.viewItemStack();
-            }
-        }
+        ItemStack item = getSkillSlot(slot).viewItemStack(playerData, slot);
+        if (selectSlot == slot) item.addUnsafeEnchantment(Enchantment.DURABILITY, 0);
         return item;
+    }
+
+    @Override
+    public void setSelectSlot(int slot) {
+        selectSlot = slot;
     }
 
     @Override

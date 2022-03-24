@@ -21,8 +21,9 @@ public class SomRecipeContainer implements SomRecipe {
     @Override
     public List<String> toStringList(boolean bold) {
         List<String> list = new ArrayList<>();
+        String boldText = bold ? "§l" : "";
         for (SomItemStack recipe : getReqStack()) {
-            list.add("§7・§e" + recipe.getDisplay() + "§ax" + recipe.getAmount());
+            list.add("§7・§e" + boldText + recipe.getDisplay() + "§a"  + boldText + "x" + recipe.getAmount());
         }
         return list;
     }

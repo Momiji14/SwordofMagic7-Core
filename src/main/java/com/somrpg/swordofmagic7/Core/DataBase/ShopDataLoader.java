@@ -32,7 +32,7 @@ public interface ShopDataLoader {
                 for (String str : data.getStringList("Data")) {
                     Map<String, String> mapData = new HashMap<>();
                     List<String> split = new ArrayList<>(List.of(str.split(",")));
-                    BaseItem item = (BaseItem) SomItemDataLoader.getItem(split.get(0));
+                    BaseItem item = SomItemDataLoader.getItem(split.get(0));
                     split.remove(0);
                     for (String str2 : split) {
                         String[] split2 = str2.split(":");

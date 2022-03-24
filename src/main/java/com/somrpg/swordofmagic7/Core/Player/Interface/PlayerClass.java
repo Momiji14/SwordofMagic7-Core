@@ -2,6 +2,10 @@ package com.somrpg.swordofmagic7.Core.Player.Interface;
 
 import com.somrpg.swordofmagic7.Core.Player.ClassesSkills.ClassData;
 import com.somrpg.swordofmagic7.Core.Player.Container.PlayerClassContainer;
+import com.somrpg.swordofmagic7.Core.Player.Skills.SkillData;
+import com.somrpg.swordofmagic7.Core.Player.Skills.SkillType;
+
+import java.util.List;
 
 public interface PlayerClass {
 
@@ -41,5 +45,9 @@ public interface PlayerClass {
 
     default String getClassExpPercent(ClassData classData) {
         return getPlayerClassContainer().getClassExpPercent(classData);
+    }
+
+    default List<SkillData> getSkillsAt(SkillType skillType) {
+        return getPlayerClassContainer().getSkillsAt(skillType);
     }
 }

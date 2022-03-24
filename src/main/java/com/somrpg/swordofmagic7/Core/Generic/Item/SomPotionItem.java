@@ -5,7 +5,7 @@ import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-public class SomPotionItem extends BaseItem {
+public class SomPotionItem extends BaseItem implements Cloneable {
 
     private double Health = 0;
     private double Mana = 0;
@@ -46,5 +46,16 @@ public class SomPotionItem extends BaseItem {
         } else {
             playerData.sendMessage("§aすでに§e全回復§aしています", SomSound.Nope);
         }
+    }
+
+    public SomPotionItem clonePotionItem() {
+        return clone();
+    }
+
+    @Override
+    public SomPotionItem clone() {
+        SomPotionItem clone = (SomPotionItem) super.clone();
+        // TODO: このクローンが元の内部を変更できないようにミュータブルな状態をここにコピーします
+        return clone;
     }
 }

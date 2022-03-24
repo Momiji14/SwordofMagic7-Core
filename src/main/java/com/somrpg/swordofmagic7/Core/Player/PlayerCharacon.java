@@ -43,7 +43,7 @@ public class PlayerCharacon {
     }
 
     public void strafe() {
-        if (!player.isFlying() && !player.isOnGround() && strafe > 0) {
+        if (!player.isFlying() && !player.isOnGround() && strafe >= 0) {
             strafe--;
             double y;
             if (wallKicked) {

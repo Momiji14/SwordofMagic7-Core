@@ -5,8 +5,12 @@ import com.somrpg.swordofmagic7.Core.Player.ClassesSkills.ClassData;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerClass;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Player.Level.ClassReqExp;
+import com.somrpg.swordofmagic7.Core.Player.Skills.SkillData;
+import com.somrpg.swordofmagic7.Core.Player.Skills.SkillType;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.somrpg.swordofmagic7.Core.Generic.DecoFormat.ScaleDigit;
@@ -79,5 +83,15 @@ public class PlayerClassContainer implements PlayerClass {
     @Override
     public String getClassExpPercent(ClassData classData) {
         return ScaleDigit((double) getClassExp(classData)/ ClassReqExp.getReqExp(getClassLevel(classData))*100f, playerData.getViewDigit()) + "%";
+    }
+
+    @Override
+    public List<SkillData> getSkillsAt(SkillType skillType) {
+        List<SkillData> skillsAt = new ArrayList<>();
+        for (ClassData classData : getClassSlot()) {
+            if (classData != null) skillsAt.addAll(classData.getSkillList());
+        }
+        skillsAt.removeIf(skillData -> skillData.getSkillType() != skillType);
+        return skillsAt;
     }
 }

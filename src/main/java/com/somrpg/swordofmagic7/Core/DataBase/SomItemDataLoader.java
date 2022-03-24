@@ -41,6 +41,19 @@ public interface SomItemDataLoader extends DataBase {
                         EquipmentItem equipmentItem = (EquipmentItem) item;
                         equipmentItem.getStatusParameter().loadFile(data);
                     }
+                    case Potion -> {
+                        SomPotionItem potionItem = new SomPotionItem(item, ItemCategory.Potion, sell);
+                        potionItem.setHealth(data.getDouble("Health", 0));
+                        potionItem.setMana(data.getDouble("Mana", 0));
+                        item = potionItem;
+                    }
+                    case Cook -> {
+                        SomCookItem cookItem = new SomCookItem(item, ItemCategory.Potion, sell);
+                        cookItem.setHealth(data.getDouble("Health", 0));
+                        cookItem.setMana(data.getDouble("Mana", 0));
+                        item = cookItem;
+                    }
+                    default -> item = baseItem;
                 }
                 if (material == Material.PLAYER_HEAD) {
                     item.setMaterialData(data.getString("PlayerHead"));
@@ -70,11 +83,34 @@ public interface SomItemDataLoader extends DataBase {
     }
 
     @Nullable
-    static SomItemStack getItem(String id) {
+    static SomItemStack getSomItemStack(String id) {
         if (SomItemDataList.containsKey(id)) {
             return SomItemDataList.get(id).cloneSomItemStack();
         }
         return null;
-        //return new SomItemStack("Error Id -> " + id, Material.BARRIER);
     }
+    @Nullable
+    static BaseItem getItem(String id) {
+        if (SomItemDataList.containsKey(id)) {
+            return ((BaseItem) SomItemDataList.get(id)).cloneItem();
+        }
+        return null;
+    }
+
+    @Nullable
+    static EquipmentItem getEquipment(String id) {
+        if (SomItemDataList.containsKey(id)) {
+            return ((EquipmentItem) SomItemDataList.get(id)).cloneEquipment();
+        }
+        return null;
+    }
+
+    @Nullable
+    static RuneItem getRune(String id) {
+        if (SomItemDataList.containsKey(id)) {
+            return ((RuneItem) SomItemDataList.get(id)).cloneRune();
+        }
+        return null;
+    }
+
 }

@@ -65,10 +65,13 @@ public class EquipmentItem extends BaseItem implements Cloneable {
     }
 
     public EquipmentItem cloneEquipment() {
-        try {
-            return (EquipmentItem) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
-        }
+       return clone();
+    }
+
+    @Override
+    public EquipmentItem clone() {
+        EquipmentItem clone = (EquipmentItem) super.clone();
+        // TODO: このクローンが元の内部を変更できないようにミュータブルな状態をここにコピーします
+        return clone;
     }
 }

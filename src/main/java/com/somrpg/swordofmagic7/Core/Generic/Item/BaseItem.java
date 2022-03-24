@@ -25,11 +25,14 @@ public class BaseItem extends SomItemStack implements Cloneable {
         return this;
     }
 
-    public BaseItem cloneBaseItem() {
-        try {
-            return (BaseItem) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
-        }
+    public BaseItem cloneItem() {
+        return clone();
+    }
+
+    @Override
+    public BaseItem clone() {
+        BaseItem clone = (BaseItem) super.clone();
+        // TODO: このクローンが元の内部を変更できないようにミュータブルな状態をここにコピーします
+        return clone;
     }
 }
