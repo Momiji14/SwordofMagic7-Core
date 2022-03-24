@@ -37,7 +37,11 @@ public class ClassMenuContainer implements ClassMenu {
 
     @Override
     public String getGUIDisplay() {
-        return "クラスメニュー";
+        if (selectSlot == -1) {
+            return "クラスメニュー [スロット選択]";
+        } else {
+            return "クラスメニュー [クラス選択]";
+        }
     }
 
     @Override

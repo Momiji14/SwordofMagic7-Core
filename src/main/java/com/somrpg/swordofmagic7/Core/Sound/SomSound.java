@@ -13,7 +13,7 @@ public enum SomSound {
     Close(Sound.BLOCK_CHEST_CLOSE, 1, 1),
 
     LevelUp(Sound.ENTITY_PLAYER_LEVELUP, 1, 1),
-    Nope(Sound.BLOCK_NOTE_BLOCK_HARP, 1, 0),
+    Nope(Sound.BLOCK_NOTE_BLOCK_HARP, 0, 1),
     Equip(Sound.ITEM_ARMOR_EQUIP_CHAIN, 1, 1),
 
     Shoot(Sound.ENTITY_WITHER_SHOOT, 1, 1),

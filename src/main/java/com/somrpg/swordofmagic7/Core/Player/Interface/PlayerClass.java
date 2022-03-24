@@ -4,6 +4,7 @@ import com.somrpg.swordofmagic7.Core.Player.ClassesSkills.ClassData;
 import com.somrpg.swordofmagic7.Core.Player.Container.PlayerClassContainer;
 import com.somrpg.swordofmagic7.Core.Player.Skills.SkillData;
 import com.somrpg.swordofmagic7.Core.Player.Skills.SkillType;
+import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.List;
 
@@ -49,5 +50,13 @@ public interface PlayerClass {
 
     default List<SkillData> getSkillsAt(SkillType skillType) {
         return getPlayerClassContainer().getSkillsAt(skillType);
+    }
+
+    default void saveClass(FileConfiguration data) {
+        getPlayerClassContainer().saveClass(data);
+    }
+
+    default void loadClass(FileConfiguration data) {
+        getPlayerClassContainer().loadClass(data);
     }
 }

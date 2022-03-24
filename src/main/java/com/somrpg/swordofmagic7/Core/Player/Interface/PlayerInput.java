@@ -31,6 +31,7 @@ public interface PlayerInput {
                 getPlayerData().getTeleportGateMenu().onClick(event);
                 getPlayerData().getShopDisplay().onClick(event);
                 getPlayerData().getClassMenu().onClick(event);
+                getPlayerData().getSkillSlotMenu().onClick(event);
             } else if (view.getBottomInventory() == clickedInv) {
                 if (slot >= 8) {
                     switch (slot) {
@@ -52,13 +53,13 @@ public interface PlayerInput {
                             switch (getPlayerData().getViewInventory()) {
                                 case ItemInventory -> {
                                     int scroll = getPlayerData().getItemInventory().getScroll();
-                                    SomItemStack itemStack = getPlayerData().getItemInventory().getList().get(scroll * 8 + index(slot));
+                                    SomItemStack itemStack = getPlayerData().getItemInventory().getList().get(scroll * 8 + indexInventory(slot));
                                     if (itemStack instanceof EquipmentItem item) {
                                         getPlayerData().getItemInventory().setEquipment(item);
                                     }
                                 }
                                 case SkillSlot -> {
-                                    getPlayerData().getSkillSlot().setSelectSlot(index(slot));
+                                    getPlayerData().getSkillSlot().setSelectSlot(indexSKillSlot(slot));
                                     getPlayerData().getSkillSlotMenu().openGUI();
                                 }
                             }
@@ -72,8 +73,15 @@ public interface PlayerInput {
         }
     }
 
-    default int index(int i) {
+    default int indexInventory(int i) {
         i -= 9;
+        if (i > 17) i--;
+        if (i > 26) i--;
+        return i;
+    }
+
+    default int indexSKillSlot(int i) {
+        if (i > 8) i--;
         if (i > 17) i--;
         if (i > 26) i--;
         return i;
@@ -81,6 +89,7 @@ public interface PlayerInput {
 
     default void onCloseGUI(InventoryCloseEvent event) {
         SomSound.Close.play(getPlayerData().getPlayer());
+        getPlayerData().getSkillSlotMenu().close(event);
         getPlayerData().getPlayerEntity().statusUpdate();
         getPlayerData().viewUpdate();
     }

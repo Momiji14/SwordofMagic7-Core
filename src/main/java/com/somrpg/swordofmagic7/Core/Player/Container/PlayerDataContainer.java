@@ -219,7 +219,9 @@ public class PlayerDataContainer implements PlayerData {
             data.set(PathPetInventory, getPetInventory().getContentsToString());
             data.set(PathSkillSlot, getSkillSlot().toDataString());
 
-            //その他
+            //クラス
+            getPlayerClass().saveClass(data);
+            //設定
             getPlayerSetting().saveSetting(data);
 
             data.save(playerFile);
@@ -261,7 +263,9 @@ public class PlayerDataContainer implements PlayerData {
             getPetInventory().fromContentsFromString(data.getStringList(PathPetInventory));
             getSkillSlot().fromDataString(data.getStringList(PathSkillSlot));
 
-            //その他
+            //クラス
+            getPlayerClass().loadClass(data);
+            //設定
             getPlayerSetting().loadSetting(data);
 
             getPlayerEntity().statusUpdate();

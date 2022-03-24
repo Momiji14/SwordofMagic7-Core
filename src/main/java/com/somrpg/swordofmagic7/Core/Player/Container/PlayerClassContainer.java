@@ -1,5 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Player.Container;
 
+import com.somrpg.swordofmagic7.Core.DataBase.ClassDataLoader;
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Player.ClassesSkills.ClassData;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerClass;
@@ -7,6 +8,7 @@ import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Player.Level.ClassReqExp;
 import com.somrpg.swordofmagic7.Core.Player.Skills.SkillData;
 import com.somrpg.swordofmagic7.Core.Player.Skills.SkillType;
+import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -93,5 +95,32 @@ public class PlayerClassContainer implements PlayerClass {
         }
         skillsAt.removeIf(skillData -> skillData.getSkillType() != skillType);
         return skillsAt;
+    }
+
+    @Override
+    public void saveClass(FileConfiguration data) {
+        int i = 0;
+        for (ClassData classData : getClassSlot()) {
+            data.set("ClassSlot.Slot-" + i, classData != null ? classData.getId() : GenericConfig.NullString);
+            i++;
+        }
+        for (ClassData classData : ClassDataLoader.ClassDataList.values()) {
+            data.set("Classes." + classData.getId() + ".Level", getClassLevel(classData));
+            data.set("Classes." + classData.getId() + ".Exp", getClassExp(classData));
+        }
+    }
+
+    @Override
+    public void loadClass(FileConfiguration data) {
+        for (int i = 0; i < GenericConfig.ClassSlot; i++) {
+            String dataString = data.getString("ClassSlot.Slot-" + i, GenericConfig.NullString);
+            if (!dataString.equals(GenericConfig.NullString)) {
+                getClassSlot()[i] = ClassDataLoader.getClassData(dataString);
+            }
+        }
+        for (ClassData classData : ClassDataLoader.ClassDataList.values()) {
+            setClassLevel(classData, data.getInt("Classes." + classData.getId() + ".Level"));
+            setClassExp(classData, data.getInt("Classes." + classData.getId() + ".Exp"));
+        }
     }
 }

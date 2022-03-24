@@ -2,6 +2,7 @@ package com.somrpg.swordofmagic7.Core.Player.Inventory;
 
 import com.somrpg.swordofmagic7.Core.DataBase.SkillDataLoader;
 import com.somrpg.swordofmagic7.Core.DataBase.SomItemDataLoader;
+import com.somrpg.swordofmagic7.Core.Generic.Item.EquipmentItem;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
@@ -43,8 +44,11 @@ public class SkillHolderContainer implements SkillHolder {
                 item = skillData.viewItemStack();
             }
             case Item -> {
-                SomItemStack itemStack = playerData.getItemInventory().getContent(getKey());
+                SomItemStack itemStack = playerData.getItemInventory().getContent(getKey()).cloneSomItemStack();
                 if (itemStack == null) itemStack = SomItemDataLoader.getItem(getKey());
+                if (itemStack instanceof EquipmentItem) {
+                    itemStack.setAmount(1);
+                }
                 if (itemStack != null) item = itemStack.viewItemStack();
             }
         }

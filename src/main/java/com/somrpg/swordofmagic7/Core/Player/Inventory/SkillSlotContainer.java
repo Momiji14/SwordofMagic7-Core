@@ -35,6 +35,16 @@ public class SkillSlotContainer implements SkillSlot {
     }
 
     @Override
+    public int getSelectSlot() {
+        return selectSlot;
+    }
+
+    @Override
+    public void setSkillSlot(int slot, SkillHolder skillHolder) {
+        skillSlot[slot] = skillHolder;
+    }
+
+    @Override
     public void SkillSlotUse(int slot) {
         switch (getSkillSlot(slot).getType()) {
             case None -> playerData.sendMessage("§eスロット[" + (slot+1) + "]§aは§bセット§aされていません", SomSound.Nope);

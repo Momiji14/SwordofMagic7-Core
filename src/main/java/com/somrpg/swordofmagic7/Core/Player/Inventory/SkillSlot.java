@@ -6,6 +6,10 @@ public interface SkillSlot {
 
     void setSelectSlot(int slot);
 
+    int getSelectSlot();
+
+    void setSkillSlot(int slot, SkillHolder skillHolder);
+
     void SkillSlotUse(int slot);
 
     SkillHolder getSkillSlot(int slot);

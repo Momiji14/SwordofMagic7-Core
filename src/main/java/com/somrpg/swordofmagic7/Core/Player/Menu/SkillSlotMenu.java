@@ -6,4 +6,5 @@ public interface SkillSlotMenu extends BaseMenu  {
 
     String display = "スキルスロット設定";
 
+    void closeGUI();
 }

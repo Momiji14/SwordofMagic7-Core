@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -59,4 +60,14 @@ public interface BaseMenu {
     }
 
     void onClick(Inventory clickedInv, ItemStack clickedItem, ClickType clickType, InventoryAction action, int slot);
+
+    default void close(InventoryCloseEvent event) {
+        if (event.getView().title().equals(getGUIDisplayComponent())) {
+            closeGUI();
+        }
+    }
+
+    default void closeGUI() {
+
+    }
 }
