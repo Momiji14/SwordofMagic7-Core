@@ -1,7 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Map.WarpGate;
 
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
-import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
 import com.somrpg.swordofmagic7.Core.DataBase.WarpGateLoader;
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Map.MapData;

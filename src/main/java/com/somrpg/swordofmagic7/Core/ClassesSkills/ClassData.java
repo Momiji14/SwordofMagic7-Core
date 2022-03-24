@@ -27,5 +27,5 @@ public interface ClassData {
 
     List<SkillData> getSkillList();
 
-    Map<String, Integer> getReqClass();
+    Map<ClassData, Integer> getReqClass();
 }

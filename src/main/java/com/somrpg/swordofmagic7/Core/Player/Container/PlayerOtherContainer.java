@@ -1,13 +1,9 @@
 package com.somrpg.swordofmagic7.Core.Player.Container;
 
-import com.somrpg.swordofmagic7.Core.Menu.AttributeMenuContainer;
-import com.somrpg.swordofmagic7.Core.Menu.UserMenuType;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerOther;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class PlayerOtherContainer implements PlayerOther {
@@ -15,9 +11,11 @@ public class PlayerOtherContainer implements PlayerOther {
     private final PlayerData playerData;
     private Set<String> activeTeleportGate = new HashSet<>();
     private int AttributePoint = 0;
+    private String nick;
 
     PlayerOtherContainer(PlayerData playerData) {
         this.playerData = playerData;
+        setNick(playerData.getPlayer().getName());
     }
 
     @Override
@@ -31,8 +29,13 @@ public class PlayerOtherContainer implements PlayerOther {
     }
 
     @Override
+    public void setNick(String nick) {
+        this.nick = nick;
+    }
+
+    @Override
     public String getNick() {
-        return null;
+        return nick;
     }
 
     @Override public Set<String> getActiveTeleportGate() {

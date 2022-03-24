@@ -1,6 +1,5 @@
 package com.somrpg.swordofmagic7.Core.Menu;
 
-import com.somrpg.swordofmagic7.Core.Generic.DecoContent;
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
 import org.bukkit.Material;

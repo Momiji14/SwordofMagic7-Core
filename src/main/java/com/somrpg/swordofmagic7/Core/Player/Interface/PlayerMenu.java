@@ -1,9 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
-import com.somrpg.swordofmagic7.Core.Menu.AttributeMenu;
-import com.somrpg.swordofmagic7.Core.Menu.SettingMenu;
-import com.somrpg.swordofmagic7.Core.Menu.TeleportGateMenu;
-import com.somrpg.swordofmagic7.Core.Menu.UserMenu;
+import com.somrpg.swordofmagic7.Core.Menu.*;
 import com.somrpg.swordofmagic7.Core.Player.Container.PlayerMenuContainer;
 import com.somrpg.swordofmagic7.Core.Production.ShopDisplay;
 
@@ -22,6 +19,9 @@ public interface PlayerMenu {
     }
     default TeleportGateMenu getTeleportGateMenu() {
         return getPlayerMenuContainer().getTeleportGateMenu();
+    }
+    default ClassMenu getClassMenu() {
+        return getPlayerMenuContainer().getClassMenu();
     }
 
     default ShopDisplay getShopDisplay() {

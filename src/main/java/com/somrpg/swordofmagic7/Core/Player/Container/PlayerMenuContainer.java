@@ -13,6 +13,7 @@ public class PlayerMenuContainer implements PlayerMenu {
     private final SettingMenu settingMenu;
     private final AttributeMenu attributeMenu;
     private final TeleportGateMenu teleportGateMenu;
+    private final ClassMenu classMenu;
 
     private final ShopDisplay shopDisplay;
 
@@ -23,6 +24,7 @@ public class PlayerMenuContainer implements PlayerMenu {
         attributeMenu = new AttributeMenuContainer(playerData);
         settingMenu = new SettingMenuContainer(playerData);
         teleportGateMenu = new TeleportGateContainer(playerData);
+        classMenu = new ClassMenuContainer(playerData);
 
         shopDisplay = new ShopDisplayContainer(playerData);
     }
@@ -44,6 +46,10 @@ public class PlayerMenuContainer implements PlayerMenu {
     @Override public TeleportGateMenu getTeleportGateMenu() {
         return teleportGateMenu;
     }
+    @Override public ClassMenu getClassMenu() {
+        return classMenu;
+    }
+
     @Override public ShopDisplay getShopDisplay() {
         return shopDisplay;
     }

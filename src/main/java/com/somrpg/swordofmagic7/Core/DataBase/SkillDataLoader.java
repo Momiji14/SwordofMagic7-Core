@@ -2,14 +2,8 @@ package com.somrpg.swordofmagic7.Core.DataBase;
 
 import com.somrpg.swordofmagic7.Core.ClassesSkills.SkillData;
 import com.somrpg.swordofmagic7.Core.ClassesSkills.SkillParameter;
-import com.somrpg.swordofmagic7.Core.ClassesSkills.SkillParameterContainer;
 import com.somrpg.swordofmagic7.Core.ClassesSkills.SkillType;
-import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Item.EquipmentItemCategory;
-import com.somrpg.swordofmagic7.Core.Production.Base.CraftSlot;
-import com.somrpg.swordofmagic7.Core.Production.Base.SomRecipe;
-import com.somrpg.swordofmagic7.Core.Production.ShopData;
-import com.somrpg.swordofmagic7.Core.Production.ShopItem;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

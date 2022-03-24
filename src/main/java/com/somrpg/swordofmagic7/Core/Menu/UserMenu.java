@@ -3,7 +3,6 @@ package com.somrpg.swordofmagic7.Core.Menu;
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
 import com.somrpg.swordofmagic7.Core.Inventory.SomInventoryType;
-import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;

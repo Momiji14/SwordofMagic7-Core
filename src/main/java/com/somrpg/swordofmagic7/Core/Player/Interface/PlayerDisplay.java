@@ -1,7 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
 import com.somrpg.swordofmagic7.Core.Generic.DecoContent;
-import com.somrpg.swordofmagic7.Core.Player.Container.PlayerEntityContainer;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;

@@ -5,11 +5,8 @@ import com.somrpg.swordofmagic7.Core.Generic.Timer.SomTimer;
 import com.somrpg.swordofmagic7.Core.Inventory.*;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
 import com.somrpg.swordofmagic7.Core.Map.MapDataInterface;
-import com.somrpg.swordofmagic7.Core.Menu.SettingMenu;
-import com.somrpg.swordofmagic7.Core.Menu.UserMenu;
-import com.somrpg.swordofmagic7.Core.Menu.TeleportGateMenu;
-import com.somrpg.swordofmagic7.Core.Player.*;
 import com.somrpg.swordofmagic7.Core.Player.Container.*;
+import com.somrpg.swordofmagic7.Core.Player.PlayerCharacon;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.entity.Player;
 
@@ -57,6 +54,7 @@ public interface PlayerData extends PlayerEntity, PlayerSetting, PlayerBank, Pla
     PlayerSetting getPlayerSetting();
     PlayerStatistics getPlayerStatistics();
     PlayerBank getPlayerBank();
+    PlayerClass getPlayerClass();
     PlayerOther getPlayerOther();
 
     //Other

@@ -3,7 +3,6 @@ package com.somrpg.swordofmagic7.Core.Generic.ItemStack;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import com.somrpg.swordofmagic7.Core.Generic.DecoContent;
-import com.somrpg.swordofmagic7.Core.Generic.DecoFormat;
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Item.BaseItem;
 import com.somrpg.swordofmagic7.Core.Item.EquipmentItem;

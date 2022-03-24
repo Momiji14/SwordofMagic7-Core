@@ -2,7 +2,6 @@ package com.somrpg.swordofmagic7.Core.Production;
 
 import com.somrpg.swordofmagic7.Core.Production.Base.CraftData;
 import com.somrpg.swordofmagic7.Core.Production.Base.CraftSlot;
-import com.somrpg.swordofmagic7.Core.Production.Base.SomCraftItem;
 
 import java.util.Map;
 

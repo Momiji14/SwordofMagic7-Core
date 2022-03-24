@@ -1,9 +1,8 @@
 package com.somrpg.swordofmagic7.Core.Generic.Entity;
 
 import com.somrpg.swordofmagic7.Core.Effect.EffectData;
-import com.somrpg.swordofmagic7.Core.Generic.Parameter.SomAttribute;
-import com.somrpg.swordofmagic7.Core.Generic.Parameter.SomAttributeContainer;
 import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatusContainer;
+import com.somrpg.swordofmagic7.Core.Generic.Parameter.SomAttributeContainer;
 
 import java.util.Collection;
 import java.util.HashSet;

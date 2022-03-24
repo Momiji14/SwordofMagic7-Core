@@ -1,6 +1,5 @@
 package com.somrpg.swordofmagic7.Core.Listener;
 
-import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
 import com.somrpg.swordofmagic7.Core.DataBase.ShopDataLoader;
 import com.somrpg.swordofmagic7.Core.Generic.DecoContent;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
@@ -28,7 +27,12 @@ public class InteractListener implements Listener {
                 NPC npc = npcRegistry.getNPC(entity);
                 String shop = DecoContent.uncolored(entity.getCustomName());
                 ShopData shopData = ShopDataLoader.getShopData(shop);
-                if (shopData != null) playerData.getShopDisplay().open(shopData);
+                if (shopData != null) {
+                    playerData.getShopDisplay().open(shopData);
+                } else if (shop.equalsIgnoreCase("転職神官")) {
+                    playerData.getClassMenu().resetSelectSlot();
+                    playerData.getClassMenu().openGUI();
+                }
             }
         }
     }

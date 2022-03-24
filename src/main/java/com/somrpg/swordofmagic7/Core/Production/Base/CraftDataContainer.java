@@ -1,6 +1,5 @@
 package com.somrpg.swordofmagic7.Core.Production.Base;
 
-import java.util.List;
 import java.util.Map;
 
 public class CraftDataContainer implements CraftData {

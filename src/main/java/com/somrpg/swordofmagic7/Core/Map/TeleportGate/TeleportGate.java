@@ -1,6 +1,5 @@
 package com.somrpg.swordofmagic7.Core.Map.TeleportGate;
 
-import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
 import com.somrpg.swordofmagic7.Core.DataBase.TeleportGateLoader;
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;

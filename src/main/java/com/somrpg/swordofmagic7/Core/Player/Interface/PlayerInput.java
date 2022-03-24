@@ -1,6 +1,5 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
-import com.somrpg.swordofmagic7.Core.Player.Container.PlayerInputContainer;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -24,6 +23,7 @@ public interface PlayerInput {
                 getPlayerData().getSettingMenu().onClick(event);
                 getPlayerData().getTeleportGateMenu().onClick(event);
                 getPlayerData().getShopDisplay().onClick(event);
+                getPlayerData().getClassMenu().onClick(event);
             } else if (view.getBottomInventory() == clickedInv) {
                 switch (slot) {
                     case 26 -> getPlayerData().getUserMenu().openGUI();

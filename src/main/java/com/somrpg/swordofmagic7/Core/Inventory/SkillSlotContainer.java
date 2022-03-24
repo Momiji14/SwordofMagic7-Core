@@ -1,9 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Inventory;
 
-import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
 import com.somrpg.swordofmagic7.Core.DataBase.SomItemDataLoader;
-import com.somrpg.swordofmagic7.Core.Generic.DecoContent;
-import com.somrpg.swordofmagic7.Core.Generic.DecoFormat;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;

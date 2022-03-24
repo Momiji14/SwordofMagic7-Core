@@ -1,6 +1,5 @@
 package com.somrpg.swordofmagic7.Core.Map.WarpGate;
 
-import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
 import com.somrpg.swordofmagic7.Core.DataBase.WarpGateLoader;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
 import com.somrpg.swordofmagic7.Core.Particle.ParticleData;

@@ -9,15 +9,23 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockExplodeEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 
 public class BlockListener implements Listener {
 
     @EventHandler
+    void onBlockPlace(BlockPlaceEvent event) {
+        Player player = event.getPlayer();
+        if (!player.hasPermission("som7.builder")) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
     void onBlockBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
-        Block block = event.getBlock();
-        if (!player.hasPermission("som7.builder") || PlayerData.getData(player).isPlayMode()) {
+        if (!player.hasPermission("som7.builder")) {
             event.setCancelled(true);
         }
     }

@@ -1,10 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
-import com.somrpg.swordofmagic7.Core.Menu.AttributeMenuContainer;
-import com.somrpg.swordofmagic7.Core.Menu.UserMenuType;
 import com.somrpg.swordofmagic7.Core.Player.Container.PlayerOtherContainer;
 
-import java.util.List;
 import java.util.Set;
 
 public interface PlayerOther {
@@ -12,6 +9,10 @@ public interface PlayerOther {
     PlayerOtherContainer getPlayerOtherContainer();
 
     PlayerData getPlayerData();
+
+    default void setNick(String nick) {
+        getPlayerOtherContainer().setNick(nick);
+    }
 
     default String getNick() {
         return getPlayerOtherContainer().getNick();

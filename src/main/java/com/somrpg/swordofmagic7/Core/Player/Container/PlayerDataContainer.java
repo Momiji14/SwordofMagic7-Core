@@ -5,19 +5,16 @@ import com.somrpg.swordofmagic7.Core.Generic.Timer.SomTimer;
 import com.somrpg.swordofmagic7.Core.Inventory.*;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
 import com.somrpg.swordofmagic7.Core.Map.MapDataInterface;
-import com.somrpg.swordofmagic7.Core.Menu.SettingMenu;
-import com.somrpg.swordofmagic7.Core.Menu.UserMenu;
-import com.somrpg.swordofmagic7.Core.Menu.TeleportGateMenu;
-import com.somrpg.swordofmagic7.Core.Player.*;
 import com.somrpg.swordofmagic7.Core.Player.Interface.*;
-import com.somrpg.swordofmagic7.Core.SomCore;
+import com.somrpg.swordofmagic7.Core.Player.PlayerCharacon;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
 
 import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.DataBasePath;
 
@@ -45,6 +42,7 @@ public class PlayerDataContainer implements PlayerData {
     private final PlayerStatisticsContainer playerStatistics;
     private final PlayerBankContainer playerBank;
     private final PlayerMenuContainer playerMenu;
+    private final PlayerClassContainer playerClass;
     private final PlayerOtherContainer playerOther;
 
     private final PlayerCharacon playerCharacon;
@@ -66,6 +64,7 @@ public class PlayerDataContainer implements PlayerData {
         playerStatistics = new PlayerStatisticsContainer(this);
         playerMenu = new PlayerMenuContainer(this);
         playerBank = new PlayerBankContainer(this);
+        playerClass = new PlayerClassContainer(this);
 
         playerOther = new PlayerOtherContainer(this);
 
@@ -109,6 +108,9 @@ public class PlayerDataContainer implements PlayerData {
     @Override public PlayerBankContainer getPlayerBankContainer() {
         return playerBank;
     }
+    @Override public PlayerClassContainer getPlayerClassContainer() {
+        return playerClass;
+    }
     @Override public PlayerMenuContainer getPlayerMenuContainer() {
         return playerMenu;
     }
@@ -128,6 +130,9 @@ public class PlayerDataContainer implements PlayerData {
     }
     @Override public PlayerBank getPlayerBank() {
         return playerBank;
+    }
+    @Override public PlayerClass getPlayerClass() {
+        return playerClass;
     }
     @Override public PlayerOther getPlayerOther() {
         return playerOther;

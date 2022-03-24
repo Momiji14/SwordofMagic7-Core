@@ -3,7 +3,10 @@ package com.somrpg.swordofmagic7.Core.Generic.Timer;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class SomTimerContainer implements SomTimer {
 

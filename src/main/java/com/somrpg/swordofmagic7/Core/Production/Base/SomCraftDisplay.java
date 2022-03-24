@@ -6,7 +6,6 @@ import com.somrpg.swordofmagic7.Core.Production.CheckReturn;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.List;
 import java.util.Map;
 
 public interface SomCraftDisplay extends BaseMenu {

@@ -1,7 +1,5 @@
 package com.somrpg.swordofmagic7.Core.Generic;
 
-import com.somrpg.swordofmagic7.Core.ClassesSkills.ClassData;
-import com.somrpg.swordofmagic7.Core.DataBase.ClassDataLoader;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

@@ -1,10 +1,10 @@
 package com.somrpg.swordofmagic7.Core.Inventory;
 
-import com.somrpg.swordofmagic7.Core.Item.EquipmentItem;
-import com.somrpg.swordofmagic7.Core.Item.SomEquipmentSlot;
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Item.BaseItem;
+import com.somrpg.swordofmagic7.Core.Item.EquipmentItem;
+import com.somrpg.swordofmagic7.Core.Item.SomEquipmentSlot;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.checkerframework.checker.nullness.qual.NonNull;

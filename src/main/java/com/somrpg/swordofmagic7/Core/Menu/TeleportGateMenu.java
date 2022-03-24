@@ -1,9 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Menu;
 
-import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
 import com.somrpg.swordofmagic7.Core.DataBase.TeleportGateLoader;
 import com.somrpg.swordofmagic7.Core.Map.TeleportGate.TeleportGate;
-import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import net.kyori.adventure.text.Component;

@@ -3,7 +3,6 @@ package com.somrpg.swordofmagic7.Core.Player.Interface;
 import com.somrpg.swordofmagic7.Core.Inventory.SomInventoryType;
 import com.somrpg.swordofmagic7.Core.Menu.UserMenuType;
 import com.somrpg.swordofmagic7.Core.Player.Enum.*;
-import com.somrpg.swordofmagic7.Core.Player.Container.PlayerSettingContainer;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public interface PlayerSetting {

@@ -3,7 +3,6 @@ package com.somrpg.swordofmagic7.Core.ClassesSkills;
 import com.somrpg.swordofmagic7.Core.Item.EquipmentItemCategory;
 import org.bukkit.Material;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SkillDataContainer implements SkillData {

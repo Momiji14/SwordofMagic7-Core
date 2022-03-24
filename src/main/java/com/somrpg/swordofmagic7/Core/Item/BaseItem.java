@@ -3,9 +3,6 @@ package com.somrpg.swordofmagic7.Core.Item;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import static com.somrpg.swordofmagic7.Core.Generic.DecoContent.decoLore;
-import static com.somrpg.swordofmagic7.Core.Generic.DecoContent.decoPartition;
-
 public class BaseItem extends SomItemStack {
     private final ItemCategory itemCategory;
     private final int sell;

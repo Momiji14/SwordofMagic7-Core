@@ -1,11 +1,14 @@
 package com.somrpg.swordofmagic7.Core.ClassesSkills;
 
+import com.somrpg.swordofmagic7.Core.Player.Level.ClassReqExp;
 import org.bukkit.Material;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.somrpg.swordofmagic7.Core.Generic.DecoFormat.ScaleDigit;
 
 public class ClassDataContainer implements ClassData {
 
@@ -17,7 +20,7 @@ public class ClassDataContainer implements ClassData {
     private final List<String> lore;
     private final boolean productionClass;
     private final List<SkillData> skillList = new ArrayList<>();
-    private final Map<String, Integer> reqClass = new HashMap<>();
+    private final Map<ClassData, Integer> reqClass = new HashMap<>();
 
     ClassDataContainer(String id, Material material, String display, String color, String nick, List<String> lore, boolean productionClass) {
         this.id = id;
@@ -70,7 +73,8 @@ public class ClassDataContainer implements ClassData {
     }
 
     @Override
-    public Map<String, Integer> getReqClass() {
+    public Map<ClassData, Integer> getReqClass() {
         return reqClass;
     }
+
 }

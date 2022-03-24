@@ -2,17 +2,14 @@ package com.somrpg.swordofmagic7.Core.Production.Base;
 
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
-import com.somrpg.swordofmagic7.Core.Menu.BaseMenu;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Production.CheckReturn;
-import com.somrpg.swordofmagic7.Core.SomCore;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.List;
 import java.util.Map;
 
 public class SomCraftDisplayContainer implements SomCraftDisplay {
