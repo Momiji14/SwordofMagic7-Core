@@ -50,6 +50,8 @@ public interface DataBase {
         MapDataLoader.load();
         RecipeLoader.load();
         ShopDataLoader.load();
+        SkillDataLoader.load();
+        ClassDataLoader.load();
     }
 
     static void singleLoad() {
