@@ -1,6 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Player.Container;
 
 import com.somrpg.swordofmagic7.Core.Generic.Entity.BaseEntityContainer;
+import com.somrpg.swordofmagic7.Core.Generic.Timer.SomTimer;
 import com.somrpg.swordofmagic7.Core.Inventory.*;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
 import com.somrpg.swordofmagic7.Core.Map.MapDataInterface;
@@ -34,6 +35,7 @@ public class PlayerDataContainer implements PlayerData {
     }
 
     private final Player player;
+    private final SomTimer somTimer = SomTimer.create();
 
     private File playerFile;
     private final PlayerEntityContainer playerEntity;
@@ -82,6 +84,9 @@ public class PlayerDataContainer implements PlayerData {
     }
     @Override public PlayerDataContainer getPlayerDataContainer() {
         return this;
+    }
+    @Override public SomTimer getTimer() {
+        return somTimer;
     }
 
     //Container
