@@ -30,6 +30,7 @@ public class ItemInventoryContainer extends BaseInventory implements ItemInvento
                 }
             }
             getList().add(itemData);
+            if (getPlayerData().getViewInventory().isItemInventory()) getPlayerData().viewUpdate();
         } else {
             getPlayerData().sendMessage("§e" + getInventoryType().getDisplay() + "§aが一杯です", SomSound.Nope);
         }

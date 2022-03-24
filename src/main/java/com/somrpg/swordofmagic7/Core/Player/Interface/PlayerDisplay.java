@@ -31,55 +31,7 @@ public interface PlayerDisplay {
     HashMap<String, List<String>> getSideBar();
 
     default void startTickUpdate() {
-        Player player = getPlayer();
-        player.setHealthScale(20);
-        Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
-        Objective sidebarObject = board.registerNewObjective("Sidebar", "dummy", Component.text(DecoContent.decoDisplay("§bSword of Magic Ⅶ")));
-        sidebarObject.setDisplaySlot(DisplaySlot.SIDEBAR);
-        player.setScoreboard(board);
-        Team team = board.registerNewTeam(player.getName());
-        team.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.FOR_OWN_TEAM);
-        team.addEntry(player.getName());
-        team.setCanSeeFriendlyInvisibles(true);
-
-        PlayerEntity playerEntity = getPlayerData().getPlayerEntity();
-
-        SomCore.getSomTask().AsyncTaskTimer(() -> {
-            String actionBar =
-                    "§e§l《" + getPlayerData().getNick() + " Lv" + getPlayerData().getLevel() + "》" +
-                    "§c§l《Health: " + ScaleDigit(getPlayerData().getHealth()) + "/" + ScaleDigit(getPlayerData().getMaxHealth()) + "》" +
-                    "§b§l《Mana: " + ScaleDigit(getPlayerData().getMana()) + "/" + ScaleDigit(getPlayerData().getMaxMana()) + "》" +
-                    "§a§l《Exp: " + getPlayerData().getExpPercentString() + "》";
-
-            playerEntity.addHealth(getPlayerData().getHealthRegen()/20d);
-            playerEntity.addMana(getPlayerData().getManaRegen()/20d);
-
-            player.sendActionBar(Component.text(actionBar));
-
-
-            setSideBar("Mel", Collections.singletonList(DecoContent.decoLore("所持金") + getPlayerData().getMel() + "メル"));
-
-            int i = 15;
-            exit:
-            for (List<String> textList : getSideBar().values()) {
-                for (String scoreName : textList) {
-                    Score sidebarScore = sidebarObject.getScore(scoreName);
-                    sidebarScore.setScore(i);
-                    i--;
-                    if (i < 0) break exit;
-                }
-            }
-        }, 2);
-
-        PotionEffect jumpPotion = new PotionEffect(PotionEffectType.JUMP, 21, 0, false, false, false);
-        SomCore.getSomTask().SyncTaskTimer(() -> {
-            player.addPotionEffect(jumpPotion);
-            AttributeInstance maxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);
-            if (maxHealth != null) maxHealth.setBaseValue(getPlayerData().getMaxHealth());
-            player.setHealth(Math.max(0.5, Math.min(getPlayerData().getMaxHealth(), getPlayerData().getHealth())));
-            player.setFoodLevel((int) Math.max(0, Math.min(20, Math.floor(getPlayerData().getMana()/getPlayerData().getMaxMana()*20))));
-            getPlayerData().getPlayerStatistics().addPlayTime();
-        }, 20);
+        getPlayerData().getPlayerDisplay().startTickUpdate();
     }
 
     static void setSideBar(Collection<Player> players, String key, List<String> data) {

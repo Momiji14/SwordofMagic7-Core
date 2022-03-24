@@ -21,6 +21,7 @@ public class RuneInventoryContainer extends BaseInventory implements RuneInvento
     public void addContent(@NonNull RuneItem itemData) {
         if (getList().size() < GenericConfig.RuneInventoryMaxSlot) {
             getList().add(itemData);
+            if (getPlayerData().getViewInventory().isRuneInventory()) getPlayerData().viewUpdate();
         } else {
             getPlayerData().sendMessage("§e" + getInventoryType().getDisplay() + "§aが一杯です", SomSound.Nope);
         }
