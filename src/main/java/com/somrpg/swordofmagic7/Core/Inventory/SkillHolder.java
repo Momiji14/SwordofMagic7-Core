@@ -1,29 +1,24 @@
 package com.somrpg.swordofmagic7.Core.Inventory;
 
-import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
-import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
-import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
-import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
+public interface SkillHolder {
 
-public class SkillHolder {
-    private String key;
-    private SkillHolderType type = SkillHolderType.None;
-
-    public void setKey(String key) {
-        this.key = key;
+    static SkillHolder fromDataString(String data) {
+        SkillHolder skillHolder = new SkillHolderContainer();
+        String[] split = data.split(",");
+        skillHolder.setKey(split[0]);
+        skillHolder.setType(SkillHolderType.valueOf(split[1]));
+        return skillHolder;
     }
 
-    public String getKey() {
-        return key;
+    default String toDataString() {
+        return getKey() + "," + getType().toString();
     }
 
-    public SkillHolderType getType() {
-        return type;
-    }
+    void setKey(String key);
 
-    public void setType(SkillHolderType type) {
-        this.type = type;
-    }
+    String getKey();
+
+    SkillHolderType getType();
+
+    void setType(SkillHolderType type);
 }

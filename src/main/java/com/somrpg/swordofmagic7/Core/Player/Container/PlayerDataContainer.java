@@ -54,6 +54,7 @@ public class PlayerDataContainer implements PlayerData {
     private final ItemInventory itemInventory;
     private final RuneInventory runeInventory;
     private final PetInventory petInventory;
+    private final SkillSlot skillSlot;
 
 
     private MapDataInterface mapData;
@@ -75,6 +76,7 @@ public class PlayerDataContainer implements PlayerData {
         itemInventory = new ItemInventoryContainer(this);
         runeInventory = new RuneInventoryContainer(this);
         petInventory = new PetInventoryContainer(this);
+        skillSlot = new SkillSlotContainer(this);
     }
 
     //this
@@ -152,6 +154,9 @@ public class PlayerDataContainer implements PlayerData {
     @Override public PetInventory getPetInventory() {
         return petInventory;
     }
+    @Override public SkillSlot getSkillSlot() {
+        return skillSlot;
+    }
 
     //Map
     @Override public void setMapData(MapData mapData) {
@@ -170,6 +175,7 @@ public class PlayerDataContainer implements PlayerData {
     private static final String PathItemInventory = "Inventory.Item";
     private static final String PathRuneInventory = "Inventory.Rune";
     private static final String PathPetInventory = "Inventory.Pet";
+    private static final String PathSkillSlot = "Inventory.SkillSlot";
 
     @Override
     public void save() {
@@ -186,10 +192,10 @@ public class PlayerDataContainer implements PlayerData {
             data.set(PathMana, getMana());
 
             //各インベントリ
-
             data.set(PathItemInventory, getItemInventory().getContentsToString());
             data.set(PathRuneInventory, getRuneInventory().getContentsToString());
             data.set(PathPetInventory, getPetInventory().getContentsToString());
+            data.set(PathSkillSlot, getSkillSlot().toDataString());
 
             //その他
             getPlayerSetting().saveSetting(data);
@@ -224,6 +230,7 @@ public class PlayerDataContainer implements PlayerData {
             getItemInventory().fromContentsFromString(data.getStringList(PathItemInventory));
             getRuneInventory().fromContentsFromString(data.getStringList(PathRuneInventory));
             getPetInventory().fromContentsFromString(data.getStringList(PathPetInventory));
+            getSkillSlot().fromDataString(data.getStringList(PathSkillSlot));
 
             //その他
             getPlayerSetting().loadSetting(data);

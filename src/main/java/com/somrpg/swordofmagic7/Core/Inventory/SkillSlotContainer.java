@@ -22,37 +22,61 @@ public class SkillSlotContainer implements SkillSlot {
     }
 
     public ItemStack viewItemStack(int slot) {
-        ItemStack item = null;
-        if (skillSlot[slot] != null) skillSlot[slot] = new SkillHolder();
-        switch (skillSlot[slot].getType()) {
-            case None -> item = ViewableItemStack.create("§7§lスロット[" + slot + "]", Material.IRON_BARS, 1).viewItemStackNonDeco();
+        ItemStack item = ViewableItemStack.create("§7§lスロット[" + (slot+1) + "]", Material.IRON_BARS, 1).viewItemStackNonDeco();
+
+        switch (getSkillSlot(slot).getType()) {
             case Skill -> {
 
             }
             case Item -> {
-                SomItemStack itemStack = playerData.getItemInventory().getContent(skillSlot[slot].getKey());
-                if (itemStack == null) itemStack = DataBase.getSomItemStack(skillSlot[slot].getKey());
+                SomItemStack itemStack = playerData.getItemInventory().getContent(getSkillSlot(slot).getKey());
+                if (itemStack == null) itemStack = DataBase.getSomItemStack(getSkillSlot(slot).getKey());
                 if (itemStack != null) item = itemStack.viewItemStack();
             }
         }
-        if (item != null) ViewableItemStack.create("§7§lスロット[" + slot + "]", Material.IRON_BARS, 1).viewItemStackNonDeco();
         return item;
     }
 
+    @Override
+    public SkillHolder getSkillSlot(int slot) {
+        if (skillSlot[slot] == null) skillSlot[slot] = new SkillHolderContainer();
+        return skillSlot[slot];
+    }
+
+    @Override
     public void viewTop() {
         int slot = 9;
         for (int i = 8; i < 32; i++) {
-            playerData.getPlayer().getInventory().setItem(slot, viewItemStack(slot));
+            playerData.getPlayer().getInventory().setItem(slot, viewItemStack(i));
             slot++;
             if (slot == 17 || slot == 26) slot++;
         }
     }
 
+    @Override
     public void viewBottom() {
         int slot = 0;
         for (int i = 0; i < 8; i++) {
-            playerData.getPlayer().getInventory().setItem(slot, viewItemStack(slot));
+            playerData.getPlayer().getInventory().setItem(slot, viewItemStack(i));
             slot++;
+        }
+    }
+
+    @Override
+    public List<String> toDataString() {
+        List<String> data = new ArrayList<>();
+        for (int i = 0; i < 32; i++) {
+            data.add(getSkillSlot(i).toDataString());
+        }
+        return data;
+    }
+
+    @Override
+    public void fromDataString(List<String> data) {
+        int i = 0;
+        for (String str : data) {
+            skillSlot[i] = SkillHolder.fromDataString(str);
+            i++;
         }
     }
 }

@@ -9,6 +9,8 @@ public interface PlayerViewUpdate {
             case ItemInventory -> getPlayerData().getItemInventory().viewInventory();
             case RuneInventory -> getPlayerData().getRuneInventory().viewInventory();
             case PetInventory -> getPlayerData().getPetInventory().viewInventory();
+            case SkillSlot -> getPlayerData().getSkillSlot().viewTop();
         }
+        getPlayerData().getSkillSlot().viewBottom();
     }
 }

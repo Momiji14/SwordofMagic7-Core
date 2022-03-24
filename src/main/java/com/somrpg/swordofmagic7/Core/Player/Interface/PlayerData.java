@@ -86,6 +86,8 @@ public interface PlayerData extends PlayerEntity, PlayerSetting, PlayerBank, Pla
         return getBaseInventory(getViewInventory());
     }
 
+    SkillSlot getSkillSlot();
+
     //Map
     void setMapData(MapData mapData);
     MapDataInterface getMapData();
