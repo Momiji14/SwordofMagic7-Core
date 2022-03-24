@@ -15,7 +15,7 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public interface PlayerData extends PlayerEntity, PlayerSetting, PlayerBank, PlayerViewUpdate, PlayerOther, PlayerInput, PlayerMenu {
+public interface PlayerData extends PlayerEntity, PlayerSetting, PlayerBank, PlayerViewUpdate, PlayerOther, PlayerInput, PlayerMenu, PlayerClass {
 
     static PlayerData getData(Player player) {
         return PlayerDataContainer.getData(player);
