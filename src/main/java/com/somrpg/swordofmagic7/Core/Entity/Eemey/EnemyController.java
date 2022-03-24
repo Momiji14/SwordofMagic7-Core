@@ -11,11 +11,11 @@ import java.util.Map;
 
 public interface EnemyController extends BaseEntity {
 
-    List<EnemyController> EnemyControllerList = new ArrayList<>();
+    Map<Entity, EnemyController> EnemyControllerList = new HashMap<>();
 
     static EnemyController spawn(EnemyData enemyData, Location spawnLocation, int level) {
         EnemyController controller = new EnemyControllerContainer(enemyData, spawnLocation, level);
-        EnemyControllerList.add(controller);
+        EnemyControllerList.put(controller.getEntity(), controller);
         return controller;
     }
 

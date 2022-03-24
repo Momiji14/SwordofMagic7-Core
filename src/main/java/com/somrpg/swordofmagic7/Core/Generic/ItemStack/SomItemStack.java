@@ -8,6 +8,7 @@ import com.somrpg.swordofmagic7.Core.Generic.Item.RuneItem;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import org.bukkit.Material;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.io.File;
 import java.util.*;
@@ -88,7 +89,8 @@ public class SomItemStack extends ViewableItemStack implements Cloneable {
         return data.toString();
     }
 
-    public static SomItemStack fromDataString(@NonNull String data) {
+    public static SomItemStack fromDataString(@Nullable String data) {
+        if (data == null) return null;
         try {
             String[] itemSeparate = data.split("<Rune>");
             String[] split = itemSeparate[0].split(",");

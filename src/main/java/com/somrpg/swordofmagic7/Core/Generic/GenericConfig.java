@@ -14,6 +14,8 @@ public interface GenericConfig {
 
     int GenericDigit = 2;
 
+    String NullString = "None";
+
     int ClassSlot = 4;
     int[] SlotReqLevel = {1, 10, 30, 50};
     int PlayerMaxLevel = 50;

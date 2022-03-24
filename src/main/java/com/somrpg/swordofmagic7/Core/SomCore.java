@@ -52,7 +52,7 @@ public final class SomCore extends JavaPlugin {
     public void onDisable() {
 
         int count = 0;
-        for (EnemyController controller : EnemyController.EnemyControllerList) {
+        for (EnemyController controller : EnemyController.EnemyControllerList.values()) {
             if (controller.getEntity() != null) controller.getEntity().remove();
             count++;
         }

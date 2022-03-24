@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
@@ -77,6 +78,22 @@ public class CastListener implements Listener {
                     playerData.getSkillSlot().SkillSlotUse(5);
                 } else {
                     playerData.getSkillSlot().SkillSlotUse(1);
+                }
+            }
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    void onPlayerDropItem(PlayerDropItemEvent event) {
+        Player player = event.getPlayer();
+        PlayerData playerData = PlayerData.getData(player);
+        if (playerData.isPlayMode()) {
+            if (playerData.getPlayerCastMode().isLegacy()) {
+                if (player.isSneaking()) {
+                    playerData.getSkillSlot().SkillSlotUse(6);
+                } else {
+                    playerData.getSkillSlot().SkillSlotUse(2);
                 }
             }
             event.setCancelled(true);

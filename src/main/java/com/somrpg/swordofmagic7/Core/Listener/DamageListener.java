@@ -1,5 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Listener;
 
+import com.somrpg.swordofmagic7.Core.Entity.Eemey.EnemyController;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -13,12 +14,12 @@ public class DamageListener implements Listener {
     public void onDamage(EntityDamageByEntityEvent event) {
         Entity attacker = event.getDamager();
         Entity victim = event.getEntity();
-        if (attacker instanceof Player player) {
+        if (victim instanceof Player player) {
+            event.setCancelled(true);
             PlayerData playerData = PlayerData.getData(player);
-            if (playerData.getPlayerSetting().isPlayMode()) {
-                event.setCancelled(true);
-            }
-        } else event.setCancelled(true);
+        } else if (EnemyController.EnemyControllerList.containsKey(victim)) {
+            event.setCancelled(true);
+        }
     }
 
 }

@@ -57,7 +57,7 @@ public interface DataBase {
         }
 
         SomCore.getSomTask().AsyncTaskTimer(() -> {
-            EnemyController.EnemyControllerList.removeIf(EnemyController::isDead);
+            EnemyController.EnemyControllerList.entrySet().removeIf(entityEnemyControllerEntry -> entityEnemyControllerEntry.getValue().isDead());
         }, 200);
     }
 }

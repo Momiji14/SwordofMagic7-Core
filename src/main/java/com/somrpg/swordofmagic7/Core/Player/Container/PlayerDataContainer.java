@@ -1,6 +1,10 @@
 package com.somrpg.swordofmagic7.Core.Player.Container;
 
 import com.somrpg.swordofmagic7.Core.Entity.BaseEntityContainer;
+import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
+import com.somrpg.swordofmagic7.Core.Generic.Item.EquipmentItem;
+import com.somrpg.swordofmagic7.Core.Generic.Item.SomEquipmentSlot;
+import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Generic.Timer.SomTimer;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
 import com.somrpg.swordofmagic7.Core.Map.MapDataInterface;
@@ -185,6 +189,7 @@ public class PlayerDataContainer implements PlayerData {
     private static final String PathRuneInventory = "Inventory.Rune";
     private static final String PathPetInventory = "Inventory.Pet";
     private static final String PathSkillSlot = "Inventory.SkillSlot";
+    private static final String PathEquipment = "Inventory.";
 
     @Override
     public void save() {
@@ -201,6 +206,14 @@ public class PlayerDataContainer implements PlayerData {
             data.set(PathMana, getMana());
 
             //各インベントリ
+            for (SomEquipmentSlot slot : SomEquipmentSlot.values()) {
+                String path = PathEquipment + slot;
+                if (getItemInventory().hasEquipment(slot)) {
+                    data.set(path, getItemInventory().getEquipment(slot).toDataString());
+                } else {
+                    data.set(path, GenericConfig.NullString);
+                }
+            }
             data.set(PathItemInventory, getItemInventory().getContentsToString());
             data.set(PathRuneInventory, getRuneInventory().getContentsToString());
             data.set(PathPetInventory, getPetInventory().getContentsToString());
@@ -236,6 +249,13 @@ public class PlayerDataContainer implements PlayerData {
             getPlayerEntity().setManaUnsafe(data.getDouble(PathMana, Double.MAX_VALUE));
 
             //各インベントリ
+            for (SomEquipmentSlot slot : SomEquipmentSlot.values()) {
+                String path = PathEquipment + slot;
+                String dataString = data.getString(path, GenericConfig.NullString);
+                if (!dataString.equals(GenericConfig.NullString)) {
+                    getItemInventory().setEquipment((EquipmentItem) SomItemStack.fromDataString(dataString));
+                }
+            }
             getItemInventory().fromContentsFromString(data.getStringList(PathItemInventory));
             getRuneInventory().fromContentsFromString(data.getStringList(PathRuneInventory));
             getPetInventory().fromContentsFromString(data.getStringList(PathPetInventory));
