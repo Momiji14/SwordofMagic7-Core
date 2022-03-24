@@ -6,6 +6,7 @@ import com.somrpg.swordofmagic7.Core.Listener.*;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Player.PlayerList;
 import com.somrpg.swordofmagic7.Core.SomThread.SomTask;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -20,14 +21,14 @@ public final class SomCore extends JavaPlugin {
         plugin = this;
         javaPlugin = this;
 
-        getServer().getPluginManager().registerEvents(new ConnectionListener(), plugin);
-        getServer().getPluginManager().registerEvents(new DamageListener(), plugin);
-        getServer().getPluginManager().registerEvents(new InventoryListener(), plugin);
-        getServer().getPluginManager().registerEvents(new OthersListener(), plugin);
-        getServer().getPluginManager().registerEvents(new PlayerControlListener(), plugin);
-        getServer().getPluginManager().registerEvents(new PhysicsListener(), plugin);
-        getServer().getPluginManager().registerEvents(new BlockListener(), plugin);
-        getServer().getPluginManager().registerEvents(new InteractListener(), plugin);
+        Bukkit.getPluginManager().registerEvents(new ConnectionListener(), plugin);
+        Bukkit.getPluginManager().registerEvents(new DamageListener(), plugin);
+        Bukkit.getPluginManager().registerEvents(new InventoryListener(), plugin);
+        Bukkit.getPluginManager().registerEvents(new OthersListener(), plugin);
+        Bukkit.getPluginManager().registerEvents(new PlayerControlListener(), plugin);
+        Bukkit.getPluginManager().registerEvents(new PhysicsListener(), plugin);
+        Bukkit.getPluginManager().registerEvents(new BlockListener(), plugin);
+        Bukkit.getPluginManager().registerEvents(new InteractListener(), plugin);
 
         CommandRegisterExecutor.registerExecutors();
         PlayerList.load();

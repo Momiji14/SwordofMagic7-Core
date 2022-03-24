@@ -70,3 +70,6 @@ commands:
   userMenuType:
     description: description
     usage: /<command>
+  playerList:
+    description: description
+    usage: /<command>

@@ -36,6 +36,11 @@ public class SomTimerContainer implements SomTimer {
     }
 
     @Override
+    public int getTimer(String key) {
+        return TimerTable.getOrDefault(key, -1);
+    }
+
+    @Override
     public boolean isTimer(String key) {
         return TimerTable.containsKey(key);
     }

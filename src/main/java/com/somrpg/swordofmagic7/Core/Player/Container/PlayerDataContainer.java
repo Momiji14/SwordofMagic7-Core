@@ -22,13 +22,15 @@ import java.util.*;
 import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.DataBasePath;
 
 public class PlayerDataContainer implements PlayerData {
-    private static final HashMap<String, PlayerData> playerDataList = new HashMap<>();
+    public static void remove(Player player) {
+        playerDataList.remove(player);
+    }
+    private static final HashMap<Player, PlayerData> playerDataList = new HashMap<>();
     public static PlayerData getData(Player player) {
-        String uuid = String.valueOf(player.getUniqueId());
-        if (!playerDataList.containsKey(uuid)) {
-            playerDataList.put(uuid, new PlayerDataContainer(player));
+        if (!playerDataList.containsKey(player)) {
+            playerDataList.put(player, new PlayerDataContainer(player));
         }
-        return playerDataList.get(uuid);
+        return playerDataList.get(player);
     }
     public static Collection<PlayerData> getDataList() {
         return playerDataList.values();

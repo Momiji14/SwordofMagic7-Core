@@ -1,5 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Listener;
 
+import com.somrpg.swordofmagic7.Core.Player.Container.PlayerDataContainer;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Player.PlayerList;
 import org.bukkit.entity.Player;
@@ -21,9 +22,10 @@ public class ConnectionListener implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        PlayerList.removePlayer(player);
         PlayerData playerData = PlayerData.getData(player);
         playerData.save();
+        PlayerList.removePlayer(player);
+        PlayerDataContainer.remove(player);
     }
 
 }
