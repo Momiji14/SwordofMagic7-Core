@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.VectorDown;
+import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.VectorUp;
 
 public class SomSpawnerContainer implements SomSpawner {
 
@@ -38,29 +39,26 @@ public class SomSpawnerContainer implements SomSpawner {
     @Override
     public void start() {
         if (!isStarted()) {
-            SomCore.log(file.getName() + "'s spawner started");
             isStarted = true;
             SomCore.getSomTask().AsyncTaskTimer(() -> {
                 getSpawnedEnemy().removeIf(EnemyController::isDead);
-                int perSpawn = Math.min(getSpawnedEnemy().size() + getPerSpawn(), getMaxMob());
-                if (perSpawn > 0 && PlayerList.isInPlayer(getLocation(), getRadius()+32)) {
-                    for(int i = 0; i < perSpawn; i++) {
+                int perSpawn = getSpawnedEnemy().size() + getPerSpawn() > getMaxMob() ? 0 : getMaxMob() - getSpawnedEnemy().size();
+                if (perSpawn > 0 && PlayerList.isInPlayer(getLocation(), getRadius() + 32)) {
+                    for (int i = 0; i < perSpawn; i++) {
                         double x = getLocation().getX() + (2 * SomCore.getRandom().nextDouble() * getRadius()) - getRadius();
                         double z = getLocation().getZ() + (2 * SomCore.getRandom().nextDouble() * getRadius()) - getRadius();
                         double y = getLocation().getY() + getRadiusY();
-                        Location origin = new Location(getLocation().getWorld(), x, y, z);
-                        for (int i2 = 0; i2 < getRadiusY(); i2++) {
-                            if (!origin.getBlock().getType().isSolid() && origin.clone().add(VectorDown).getBlock().getType().isSolid()) {
+                        Location origin = new Location(getLocation().getWorld(), x, y, z, 0,90);
+                        for (int i2 = 0; i2 < getRadiusY()*2; i2++) {
+                            if (!origin.getBlock().getType().isSolid() && origin.add(VectorDown).getBlock().getType().isSolid()) {
                                 SomCore.getSomTask().SyncTask(() -> {
-                                    EnemyController.spawn(getEnemyData(), origin, getLevel());
+                                    getSpawnedEnemy().add(EnemyController.spawn(getEnemyData(), origin.add(VectorUp), getLevel()));
                                 });
                             }
                         }
                     }
                 }
-            }, 50);
-        } else {
-            SomCore.log(file.getName() + "'s spawner already");
+            }, 30);
         }
     }
 

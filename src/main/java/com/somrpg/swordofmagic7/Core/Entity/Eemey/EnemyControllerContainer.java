@@ -17,6 +17,7 @@ public class EnemyControllerContainer implements EnemyController {
         baseEntityContainer = new BaseEntityContainer();
         this.enemyData = enemyData;
         this.spawnLocation = spawnLocation.clone();
+        setLevel(level);
         entity = spawnLocation.getWorld().spawnEntity(spawnLocation, enemyData.getEntityType(), false);
         entity.setCustomNameVisible(true);
         entity.setCustomName(getDecoDisplay());
@@ -26,8 +27,6 @@ public class EnemyControllerContainer implements EnemyController {
             enemyData.getDisguise().setDisguiseName(getDecoDisplay());
             enemyData.getDisguise().startDisguise();
         }
-
-        setLevel(level);
     }
 
     public String getDecoDisplay() {

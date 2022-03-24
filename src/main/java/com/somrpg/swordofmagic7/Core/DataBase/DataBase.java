@@ -1,5 +1,6 @@
 package com.somrpg.swordofmagic7.Core.DataBase;
 
+import com.somrpg.swordofmagic7.Core.Entity.Eemey.EnemyController;
 import com.somrpg.swordofmagic7.Core.Entity.Eemey.SomSpawner;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.SomCore;
@@ -54,5 +55,9 @@ public interface DataBase {
         for (SomSpawner spawner : SomSpawnerLoader.SpawnerDataList.values()) {
             spawner.start();
         }
+
+        SomCore.getSomTask().AsyncTaskTimer(() -> {
+            EnemyController.EnemyControllerList.removeIf(EnemyController::isDead);
+        }, 200);
     }
 }

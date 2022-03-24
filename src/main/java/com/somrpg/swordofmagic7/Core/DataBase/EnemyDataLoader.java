@@ -7,6 +7,7 @@ import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatus;
 import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatusContainer;
 import com.somrpg.swordofmagic7.Core.Player.Production.Base.SomRecipeContainer;
+import com.somrpg.swordofmagic7.Core.SomCore;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 import me.libraryaddict.disguise.disguisetypes.watchers.SlimeWatcher;
@@ -34,11 +35,11 @@ public interface EnemyDataLoader {
                 FileConfiguration data = YamlConfiguration.loadConfiguration(file);
 
                 String display = data.getString("Display");
-                String entityTypeString = data.getString("Type", "SKELETON").toUpperCase();
-                EntityType entityType = EntityType.fromName(entityTypeString);
+                EntityType entityType = EntityType.fromName(data.getString("Type", "SKELETON").toUpperCase());
                 EnemyType enemyType = EnemyType.valueOf(data.getString("EnemyType", "Normal"));
-                if (entityType != null) {
+                if (entityType == null) {
                     entityType = EntityType.SKELETON;
+                    SomCore.log("Illegal EntityType -> " + file.getName());
                 }
                 MobDisguise disguise = null;
                 if (data.isSet("Disguise.Type")) {
