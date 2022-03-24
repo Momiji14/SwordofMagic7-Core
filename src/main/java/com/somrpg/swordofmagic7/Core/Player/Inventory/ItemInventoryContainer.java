@@ -51,7 +51,7 @@ public class ItemInventoryContainer extends BaseInventory implements ItemInvento
     public void setEquipment(@NonNull EquipmentItem equipmentItem, boolean log) {
         SomEquipmentSlot slot = equipmentItem.getEquipmentSlot();
         if (hasEquipment(slot)) addContent(getEquipment(slot));
-        EquipmentItem item = equipmentItem.clone();
+        EquipmentItem item = equipmentItem.cloneEquipment();
         equipmentSlot.put(slot, item);
         item.setAmount(1);
         removeContent(equipmentItem, 1);

@@ -11,6 +11,10 @@ public interface PlayerClass {
         return getPlayerClassContainer().getTopClass();
     }
 
+    default ClassData[] getClassSlot() {
+        return getPlayerClassContainer().getClassSlot();
+    }
+
     default void setClassSlot(int i, ClassData classData) {
         getPlayerClassContainer().setClassSlot(i, classData);
     }

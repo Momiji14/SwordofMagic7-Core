@@ -37,6 +37,11 @@ public class PlayerClassContainer implements PlayerClass {
     }
 
     @Override
+    public ClassData[] getClassSlot() {
+        return classSlot;
+    }
+
+    @Override
     public void setClassSlot(int i, ClassData classData) {
         classSlot[i] = classData;
     }

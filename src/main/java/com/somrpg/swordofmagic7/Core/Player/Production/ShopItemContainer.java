@@ -1,5 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Player.Production;
 
+import com.somrpg.swordofmagic7.Core.Generic.Item.BaseItem;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Player.Production.Base.SomCraftItemContainer;
 import com.somrpg.swordofmagic7.Core.Player.Production.Base.SomRecipe;
@@ -11,8 +12,8 @@ public class ShopItemContainer extends SomCraftItemContainer implements ShopItem
 
     private int price;
 
-    ShopItemContainer(SomRecipe recipes, SomItemStack somItemStack, int price) {
-        super(recipes, somItemStack);
+    ShopItemContainer(SomRecipe recipes, BaseItem item, int price) {
+        super(recipes, item);
         this.price = price;
     }
 
@@ -27,10 +28,10 @@ public class ShopItemContainer extends SomCraftItemContainer implements ShopItem
     }
 
     @Override
-    public List<String> toStringList() {
+    public List<String> toStringList(boolean bold) {
         List<String> list = new ArrayList<>();
         list.add("§7・§e§l" + getPrice() + "メル");
-        list.addAll(getRecipe().toStringList());
+        list.addAll(getRecipe().toStringList(bold));
         return list;
     }
 

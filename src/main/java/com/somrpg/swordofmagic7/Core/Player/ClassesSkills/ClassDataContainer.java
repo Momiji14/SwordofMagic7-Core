@@ -74,5 +74,4 @@ public class ClassDataContainer implements ClassData {
     public Map<ClassData, Integer> getReqClass() {
         return reqClass;
     }
-
 }

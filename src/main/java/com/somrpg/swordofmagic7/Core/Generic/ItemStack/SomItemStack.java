@@ -130,8 +130,7 @@ public class SomItemStack extends ViewableItemStack implements Cloneable {
         }
     }
 
-    @Override
-    public SomItemStack clone() {
+    public SomItemStack cloneSomItemStack() {
         try {
             return (SomItemStack) super.clone();
         } catch (CloneNotSupportedException e) {

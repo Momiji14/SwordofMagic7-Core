@@ -2,6 +2,7 @@ package com.somrpg.swordofmagic7.Core.Player.Production.Base;
 
 import com.somrpg.swordofmagic7.Core.Generic.DecoContent;
 import com.somrpg.swordofmagic7.Core.Generic.DecoFormat;
+import com.somrpg.swordofmagic7.Core.Generic.Item.BaseItem;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import org.bukkit.inventory.ItemStack;
 
@@ -10,25 +11,25 @@ import java.util.List;
 
 public class SomCraftItemContainer implements SomCraftItem {
 
-    private final SomItemStack somItemStack;
+    private final BaseItem item;
     private final SomRecipe recipe;
 
-    protected SomCraftItemContainer(SomRecipe recipe, SomItemStack somItemStack) {
+    protected SomCraftItemContainer(SomRecipe recipe, BaseItem item) {
         this.recipe = recipe != null ? recipe : SomRecipe.create(new ArrayList<>());
-        this.somItemStack = somItemStack;
+        this.item = item;
     }
 
     @Override
-    public SomItemStack getSomItemStack() {
-        return somItemStack;
+    public BaseItem getItem() {
+        return item;
     }
 
     @Override
     public ItemStack viewItemStack() {
-        ItemStack itemStack = getSomItemStack().viewItemStack();
+        ItemStack itemStack = getItem().viewItemStack();
         List<String> addLore = new ArrayList<>();
         addLore.add(DecoContent.decoPartition(getPartition()));
-        addLore.addAll(toStringList());
+        addLore.addAll(toStringList(true));
         DecoFormat.addLore(itemStack, addLore);
         return itemStack;
     }
@@ -44,7 +45,7 @@ public class SomCraftItemContainer implements SomCraftItem {
     }
 
     @Override
-    public List<String> toStringList() {
-        return recipe.toStringList();
+    public List<String> toStringList(boolean bold) {
+        return recipe.toStringList(bold);
     }
 }

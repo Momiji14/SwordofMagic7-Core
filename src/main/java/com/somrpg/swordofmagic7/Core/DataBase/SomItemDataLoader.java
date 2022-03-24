@@ -72,7 +72,7 @@ public interface SomItemDataLoader extends DataBase {
     @Nullable
     static SomItemStack getItem(String id) {
         if (SomItemDataList.containsKey(id)) {
-            return SomItemDataList.get(id).clone();
+            return SomItemDataList.get(id).cloneSomItemStack();
         }
         return null;
         //return new SomItemStack("Error Id -> " + id, Material.BARRIER);

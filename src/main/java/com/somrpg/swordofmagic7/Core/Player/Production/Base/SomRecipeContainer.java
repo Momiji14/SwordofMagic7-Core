@@ -19,7 +19,7 @@ public class SomRecipeContainer implements SomRecipe {
     }
 
     @Override
-    public List<String> toStringList() {
+    public List<String> toStringList(boolean bold) {
         List<String> list = new ArrayList<>();
         for (SomItemStack recipe : getReqStack()) {
             list.add("§7・§e" + recipe.getDisplay() + "§ax" + recipe.getAmount());

@@ -52,10 +52,10 @@ public class SkillParameterContainer implements SkillParameter {
 
     @Override
     public String valueView() {
-        if (digit > -1) {
-            return prefix + ScaleDigit(value, digit) + suffix;
+        if (getDigit() > -1) {
+            return getPrefix() + ScaleDigit(getValue(), getDigit()) + getSuffix();
         } else {
-            return prefix + suffix;
+            return getPrefix() + getSuffix();
         }
     }
 }

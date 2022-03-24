@@ -11,5 +11,5 @@ public interface SomRecipe {
 
     List<SomItemStack> getReqStack();
 
-    List<String> toStringList();
+    List<String> toStringList(boolean bold);
 }

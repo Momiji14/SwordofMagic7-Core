@@ -64,9 +64,11 @@ public class EquipmentItem extends BaseItem implements Cloneable {
         return reqLevel;
     }
 
-    @Override
-    public EquipmentItem clone() {
-        // TODO: このクローンが元の内部を変更できないようにミュータブルな状態をここにコピーします
-        return (EquipmentItem) super.clone();
+    public EquipmentItem cloneEquipment() {
+        try {
+            return (EquipmentItem) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }
