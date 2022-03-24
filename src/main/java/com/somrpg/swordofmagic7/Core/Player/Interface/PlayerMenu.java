@@ -23,7 +23,9 @@ public interface PlayerMenu {
     default ClassMenu getClassMenu() {
         return getPlayerMenuContainer().getClassMenu();
     }
-
+    default SkillSlotMenu getSkillSlotMenu() {
+        return getPlayerMenuContainer().getSkillSlotMenu();
+    }
     default ShopDisplay getShopDisplay() {
         return getPlayerMenuContainer().getShopDisplay();
     }

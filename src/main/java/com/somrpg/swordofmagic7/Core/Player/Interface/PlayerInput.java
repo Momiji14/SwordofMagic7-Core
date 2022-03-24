@@ -32,28 +32,41 @@ public interface PlayerInput {
                 getPlayerData().getShopDisplay().onClick(event);
                 getPlayerData().getClassMenu().onClick(event);
             } else if (view.getBottomInventory() == clickedInv) {
-                switch (slot) {
-                    case 8 -> getPlayerData().getItemInventory().removeEquipment(SomEquipmentSlot.MainHand);
-                    case 40 -> getPlayerData().getItemInventory().removeEquipment(SomEquipmentSlot.OffHand);
-                    case 38 -> getPlayerData().getItemInventory().removeEquipment(SomEquipmentSlot.Armor);
-                    case 26 -> getPlayerData().getUserMenu().openGUI();
-                    case 17 -> {
-                        if (getPlayerData().getViewInventory().isSkillSlot()) getPlayerData().getSkillSlot().ScrollUp();
-                        else getPlayerData().getBaseViewInventory().addScroll(1);
-                    }
-                    case 35 -> {
-                        if (getPlayerData().getViewInventory().isSkillSlot()) getPlayerData().getSkillSlot().ScrollDown();
-                        else getPlayerData().getBaseViewInventory().addScroll(-1);
-                    }
-                    default -> {
-                        if (getPlayerData().getViewInventory().isItemInventory()) {
-                            int scroll = getPlayerData().getItemInventory().getScroll();
-                            SomItemStack itemStack = getPlayerData().getItemInventory().getList().get(scroll*8+index(slot));
-                            if (itemStack instanceof EquipmentItem item) {
-                                getPlayerData().getItemInventory().setEquipment(item);
+                if (slot >= 8) {
+                    switch (slot) {
+                        case 8 -> getPlayerData().getItemInventory().removeEquipment(SomEquipmentSlot.MainHand);
+                        case 40 -> getPlayerData().getItemInventory().removeEquipment(SomEquipmentSlot.OffHand);
+                        case 38 -> getPlayerData().getItemInventory().removeEquipment(SomEquipmentSlot.Armor);
+                        case 26 -> getPlayerData().getUserMenu().openGUI();
+                        case 17 -> {
+                            if (getPlayerData().getViewInventory().isSkillSlot())
+                                getPlayerData().getSkillSlot().ScrollUp();
+                            else getPlayerData().getBaseViewInventory().addScroll(1);
+                        }
+                        case 35 -> {
+                            if (getPlayerData().getViewInventory().isSkillSlot())
+                                getPlayerData().getSkillSlot().ScrollDown();
+                            else getPlayerData().getBaseViewInventory().addScroll(-1);
+                        }
+                        default -> {
+                            switch (getPlayerData().getViewInventory()) {
+                                case ItemInventory -> {
+                                    int scroll = getPlayerData().getItemInventory().getScroll();
+                                    SomItemStack itemStack = getPlayerData().getItemInventory().getList().get(scroll * 8 + index(slot));
+                                    if (itemStack instanceof EquipmentItem item) {
+                                        getPlayerData().getItemInventory().setEquipment(item);
+                                    }
+                                }
+                                case SkillSlot -> {
+                                    getPlayerData().getSkillSlot().setSelectSlot(index(slot));
+                                    getPlayerData().getSkillSlotMenu().openGUI();
+                                }
                             }
                         }
                     }
+                } else {
+                    getPlayerData().getSkillSlot().setSelectSlot(slot);
+                    getPlayerData().getSkillSlotMenu().openGUI();
                 }
             }
         }

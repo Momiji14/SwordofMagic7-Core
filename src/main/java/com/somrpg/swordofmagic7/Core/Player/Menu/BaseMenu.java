@@ -34,9 +34,16 @@ public interface BaseMenu {
         Inventory inv = Bukkit.createInventory(null, getSize()*9, getGUIDisplayComponent());
         inv.setMaxStackSize(GenericConfig.MaxItemStackAmount);
         inv.setContents(getContent());
-        getPlayer().openInventory(inv);
-        SomSound.Open.play(getPlayer());
+        if (!getPlayer().getOpenInventory().title().equals(getGUIDisplayComponent())) {
+            getPlayer().openInventory(inv);
+            SomSound.Open.play(getPlayer());
+        }
+        openProcess();
         return inv;
+    }
+
+    default void openProcess() {
+
     }
 
     default void review() {

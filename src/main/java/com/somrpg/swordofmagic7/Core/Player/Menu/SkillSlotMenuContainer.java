@@ -7,6 +7,7 @@ import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Player.Inventory.SkillHolder;
 import com.somrpg.swordofmagic7.Core.Player.Inventory.SkillHolderContainer;
 import com.somrpg.swordofmagic7.Core.Player.Inventory.SkillHolderType;
+import com.somrpg.swordofmagic7.Core.Player.Inventory.SomInventoryType;
 import com.somrpg.swordofmagic7.Core.Player.Skills.SkillData;
 import com.somrpg.swordofmagic7.Core.Player.Skills.SkillType;
 import org.bukkit.event.inventory.ClickType;
@@ -21,13 +22,13 @@ public class SkillSlotMenuContainer implements SkillSlotMenu {
 
     private final PlayerData playerData;
 
-    SkillSlotMenuContainer(PlayerData playerData) {
+    public SkillSlotMenuContainer(PlayerData playerData) {
         this.playerData = playerData;
     }
 
     @Override
     public String getGUIDisplay() {
-        return "スキルスロット設定";
+        return display;
     }
 
     @Override
@@ -38,6 +39,12 @@ public class SkillSlotMenuContainer implements SkillSlotMenu {
     @Override
     public int getSize() {
         return 6;
+    }
+
+    @Override
+    public void openProcess() {
+        getPlayerData().setViewInventory(SomInventoryType.SkillSlot);
+        getPlayerData().viewUpdate();
     }
 
     Map<Integer, SkillHolder> skillHolderMap = new HashMap<>();

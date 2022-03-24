@@ -4,4 +4,6 @@ import com.somrpg.swordofmagic7.Core.Generic.Item.BaseItem;
 
 public interface SkillSlotMenu extends BaseMenu  {
 
+    String display = "スキルスロット設定";
+
 }

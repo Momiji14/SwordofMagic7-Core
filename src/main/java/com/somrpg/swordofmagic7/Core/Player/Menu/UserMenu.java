@@ -16,6 +16,7 @@ public interface UserMenu extends BaseMenu {
     ItemStack SkillSlotIcon = ViewableItemStack.create(SomInventoryType.SkillSlot.getDisplay(), Material.END_CRYSTAL, "インベントリ表示をスキルスロットに切り替えます").viewItemStack();
 
     ItemStack AttributeMenuIcon = ViewableItemStack.create(AttributeMenu.display, Material.RED_DYE, "アトリビュートメニューを開きます").viewItemStack();
+    ItemStack SkillSlotMenuIcon = ViewableItemStack.create(SkillSlotMenu.display, Material.END_CRYSTAL, "スキルスロット設定を開きます").viewItemStack();
     ItemStack SettingMenuIcon = ViewableItemStack.create(SettingMenu.display, Material.CRAFTING_TABLE, "設定メニューを開きます").viewItemStack();
 
     String display = "ユーザーメニュー";
@@ -46,6 +47,7 @@ public interface UserMenu extends BaseMenu {
                 content[3] = SkillSlotIcon;
 
                 content[18] = AttributeMenuIcon;
+                content[19] = SkillSlotMenuIcon;
                 content[26] = SettingMenuIcon;
 
                 for (int i = 9; i < 18; i++) {
@@ -86,6 +88,8 @@ public interface UserMenu extends BaseMenu {
         //下段
         if (clickedItem.equals(AttributeMenuIcon)) {
             getPlayerData().getAttributeMenu().openGUI();
+        } else if (clickedItem.equals(SkillSlotMenuIcon)) {
+            getPlayerData().getSkillSlotMenu().openGUI();
         } else if (clickedItem.equals(SettingMenuIcon)) {
             getPlayerData().getSettingMenu().openGUI();
         }
