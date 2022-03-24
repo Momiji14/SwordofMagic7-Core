@@ -4,7 +4,7 @@ import com.somrpg.swordofmagic7.Core.DataBase.TeleportGateLoader;
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
-import com.somrpg.swordofmagic7.Core.Particle.ParticleData;
+import com.somrpg.swordofmagic7.Core.Generic.Particle.ParticleData;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;

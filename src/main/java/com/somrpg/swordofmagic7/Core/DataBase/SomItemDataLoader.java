@@ -2,7 +2,7 @@ package com.somrpg.swordofmagic7.Core.DataBase;
 
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatusContainer;
-import com.somrpg.swordofmagic7.Core.Item.*;
+import com.somrpg.swordofmagic7.Core.Generic.Item.*;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

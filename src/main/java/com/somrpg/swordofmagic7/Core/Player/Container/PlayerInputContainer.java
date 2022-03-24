@@ -29,7 +29,7 @@ public class PlayerInputContainer implements PlayerInput {
 
     @Override
     public boolean isRightClickHold() {
-        return isRightClickHold();
+        return RightClickHold;
     }
 
     @Override

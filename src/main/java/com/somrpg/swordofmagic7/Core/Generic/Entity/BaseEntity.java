@@ -1,6 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Generic.Entity;
 
-import com.somrpg.swordofmagic7.Core.Effect.EffectData;
+import com.somrpg.swordofmagic7.Core.Generic.Effect.EffectData;
 import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatus;
 import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatusContainer;
 import com.somrpg.swordofmagic7.Core.Generic.Parameter.SomAttribute;

@@ -1,6 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
-import com.somrpg.swordofmagic7.Core.ClassesSkills.ClassData;
+import com.somrpg.swordofmagic7.Core.Player.ClassesSkills.ClassData;
 import com.somrpg.swordofmagic7.Core.Player.Container.PlayerClassContainer;
 
 public interface PlayerClass {

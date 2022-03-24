@@ -3,7 +3,7 @@ package com.somrpg.swordofmagic7.Core.Listener;
 import com.somrpg.swordofmagic7.Core.DataBase.ShopDataLoader;
 import com.somrpg.swordofmagic7.Core.Generic.DecoContent;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
-import com.somrpg.swordofmagic7.Core.Production.ShopData;
+import com.somrpg.swordofmagic7.Core.Player.Production.ShopData;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
@@ -17,9 +17,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerItemHeldEvent;
-import org.bukkit.event.player.PlayerSwapHandItemsEvent;
-import org.bukkit.inventory.EquipmentSlot;
 
 public class InteractListener implements Listener {
 

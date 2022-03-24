@@ -3,7 +3,7 @@ package com.somrpg.swordofmagic7.Core.Command.AdminCommand;
 import com.somrpg.swordofmagic7.Core.Command.PlayerCommandExecutor;
 import com.somrpg.swordofmagic7.Core.DataBase.SomItemDataLoader;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
-import com.somrpg.swordofmagic7.Core.Item.BaseItem;
+import com.somrpg.swordofmagic7.Core.Generic.Item.BaseItem;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.entity.Player;

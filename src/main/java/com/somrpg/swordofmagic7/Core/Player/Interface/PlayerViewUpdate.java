@@ -1,8 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
-import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatus;
-import com.somrpg.swordofmagic7.Core.Item.SomEquipmentSlot;
+import com.somrpg.swordofmagic7.Core.Generic.Item.SomEquipmentSlot;
 
 public interface PlayerViewUpdate {
 

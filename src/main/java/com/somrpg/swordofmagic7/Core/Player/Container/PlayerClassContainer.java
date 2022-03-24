@@ -1,6 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Player.Container;
 
-import com.somrpg.swordofmagic7.Core.ClassesSkills.ClassData;
+import com.somrpg.swordofmagic7.Core.Player.ClassesSkills.ClassData;
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerClass;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;

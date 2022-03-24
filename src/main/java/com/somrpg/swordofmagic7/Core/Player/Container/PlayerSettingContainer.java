@@ -1,7 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Player.Container;
 
-import com.somrpg.swordofmagic7.Core.Inventory.SomInventoryType;
-import com.somrpg.swordofmagic7.Core.Menu.UserMenuType;
+import com.somrpg.swordofmagic7.Core.Player.Inventory.SomInventoryType;
+import com.somrpg.swordofmagic7.Core.Player.Menu.UserMenuType;
 import com.somrpg.swordofmagic7.Core.Player.Enum.*;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerSetting;

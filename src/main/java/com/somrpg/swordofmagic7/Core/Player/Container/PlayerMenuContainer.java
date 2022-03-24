@@ -1,10 +1,10 @@
 package com.somrpg.swordofmagic7.Core.Player.Container;
 
-import com.somrpg.swordofmagic7.Core.Menu.*;
+import com.somrpg.swordofmagic7.Core.Player.Menu.*;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerMenu;
-import com.somrpg.swordofmagic7.Core.Production.ShopDisplay;
-import com.somrpg.swordofmagic7.Core.Production.ShopDisplayContainer;
+import com.somrpg.swordofmagic7.Core.Player.Production.ShopDisplay;
+import com.somrpg.swordofmagic7.Core.Player.Production.ShopDisplayContainer;
 
 public class PlayerMenuContainer implements PlayerMenu {
 

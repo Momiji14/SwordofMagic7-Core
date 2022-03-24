@@ -1,8 +1,8 @@
 package com.somrpg.swordofmagic7.Core.DataBase;
 
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
-import com.somrpg.swordofmagic7.Core.Production.Base.SomRecipe;
-import com.somrpg.swordofmagic7.Core.Production.Base.SomRecipeContainer;
+import com.somrpg.swordofmagic7.Core.Player.Production.Base.SomRecipe;
+import com.somrpg.swordofmagic7.Core.Player.Production.Base.SomRecipeContainer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 

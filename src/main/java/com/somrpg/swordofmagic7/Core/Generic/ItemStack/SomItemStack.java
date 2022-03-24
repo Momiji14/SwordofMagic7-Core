@@ -2,9 +2,9 @@ package com.somrpg.swordofmagic7.Core.Generic.ItemStack;
 
 import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
 import com.somrpg.swordofmagic7.Core.DataBase.SomItemDataLoader;
-import com.somrpg.swordofmagic7.Core.Item.BaseItem;
-import com.somrpg.swordofmagic7.Core.Item.EquipmentItem;
-import com.somrpg.swordofmagic7.Core.Item.RuneItem;
+import com.somrpg.swordofmagic7.Core.Generic.Item.BaseItem;
+import com.somrpg.swordofmagic7.Core.Generic.Item.EquipmentItem;
+import com.somrpg.swordofmagic7.Core.Generic.Item.RuneItem;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import org.bukkit.Material;
 import org.checkerframework.checker.nullness.qual.NonNull;

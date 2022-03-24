@@ -1,9 +1,9 @@
 package com.somrpg.swordofmagic7.Core.DataBase;
 
-import com.somrpg.swordofmagic7.Core.ClassesSkills.SkillData;
-import com.somrpg.swordofmagic7.Core.ClassesSkills.SkillParameter;
-import com.somrpg.swordofmagic7.Core.ClassesSkills.SkillType;
-import com.somrpg.swordofmagic7.Core.Item.EquipmentItemCategory;
+import com.somrpg.swordofmagic7.Core.Player.Skills.SkillData;
+import com.somrpg.swordofmagic7.Core.Player.Skills.SkillParameter;
+import com.somrpg.swordofmagic7.Core.Player.Skills.SkillType;
+import com.somrpg.swordofmagic7.Core.Generic.Item.EquipmentItemCategory;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

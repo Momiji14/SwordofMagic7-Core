@@ -1,7 +1,7 @@
 package com.somrpg.swordofmagic7.Core.DataBase;
 
-import com.somrpg.swordofmagic7.Core.ClassesSkills.ClassData;
-import com.somrpg.swordofmagic7.Core.ClassesSkills.SkillData;
+import com.somrpg.swordofmagic7.Core.Player.ClassesSkills.ClassData;
+import com.somrpg.swordofmagic7.Core.Player.Skills.SkillData;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
