@@ -1,6 +1,6 @@
-package com.somrpg.swordofmagic7.Core.Pet;
+package com.somrpg.swordofmagic7.Core.Entity.Pet;
 
-import com.somrpg.swordofmagic7.Core.Generic.Entity.BaseEntityContainer;
+import com.somrpg.swordofmagic7.Core.Entity.BaseEntityContainer;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class PetEntityContainer extends BaseEntityContainer implements PetEntityInterface {

@@ -1,4 +1,4 @@
-package com.somrpg.swordofmagic7.Core.Generic.Entity;
+package com.somrpg.swordofmagic7.Core.Entity;
 
 import com.somrpg.swordofmagic7.Core.Generic.Effect.EffectData;
 import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatusContainer;
@@ -8,6 +8,8 @@ import java.util.Collection;
 import java.util.HashSet;
 
 public class BaseEntityContainer implements BaseEntity {
+    private int level;
+    private int exp;
     private double Health = 0;
     private double Mana = 0;
     private final Collection<EffectData> EffectSet = new HashSet<>();
@@ -31,6 +33,20 @@ public class BaseEntityContainer implements BaseEntity {
     @Override
     public SomAttributeContainer getAttributeContainer() {
         return attributeContainer;
+    }
+
+    @Override public void setLevel(int level) {
+        this.level = level;
+    }
+    @Override public int getLevel() {
+        return level;
+    }
+
+    @Override public void setExp(int exp) {
+        this.exp = exp;
+    }
+    @Override public int getExp() {
+        return exp;
     }
 
     @Override

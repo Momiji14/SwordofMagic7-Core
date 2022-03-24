@@ -1,6 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
-import com.somrpg.swordofmagic7.Core.Generic.Entity.BaseEntityContainer;
+import com.somrpg.swordofmagic7.Core.Entity.BaseEntityContainer;
 import com.somrpg.swordofmagic7.Core.Generic.Timer.SomTimer;
 import com.somrpg.swordofmagic7.Core.Player.Inventory.*;
 import com.somrpg.swordofmagic7.Core.Map.MapData;

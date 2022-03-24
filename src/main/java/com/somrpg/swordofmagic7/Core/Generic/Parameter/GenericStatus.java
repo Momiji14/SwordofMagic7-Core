@@ -5,11 +5,11 @@ import java.util.List;
 
 import static com.somrpg.swordofmagic7.Core.Generic.DecoContent.decoLore;
 
-public interface GenericStatus {
+public interface GenericStatus extends Cloneable {
 
     GenericStatusContainer getGenericStatusContainer();
 
-    default void setStatusParameter(double maxHealth, double healthRegen, double maxMana, double manaRegen, double atk, double def, double acc, double eva, double hlp, double criticalRate, double criticalResist) {
+    default GenericStatus setStatusParameter(double maxHealth, double healthRegen, double maxMana, double manaRegen, double atk, double def, double acc, double eva, double hlp, double criticalRate, double criticalResist) {
         setMaxHealth(maxHealth);
         setHealthRegen(healthRegen);
         setMaxMana(maxMana);
@@ -21,9 +21,24 @@ public interface GenericStatus {
         setEVA(eva);
         setCriticalRate(criticalRate);
         setCriticalResist(criticalResist);
+        return getGenericStatusContainer();
     }
 
-    default void addStatusParameter(GenericStatus param) {
+    default GenericStatus setAllStatusParameter(double value) {
+        setMaxHealth(value);
+        setHealthRegen(value);
+        setMaxMana(value);
+        setManaRegen(value);
+        setATK(value);
+        setDEF(value);
+        setACC(value);
+        setEVA(value);
+        setCriticalRate(value);
+        setCriticalResist(value);
+        return getGenericStatusContainer();
+    }
+
+    default GenericStatus addStatusParameter(GenericStatus param) {
         setMaxHealth(getMaxHealth() + param.getMaxHealth());
         setHealthRegen(getManaRegen() + param.getHealthRegen());
         setMaxMana(getMaxMana() + param.getMaxMana());
@@ -34,9 +49,10 @@ public interface GenericStatus {
         setEVA(getEVA() + param.getEVA());
         setCriticalRate(getCriticalRate() + param.getCriticalRate());
         setCriticalResist(getCriticalResist() + param.getCriticalResist());
+        return getGenericStatusContainer();
     }
 
-    default void multiplyStatusParameter(GenericStatus param) {
+    default GenericStatus multiplyStatusParameter(GenericStatus param) {
         setMaxHealth(getMaxHealth() * param.getMaxHealth());
         setHealthRegen(getManaRegen() * param.getHealthRegen());
         setMaxMana(getMaxMana() * param.getMaxMana());
@@ -47,6 +63,7 @@ public interface GenericStatus {
         setEVA(getEVA() * param.getEVA());
         setCriticalRate(getCriticalRate() * param.getCriticalRate());
         setCriticalResist(getCriticalResist() * param.getCriticalResist());
+        return getGenericStatusContainer();
     }
 
     default void setStatusParameter(GenericStatus param) {

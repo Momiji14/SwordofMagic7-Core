@@ -1,7 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Player.Inventory;
 
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
-import com.somrpg.swordofmagic7.Core.Pet.PetItem;
+import com.somrpg.swordofmagic7.Core.Entity.Pet.PetItem;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.checkerframework.checker.nullness.qual.NonNull;

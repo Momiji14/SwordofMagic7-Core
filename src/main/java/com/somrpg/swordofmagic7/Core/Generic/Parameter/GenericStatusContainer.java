@@ -28,7 +28,7 @@ public class GenericStatusContainer extends SomLevel implements GenericStatus {
     }
 
     @Override
-    public void setStatusParameter(double maxHealth, double healthRegen, double maxMana, double manaRegen, double atk, double def, double acc, double eva, double hlp, double criticalRate, double criticalResist) {
+    public GenericStatus setStatusParameter(double maxHealth, double healthRegen, double maxMana, double manaRegen, double atk, double def, double acc, double eva, double hlp, double criticalRate, double criticalResist) {
         MaxHealth = maxHealth;
         HealthRegen = healthRegen;
         MaxMana = maxMana;
@@ -40,6 +40,7 @@ public class GenericStatusContainer extends SomLevel implements GenericStatus {
         HLP = hlp;
         CriticalRate = criticalRate;
         CriticalResist = criticalResist;
+        return this;
     }
 
     public void load(FileConfiguration data) {
@@ -55,7 +56,7 @@ public class GenericStatusContainer extends SomLevel implements GenericStatus {
     }
 
     @Override
-    public void addStatusParameter(GenericStatus param) {
+    public GenericStatus addStatusParameter(GenericStatus param) {
         MaxHealth += param.getMaxHealth();
         HealthRegen += param.getHealthRegen();
         MaxMana += param.getMaxMana();
@@ -67,10 +68,11 @@ public class GenericStatusContainer extends SomLevel implements GenericStatus {
         HLP += param.getHLP();
         CriticalRate += param.getCriticalRate();
         CriticalResist += param.getCriticalResist();
+        return this;
     }
 
     @Override
-    public void multiplyStatusParameter(GenericStatus param) {
+    public GenericStatus multiplyStatusParameter(GenericStatus param) {
         MaxHealth *= param.getMaxHealth();
         HealthRegen *= param.getHealthRegen();
         MaxMana *= param.getMaxMana();
@@ -82,6 +84,7 @@ public class GenericStatusContainer extends SomLevel implements GenericStatus {
         HLP *= param.getHLP();
         CriticalRate *= param.getCriticalRate();
         CriticalResist *= param.getCriticalResist();
+        return this;
     }
 
     @Override
