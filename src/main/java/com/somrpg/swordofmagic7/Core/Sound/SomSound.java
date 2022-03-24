@@ -17,6 +17,7 @@ public enum SomSound {
     Equip(Sound.ITEM_ARMOR_EQUIP_CHAIN, 1, 1),
 
     Shoot(Sound.ENTITY_WITHER_SHOOT, 1, 1),
+    Heal(Sound.ENTITY_ENDER_EYE_DEATH, 1, 1),
     ;
 
     private final Sound sound;

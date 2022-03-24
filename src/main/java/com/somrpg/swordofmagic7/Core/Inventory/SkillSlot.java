@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface SkillSlot {
 
+    void SkillSlotUse(int slot);
+
     SkillHolder getSkillSlot(int slot);
 
     void viewTop();

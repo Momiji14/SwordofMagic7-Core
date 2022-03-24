@@ -1,5 +1,6 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
+import com.somrpg.swordofmagic7.Core.Player.Container.PlayerInputContainer;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -10,6 +11,8 @@ import org.bukkit.inventory.ItemStack;
 public interface PlayerInput {
 
     PlayerData getPlayerData();
+
+    PlayerInputContainer getPlayerInputContainer();
 
     default void onClickGUI(InventoryClickEvent event) {
         InventoryView view = event.getView();
@@ -45,5 +48,12 @@ public interface PlayerInput {
         getPlayerData().viewUpdate();
     }
 
+    default boolean isRightClickHold() {
+        return getPlayerInputContainer().isRightClickHold();
+    }
+
+    default void setRightClickHold() {
+        getPlayerInputContainer().setRightClickHold();
+    }
 }
 

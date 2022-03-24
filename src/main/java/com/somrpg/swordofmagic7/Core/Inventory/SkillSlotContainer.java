@@ -3,7 +3,10 @@ package com.somrpg.swordofmagic7.Core.Inventory;
 import com.somrpg.swordofmagic7.Core.DataBase.SomItemDataLoader;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
+import com.somrpg.swordofmagic7.Core.Item.BaseItem;
+import com.somrpg.swordofmagic7.Core.Item.SomPotionItem;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
+import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -33,6 +36,22 @@ public class SkillSlotContainer implements SkillSlot {
             }
         }
         return item;
+    }
+
+    @Override
+    public void SkillSlotUse(int slot) {
+        switch (getSkillSlot(slot).getType()) {
+            case None -> playerData.sendMessage("§eスロット[" + (slot+1) + "]§aは§bセット§aされていません", SomSound.Nope);
+            case Item -> {
+                SomItemStack item = playerData.getItemInventory().getContent(getSkillSlot(slot).getKey());
+                if (item instanceof SomPotionItem potionItem) {
+                    potionItem.use(playerData);
+                }
+            }
+            case Skill -> {
+
+            }
+        }
     }
 
     @Override

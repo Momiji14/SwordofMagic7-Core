@@ -1,35 +1,21 @@
 package com.somrpg.swordofmagic7.Core.Item;
 
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
+import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatus;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-public class SomPotionItem extends BaseItem {
+public class SomCookItem extends SomPotionItem {
 
-    private double Health = 0;
-    private double Mana = 0;
+    private GenericStatus fixed;
+    private GenericStatus multiply;
 
-    public SomPotionItem(@NonNull SomItemStack data, @NonNull ItemCategory itemCategory, int sell) {
+    public SomCookItem(@NonNull SomItemStack data, @NonNull ItemCategory itemCategory, int sell) {
         super(data, itemCategory, sell);
     }
 
-    public void setHealth(double health) {
-        Health = health;
-    }
-
-    public double getHealth() {
-        return Health;
-    }
-
-    public void setMana(double mana) {
-        Mana = mana;
-    }
-
-    public double getMana() {
-        return Mana;
-    }
-
+    @Override
     public void use(PlayerData playerData) {
         boolean used = false;
         if (playerData.getHealth() < playerData.getMaxHealth()) {
@@ -47,4 +33,5 @@ public class SomPotionItem extends BaseItem {
             playerData.sendMessage("§aすでに§e全回復§aしています", SomSound.Nope);
         }
     }
+
 }

@@ -24,9 +24,13 @@ public interface SomInventory {
     PlayerInventory getInventory();
 
     default void removeContent(@NonNull SomItemStack content) {
+        removeContent(content, content.getAmount());
+    }
+
+    default void removeContent(@NonNull SomItemStack content, int amount) {
         for (SomItemStack itemStack : getList()) {
             if (SomItemStack.equal(itemStack, content)) {
-                itemStack.setAmount(-content.getAmount());
+                itemStack.setAmount(-amount);
             }
         }
         getList().removeIf(somItemStack -> somItemStack.getAmount() <= 0);

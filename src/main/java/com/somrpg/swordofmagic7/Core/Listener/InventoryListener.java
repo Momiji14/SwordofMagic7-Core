@@ -25,6 +25,7 @@ public class InventoryListener implements Listener {
         PlayerData playerData = PlayerData.getData(player);
         if (playerData.getPlayerSetting().isPlayMode()) {
             playerData.getPlayerInput().onCloseGUI(event);
+            playerData.getPlayerEntity().statusUpdate();
         }
     }
 

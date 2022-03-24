@@ -17,7 +17,7 @@ public class BlockListener implements Listener {
     @EventHandler
     void onBlockPlace(BlockPlaceEvent event) {
         Player player = event.getPlayer();
-        if (!player.hasPermission("som7.builder")) {
+        if (!player.hasPermission("som7.builder") || PlayerData.getData(player).isPlayMode()) {
             event.setCancelled(true);
         }
     }
@@ -25,7 +25,7 @@ public class BlockListener implements Listener {
     @EventHandler
     void onBlockBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
-        if (!player.hasPermission("som7.builder")) {
+        if (!player.hasPermission("som7.builder") || PlayerData.getData(player).isPlayMode()) {
             event.setCancelled(true);
         }
     }
