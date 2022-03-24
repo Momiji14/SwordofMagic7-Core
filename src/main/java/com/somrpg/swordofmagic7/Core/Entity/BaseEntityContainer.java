@@ -8,8 +8,8 @@ import java.util.Collection;
 import java.util.HashSet;
 
 public class BaseEntityContainer implements BaseEntity {
-    private int level;
-    private int exp;
+    private int level = 1;
+    private int exp = 0;
     private double Health = 0;
     private double Mana = 0;
     private final Collection<EffectData> EffectSet = new HashSet<>();

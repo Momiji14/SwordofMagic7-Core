@@ -12,6 +12,7 @@ import com.somrpg.swordofmagic7.Core.Player.Interface.*;
 import com.somrpg.swordofmagic7.Core.Player.Inventory.*;
 import com.somrpg.swordofmagic7.Core.Player.PlayerCharacon;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
+import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -21,6 +22,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.DataBasePath;
+import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.SpawnLocation;
 
 public class PlayerDataContainer implements PlayerData {
     public static void remove(Player player) {
@@ -185,6 +187,9 @@ public class PlayerDataContainer implements PlayerData {
     private static final String PathExp = "Exp";
     private static final String PathHealth = "Health";
     private static final String PathMana = "Mana";
+    private static final String PathLocationX = "Location.x";
+    private static final String PathLocationY = "Location.y";
+    private static final String PathLocationZ = "Location.z";
     private static final String PathItemInventory = "Inventory.Item";
     private static final String PathRuneInventory = "Inventory.Rune";
     private static final String PathPetInventory = "Inventory.Pet";
@@ -224,6 +229,10 @@ public class PlayerDataContainer implements PlayerData {
             //設定
             getPlayerSetting().saveSetting(data);
 
+            data.set(PathLocationX, getPlayer().getLocation().getX());
+            data.set(PathLocationY, getPlayer().getLocation().getY());
+            data.set(PathLocationZ, getPlayer().getLocation().getZ());
+
             data.save(playerFile);
             sendMessage("§eプレイヤーデータ§aの§b保存§aが§b完了§aしました", SomSound.Tick);
         } catch (Exception e) {
@@ -238,7 +247,8 @@ public class PlayerDataContainer implements PlayerData {
             if (!playerFile.exists()) {
                 getPlayerEntity().statusUpdate();
                 getPlayerEntity().setHealth(getPlayerEntity().getMaxHealth());
-                getPlayerEntity().setMana(getPlayerEntity().getMana());
+                getPlayerEntity().setMana(getPlayerEntity().getMaxMana());
+                GenericConfig.spawnPlayer(player);
                 return;
             }
             FileConfiguration data = YamlConfiguration.loadConfiguration(playerFile);
@@ -268,6 +278,12 @@ public class PlayerDataContainer implements PlayerData {
             //設定
             getPlayerSetting().loadSetting(data);
 
+            if (isPlayMode()) {
+                double x = data.getDouble(PathLocationX, SpawnLocation.getX());
+                double y = data.getDouble(PathLocationY, SpawnLocation.getY());
+                double z = data.getDouble(PathLocationZ, SpawnLocation.getZ());
+                getPlayer().teleportAsync(new Location(getPlayer().getWorld(), x, y, z, getPlayer().getLocation().getYaw(), getPlayer().getLocation().getPitch()));
+            }
             getPlayerEntity().statusUpdate();
             viewUpdate();
             sendMessage("§eプレイヤーデータ§aの§b読み込み§aが§b完了§aしました", SomSound.Tick);

@@ -1,12 +1,17 @@
 package com.somrpg.swordofmagic7.Core.Generic;
 
+import com.somrpg.swordofmagic7.Core.DataBase.MapDataLoader;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 public interface GenericConfig {
     String DataBasePath = "M:\\Minecraft\\Server\\SwordofMagic7\\DataBase\\";
+    Location SpawnLocation = new Location(Bukkit.getWorld("world"), 1200.5, 100, 0.5, 0, 0);
     int MaxItemStackAmount = 100;
     int ItemInventoryMaxSlot = 256;
     int RuneInventoryMaxSlot = 256;
@@ -49,5 +54,12 @@ public interface GenericConfig {
     double AttributeValue_VIT_DEF = 0.01;
     double AttributeValue_VIT_ResistATK = 0.002;
     double AttributeValue_VIT_CriticalResist = 0.002;
+
+    static void spawnPlayer(Player player) {
+        MapDataLoader.getMapData("Alden").enter(player);
+        player.setFlying(false);
+        player.setGravity(true);
+        player.teleportAsync(SpawnLocation);
+    }
 }
 

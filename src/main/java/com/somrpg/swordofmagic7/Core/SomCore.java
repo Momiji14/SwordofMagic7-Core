@@ -3,6 +3,7 @@ package com.somrpg.swordofmagic7.Core;
 import com.somrpg.swordofmagic7.Core.Command.CommandRegisterExecutor;
 import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
 import com.somrpg.swordofmagic7.Core.DataBase.EnemyDataLoader;
+import com.somrpg.swordofmagic7.Core.DataBase.MapDataLoader;
 import com.somrpg.swordofmagic7.Core.Entity.Eemey.EnemyController;
 import com.somrpg.swordofmagic7.Core.Entity.Eemey.EnemyData;
 import com.somrpg.swordofmagic7.Core.Listener.*;
