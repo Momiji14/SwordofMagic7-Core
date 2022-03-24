@@ -1,5 +1,8 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
+import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
+import com.somrpg.swordofmagic7.Core.Item.EquipmentItem;
+import com.somrpg.swordofmagic7.Core.Item.SomEquipmentSlot;
 import com.somrpg.swordofmagic7.Core.Player.Container.PlayerInputContainer;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -29,12 +32,25 @@ public interface PlayerInput {
                 getPlayerData().getClassMenu().onClick(event);
             } else if (view.getBottomInventory() == clickedInv) {
                 switch (slot) {
+                    case 8 -> getPlayerData().getItemInventory().removeEquipment(SomEquipmentSlot.MainHand);
+                    case 40 -> getPlayerData().getItemInventory().removeEquipment(SomEquipmentSlot.OffHand);
+                    case 38 -> getPlayerData().getItemInventory().removeEquipment(SomEquipmentSlot.Armor);
                     case 26 -> getPlayerData().getUserMenu().openGUI();
-                    case 17 -> getPlayerData().getBaseViewInventory().addScroll(1);
-                    case 35 -> getPlayerData().getBaseViewInventory().addScroll(-1);
+                    case 17 -> {
+                        if (getPlayerData().getViewInventory().isSkillSlot()) getPlayerData().getSkillSlot().ScrollUp();
+                        else getPlayerData().getBaseViewInventory().addScroll(1);
+                    }
+                    case 35 -> {
+                        if (getPlayerData().getViewInventory().isSkillSlot()) getPlayerData().getSkillSlot().ScrollDown();
+                        else getPlayerData().getBaseViewInventory().addScroll(-1);
+                    }
                     default -> {
                         if (getPlayerData().getViewInventory().isItemInventory()) {
-
+                            int scroll = getPlayerData().getItemInventory().getScroll();
+                            SomItemStack itemStack = getPlayerData().getItemInventory().getList().get(scroll*9+slot);
+                            if (itemStack instanceof EquipmentItem item) {
+                                getPlayerData().getItemInventory().setEquipment(item);
+                            }
                         }
                     }
                 }

@@ -43,11 +43,11 @@ public class PlayerDataContainer implements PlayerData {
     private final PlayerBankContainer playerBank;
     private final PlayerMenuContainer playerMenu;
     private final PlayerClassContainer playerClass;
+    private final PlayerInputContainer playerInput;
     private final PlayerOtherContainer playerOther;
 
     private final PlayerCharacon playerCharacon;
     private final PlayerDisplay playerDisplay;
-    private final PlayerInput playerInput;
 
     private final ItemInventory itemInventory;
     private final RuneInventory runeInventory;
@@ -64,13 +64,13 @@ public class PlayerDataContainer implements PlayerData {
         playerStatistics = new PlayerStatisticsContainer(this);
         playerMenu = new PlayerMenuContainer(this);
         playerBank = new PlayerBankContainer(this);
+        playerInput = new PlayerInputContainer(this);
         playerClass = new PlayerClassContainer(this);
 
         playerOther = new PlayerOtherContainer(this);
 
         playerCharacon = new PlayerCharacon(this);
         playerDisplay = new PlayerDisplayContainer(this);
-        playerInput = new PlayerInputContainer(this);
 
         itemInventory = new ItemInventoryContainer(this);
         runeInventory = new RuneInventoryContainer(this);
@@ -85,6 +85,7 @@ public class PlayerDataContainer implements PlayerData {
     @Override public PlayerData getPlayerData() {
         return this;
     }
+
     @Override public PlayerDataContainer getPlayerDataContainer() {
         return this;
     }
@@ -113,6 +114,9 @@ public class PlayerDataContainer implements PlayerData {
     }
     @Override public PlayerMenuContainer getPlayerMenuContainer() {
         return playerMenu;
+    }
+    @Override public PlayerInputContainer getPlayerInputContainer() {
+        return playerInput;
     }
     @Override public PlayerOtherContainer getPlayerOtherContainer() {
         return playerOther;

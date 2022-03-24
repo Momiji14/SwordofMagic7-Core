@@ -17,6 +17,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemHeldEvent;
+import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.EquipmentSlot;
 
 public class InteractListener implements Listener {
@@ -46,9 +48,7 @@ public class InteractListener implements Listener {
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        PlayerData playerData = PlayerData.getData(player);
         Block block = event.getClickedBlock();
-        Action action = event.getAction();
         if (player.getGameMode() != GameMode.CREATIVE) {
             if (block != null) {
                 if (block.getType() != Material.LECTERN) {
@@ -60,35 +60,6 @@ public class InteractListener implements Listener {
         } else if (event.getAction() == Action.PHYSICAL) {
             if (block != null && block.getType() == Material.FARMLAND) {
                 event.setCancelled(true);
-            }
-        }
-
-        if (playerData.isPlayMode() && player.getGameMode() != GameMode.SPECTATOR) {
-            if (event.getHand() == EquipmentSlot.HAND) {
-                switch (playerData.getPlayerCastMode()) {
-                    case Hold -> {
-                        int slot = player.getInventory().getHeldItemSlot();
-                        if (action.isRightClick() && slot < 8) {
-                            playerData.getSkillSlot().SkillSlotUse(slot);
-                        }
-                    }
-                    case Renewed -> {
-
-                    }
-                    case Legacy -> {
-                        if (action.isRightClick()) {
-                            if (player.isSneaking()) {
-                                playerData.getSkillSlot().SkillSlotUse(4);
-                            } else {
-                                playerData.getSkillSlot().SkillSlotUse(0);
-                            }
-                        } else if (action.isLeftClick()) {
-                            if (player.isSneaking()) {
-                                playerData.getSkillSlot().SkillSlotUse(3);
-                            }
-                        }
-                    }
-                }
             }
         }
     }

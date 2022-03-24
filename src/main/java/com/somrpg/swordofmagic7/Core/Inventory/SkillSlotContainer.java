@@ -80,6 +80,22 @@ public class SkillSlotContainer implements SkillSlot {
     }
 
     @Override
+    public void ScrollUp() {
+        SkillHolder[] skillSlotOld = skillSlot.clone();
+        System.arraycopy(skillSlotOld, 8, skillSlot, 0, 24);
+        System.arraycopy(skillSlotOld, 0, skillSlot, 24, 8);
+        SomSound.Tick.play(playerData.getPlayer());
+    }
+
+    @Override
+    public void ScrollDown() {
+        SkillHolder[] skillSlotOld = skillSlot.clone();
+        System.arraycopy(skillSlotOld, 0, skillSlot, 8, 24);
+        System.arraycopy(skillSlotOld, 24, skillSlot, 0, 8);
+        SomSound.Tick.play(playerData.getPlayer());
+    }
+
+    @Override
     public List<String> toDataString() {
         List<String> data = new ArrayList<>();
         for (int i = 0; i < 32; i++) {

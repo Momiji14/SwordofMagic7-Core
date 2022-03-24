@@ -52,4 +52,10 @@ public class ItemInventoryContainer extends BaseInventory implements ItemInvento
         equipmentSlot.put(slot, equipmentItem);
         if (log) getPlayerData().sendMessage("§e[" + equipmentItem.getDisplay() + "]§aを§b装備§aしました", SomSound.Equip);
     }
+
+    @Override
+    public void removeEquipment(@NonNull SomEquipmentSlot slot) {
+        if (hasEquipment(slot)) addContent(equipmentSlot.get(slot));
+        equipmentSlot.remove(slot);
+    }
 }

@@ -12,6 +12,10 @@ public interface SkillSlot {
 
     void viewBottom();
 
+    void ScrollUp();
+
+    void ScrollDown();
+
     List<String> toDataString();
     void fromDataString(List<String> data);
 }
