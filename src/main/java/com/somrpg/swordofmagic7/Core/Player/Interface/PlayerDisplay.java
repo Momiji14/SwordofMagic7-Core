@@ -1,22 +1,10 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
-import com.somrpg.swordofmagic7.Core.Generic.DecoContent;
-import com.somrpg.swordofmagic7.Core.SomCore;
-import net.kyori.adventure.text.Component;
-import org.bukkit.Bukkit;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scoreboard.*;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
-import static com.somrpg.swordofmagic7.Core.Generic.DecoFormat.ScaleDigit;
 
 public interface PlayerDisplay {
 

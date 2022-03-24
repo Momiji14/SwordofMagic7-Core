@@ -1,8 +1,8 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
-import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Generic.Item.EquipmentItem;
 import com.somrpg.swordofmagic7.Core.Generic.Item.SomEquipmentSlot;
+import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Player.Container.PlayerInputContainer;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.Material;

@@ -1,7 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
-import com.somrpg.swordofmagic7.Core.Player.Menu.*;
 import com.somrpg.swordofmagic7.Core.Player.Container.PlayerMenuContainer;
+import com.somrpg.swordofmagic7.Core.Player.Menu.*;
 import com.somrpg.swordofmagic7.Core.Player.Production.ShopDisplay;
 
 public interface PlayerMenu {

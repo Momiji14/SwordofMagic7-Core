@@ -1,8 +1,8 @@
 package com.somrpg.swordofmagic7.Core.Map.WarpGate;
 
 import com.somrpg.swordofmagic7.Core.DataBase.WarpGateLoader;
-import com.somrpg.swordofmagic7.Core.Map.MapData;
 import com.somrpg.swordofmagic7.Core.Generic.Particle.ParticleData;
+import com.somrpg.swordofmagic7.Core.Map.MapData;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.Location;

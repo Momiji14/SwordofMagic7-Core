@@ -137,7 +137,7 @@ public class ViewableItemStack {
             viewLore.add(decoPartition("装備情報"));
             viewLore.add(decoLore("装備種") + itemData.getEquipmentItemCategory().getDisplay());
             viewLore.add(decoLore("装備部位") + itemData.getEquipmentItemCategory().getEquipmentSlot().getDisplay());
-            viewLore.addAll(itemData.getStatusParameter().toStringList());
+            viewLore.addAll(itemData.getStatusParameter().toStringList(digit));
             viewLore.add(decoLore("強化値") + itemData.getPlus());
             viewLore.add(decoLore("必要レベル") + itemData.getReqLevel());
             viewLore.add(decoPartition("ルーンスロット"));

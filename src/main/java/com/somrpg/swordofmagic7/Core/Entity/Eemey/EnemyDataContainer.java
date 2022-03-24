@@ -23,7 +23,7 @@ public class EnemyDataContainer implements EnemyData{
     private final List<DropRuneData> dropRuneData = new ArrayList<>();
     private final List<Double> HStop = new ArrayList<>();
 
-    EnemyDataContainer(String id, String display, EntityType entityType, EnemyType enemyType, MobDisguise disguise, GenericStatus status, int exp, double mov, double reach, double search, boolean hostile) {
+    public EnemyDataContainer(String id, String display, EntityType entityType, EnemyType enemyType, MobDisguise disguise, GenericStatus status, int exp, double mov, double reach, double search, boolean hostile) {
         this.id = id;
         this.display = display;
         this.entityType = entityType;

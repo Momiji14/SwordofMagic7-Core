@@ -1,5 +1,6 @@
 package com.somrpg.swordofmagic7.Core.DataBase;
 
+import com.somrpg.swordofmagic7.Core.Entity.Eemey.SomSpawner;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.SomCore;
 import org.bukkit.Material;
@@ -42,10 +43,16 @@ public interface DataBase {
         ShopDataLoader.load();
         SkillDataLoader.load();
         ClassDataLoader.load();
+        EnemyDataLoader.load();
+        SomSpawnerLoader.load();
     }
 
     static void singleLoad() {
         WarpGateLoader.load();
         TeleportGateLoader.load();
+
+        for (SomSpawner spawner : SomSpawnerLoader.SpawnerDataList.values()) {
+            spawner.start();
+        }
     }
 }

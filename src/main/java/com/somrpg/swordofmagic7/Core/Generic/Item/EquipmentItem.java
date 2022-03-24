@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EquipmentItem extends BaseItem implements Cloneable {
-    private final GenericStatus genericStatus;
+    private final GenericStatus equipmentStatus;
     private final EquipmentItemCategory equipmentItemCategory;
     private final SomEquipmentSlot equipmentSlot;
     private int plus = 0;
@@ -20,12 +20,12 @@ public class EquipmentItem extends BaseItem implements Cloneable {
         super(data, data.getItemCategory(), data.getSell());
         this.equipmentSlot = equipmentSlot;
         this.equipmentItemCategory = equipmentItemCategory;
-        this.genericStatus = new GenericStatusContainer();
+        this.equipmentStatus = new GenericStatusContainer();
         setMaterial(equipmentItemCategory.getMaterial());
     }
 
     public GenericStatus getStatusParameter() {
-        return genericStatus;
+        return equipmentStatus;
     }
 
     public EquipmentItemCategory getEquipmentItemCategory() {

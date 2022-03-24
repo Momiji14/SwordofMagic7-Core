@@ -2,8 +2,6 @@ package com.somrpg.swordofmagic7.Core.Listener;
 
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

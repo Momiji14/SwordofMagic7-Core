@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.somrpg.swordofmagic7.Core.Generic.DecoFormat.ScaleDigit;
-
 public class ClassDataContainer implements ClassData {
 
     private final String id;

@@ -21,6 +21,7 @@ public interface GenericConfig {
     int LifeMaxLevel = 30;
 
     Vector VectorUp = new Vector(0, 1, 0);
+    Vector VectorDown = new Vector(0, -1, 0);
 
     ItemStack AirItem = new ItemStack(Material.AIR);
 

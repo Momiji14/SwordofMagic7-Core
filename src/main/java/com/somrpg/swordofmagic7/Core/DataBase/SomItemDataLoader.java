@@ -1,8 +1,8 @@
 package com.somrpg.swordofmagic7.Core.DataBase;
 
+import com.somrpg.swordofmagic7.Core.Generic.Item.*;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Generic.Parameter.GenericStatusContainer;
-import com.somrpg.swordofmagic7.Core.Generic.Item.*;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -38,6 +38,8 @@ public interface SomItemDataLoader extends DataBase {
                         EquipmentItemCategory equipmentItemCategory = EquipmentItemCategory.valueOf(data.getString("EquipmentCategory"));
                         SomEquipmentSlot equipmentSlot = SomEquipmentSlot.valueOf(data.getString("EquipmentSlot"));
                         item = new EquipmentItem(baseItem, equipmentItemCategory, equipmentSlot);
+                        EquipmentItem equipmentItem = (EquipmentItem) item;
+                        equipmentItem.getStatusParameter().loadFile(data);
                     }
                 }
                 if (material == Material.PLAYER_HEAD) {

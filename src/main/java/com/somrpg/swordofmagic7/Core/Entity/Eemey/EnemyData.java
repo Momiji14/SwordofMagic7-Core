@@ -7,6 +7,7 @@ import org.bukkit.entity.EntityType;
 import java.util.List;
 
 public interface EnemyData {
+
     String getId();
 
     String getDisplay();

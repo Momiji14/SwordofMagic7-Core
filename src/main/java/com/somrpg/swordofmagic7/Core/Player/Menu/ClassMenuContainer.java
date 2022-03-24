@@ -1,12 +1,12 @@
 package com.somrpg.swordofmagic7.Core.Player.Menu;
 
-import com.somrpg.swordofmagic7.Core.Player.ClassesSkills.ClassData;
-import com.somrpg.swordofmagic7.Core.Player.Skills.SkillData;
 import com.somrpg.swordofmagic7.Core.DataBase.ClassDataLoader;
 import com.somrpg.swordofmagic7.Core.Generic.DecoContent;
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
+import com.somrpg.swordofmagic7.Core.Player.ClassesSkills.ClassData;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
+import com.somrpg.swordofmagic7.Core.Player.Skills.SkillData;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.ClickType;
@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 import static com.somrpg.swordofmagic7.Core.Generic.DecoContent.decoLore;
-import static com.somrpg.swordofmagic7.Core.Generic.DecoFormat.ScaleDigit;
 
 public class ClassMenuContainer implements ClassMenu {
 

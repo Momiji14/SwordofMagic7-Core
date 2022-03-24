@@ -1,8 +1,8 @@
 package com.somrpg.swordofmagic7.Core.Player.Interface;
 
+import com.somrpg.swordofmagic7.Core.Player.Enum.*;
 import com.somrpg.swordofmagic7.Core.Player.Inventory.SomInventoryType;
 import com.somrpg.swordofmagic7.Core.Player.Menu.UserMenuType;
-import com.somrpg.swordofmagic7.Core.Player.Enum.*;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public interface PlayerSetting {

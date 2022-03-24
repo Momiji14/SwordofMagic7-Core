@@ -11,10 +11,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Random;
+
 public final class SomCore extends JavaPlugin {
     private static Plugin plugin;
     private static JavaPlugin javaPlugin;
     private static final SomTask somTask = new SomTask();
+    private static final Random random = new Random();
 
     @Override
     public void onEnable() {
@@ -64,5 +67,9 @@ public final class SomCore extends JavaPlugin {
                 player.sendMessage(log);
             }
         }
+    }
+
+    public static Random getRandom() {
+        return random;
     }
 }

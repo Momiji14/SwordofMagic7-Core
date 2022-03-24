@@ -1,9 +1,12 @@
 package com.somrpg.swordofmagic7.Core.Generic.Parameter;
 
+import org.bukkit.configuration.file.FileConfiguration;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.somrpg.swordofmagic7.Core.Generic.DecoContent.decoLore;
+import static com.somrpg.swordofmagic7.Core.Generic.DecoFormat.ScaleDigit;
 
 public interface GenericStatus extends Cloneable {
 
@@ -79,6 +82,10 @@ public interface GenericStatus extends Cloneable {
         setCriticalResist(param.getCriticalResist());
     }
 
+    default void loadFile(FileConfiguration data) {
+        getGenericStatusContainer().loadFile(data);
+    }
+
     default void setMaxHealth(double maxHealth) {
         getGenericStatusContainer().setMaxHealth(maxHealth);
     }
@@ -146,19 +153,19 @@ public interface GenericStatus extends Cloneable {
         return getGenericStatusContainer().getCriticalResist();
     }
 
-    default List<String> toStringList() {
+    default List<String> toStringList(int digit) {
         List<String> list = new ArrayList<>();
-        if (getMaxHealth() > 0) list.add(decoLore("最大体力") + getMaxHealth());
-        if (getHealthRegen() > 0) list.add(decoLore("体力自動回復") + getHealthRegen());
-        if (getMaxMana() > 0) list.add(decoLore("最大マナ") + getMaxMana());
-        if (getManaRegen() > 0) list.add(decoLore("マナ自動回復") + getManaRegen());
-        if (getATK() > 0) list.add(decoLore("攻撃力") + getATK());
-        if (getDEF() > 0) list.add(decoLore("防御力") + getDEF());
-        if (getACC() > 0) list.add(decoLore("命中") + getACC());
-        if (getEVA() > 0) list.add(decoLore("回避") + getEVA());
-        if (getHLP() > 0) list.add(decoLore("治癒力") + getHLP());
-        if (getCriticalRate() > 0) list.add(decoLore("クリティカル発生") + getCriticalRate());
-        if (getCriticalResist() > 0) list.add(decoLore("クリティカル耐性") + getCriticalResist());
+        if (getMaxHealth() > 0) list.add(decoLore("最大体力") + ScaleDigit(getMaxHealth(), digit));
+        if (getHealthRegen() > 0) list.add(decoLore("体力自動回復") + ScaleDigit(getHealthRegen(), digit));
+        if (getMaxMana() > 0) list.add(decoLore("最大マナ") + ScaleDigit(getMaxMana(), digit));
+        if (getManaRegen() > 0) list.add(decoLore("マナ自動回復") + ScaleDigit(getManaRegen(), digit));
+        if (getATK() > 0) list.add(decoLore("攻撃力") + ScaleDigit(getATK(), digit));
+        if (getDEF() > 0) list.add(decoLore("防御力") + ScaleDigit(getDEF(), digit));
+        if (getACC() > 0) list.add(decoLore("命中") + ScaleDigit(getACC(), digit));
+        if (getEVA() > 0) list.add(decoLore("回避") + ScaleDigit(getEVA(), digit));
+        if (getHLP() > 0) list.add(decoLore("治癒力") + ScaleDigit(getHLP(), digit));
+        if (getCriticalRate() > 0) list.add(decoLore("クリティカル発生") + ScaleDigit(getCriticalRate(), digit));
+        if (getCriticalResist() > 0) list.add(decoLore("クリティカル耐性") + ScaleDigit(getCriticalResist(), digit));
         return list;
     }
 }

@@ -1,9 +1,9 @@
 package com.somrpg.swordofmagic7.Core.Player.Inventory;
 
 import com.somrpg.swordofmagic7.Core.DataBase.SomItemDataLoader;
+import com.somrpg.swordofmagic7.Core.Generic.Item.SomPotionItem;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
-import com.somrpg.swordofmagic7.Core.Generic.Item.SomPotionItem;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.bukkit.Material;

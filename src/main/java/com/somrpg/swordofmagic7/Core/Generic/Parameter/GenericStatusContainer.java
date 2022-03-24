@@ -19,7 +19,7 @@ public class GenericStatusContainer extends SomLevel implements GenericStatus {
 
     public GenericStatusContainer() {}
     public GenericStatusContainer(@NonNull FileConfiguration data) {
-        load(data);
+        loadFile(data);
     }
 
     @Override
@@ -43,7 +43,8 @@ public class GenericStatusContainer extends SomLevel implements GenericStatus {
         return this;
     }
 
-    public void load(FileConfiguration data) {
+    @Override
+    public void loadFile(FileConfiguration data) {
         MaxHealth = data.getDouble("MaxHealth", 0);
         MaxMana = data.getDouble("MaxMana", 0);
         ATK = data.getDouble("ATK", 0);
