@@ -11,7 +11,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import java.io.File;
 import java.util.*;
 
-public class SomItemStack extends ViewableItemStack {
+public class SomItemStack extends ViewableItemStack implements Cloneable {
 
     public static boolean equal(SomItemStack itemStack, SomItemStack itemStack2) {
         if (itemStack instanceof EquipmentItem item && itemStack2 instanceof EquipmentItem item2) {
@@ -115,6 +115,15 @@ public class SomItemStack extends ViewableItemStack {
             e.printStackTrace();
             SomCore.log("SomItemStack fromDataStringError -> " + data);
             return DataBase.ErrorItemStack;
+        }
+    }
+
+    @Override
+    public SomItemStack clone() {
+        try {
+            return (SomItemStack) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
         }
     }
 }

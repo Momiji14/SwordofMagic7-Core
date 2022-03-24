@@ -3,6 +3,7 @@ package com.somrpg.swordofmagic7.Core.Generic.ItemStack;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import com.somrpg.swordofmagic7.Core.Generic.DecoContent;
+import com.somrpg.swordofmagic7.Core.Generic.DecoFormat;
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Item.BaseItem;
 import com.somrpg.swordofmagic7.Core.Item.EquipmentItem;
@@ -129,6 +130,9 @@ public class ViewableItemStack {
             viewLore.add(decoPartition("アイテム情報"));
             viewLore.add(decoLore("カテゴリ") + itemData.getItemCategory().getDisplay());
             viewLore.add(decoLore("売値") + itemData.getSell());
+            viewLore.add(DecoContent.decoPartition("スタック情報"));
+            viewLore.add(decoLore("所持個数") + getAmount());
+            viewLore.add(decoLore("総価値") + itemData.getSell() * getAmount());
         }
         if (this instanceof EquipmentItem itemData) {
             viewLore.add(decoPartition("装備情報"));

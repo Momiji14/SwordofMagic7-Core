@@ -67,7 +67,7 @@ public interface DataBase {
     @Nullable
     static SomItemStack getSomItemStack(String key) {
         if (SomItemDataList.containsKey(key)) {
-            return SomItemDataList.get(key);
+            return SomItemDataList.get(key).clone();
         }
         return null;
     }
