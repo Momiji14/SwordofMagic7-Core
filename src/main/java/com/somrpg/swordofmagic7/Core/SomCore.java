@@ -38,6 +38,7 @@ public final class SomCore extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new BlockListener(), plugin);
         Bukkit.getPluginManager().registerEvents(new InteractListener(), plugin);
         Bukkit.getPluginManager().registerEvents(new PlayerControlListener(), plugin);
+        Bukkit.getPluginManager().registerEvents(new CastListener(), plugin);
 
         CommandRegisterExecutor.registerExecutors();
         PlayerList.load();
