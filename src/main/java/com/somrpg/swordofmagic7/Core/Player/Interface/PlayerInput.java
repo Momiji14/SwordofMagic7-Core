@@ -5,6 +5,7 @@ import com.somrpg.swordofmagic7.Core.Item.EquipmentItem;
 import com.somrpg.swordofmagic7.Core.Item.SomEquipmentSlot;
 import com.somrpg.swordofmagic7.Core.Player.Container.PlayerInputContainer;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
+import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
@@ -23,7 +24,7 @@ public interface PlayerInput {
         int slot = event.getSlot();
         ItemStack clickedItem = event.getCurrentItem();
         view.setCursor(null);
-        if (clickedItem != null) {
+        if (clickedItem != null && clickedItem.getType() != Material.AIR) {
             if (view.getTopInventory() == clickedInv) {
                 getPlayerData().getUserMenu().onClick(event);
                 getPlayerData().getSettingMenu().onClick(event);
@@ -47,7 +48,7 @@ public interface PlayerInput {
                     default -> {
                         if (getPlayerData().getViewInventory().isItemInventory()) {
                             int scroll = getPlayerData().getItemInventory().getScroll();
-                            SomItemStack itemStack = getPlayerData().getItemInventory().getList().get(scroll*9+slot);
+                            SomItemStack itemStack = getPlayerData().getItemInventory().getList().get(scroll*8+index(slot));
                             if (itemStack instanceof EquipmentItem item) {
                                 getPlayerData().getItemInventory().setEquipment(item);
                             }
@@ -56,6 +57,13 @@ public interface PlayerInput {
                 }
             }
         }
+    }
+
+    default int index(int i) {
+        i -= 9;
+        if (i > 17) i--;
+        if (i > 26) i--;
+        return i;
     }
 
     default void onCloseGUI(InventoryCloseEvent event) {

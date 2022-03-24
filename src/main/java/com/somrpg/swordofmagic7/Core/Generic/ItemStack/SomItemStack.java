@@ -2,6 +2,7 @@ package com.somrpg.swordofmagic7.Core.Generic.ItemStack;
 
 import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
 import com.somrpg.swordofmagic7.Core.DataBase.SomItemDataLoader;
+import com.somrpg.swordofmagic7.Core.Item.BaseItem;
 import com.somrpg.swordofmagic7.Core.Item.EquipmentItem;
 import com.somrpg.swordofmagic7.Core.Item.RuneItem;
 import com.somrpg.swordofmagic7.Core.SomCore;
@@ -73,7 +74,11 @@ public class SomItemStack extends ViewableItemStack implements Cloneable {
         StringBuilder data = new StringBuilder("Id:" + getId());
         if (this instanceof RuneItem item) {
             data.append(",Level:").append(item.getLevel()).append(",Quality:").append(item.getQuality());
-        } else if (this instanceof EquipmentItem item) {
+        }
+        if (this instanceof BaseItem) {
+            data.append(",Amount:").append(getAmount());
+        }
+        if (this instanceof EquipmentItem item) {
             data.append(",Plus:").append(item.getPlus());
             for (RuneItem runeItem : item.getRune()) {
                 data.append("<Rune>").append(",Rune").append(":").append(runeItem.toDataString());
@@ -103,7 +108,11 @@ public class SomItemStack extends ViewableItemStack implements Cloneable {
                 double quality = Double.parseDouble(mapData.get("Quality"));
                 runeItem.setLevel(level);
                 runeItem.setQuality(quality);
-            } else if (item instanceof EquipmentItem equipmentItem) {
+            }
+            if (item instanceof BaseItem) {
+                item.setAmount(Integer.parseInt(mapData.get("Amount")));
+            }
+            if (item instanceof EquipmentItem equipmentItem) {
                 int plus = Integer.parseInt(mapData.get("Plus"));
                 equipmentItem.setPlus(plus);
                 for (int i = 1; i < itemSeparate.length; i++) {

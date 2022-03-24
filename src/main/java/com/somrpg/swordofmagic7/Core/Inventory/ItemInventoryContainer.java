@@ -6,6 +6,7 @@ import com.somrpg.swordofmagic7.Core.Item.BaseItem;
 import com.somrpg.swordofmagic7.Core.Item.EquipmentItem;
 import com.somrpg.swordofmagic7.Core.Item.SomEquipmentSlot;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
+import com.somrpg.swordofmagic7.Core.SomCore;
 import com.somrpg.swordofmagic7.Core.Sound.SomSound;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -30,7 +31,7 @@ public class ItemInventoryContainer extends BaseInventory implements ItemInvento
                 }
             }
             getList().add(itemData);
-            if (getPlayerData().getViewInventory().isItemInventory()) getPlayerData().viewUpdate();
+            getPlayerData().viewUpdate();
         } else {
             getPlayerData().sendMessage("§e" + getInventoryType().getDisplay() + "§aが一杯です", SomSound.Nope);
         }
@@ -50,13 +51,18 @@ public class ItemInventoryContainer extends BaseInventory implements ItemInvento
     public void setEquipment(@NonNull EquipmentItem equipmentItem, boolean log) {
         SomEquipmentSlot slot = equipmentItem.getEquipmentSlot();
         if (hasEquipment(slot)) addContent(getEquipment(slot));
-        equipmentSlot.put(slot, equipmentItem);
+        EquipmentItem item = equipmentItem.clone();
+        equipmentSlot.put(slot, item);
+        item.setAmount(1);
+        removeContent(equipmentItem, 1);
         if (log) getPlayerData().sendMessage("§e[" + equipmentItem.getDisplay() + "]§aを§b装備§aしました", SomSound.Equip);
+        getPlayerData().viewUpdate();
     }
 
     @Override
     public void removeEquipment(@NonNull SomEquipmentSlot slot) {
         if (hasEquipment(slot)) addContent(equipmentSlot.get(slot));
         equipmentSlot.remove(slot);
+        getPlayerData().viewUpdate();
     }
 }

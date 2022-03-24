@@ -16,6 +16,7 @@ public class PetInventoryContainer extends BaseInventory implements PetInventory
     public void addContent(@NonNull PetItem itemData) {
         if (getList().size() < GenericConfig.PetInventoryMaxSlot) {
             getList().add(itemData);
+            getPlayerData().viewUpdate();
         } else {
             getPlayerData().sendMessage("§e" + getInventoryType().getDisplay() + "§aが一杯です", SomSound.Nope);
         }

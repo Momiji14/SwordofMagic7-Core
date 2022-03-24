@@ -2,6 +2,7 @@ package com.somrpg.swordofmagic7.Core.Inventory;
 
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
+import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -22,6 +23,7 @@ public interface SomInventory {
     int getScroll();
     SomInventoryType getInventoryType();
     PlayerInventory getInventory();
+    PlayerData getPlayerData();
 
     default void removeContent(@NonNull SomItemStack content) {
         removeContent(content, content.getAmount());
@@ -30,10 +32,11 @@ public interface SomInventory {
     default void removeContent(@NonNull SomItemStack content, int amount) {
         for (SomItemStack itemStack : getList()) {
             if (SomItemStack.equal(itemStack, content)) {
-                itemStack.setAmount(-amount);
+                itemStack.setAmount(itemStack.getAmount()-amount);
             }
         }
         getList().removeIf(somItemStack -> somItemStack.getAmount() <= 0);
+        getPlayerData().viewUpdate();
     }
 
     default boolean hasContent(@NonNull SomItemStack content) {

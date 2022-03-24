@@ -7,7 +7,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EquipmentItem extends BaseItem {
+public class EquipmentItem extends BaseItem implements Cloneable {
     private final GenericStatus genericStatus;
     private final EquipmentItemCategory equipmentItemCategory;
     private final SomEquipmentSlot equipmentSlot;
@@ -62,5 +62,11 @@ public class EquipmentItem extends BaseItem {
 
     public int getReqLevel() {
         return reqLevel;
+    }
+
+    @Override
+    public EquipmentItem clone() {
+        // TODO: このクローンが元の内部を変更できないようにミュータブルな状態をここにコピーします
+        return (EquipmentItem) super.clone();
     }
 }

@@ -40,11 +40,13 @@ public class BaseInventory implements SomInventory {
     @Override
     public void setScroll(int scroll) {
         this.scroll = scroll;
+        getPlayerData().viewUpdate();
     }
 
     @Override
     public void addScroll(int scroll) {
-        setScroll((int) Math.max(0,Math.min(Math.ceil(getList().size()/9f)-2, getScroll() + scroll)));
+        setScroll((int) Math.max(0,Math.min(Math.ceil(getList().size()/8f)-2, getScroll() + scroll)));
+        getPlayerData().viewUpdate();
         SomSound.Tick.play(getPlayer());
     }
 
