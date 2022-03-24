@@ -1,17 +1,23 @@
 package com.somrpg.swordofmagic7.Core.DataBase;
 
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
+import com.somrpg.swordofmagic7.Core.Production.Base.SomRecipe;
 import com.somrpg.swordofmagic7.Core.Production.Base.SomRecipeContainer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.DataBasePath;
 
-public interface RecipeLoader extends DataBase {
+public interface RecipeLoader {
+
+    Map<String, SomRecipe> SomRecipeList = new HashMap<>();
+
     static void load() {
         for (File file : DataBase.dump(new File(DataBasePath, "Recipe/"))) {
             try {

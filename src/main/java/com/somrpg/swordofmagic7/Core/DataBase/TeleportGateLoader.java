@@ -1,6 +1,7 @@
 package com.somrpg.swordofmagic7.Core.DataBase;
 
 import com.somrpg.swordofmagic7.Core.Map.MapData;
+import com.somrpg.swordofmagic7.Core.Map.TeleportGate.TeleportGate;
 import com.somrpg.swordofmagic7.Core.Map.TeleportGate.TeleportGateData;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -8,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.io.File;
 import java.util.HashMap;
@@ -15,9 +17,10 @@ import java.util.Map;
 
 import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.DataBasePath;
 
-public interface TeleportGateLoader extends DataBase {
+public interface TeleportGateLoader {
 
     Map<Integer, String> TeleportGateMenu = new HashMap<>();
+    Map<String, TeleportGateData> TeleportGateList = new HashMap<>();
 
     static void load() {
         for (File file : DataBase.dump(new File(DataBasePath, "TeleportGateData/"))) {
@@ -37,7 +40,7 @@ public interface TeleportGateLoader extends DataBase {
                     String title = data.getString("Title");
                     String subtitle = data.getString("Subtitle");
                     boolean defaultActive = data.getBoolean("DefaultActive");
-                    MapData mapData = MapDataList.get(data.getString("Map"));
+                    MapData mapData = MapDataLoader.MapDataList.get(data.getString("Map"));
                     TeleportGateData teleportGate = new TeleportGateData(fileName, display, material, title, subtitle, loc, mapData, defaultActive);
                     TeleportGateList.put(fileName, teleportGate);
                     teleportGate.start();
@@ -52,5 +55,13 @@ public interface TeleportGateLoader extends DataBase {
                 DataBase.loadError(file);
             }
         }
+    }
+
+    @Nullable
+    static TeleportGate getTeleportGate(String key) {
+        if (TeleportGateList.containsKey(key)) {
+            return TeleportGateList.get(key);
+        }
+        return null;
     }
 }

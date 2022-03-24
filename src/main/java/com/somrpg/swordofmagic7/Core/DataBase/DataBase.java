@@ -20,14 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface DataBase {
-
-
-    Map<String, SomRecipe> SomRecipeList = new HashMap<>();
-    Map<String, ShopData> ShopDataList = new HashMap<>();
-
-    Map<String, WarpGateData> WarpGateList = new HashMap<>();
-    Map<String, TeleportGateData> TeleportGateList = new HashMap<>();
-
     static void loadError(@NonNull File file) {
         SomCore.log("§cLoading Error -> " + file.getName());
     }
@@ -61,29 +53,5 @@ public interface DataBase {
     static void singleLoad() {
         WarpGateLoader.load();
         TeleportGateLoader.load();
-    }
-
-    @Nullable
-    static WarpGate getWarpGate(String key) {
-        if (WarpGateList.containsKey(key)) {
-            return WarpGateList.get(key);
-        }
-        return null;
-    }
-
-    @Nullable
-    static TeleportGate getTeleportGate(String key) {
-        if (TeleportGateList.containsKey(key)) {
-            return TeleportGateList.get(key);
-        }
-        return null;
-    }
-
-    @Nullable
-    static ShopData getShopData(String key) {
-        if (ShopDataList.containsKey(key)) {
-            return ShopDataList.get(key);
-        }
-        return null;
     }
 }

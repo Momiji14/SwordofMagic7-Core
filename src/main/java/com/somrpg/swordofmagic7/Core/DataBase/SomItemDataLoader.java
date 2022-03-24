@@ -12,7 +12,7 @@ import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.HashMap;
@@ -51,7 +51,7 @@ public interface SomItemDataLoader extends DataBase {
                 if (material == Material.PLAYER_HEAD) {
                     item.setMaterialData(data.getString("PlayerHead"));
                 }
-                DataBase.SomItemDataList.put(fileName, item);
+                SomItemDataList.put(fileName, item);
             } catch (Exception e) {
                 e.printStackTrace();
                 DataBase.loadError(file);
@@ -75,6 +75,7 @@ public interface SomItemDataLoader extends DataBase {
         }
     }
 
+    @Nullable
     static SomItemStack getItem(String id) {
         if (SomItemDataList.containsKey(id)) {
             return SomItemDataList.get(id).clone();
