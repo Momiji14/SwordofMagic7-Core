@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 public interface DataBase {
+
+    SomItemStack ErrorItemStack = new SomItemStack("Error SomItemStack", Material.BARRIER);
     static void loadError(@NonNull File file) {
         SomCore.log("§cLoading Error -> " + file.getName());
     }

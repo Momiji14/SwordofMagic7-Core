@@ -1,6 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Inventory;
 
 import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
+import com.somrpg.swordofmagic7.Core.DataBase.SomItemDataLoader;
 import com.somrpg.swordofmagic7.Core.Generic.DecoContent;
 import com.somrpg.swordofmagic7.Core.Generic.DecoFormat;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.SomItemStack;
@@ -30,7 +31,7 @@ public class SkillSlotContainer implements SkillSlot {
             }
             case Item -> {
                 SomItemStack itemStack = playerData.getItemInventory().getContent(getSkillSlot(slot).getKey());
-                if (itemStack == null) itemStack = DataBase.getSomItemStack(getSkillSlot(slot).getKey());
+                if (itemStack == null) itemStack = SomItemDataLoader.getItem(getSkillSlot(slot).getKey());
                 if (itemStack != null) item = itemStack.viewItemStack();
             }
         }

@@ -1,8 +1,10 @@
 package com.somrpg.swordofmagic7.Core.Listener;
 
 import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
+import com.somrpg.swordofmagic7.Core.DataBase.ShopDataLoader;
 import com.somrpg.swordofmagic7.Core.Generic.DecoContent;
 import com.somrpg.swordofmagic7.Core.Player.Interface.PlayerData;
+import com.somrpg.swordofmagic7.Core.Production.ShopData;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.npc.NPCRegistry;
@@ -25,9 +27,8 @@ public class InteractListener implements Listener {
             if (npcRegistry.isNPC(entity)) {
                 NPC npc = npcRegistry.getNPC(entity);
                 String shop = DecoContent.uncolored(entity.getCustomName());
-                if (DataBase.ShopDataList.containsKey(shop)) {
-                    playerData.getShopDisplay().open(DataBase.getShopData(shop));
-                }
+                ShopData shopData = ShopDataLoader.getShopData(shop);
+                if (shopData != null) playerData.getShopDisplay().open(shopData);
             }
         }
     }

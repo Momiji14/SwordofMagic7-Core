@@ -22,8 +22,6 @@ import java.util.Map;
 import static com.somrpg.swordofmagic7.Core.Generic.GenericConfig.DataBasePath;
 
 public interface SomItemDataLoader extends DataBase {
-
-    SomItemStack ErrorItemStack = new SomItemStack("Error SomItemStack", Material.BARRIER);
     Map<String, SomItemStack> SomItemDataList = new HashMap<>();
 
     static void load() {

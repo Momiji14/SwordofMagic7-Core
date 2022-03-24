@@ -34,7 +34,7 @@ public interface TeleportGateMenu extends BaseMenu {
         ItemStack[] itemStack = new ItemStack[45];
         for (Map.Entry<Integer, String> gui : TeleportGateLoader.TeleportGateMenu.entrySet()) {
             if (gui.getKey() < 45) {
-                itemStack[gui.getKey()] = DataBase.TeleportGateList.get(gui.getValue()).viewItemStack();
+                itemStack[gui.getKey()] = TeleportGateLoader.getTeleportGate(gui.getValue()).viewItemStack();
             } else {
                 SomCore.log("TeleportGateGUIのスロット位置が範囲外です -> " + gui.getValue());
             }
@@ -44,7 +44,7 @@ public interface TeleportGateMenu extends BaseMenu {
 
     @Override
     default void onClick(Inventory clickedInv, ItemStack clickedItem, ClickType clickType, InventoryAction action, int slot) {
-        TeleportGate teleport = DataBase.getTeleportGate(TeleportGateLoader.TeleportGateMenu.get(slot));
+        TeleportGate teleport = TeleportGateLoader.getTeleportGate(TeleportGateLoader.TeleportGateMenu.get(slot));
         assert teleport != null;
         if (teleport.isDefaultActive() || getPlayerData().getActiveTeleportGate().contains(teleport.getId()) || getPlayer().hasPermission("som7.builder")) {
             getPlayerData().setMapData(teleport.getMapData());

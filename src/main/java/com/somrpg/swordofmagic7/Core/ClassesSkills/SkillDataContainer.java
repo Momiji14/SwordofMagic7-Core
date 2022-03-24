@@ -14,21 +14,25 @@ public class SkillDataContainer implements SkillData {
     private final SkillType skillType;
     private final List<String> lore;
     private final List<SkillParameter> skillParameters;
-    private int mana;
-    private int castTime;
-    private int rigidTime;
-    private int coolTime;
-    private int reqLevel;
-    public final List<EquipmentItemCategory> ReqMainHand = new ArrayList<>();
-    public final List<EquipmentItemCategory> ReqOffHand = new ArrayList<>();
+    private int mana = 0;
+    private int stack = 0;
+    private int castTime = 0;
+    private int rigidTime = 0;
+    private int coolTime = 0;
+    private final int reqLevel;
+    public final List<EquipmentItemCategory> reqMainHand;
+    public final List<EquipmentItemCategory> reqOffHand;
 
-    SkillDataContainer(String id, Material material, String display, SkillType skillType, List<String> lore, List<SkillParameter> skillParameters) {
+    SkillDataContainer(String id, Material material, String display, SkillType skillType, List<String> lore, int reqLevel, List<SkillParameter> skillParameters, List<EquipmentItemCategory> reqMainHand, List<EquipmentItemCategory> reqOffHand) {
         this.id = id;
         this.material = material;
         this.display = display;
         this.skillType = skillType;
         this.lore = lore;
+        this.reqLevel = reqLevel;
         this.skillParameters = skillParameters;
+        this.reqMainHand = reqMainHand;
+        this.reqOffHand = reqOffHand;
     }
 
     @Override
@@ -82,6 +86,16 @@ public class SkillDataContainer implements SkillData {
     }
 
     @Override
+    public void setStack(int stack) {
+        this.stack = stack;
+    }
+
+    @Override
+    public int getStack() {
+        return stack;
+    }
+
+    @Override
     public void setCastTime(int castTime) {
         this.castTime = castTime;
     }
@@ -112,22 +126,17 @@ public class SkillDataContainer implements SkillData {
     }
 
     @Override
-    public void setReqLevel(int reqLevel) {
-        this.reqLevel = reqLevel;
-    }
-
-    @Override
     public int getReqLevel() {
         return reqLevel;
     }
 
     @Override
     public List<EquipmentItemCategory> getReqMainHand() {
-        return ReqMainHand;
+        return reqMainHand;
     }
 
     @Override
     public List<EquipmentItemCategory> getReqOffHand() {
-        return ReqOffHand;
+        return reqOffHand;
     }
 }

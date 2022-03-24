@@ -2,6 +2,7 @@ package com.somrpg.swordofmagic7.Core.Map.WarpGate;
 
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
+import com.somrpg.swordofmagic7.Core.DataBase.WarpGateLoader;
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
 import com.somrpg.swordofmagic7.Core.Particle.ParticleData;
@@ -33,9 +34,9 @@ public interface WarpGate {
 
     static void Selector(@NonNull Player player) {
         Location pLoc = player.getLocation();
-        for (Map.Entry<String, WarpGateData> entry : DataBase.WarpGateList.entrySet()) {
+        for (Map.Entry<String, WarpGateData> entry : WarpGateLoader.WarpGateList.entrySet()) {
             if (entry.getValue().getLocation().distance(pLoc) < 1.5) {
-                if (DataBase.WarpGateList.containsKey(entry.getValue().getTarget()) || entry.getValue().getTargetLocation() != null) {
+                if (WarpGateLoader.WarpGateList.containsKey(entry.getValue().getTarget()) || entry.getValue().getTargetLocation() != null) {
                     entry.getValue().usePlayer(player);
                 } else {
                     SomCore.log("§cError NotFundWarpGate: " + entry.getValue().getTarget() + " at " + entry.getKey());

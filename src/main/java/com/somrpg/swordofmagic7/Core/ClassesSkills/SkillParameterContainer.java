@@ -46,6 +46,11 @@ public class SkillParameterContainer implements SkillParameter {
     }
 
     @Override
+    public int getDigit() {
+        return digit;
+    }
+
+    @Override
     public String valueView() {
         if (digit > -1) {
             return prefix + ScaleDigit(value, digit) + suffix;

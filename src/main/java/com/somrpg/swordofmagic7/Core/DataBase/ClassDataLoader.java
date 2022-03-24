@@ -32,24 +32,23 @@ public interface ClassDataLoader extends DataBase {
                 List<String> lore = data.getStringList("Lore");
                 String nick = data.getString("Nick");
                 boolean productionClass = data.getBoolean("ProductionClass", false);
-                List<SkillData> Skills = new ArrayList<>();
+                List<SkillData> skills = new ArrayList<>();
                 for (String str : data.getStringList("SkillList")) {
-                    if (SkillDataList.containsKey(str)) {
-                        Skills.add(SkillDataList.get(str));
+                    if (SkillDataLoader.getSkillData(str) != null) {
+                        skills.add(SkillDataLoader.getSkillData(str));
                     }
                 }
-                ClassData classData = new ClassData();
-                classData.SkillList = Skills;
-                ClassList.put(fileName, classData);
-                ClassListDisplay.put(classData.Display, classData);
+                ClassData classData = ClassData.create(fileName, material, display, nick, color, lore, productionClass);
+                classData.getSkillList().addAll(skills);
+                ClassDataList.put(fileName, classData);
             } catch (Exception e) {
-                loadError(file);
+                DataBase.loadError(file);
             }
         }
     }
 
     @Nullable
-    default ClassData getClassData(String id) {
+    static ClassData getClassData(String id) {
         if (ClassDataList.containsKey(id)) {
             return ClassDataList.get(id);
         }

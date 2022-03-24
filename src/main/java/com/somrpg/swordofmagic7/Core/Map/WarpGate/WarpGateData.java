@@ -1,6 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Map.WarpGate;
 
 import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
+import com.somrpg.swordofmagic7.Core.DataBase.WarpGateLoader;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
 import com.somrpg.swordofmagic7.Core.Particle.ParticleData;
 import com.somrpg.swordofmagic7.Core.SomCore;
@@ -68,7 +69,7 @@ public class WarpGateData implements WarpGate {
         }
         */
         getNextMap().enter(player);
-        if (getTarget() != null) targetLocation = DataBase.WarpGateList.get(getTarget()).getLocation();
+        if (getTarget() != null) targetLocation = WarpGateLoader.getWarpGate(getTarget()).getLocation();
         player.teleportAsync(getTargetLocation());
         SomSound.LevelUp.play(player);
     }

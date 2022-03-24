@@ -7,6 +7,10 @@ import java.util.List;
 
 public interface SkillData {
 
+    static SkillData create(String id, Material material, String display, List<String> lore, SkillType skillType, int reqLevel, List<SkillParameter> skillParameters, List<EquipmentItemCategory> reqMainHand, List<EquipmentItemCategory> reqOffHand) {
+        return new SkillDataContainer(id, material, display, skillType, lore, reqLevel, skillParameters, reqMainHand, reqOffHand);
+    }
+
     String getId();
 
     Material getMaterial();
@@ -27,6 +31,10 @@ public interface SkillData {
 
     int getMana();
 
+    void setStack(int stack);
+
+    int getStack();
+
     void setCastTime(int castTime);
 
     int getCastTime();
@@ -38,8 +46,6 @@ public interface SkillData {
     void setCoolTime(int coolTime);
 
     int getCoolTime();
-
-    void setReqLevel(int reqLevel);
 
     int getReqLevel();
 

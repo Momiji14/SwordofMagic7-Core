@@ -1,6 +1,7 @@
 package com.somrpg.swordofmagic7.Core.Map.TeleportGate;
 
 import com.somrpg.swordofmagic7.Core.DataBase.DataBase;
+import com.somrpg.swordofmagic7.Core.DataBase.TeleportGateLoader;
 import com.somrpg.swordofmagic7.Core.Generic.GenericConfig;
 import com.somrpg.swordofmagic7.Core.Generic.ItemStack.ViewableItemStack;
 import com.somrpg.swordofmagic7.Core.Map.MapData;
@@ -37,7 +38,7 @@ public interface TeleportGate {
     static void Selector(@NonNull Player player) {
         PlayerData playerData = PlayerData.getData(player);
         Location pLoc = player.getLocation();
-        for (Map.Entry<String, TeleportGateData> entry : DataBase.TeleportGateList.entrySet()) {
+        for (Map.Entry<String, TeleportGateData> entry : TeleportGateLoader.TeleportGateList.entrySet()) {
             TeleportGateData teleport = entry.getValue();
             if (teleport.getLocation().distance(pLoc) < 1.5) {
                 if (!teleport.isDefaultActive() && !playerData.getActiveTeleportGate().contains(teleport.getId())) {
